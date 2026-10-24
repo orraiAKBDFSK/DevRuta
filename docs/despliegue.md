@@ -4,8 +4,8 @@ Lo que hay hoy funciona en local (Compose). **Nada de esto se ha probado en un s
 antes de abrir el registro al público.
 
 ## 1. Repositorio y CI
-- [ ] Repositorio remoto creado; `git push` de `main`.
-- [ ] Primera ejecución del workflow `CI` en verde (jobs: contenido, API, runner, web, imágenes). Si algo falla, arreglarlo antes de seguir.
+- [x] Repositorio remoto creado y `main` subido (https://github.com/orraiAKBDFSK/DevRuta).
+- [x] Primera ejecución del workflow `CI` en verde (2026-10-24): contenido, API, runner, web e imágenes.
 - [ ] Rama `main` protegida: pull request + CI verde obligatorios.
 
 ## 2. Aplicación (API + web + PostgreSQL)

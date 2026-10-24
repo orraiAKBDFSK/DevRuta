@@ -11,7 +11,7 @@ pistas y progreso visible. Empieza con **Python** y se amplía a C++ después.
 |---|---|
 | Contenido de Python (10 unidades) | Escrito en borrador, **sin revisión humana** |
 | Esqueleto del monorepo (API, web, Compose) | Fase 3: creado y verificado en local (ver `docs/adr/0002-estructura-y-versiones.md`) |
-| CI de GitHub Actions | Escrito, **sin ejecutar en GitHub** (no hay repositorio remoto). Sus comandos se probaron a mano desde un clon limpio del commit: contenido, runner, web, API y las 4 imágenes pasan |
+| CI de GitHub Actions | **Ejecutado en GitHub y en verde** (2026-10-24, commit `2f948e4`): contenido, runner con los 142 ejercicios de código, web, API e imágenes Docker. Repositorio: https://github.com/orraiAKBDFSK/DevRuta |
 | Autenticación, perfiles y base de datos de usuarios | Fase 4: hecha y verificada en local (ver `docs/adr/0003-autenticacion-y-perfiles.md`) |
 | Catálogo de rutas, unidades y lecciones + importador de contenido | Fase 5: hecha y verificada en local (ver `docs/adr/0005-catalogo-e-importador-de-contenido.md`). Los ejercicios llegan en la fase 6 |
 | Ejercicios básicos y evaluación automática | Fase 6: hecha y verificada en local (ver `docs/adr/0006-ejercicios-y-evaluacion.md`). Se evalúan 270 de 412 ejercicios; los 142 de «escribir código» esperan a la fase 7 |
