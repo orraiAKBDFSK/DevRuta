@@ -78,3 +78,9 @@ python scripts/validate_content.py           # valida lecciones y ejercicios
 - Cómo contribuir: [CONTRIBUTING.md](CONTRIBUTING.md)
 - Decisiones técnicas: [docs/adr](docs/adr)
 - Formato del contenido: [content/SCHEMA.md](content/SCHEMA.md)
+
+## Guías para lo que falta
+
+- `docs/revision-de-contenido.md`: cómo revisar y publicar lecciones (`scripts/review_report.py` lista lo pendiente).
+- `docs/prueba-con-lector-de-pantalla.md`: qué probar con NVDA o VoiceOver.
+- `docs/despliegue.md`: lista de comprobación antes de abrir al público (CI, correo, runner, legal).
