@@ -1,0 +1,196 @@
+id: py.u03.l02
+language: python
+unit: py.u03
+position: 2
+skills: [py.bool]
+status: draft
+reviewed_by: []
+title:
+  es: 'Combinar condiciones'
+  en: 'Combining conditions'
+explanation:
+  es: |
+    Puedes combinar valores `bool` con tres operadores:
+
+    | Operador | Significa | Es `True` cuando... |
+    |---|---|---|
+    | `and` | y | **ambos** lados son `True` |
+    | `or` | o | **al menos uno** es `True` |
+    | `not` | no | invierte el valor |
+
+    ```python
+    edad = 25
+    print(edad >= 18 and edad < 65)   # True
+    print(not (edad >= 18))           # False
+    ```
+
+    Usa paréntesis cuando tengas dudas sobre el orden: `not` va primero, luego `and`, luego `or`.
+  en: |
+    You can combine `bool` values with three operators:
+
+    | Operator | Means | Is `True` when... |
+    |---|---|---|
+    | `and` | and | **both** sides are `True` |
+    | `or` | or | **at least one** is `True` |
+    | `not` | not | it flips the value |
+
+    ```python
+    edad = 25
+    print(edad >= 18 and edad < 65)   # True
+    print(not (edad >= 18))           # False
+    ```
+
+    Use parentheses when in doubt about the order: `not` goes first, then `and`, then `or`.
+exercises:
+  - id: py.u03.l02.e01
+    type: predict_output
+    difficulty: 1
+    skills: [py.bool]
+    prompt:
+      es: '¿Qué muestra este programa?'
+      en: 'What does this program show?'
+    code: |
+      print(True and False)
+    answer: "False"
+    hints:
+      - {es: '`and` necesita que los dos lados sean verdaderos.', en: '`and` needs both sides to be true.'}
+    explanation:
+      es: 'Uno de los lados es `False`, así que `and` da `False`.'
+      en: 'One side is `False`, so `and` gives `False`.'
+
+  - id: py.u03.l02.e02
+    type: predict_output
+    difficulty: 1
+    skills: [py.bool]
+    prompt:
+      es: '¿Qué muestra este programa?'
+      en: 'What does this program show?'
+    code: |
+      print(True or False)
+    answer: "True"
+    hints:
+      - {es: '`or` solo necesita que uno sea verdadero.', en: '`or` only needs one to be true.'}
+    explanation:
+      es: 'Basta con que un lado sea `True`.'
+      en: 'It is enough for one side to be `True`.'
+
+  - id: py.u03.l02.e03
+    type: predict_output
+    difficulty: 1
+    skills: [py.bool]
+    prompt:
+      es: '¿Qué muestra este programa?'
+      en: 'What does this program show?'
+    code: |
+      print(not True)
+    answer: "False"
+    hints:
+      - {es: '`not` invierte el valor.', en: '`not` flips the value.'}
+    explanation:
+      es: 'Lo contrario de `True` es `False`.'
+      en: 'The opposite of `True` is `False`.'
+
+  - id: py.u03.l02.e04
+    type: predict_output
+    difficulty: 2
+    skills: [py.bool, py.compare]
+    prompt:
+      es: '¿Qué muestra este programa?'
+      en: 'What does this program show?'
+    code: |
+      x = 7
+      print(x > 5 and x < 10)
+    answer: "True"
+    hints:
+      - {es: 'Evalúa cada comparación por separado.', en: 'Evaluate each comparison separately.'}
+    explanation:
+      es: '7 > 5 es `True` y 7 < 10 es `True`, por tanto el resultado es `True`.'
+      en: '7 > 5 is `True` and 7 < 10 is `True`, so the result is `True`.'
+
+  - id: py.u03.l02.e05
+    type: multiple_choice
+    difficulty: 2
+    skills: [py.bool, py.compare]
+    prompt:
+      es: '¿Qué expresión es `True` solo cuando `n` está entre 1 y 10, ambos incluidos?'
+      en: 'Which expression is `True` only when `n` is between 1 and 10, both included?'
+    options:
+      - {es: 'n >= 1 and n <= 10', en: 'n >= 1 and n <= 10'}
+      - {es: 'n >= 1 or n <= 10', en: 'n >= 1 or n <= 10'}
+      - {es: 'n > 1 and n < 10', en: 'n > 1 and n < 10'}
+      - {es: 'n >= 1 and <= 10', en: 'n >= 1 and <= 10'}
+    answer: 0
+    distractor_tags: {1: logic.or_vs_and, 2: logic.off_by_one, 3: syntax.incomplete_condition}
+    hints:
+      - {es: 'Deben cumplirse las dos condiciones a la vez.', en: 'Both conditions must hold at the same time.'}
+    explanation:
+      es: 'Con `or` casi cualquier número cumpliría; con `>` y `<` se excluyen el 1 y el 10; la última opción es un error de sintaxis.'
+      en: 'With `or` almost any number would pass; `>` and `<` exclude 1 and 10; the last option is a syntax error.'
+
+  - id: py.u03.l02.e06
+    type: fill_code
+    difficulty: 2
+    skills: [py.bool]
+    prompt:
+      es: 'Completa para que el programa muestre `False`.'
+      en: 'Fill in the blank so the program shows `False`.'
+    code: |
+      print(___ (5 > 3))
+    blanks:
+      - ["not"]
+    hints:
+      - {es: '5 > 3 es `True`; necesitas invertirlo.', en: '5 > 3 is `True`; you need to flip it.'}
+    explanation:
+      es: '`not True` es `False`.'
+      en: '`not True` is `False`.'
+
+  - id: py.u03.l02.e07
+    type: write_code
+    difficulty: 3
+    skills: [py.bool, py.compare, py.operators, py.input]
+    prompt:
+      es: |
+        Lee un entero y muestra `True` si es **par y positivo**, o `False` en cualquier otro caso.
+      en: |
+        Read a whole number and show `True` if it is **even and positive**, or `False` otherwise.
+    starter: |
+      # Escribe tu código aquí / Write your code here
+    reference_solution: |
+      n = int(input())
+      print(n % 2 == 0 and n > 0)
+    tests:
+      - {stdin: "4\n", expected_stdout: "True\n", visible: true}
+      - {stdin: "-2\n", expected_stdout: "False\n", visible: false}
+      - {stdin: "3\n", expected_stdout: "False\n", visible: false}
+      - {stdin: "0\n", expected_stdout: "False\n", visible: false}
+    wrong_examples:
+      - code: |
+          n = int(input())
+          print(n % 2 == 0)
+        expect_fail_tag: logic.missing_condition
+      - code: |
+          n = int(input())
+          print(n % 2 == 0 or n > 0)
+        expect_fail_tag: logic.or_vs_and
+    hints:
+      - {es: 'Un número es par si el resto de dividirlo entre 2 es 0.', en: 'A number is even if the remainder of dividing it by 2 is 0.'}
+      - {es: 'Necesitas dos comparaciones unidas con `and`.', en: 'You need two comparisons joined with `and`.'}
+    explanation:
+      es: 'Con `or` bastaría con ser positivo (o par), y con una sola condición faltaría la otra.'
+      en: 'With `or` being positive (or even) would be enough, and with a single condition the other would be missing.'
+
+  - id: py.u03.l02.e08
+    type: predict_output
+    difficulty: 3
+    skills: [py.bool]
+    prompt:
+      es: '¿Qué muestra este programa? Resuelve primero el paréntesis.'
+      en: 'What does this program show? Solve the parentheses first.'
+    code: |
+      print(not (3 > 5 or 2 > 1))
+    answer: "False"
+    hints:
+      - {es: '3 > 5 es `False` y 2 > 1 es `True`.', en: '3 > 5 is `False` and 2 > 1 is `True`.'}
+    explanation:
+      es: '`False or True` es `True`, y `not True` es `False`.'
+      en: '`False or True` is `True`, and `not True` is `False`.'

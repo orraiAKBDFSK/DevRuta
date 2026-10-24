@@ -1,0 +1,318 @@
+id: py.u08.l03
+language: python
+unit: py.u08
+position: 3
+skills: [py.strings.methods]
+status: draft
+reviewed_by: []
+title:
+  es: 'Métodos de cadenas'
+  en: 'String methods'
+explanation:
+  es: |
+    Los textos tienen métodos propios. Como un texto **no se puede modificar**, todos **devuelven un texto nuevo**
+    y el original queda igual:
+
+    | Método | Qué hace | Ejemplo |
+    |---|---|---|
+    | `upper()` / `lower()` | mayúsculas / minúsculas | `"Hola".upper()` → `HOLA` |
+    | `strip()` | quita espacios al inicio y al final | `"  a ".strip()` → `a` |
+    | `replace(a, b)` | cambia `a` por `b` | `"casa".replace("a", "o")` → `coso` |
+    | `find(x)` | posición de `x`, o `-1` si no está | `"hola".find("l")` → `2` |
+    | `count(x)` | cuántas veces aparece `x` | `"banana".count("an")` → `2` |
+    | `startswith(x)` / `endswith(x)` | ¿empieza / termina con `x`? | `"hola".endswith("la")` → `True` |
+    | `split()` | parte el texto en una **lista** de palabras | `"a b".split()` → `['a', 'b']` |
+    | `separador.join(lista)` | une una lista de textos | `"-".join(["a", "b"])` → `a-b` |
+
+    `split()` sin argumentos separa por cualquier cantidad de espacios; `split(",")` separa por comas.
+  en: |
+    Text has its own methods. Since text **cannot be modified**, they all **return a new text**
+    and the original stays the same:
+
+    | Method | What it does | Example |
+    |---|---|---|
+    | `upper()` / `lower()` | uppercase / lowercase | `"Hola".upper()` → `HOLA` |
+    | `strip()` | removes spaces at the start and end | `"  a ".strip()` → `a` |
+    | `replace(a, b)` | changes `a` into `b` | `"casa".replace("a", "o")` → `coso` |
+    | `find(x)` | position of `x`, or `-1` if absent | `"hola".find("l")` → `2` |
+    | `count(x)` | how many times `x` appears | `"banana".count("an")` → `2` |
+    | `startswith(x)` / `endswith(x)` | does it start / end with `x`? | `"hola".endswith("la")` → `True` |
+    | `split()` | splits the text into a **list** of words | `"a b".split()` → `['a', 'b']` |
+    | `separator.join(list)` | joins a list of texts | `"-".join(["a", "b"])` → `a-b` |
+
+    `split()` with no arguments splits on any amount of spaces; `split(",")` splits on commas.
+exercises:
+  - id: py.u08.l03.e01
+    type: predict_output
+    difficulty: 1
+    skills: [py.strings.methods]
+    prompt:
+      es: '¿Qué muestra este programa?'
+      en: 'What does this program show?'
+    code: |
+      print("hola".upper())
+    answer: "HOLA"
+    hints:
+      - {es: '`upper` pasa todo a mayúsculas.', en: '`upper` turns everything into capitals.'}
+    explanation:
+      es: 'Devuelve un texto nuevo en mayúsculas.'
+      en: 'It returns a new text in capitals.'
+
+  - id: py.u08.l03.e02
+    type: predict_output
+    difficulty: 1
+    skills: [py.strings.methods]
+    prompt:
+      es: '¿Qué muestra este programa?'
+      en: 'What does this program show?'
+    code: |
+      print("  hola  ".strip())
+    answer: "hola"
+    hints:
+      - {es: '`strip` quita los espacios de los extremos.', en: '`strip` removes the spaces at the ends.'}
+    explanation:
+      es: 'No quita los espacios del medio, solo los de los extremos.'
+      en: 'It does not remove spaces in the middle, only at the ends.'
+
+  - id: py.u08.l03.e03
+    type: predict_output
+    difficulty: 2
+    skills: [py.strings.methods]
+    prompt:
+      es: '¿Qué muestra este programa?'
+      en: 'What does this program show?'
+    code: |
+      print("banana".replace("a", "o"))
+    answer: "bonono"
+    hints:
+      - {es: 'Reemplaza todas las apariciones.', en: 'It replaces all occurrences.'}
+    explanation:
+      es: 'Las tres `a` pasan a ser `o`.'
+      en: 'The three `a` letters become `o`.'
+
+  - id: py.u08.l03.e04
+    type: predict_output
+    difficulty: 2
+    skills: [py.strings.methods]
+    prompt:
+      es: '¿Qué muestra este programa?'
+      en: 'What does this program show?'
+    code: |
+      print("banana".find("n"), "banana".find("z"))
+    answer: "2 -1"
+    hints:
+      - {es: 'Si no lo encuentra, devuelve -1.', en: 'If it does not find it, it returns -1.'}
+    explanation:
+      es: 'La primera `n` está en el índice 2; la `z` no aparece.'
+      en: 'The first `n` is at index 2; the `z` does not appear.'
+
+  - id: py.u08.l03.e05
+    type: predict_output
+    difficulty: 2
+    skills: [py.strings.methods, py.list]
+    prompt:
+      es: '¿Qué muestra este programa? Escribe la lista tal como la muestra Python.'
+      en: 'What does this program show? Write the list the way Python shows it.'
+    code: |
+      print("a,b,c".split(","))
+    answer: "['a', 'b', 'c']"
+    hints:
+      - {es: '`split` devuelve una lista de textos.', en: '`split` returns a list of texts.'}
+    explanation:
+      es: 'El argumento indica por qué carácter se parte.'
+      en: 'The argument tells which character to split on.'
+
+  - id: py.u08.l03.e06
+    type: predict_output
+    difficulty: 2
+    skills: [py.strings.methods]
+    prompt:
+      es: '¿Qué muestra este programa?'
+      en: 'What does this program show?'
+    code: |
+      print("-".join(["a", "b", "c"]))
+    answer: "a-b-c"
+    hints:
+      - {es: 'El texto antes del punto es el separador.', en: 'The text before the dot is the separator.'}
+    explanation:
+      es: '`join` es lo contrario de `split`.'
+      en: '`join` is the opposite of `split`.'
+
+  - id: py.u08.l03.e07
+    type: multiple_choice
+    difficulty: 2
+    skills: [py.strings.methods]
+    prompt:
+      es: |
+        ¿Qué muestra este programa?
+
+        ```python
+        s = "hola"
+        s.upper()
+        print(s)
+        ```
+      en: |
+        What does this program show?
+
+        ```python
+        s = "hola"
+        s.upper()
+        print(s)
+        ```
+    options:
+      - {es: '`hola`, porque `upper()` devuelve un texto nuevo y no se guardó.', en: '`hola`, because `upper()` returns a new text and it was not stored.'}
+      - {es: '`HOLA`', en: '`HOLA`'}
+      - {es: '`None`', en: '`None`'}
+      - {es: 'Un error.', en: 'An error.'}
+    answer: 0
+    distractor_tags: {1: string.method_returns_new}
+    hints:
+      - {es: 'Los textos no se pueden modificar.', en: 'Text cannot be modified.'}
+    explanation:
+      es: 'Para conservar el resultado hay que asignarlo: `s = s.upper()`.'
+      en: 'To keep the result you must assign it: `s = s.upper()`.'
+
+  - id: py.u08.l03.e08
+    type: fill_code
+    difficulty: 2
+    skills: [py.strings.methods]
+    prompt:
+      es: 'Completa el método para que el programa muestre `[''hola'', ''mundo'']`.'
+      en: 'Fill in the method so the program shows `[''hola'', ''mundo'']`.'
+    code: |
+      print("hola mundo".___())
+    blanks:
+      - [split]
+    hints:
+      - {es: 'Parte el texto en palabras.', en: 'It splits the text into words.'}
+    explanation:
+      es: 'Sin argumentos, `split` separa por espacios.'
+      en: 'With no arguments, `split` splits on spaces.'
+
+  - id: py.u08.l03.e09
+    type: write_code
+    difficulty: 3
+    skills: [py.strings.methods, py.input]
+    prompt:
+      es: 'Lee una frase y muestra cuántas palabras tiene (puede haber varios espacios seguidos).'
+      en: 'Read a sentence and show how many words it has (there may be several spaces in a row).'
+    starter: |
+      # Escribe tu código aquí / Write your code here
+    reference_solution: |
+      frase = input()
+      print(len(frase.split()))
+    tests:
+      - {stdin: "hola mundo cruel\n", expected_stdout: "3\n", visible: true}
+      - {stdin: "uno\n", expected_stdout: "1\n", visible: false}
+      - {stdin: "  a   b  \n", expected_stdout: "2\n", visible: false}
+    wrong_examples:
+      - code: |
+          frase = input()
+          print(frase.count(" ") + 1)
+        expect_fail_tag: logic.wrong_operation
+    hints:
+      - {es: '`split()` ya ignora los espacios repetidos.', en: '`split()` already ignores repeated spaces.'}
+    explanation:
+      es: 'Contar espacios fallaría con espacios extra al inicio, al final o repetidos.'
+      en: 'Counting spaces would fail with extra spaces at the start, at the end or repeated.'
+
+  - id: py.u08.l03.e10
+    type: write_code
+    difficulty: 3
+    skills: [py.strings.methods, py.for, py.input]
+    prompt:
+      es: |
+        Lee una línea con números enteros separados por espacios (por ejemplo `5 -2 7`) y muestra su suma.
+      en: |
+        Read a line with whole numbers separated by spaces (for example `5 -2 7`) and show their sum.
+    starter: |
+      # Escribe tu código aquí / Write your code here
+    reference_solution: |
+      partes = input().split()
+      total = 0
+      for p in partes:
+          total = total + int(p)
+      print(total)
+    tests:
+      - {stdin: "1 2 3\n", expected_stdout: "6\n", visible: true}
+      - {stdin: "10\n", expected_stdout: "10\n", visible: false}
+      - {stdin: "5 -2 7\n", expected_stdout: "10\n", visible: false}
+    wrong_examples:
+      - code: |
+          partes = input().split()
+          total = ""
+          for p in partes:
+              total = total + p
+          print(total)
+        expect_fail_tag: io.input_not_cast
+    hints:
+      - {es: '`split()` da textos; conviértelos con `int()` antes de sumar.', en: '`split()` gives texts; convert them with `int()` before adding.'}
+    explanation:
+      es: 'Sin `int()`, sumar textos los uniría en lugar de sumarlos.'
+      en: 'Without `int()`, adding texts would join them instead of summing them.'
+
+  - id: py.u08.l03.e11
+    type: write_code
+    difficulty: 3
+    skills: [py.strings.methods, py.input]
+    prompt:
+      es: 'Lee un texto, quítale los espacios de los extremos y muestra el resultado en minúsculas.'
+      en: 'Read a text, remove the spaces at its ends and show the result in lowercase.'
+    starter: |
+      # Escribe tu código aquí / Write your code here
+    reference_solution: |
+      texto = input()
+      print(texto.strip().lower())
+    tests:
+      - {stdin: "  HoLa  \n", expected_stdout: "hola\n", visible: true}
+      - {stdin: "ABC\n", expected_stdout: "abc\n", visible: false}
+      - {stdin: " Hola Mundo \n", expected_stdout: "hola mundo\n", visible: false}
+    wrong_examples:
+      - code: |
+          texto = input()
+          print(texto.strip())
+        expect_fail_tag: logic.missing_step
+      - code: |
+          texto = input()
+          print(texto.lower())
+        expect_fail_tag: logic.missing_step
+    hints:
+      - {es: 'Puedes encadenar métodos: `texto.strip().lower()`.', en: 'You can chain methods: `texto.strip().lower()`.'}
+    explanation:
+      es: 'Cada método trabaja sobre el texto que devolvió el anterior.'
+      en: 'Each method works on the text returned by the previous one.'
+
+  - id: py.u08.l03.e12
+    type: write_code
+    difficulty: 4
+    skills: [py.strings.methods, py.input]
+    prompt:
+      es: |
+        Lee una frase y luego una palabra (líneas distintas). Muestra cuántas veces aparece esa palabra en la frase,
+        sin distinguir mayúsculas de minúsculas.
+      en: |
+        Read a sentence and then a word (on separate lines). Show how many times that word appears in the sentence,
+        ignoring the difference between uppercase and lowercase.
+    starter: |
+      # Escribe tu código aquí / Write your code here
+    reference_solution: |
+      frase = input()
+      palabra = input()
+      palabras = frase.lower().split()
+      print(palabras.count(palabra.lower()))
+    tests:
+      - {stdin: "Hola hola HOLA mundo\nhola\n", expected_stdout: "3\n", visible: true}
+      - {stdin: "a b c\nz\n", expected_stdout: "0\n", visible: false}
+      - {stdin: "sol y Sol\nSOL\n", expected_stdout: "2\n", visible: false}
+    wrong_examples:
+      - code: |
+          frase = input()
+          palabra = input()
+          print(frase.split().count(palabra))
+        expect_fail_tag: logic.case_sensitive
+    hints:
+      - {es: 'Pasa ambos textos a minúsculas antes de comparar.', en: 'Turn both texts to lowercase before comparing.'}
+      - {es: 'Una lista también tiene `count`.', en: 'A list also has `count`.'}
+    explanation:
+      es: 'Contar sobre la lista de palabras evita contar fragmentos dentro de otras palabras.'
+      en: 'Counting over the list of words avoids counting fragments inside other words.'

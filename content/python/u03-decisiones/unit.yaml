@@ -1,0 +1,8 @@
+id: py.u03
+position: 3
+title:
+  es: 'Decisiones'
+  en: 'Decisions'
+summary:
+  es: 'Comparar valores y hacer que el programa elija qué camino seguir.'
+  en: 'Comparing values and making the program choose which path to follow.'

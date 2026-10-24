@@ -1,0 +1,418 @@
+id: py.u10.l04
+language: python
+unit: py.u10
+position: 4
+skills: [py.project, py.dict, py.def, py.try]
+status: draft
+reviewed_by: []
+title:
+  es: 'Proyecto guiado: libreta de gastos'
+  en: 'Guided project: expense notebook'
+explanation:
+  es: |
+    Vas a construir un programa completo **por etapas**. Cada ejercicio añade funciones a la etapa anterior,
+    así que puedes partir de tu solución anterior.
+
+    **Formato de la entrada:** una primera línea con un entero `n` y luego `n` líneas, cada una con un comando.
+    Los comandos se explican en cada etapa. Los resultados se muestran con `print`.
+
+    Cómo abordar un proyecto:
+
+    1. **Divide** el problema en etapas pequeñas y haz que cada una funcione antes de pasar a la siguiente.
+    2. **Elige las estructuras de datos** primero (aquí, un diccionario `categoria → total`).
+    3. **Prueba** con entradas pequeñas y con casos límite (vacío, errores).
+    4. Cuando el programa crezca, **organiza el código en funciones**.
+  en: |
+    You will build a complete program **in stages**. Each exercise adds features to the previous stage,
+    so you can start from your earlier solution.
+
+    **Input format:** a first line with a whole number `n` and then `n` lines, each with a command.
+    The commands are explained at each stage. Results are shown with `print`.
+
+    How to approach a project:
+
+    1. **Split** the problem into small stages and make each one work before moving on to the next.
+    2. **Choose the data structures** first (here, a dictionary `category → total`).
+    3. **Test** with small inputs and with edge cases (empty, errors).
+    4. When the program grows, **organize the code into functions**.
+exercises:
+  - id: py.u10.l04.e01
+    type: write_code
+    difficulty: 3
+    skills: [py.project, py.dict, py.input]
+    prompt:
+      es: |
+        **Etapa 1.** Comandos (todos válidos):
+        - `gasto <categoria> <monto>`: suma el monto (entero) a esa categoría.
+        - `total`: muestra la suma de todos los gastos.
+      en: |
+        **Stage 1.** Commands (all valid):
+        - `gasto <categoria> <monto>`: adds the amount (whole number) to that category.
+        - `total`: shows the sum of all expenses.
+    starter: |
+      # Escribe tu código aquí / Write your code here
+    reference_solution: |
+      n = int(input())
+      gastos = {}
+      for i in range(n):
+          partes = input().split()
+          if partes[0] == "gasto":
+              cat = partes[1]
+              gastos[cat] = gastos.get(cat, 0) + int(partes[2])
+          elif partes[0] == "total":
+              print(sum(gastos.values()))
+    tests:
+      - {stdin: "4\ngasto comida 10\ngasto taxi 5\ntotal\ngasto cine 7\n", expected_stdout: "15\n", visible: true}
+      - {stdin: "5\ntotal\ngasto a 3\ntotal\ngasto a 4\ntotal\n", expected_stdout: "0\n3\n7\n", visible: false}
+    wrong_examples:
+      - code: |
+          n = int(input())
+          gastos = {}
+          for i in range(n):
+              partes = input().split()
+              if partes[0] == "gasto":
+                  gastos[partes[1]] = int(partes[2])
+              elif partes[0] == "total":
+                  print(sum(gastos.values()))
+        expect_fail_tag: logic.overwrites_previous
+    hints:
+      - {es: 'Usa el patrón `gastos[cat] = gastos.get(cat, 0) + monto` para acumular.', en: 'Use the pattern `gastos[cat] = gastos.get(cat, 0) + monto` to accumulate.'}
+    explanation:
+      es: 'Si asignas `gastos[cat] = monto`, cada gasto nuevo borraría el anterior de esa categoría.'
+      en: 'If you assign `gastos[cat] = monto`, each new expense would erase the previous one in that category.'
+
+  - id: py.u10.l04.e02
+    type: write_code
+    difficulty: 3
+    skills: [py.project, py.dict, py.input]
+    prompt:
+      es: |
+        **Etapa 2.** Agrega el comando:
+        - `categoria <nombre>`: muestra el total de esa categoría, o `error` si no existe.
+      en: |
+        **Stage 2.** Add the command:
+        - `categoria <nombre>`: shows the total of that category, or `error` if it does not exist.
+    starter: |
+      # Escribe tu código aquí / Write your code here
+    reference_solution: |
+      n = int(input())
+      gastos = {}
+      for i in range(n):
+          partes = input().split()
+          if partes[0] == "gasto":
+              cat = partes[1]
+              gastos[cat] = gastos.get(cat, 0) + int(partes[2])
+          elif partes[0] == "total":
+              print(sum(gastos.values()))
+          elif partes[0] == "categoria":
+              if partes[1] in gastos:
+                  print(gastos[partes[1]])
+              else:
+                  print("error")
+    tests:
+      - {stdin: "5\ngasto comida 10\ngasto comida 5\ncategoria comida\ncategoria taxi\ntotal\n", expected_stdout: "15\nerror\n15\n", visible: true}
+      - {stdin: "2\ncategoria a\ntotal\n", expected_stdout: "error\n0\n", visible: false}
+    wrong_examples:
+      - code: |
+          n = int(input())
+          gastos = {}
+          for i in range(n):
+              partes = input().split()
+              if partes[0] == "gasto":
+                  cat = partes[1]
+                  gastos[cat] = gastos.get(cat, 0) + int(partes[2])
+              elif partes[0] == "total":
+                  print(sum(gastos.values()))
+              elif partes[0] == "categoria":
+                  print(gastos[partes[1]])
+        expect_fail_tag: dict.keyerror_unhandled
+    hints:
+      - {es: 'Comprueba con `in` antes de acceder a la categoría.', en: 'Check with `in` before accessing the category.'}
+    explanation:
+      es: 'Acceder a una categoría inexistente sin comprobar produciría un `KeyError`.'
+      en: 'Accessing a missing category without checking would produce a `KeyError`.'
+
+  - id: py.u10.l04.e03
+    type: write_code
+    difficulty: 3
+    skills: [py.project, py.dict, py.fstring, py.input]
+    prompt:
+      es: |
+        **Etapa 3.** Agrega el comando:
+        - `reporte`: muestra una línea `categoria: monto` por cada categoría, en orden alfabético.
+          Si no hay categorías, muestra `vacio`.
+      en: |
+        **Stage 3.** Add the command:
+        - `reporte`: shows one line `categoria: monto` for each category, in alphabetical order.
+          If there are no categories, show `vacio`.
+    starter: |
+      # Escribe tu código aquí / Write your code here
+    reference_solution: |
+      n = int(input())
+      gastos = {}
+      for i in range(n):
+          partes = input().split()
+          if partes[0] == "gasto":
+              cat = partes[1]
+              gastos[cat] = gastos.get(cat, 0) + int(partes[2])
+          elif partes[0] == "total":
+              print(sum(gastos.values()))
+          elif partes[0] == "categoria":
+              if partes[1] in gastos:
+                  print(gastos[partes[1]])
+              else:
+                  print("error")
+          elif partes[0] == "reporte":
+              if len(gastos) == 0:
+                  print("vacio")
+              else:
+                  for cat in sorted(gastos):
+                      print(f"{cat}: {gastos[cat]}")
+    tests:
+      - {stdin: "4\ngasto taxi 5\ngasto comida 10\ngasto taxi 1\nreporte\n", expected_stdout: "comida: 10\ntaxi: 6\n", visible: true}
+      - {stdin: "1\nreporte\n", expected_stdout: "vacio\n", visible: false}
+    wrong_examples:
+      - code: |
+          n = int(input())
+          gastos = {}
+          for i in range(n):
+              partes = input().split()
+              if partes[0] == "gasto":
+                  cat = partes[1]
+                  gastos[cat] = gastos.get(cat, 0) + int(partes[2])
+              elif partes[0] == "reporte":
+                  if len(gastos) == 0:
+                      print("vacio")
+                  else:
+                      for cat in gastos:
+                          print(f"{cat}: {gastos[cat]}")
+        expect_fail_tag: logic.missing_sort
+    hints:
+      - {es: '`sorted(diccionario)` devuelve las claves en orden alfabético.', en: '`sorted(dictionary)` returns the keys in alphabetical order.'}
+    explanation:
+      es: 'Sin `sorted`, las categorías saldrían en el orden en que se agregaron.'
+      en: 'Without `sorted`, the categories would come out in the order they were added.'
+
+  - id: py.u10.l04.e04
+    type: write_code
+    difficulty: 4
+    skills: [py.project, py.try, py.dict, py.input]
+    prompt:
+      es: |
+        **Etapa 4.** Valida los comandos. Muestra `error` cuando:
+        - un comando no existe o no tiene el número correcto de partes,
+        - en `gasto`, el monto no es un entero o no es mayor que 0.
+
+        Los demás comandos (`gasto`, `total`, `categoria`, `reporte`) siguen igual. Un comando con error no cambia nada.
+      en: |
+        **Stage 4.** Validate the commands. Show `error` when:
+        - a command does not exist or does not have the right number of parts,
+        - in `gasto`, the amount is not a whole number or is not greater than 0.
+
+        The other commands (`gasto`, `total`, `categoria`, `reporte`) stay the same. A command with an error changes nothing.
+    starter: |
+      # Escribe tu código aquí / Write your code here
+    reference_solution: |
+      n = int(input())
+      gastos = {}
+      for i in range(n):
+          partes = input().split()
+          if len(partes) == 3 and partes[0] == "gasto":
+              try:
+                  monto = int(partes[2])
+              except ValueError:
+                  print("error")
+              else:
+                  if monto > 0:
+                      gastos[partes[1]] = gastos.get(partes[1], 0) + monto
+                  else:
+                      print("error")
+          elif len(partes) == 1 and partes[0] == "total":
+              print(sum(gastos.values()))
+          elif len(partes) == 2 and partes[0] == "categoria":
+              if partes[1] in gastos:
+                  print(gastos[partes[1]])
+              else:
+                  print("error")
+          elif len(partes) == 1 and partes[0] == "reporte":
+              if len(gastos) == 0:
+                  print("vacio")
+              else:
+                  for cat in sorted(gastos):
+                      print(f"{cat}: {gastos[cat]}")
+          else:
+              print("error")
+    tests:
+      - {stdin: "6\ngasto comida 10\ngasto taxi x\ngasto cine -5\nbaile\ngasto cine\ntotal\n", expected_stdout: "error\nerror\nerror\nerror\n10\n", visible: true}
+      - {stdin: "3\ngasto a 0\nreporte\ncategoria\n", expected_stdout: "error\nvacio\nerror\n", visible: false}
+    wrong_examples:
+      - code: |
+          n = int(input())
+          gastos = {}
+          for i in range(n):
+              partes = input().split()
+              if partes[0] == "gasto":
+                  gastos[partes[1]] = gastos.get(partes[1], 0) + int(partes[2])
+              elif partes[0] == "total":
+                  print(sum(gastos.values()))
+        expect_fail_tag: validation.missing_check
+    hints:
+      - {es: 'Comprueba `len(partes)` antes de usar los índices.', en: 'Check `len(partes)` before using the indexes.'}
+      - {es: 'Convierte el monto dentro de un `try` para capturar el `ValueError`.', en: 'Convert the amount inside a `try` to catch the `ValueError`.'}
+    explanation:
+      es: 'Un programa robusto asume que la entrada puede ser incorrecta.'
+      en: 'A robust program assumes the input may be wrong.'
+
+  - id: py.u10.l04.e05
+    type: write_code
+    difficulty: 4
+    skills: [py.project, py.def, py.list, py.dict, py.try, py.input]
+    prompt:
+      es: |
+        **Etapa 5 (final).** Reorganiza el programa con una función `procesar(linea, gastos)` que **devuelva una lista**
+        con las líneas que hay que mostrar (vacía si no hay salida). El código principal solo lee y muestra lo que devuelve.
+        Agrega dos comandos:
+        - `borrar <categoria>`: elimina la categoría, o `error` si no existe.
+        - `mayor`: muestra la categoría con el total más alto (si hay empate, la primera en orden alfabético), o `vacio` si no hay ninguna.
+
+        Todos los comandos con formato incorrecto muestran `error`.
+      en: |
+        **Stage 5 (final).** Reorganize the program with a function `procesar(linea, gastos)` that **returns a list**
+        with the lines to show (empty if there is no output). The main code only reads and shows what it returns.
+        Add two commands:
+        - `borrar <categoria>`: removes the category, or `error` if it does not exist.
+        - `mayor`: shows the category with the highest total (if tied, the first one in alphabetical order), or `vacio` if there are none.
+
+        Every command with a wrong format shows `error`.
+    starter: |
+      # Escribe tu código aquí / Write your code here
+    reference_solution: |
+      def procesar(linea, gastos):
+          partes = linea.split()
+          if len(partes) == 0:
+              return ["error"]
+          cmd = partes[0]
+          if cmd == "gasto" and len(partes) == 3:
+              try:
+                  monto = int(partes[2])
+              except ValueError:
+                  return ["error"]
+              if monto <= 0:
+                  return ["error"]
+              gastos[partes[1]] = gastos.get(partes[1], 0) + monto
+              return []
+          if cmd == "total" and len(partes) == 1:
+              return [str(sum(gastos.values()))]
+          if cmd == "categoria" and len(partes) == 2:
+              if partes[1] in gastos:
+                  return [str(gastos[partes[1]])]
+              return ["error"]
+          if cmd == "reporte" and len(partes) == 1:
+              if len(gastos) == 0:
+                  return ["vacio"]
+              salida = []
+              for cat in sorted(gastos):
+                  salida.append(f"{cat}: {gastos[cat]}")
+              return salida
+          if cmd == "borrar" and len(partes) == 2:
+              if partes[1] in gastos:
+                  del gastos[partes[1]]
+                  return []
+              return ["error"]
+          if cmd == "mayor" and len(partes) == 1:
+              if len(gastos) == 0:
+                  return ["vacio"]
+              mejor = ""
+              for cat in sorted(gastos):
+                  if mejor == "" or gastos[cat] > gastos[mejor]:
+                      mejor = cat
+              return [mejor]
+          return ["error"]
+
+      n = int(input())
+      gastos = {}
+      for i in range(n):
+          for linea in procesar(input(), gastos):
+              print(linea)
+    tests:
+      - {stdin: "9\ngasto comida 10\ngasto taxi 30\ngasto cine 30\nmayor\nborrar taxi\nmayor\nborrar bus\nreporte\ntotal\n", expected_stdout: "cine\ncine\nerror\ncine: 30\ncomida: 10\n40\n", visible: true}
+      - {stdin: "2\nmayor\nreporte\n", expected_stdout: "vacio\nvacio\n", visible: false}
+      - {stdin: "4\ngasto a 5\ngasto b 5\nmayor\nborrar a b\n", expected_stdout: "a\nerror\n", visible: false}
+    static_checks:
+      - {kind: requires_function, name: procesar, returns: true}
+    wrong_examples:
+      - code: |
+          def procesar(linea, gastos):
+              partes = linea.split()
+              if len(partes) == 0:
+                  return ["error"]
+              cmd = partes[0]
+              if cmd == "gasto" and len(partes) == 3:
+                  try:
+                      monto = int(partes[2])
+                  except ValueError:
+                      return ["error"]
+                  if monto <= 0:
+                      return ["error"]
+                  gastos[partes[1]] = gastos.get(partes[1], 0) + monto
+                  return []
+              if cmd == "total" and len(partes) == 1:
+                  return [str(sum(gastos.values()))]
+              if cmd == "categoria" and len(partes) == 2:
+                  if partes[1] in gastos:
+                      return [str(gastos[partes[1]])]
+                  return ["error"]
+              if cmd == "reporte" and len(partes) == 1:
+                  if len(gastos) == 0:
+                      return ["vacio"]
+                  salida = []
+                  for cat in sorted(gastos):
+                      salida.append(f"{cat}: {gastos[cat]}")
+                  return salida
+              if cmd == "borrar" and len(partes) == 2:
+                  if partes[1] in gastos:
+                      del gastos[partes[1]]
+                      return []
+                  return ["error"]
+              if cmd == "mayor" and len(partes) == 1:
+                  if len(gastos) == 0:
+                      return ["vacio"]
+                  mejor = ""
+                  for cat in sorted(gastos):
+                      if mejor == "" or gastos[cat] >= gastos[mejor]:
+                          mejor = cat
+                  return [mejor]
+              return ["error"]
+
+          n = int(input())
+          gastos = {}
+          for i in range(n):
+              for linea in procesar(input(), gastos):
+                  print(linea)
+        expect_fail_tag: logic.tie_handling
+    hints:
+      - {es: 'Cada rama de `procesar` termina con un `return` de una lista.', en: 'Each branch of `procesar` ends with a `return` of a list.'}
+      - {es: 'Para `mayor`, recorre `sorted(gastos)` y actualiza solo si el total es estrictamente mayor.', en: 'For `mayor`, walk through `sorted(gastos)` and update only if the total is strictly greater.'}
+    explanation:
+      es: 'Una función que devuelve datos en vez de imprimirlos es más fácil de probar y de reutilizar.'
+      en: 'A function that returns data instead of printing it is easier to test and reuse.'
+
+  - id: py.u10.l04.e06
+    type: multiple_choice
+    difficulty: 2
+    skills: [py.project, py.def]
+    prompt:
+      es: '¿Por qué conviene que `procesar` devuelva una lista en lugar de imprimir directamente?'
+      en: 'Why is it better for `procesar` to return a list instead of printing directly?'
+    options:
+      - {es: 'Porque el resultado se puede probar con `assert`, reutilizar o enviar a un archivo sin cambiar la función.', en: 'Because the result can be tested with `assert`, reused or sent to a file without changing the function.'}
+      - {es: 'Porque `print` no puede usarse dentro de funciones.', en: 'Because `print` cannot be used inside functions.'}
+      - {es: 'Porque así el programa corre más rápido.', en: 'Because it makes the program run faster.'}
+      - {es: 'No hay ninguna ventaja.', en: 'There is no advantage.'}
+    answer: 0
+    distractor_tags: {1: function.print_misconception}
+    hints:
+      - {es: 'Piensa en cómo probarías una función que solo imprime.', en: 'Think about how you would test a function that only prints.'}
+    explanation:
+      es: 'Separar el cálculo de la presentación es una de las ideas más importantes al organizar un programa.'
+      en: 'Separating calculation from presentation is one of the most important ideas when organizing a program.'

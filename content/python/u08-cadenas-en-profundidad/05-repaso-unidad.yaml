@@ -1,0 +1,247 @@
+id: py.u08.l05
+language: python
+unit: py.u08
+position: 5
+skills: [py.slicing, py.strings.methods, py.fstring]
+status: draft
+reviewed_by: []
+title:
+  es: 'Repaso y mini-programas'
+  en: 'Review and mini programs'
+explanation:
+  es: |
+    Repaso de índices, rebanadas, métodos de texto y f-strings. Los últimos ejercicios son
+    pequeños programas de procesamiento de texto.
+  en: |
+    Review of indexes, slices, text methods and f-strings. The last exercises are
+    small text-processing programs.
+exercises:
+  - id: py.u08.l05.e01
+    type: predict_output
+    difficulty: 2
+    skills: [py.slicing]
+    prompt:
+      es: '¿Qué muestra este programa?'
+      en: 'What does this program show?'
+    code: |
+      print("Programacion"[3:7])
+    answer: "gram"
+    hints:
+      - {es: 'La `g` está en el índice 3.', en: 'The `g` is at index 3.'}
+    explanation:
+      es: 'Repasa "Rebanadas". Índices 3, 4, 5 y 6.'
+      en: 'Review "Slices". Indexes 3, 4, 5 and 6.'
+
+  - id: py.u08.l05.e02
+    type: predict_output
+    difficulty: 2
+    skills: [py.strings.methods]
+    prompt:
+      es: '¿Qué muestra este programa?'
+      en: 'What does this program show?'
+    code: |
+      print("a-b-c".split("-"))
+    answer: "['a', 'b', 'c']"
+    hints:
+      - {es: 'El resultado es una lista.', en: 'The result is a list.'}
+    explanation:
+      es: 'Repasa "Métodos de cadenas".'
+      en: 'Review "String methods".'
+
+  - id: py.u08.l05.e03
+    type: multiple_choice
+    difficulty: 2
+    skills: [py.slicing]
+    prompt:
+      es: '¿Qué expresión devuelve siempre la última letra de `s`, sea cual sea su longitud?'
+      en: 'Which expression always returns the last letter of `s`, whatever its length?'
+    options:
+      - {es: 's[-1]', en: 's[-1]'}
+      - {es: 's[len(s)]', en: 's[len(s)]'}
+      - {es: 's[5]', en: 's[5]'}
+      - {es: 's[:-1]', en: 's[:-1]'}
+    answer: 0
+    distractor_tags: {1: index.out_of_range, 2: index.hardcoded, 3: slice.drop_vs_take}
+    hints:
+      - {es: 'Un índice negativo cuenta desde el final.', en: 'A negative index counts from the end.'}
+    explanation:
+      es: '`s[len(s)]` se pasa un lugar; `s[:-1]` es todo menos la última.'
+      en: '`s[len(s)]` goes one place too far; `s[:-1]` is everything except the last one.'
+
+  - id: py.u08.l05.e04
+    type: order_lines
+    difficulty: 3
+    skills: [py.slicing, py.if]
+    prompt:
+      es: 'Ordena las líneas para que el programa diga si `radar` es un palíndromo.'
+      en: 'Order the lines so the program says whether `radar` is a palindrome.'
+    lines:
+      - 'palabra = "radar"'
+      - 'if palabra == palabra[::-1]:'
+      - '    print("palindromo")'
+      - 'else:'
+      - '    print("no")'
+    hints:
+      - {es: 'El `else` va al mismo nivel que el `if`.', en: 'The `else` goes at the same level as the `if`.'}
+    explanation:
+      es: 'Resultado: `palindromo`.'
+      en: 'Result: `palindromo`.'
+
+  - id: py.u08.l05.e05
+    type: write_code
+    difficulty: 3
+    skills: [py.strings.methods, py.list, py.slicing, py.input]
+    prompt:
+      es: 'Lee una frase y muestra sus palabras en orden inverso, separadas por un espacio.'
+      en: 'Read a sentence and show its words in reverse order, separated by a space.'
+    starter: |
+      # Escribe tu código aquí / Write your code here
+    reference_solution: |
+      frase = input()
+      palabras = frase.split()
+      print(" ".join(palabras[::-1]))
+    tests:
+      - {stdin: "uno dos tres\n", expected_stdout: "tres dos uno\n", visible: true}
+      - {stdin: "a\n", expected_stdout: "a\n", visible: false}
+      - {stdin: "el sol sale hoy\n", expected_stdout: "hoy sale sol el\n", visible: false}
+    wrong_examples:
+      - code: |
+          frase = input()
+          print(frase[::-1])
+        expect_fail_tag: logic.reversed_wrong_unit
+    hints:
+      - {es: 'Parte en palabras, invierte la lista y vuelve a unir.', en: 'Split into words, reverse the list and join again.'}
+    explanation:
+      es: 'Invertir el texto invierte las letras, no las palabras.'
+      en: 'Reversing the text reverses the letters, not the words.'
+
+  - id: py.u08.l05.e06
+    type: write_code
+    difficulty: 3
+    skills: [py.strings.methods, py.for, py.if, py.input]
+    prompt:
+      es: 'Lee una frase y muestra cuántas vocales tiene (`a`, `e`, `i`, `o`, `u`), sin distinguir mayúsculas.'
+      en: 'Read a sentence and show how many vowels it has (`a`, `e`, `i`, `o`, `u`), ignoring case.'
+    starter: |
+      # Escribe tu código aquí / Write your code here
+    reference_solution: |
+      frase = input().lower()
+      cuenta = 0
+      for letra in frase:
+          if letra in "aeiou":
+              cuenta = cuenta + 1
+      print(cuenta)
+    tests:
+      - {stdin: "Hola Mundo\n", expected_stdout: "4\n", visible: true}
+      - {stdin: "XYZ\n", expected_stdout: "0\n", visible: false}
+      - {stdin: "AEIOU aeiou\n", expected_stdout: "10\n", visible: false}
+    wrong_examples:
+      - code: |
+          frase = input()
+          cuenta = 0
+          for letra in frase:
+              if letra in "aeiou":
+                  cuenta = cuenta + 1
+          print(cuenta)
+        expect_fail_tag: logic.case_sensitive
+    hints:
+      - {es: 'Pasa la frase a minúsculas antes de recorrerla.', en: 'Turn the sentence to lowercase before walking through it.'}
+    explanation:
+      es: 'Sin `lower()`, las vocales mayúsculas no se contarían.'
+      en: 'Without `lower()`, uppercase vowels would not be counted.'
+
+  - id: py.u08.l05.e07
+    type: write_code
+    difficulty: 4
+    skills: [py.strings.methods, py.for, py.if, py.compare, py.input]
+    prompt:
+      es: |
+        Lee una contraseña y muestra `fuerte` si tiene al menos 8 caracteres, al menos un dígito y al menos una letra
+        mayúscula; si no, muestra `debil`. (Pista: `isdigit()` e `isupper()` funcionan sobre una letra.)
+      en: |
+        Read a password and show `fuerte` if it has at least 8 characters, at least one digit and at least one uppercase
+        letter; otherwise show `debil`. (Hint: `isdigit()` and `isupper()` work on a single character.)
+    starter: |
+      # Escribe tu código aquí / Write your code here
+    reference_solution: |
+      clave = input()
+      hay_digito = False
+      hay_mayus = False
+      for c in clave:
+          if c.isdigit():
+              hay_digito = True
+          if c.isupper():
+              hay_mayus = True
+      if len(clave) >= 8 and hay_digito and hay_mayus:
+          print("fuerte")
+      else:
+          print("debil")
+    tests:
+      - {stdin: "Abcdef12\n", expected_stdout: "fuerte\n", visible: true}
+      - {stdin: "abcdef12\n", expected_stdout: "debil\n", visible: false}
+      - {stdin: "Abcdefgh\n", expected_stdout: "debil\n", visible: false}
+      - {stdin: "Ab1\n", expected_stdout: "debil\n", visible: false}
+    wrong_examples:
+      - code: |
+          clave = input()
+          if len(clave) >= 8:
+              print("fuerte")
+          else:
+              print("debil")
+        expect_fail_tag: logic.missing_condition
+    hints:
+      - {es: 'Usa dos variables `bool` que cambien a `True` si encuentras un dígito o una mayúscula.', en: 'Use two `bool` variables that turn `True` if you find a digit or an uppercase letter.'}
+    explanation:
+      es: 'Se recorre la clave una vez y se comprueban las tres condiciones al final.'
+      en: 'The password is walked through once and the three conditions are checked at the end.'
+
+  - id: py.u08.l05.e08
+    type: write_code
+    difficulty: 4
+    skills: [py.strings.methods, py.slicing, py.for, py.if, py.input]
+    prompt:
+      es: |
+        Cifrado César: lee un entero `k` y luego un texto en minúsculas (dos líneas). Desplaza cada letra `k` posiciones
+        en el alfabeto (después de la `z` vuelve a la `a`). Los caracteres que no son letras se dejan igual. Muestra el resultado.
+      en: |
+        Caesar cipher: read a whole number `k` and then a lowercase text (two lines). Shift each letter `k` positions
+        in the alphabet (after `z` it wraps back to `a`). Characters that are not letters stay unchanged. Show the result.
+    starter: |
+      alfabeto = "abcdefghijklmnopqrstuvwxyz"
+      # Escribe tu código aquí / Write your code here
+    reference_solution: |
+      alfabeto = "abcdefghijklmnopqrstuvwxyz"
+      k = int(input())
+      texto = input()
+      resultado = ""
+      for c in texto:
+          pos = alfabeto.find(c)
+          if pos == -1:
+              resultado = resultado + c
+          else:
+              resultado = resultado + alfabeto[(pos + k) % 26]
+      print(resultado)
+    tests:
+      - {stdin: "1\nhola mundo\n", expected_stdout: "ipmb nvoep\n", visible: true}
+      - {stdin: "3\nxyz\n", expected_stdout: "abc\n", visible: false}
+      - {stdin: "2\nhi!\n", expected_stdout: "jk!\n", visible: false}
+    wrong_examples:
+      - code: |
+          alfabeto = "abcdefghijklmnopqrstuvwxyz"
+          k = int(input())
+          texto = input()
+          resultado = ""
+          for c in texto:
+              pos = alfabeto.find(c)
+              if pos == -1:
+                  resultado = resultado + c
+              else:
+                  resultado = resultado + alfabeto[pos + k]
+          print(resultado)
+        expect_fail_tag: logic.missing_wraparound
+    hints:
+      - {es: '`alfabeto.find(c)` da la posición de la letra, o -1 si no es una letra.', en: '`alfabeto.find(c)` gives the position of the letter, or -1 if it is not a letter.'}
+      - {es: 'El operador `%` hace que, al pasarse de la `z`, vuelva al principio.', en: 'The `%` operator makes it wrap back to the start after going past `z`.'}
+    explanation:
+      es: 'Sin `% 26`, desplazar la `x` por 3 daría un `IndexError`.'
+      en: 'Without `% 26`, shifting the `x` by 3 would raise an `IndexError`.'

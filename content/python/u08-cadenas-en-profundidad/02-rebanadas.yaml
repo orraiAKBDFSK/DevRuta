@@ -1,0 +1,282 @@
+id: py.u08.l02
+language: python
+unit: py.u08
+position: 2
+skills: [py.slicing]
+status: draft
+reviewed_by: []
+title:
+  es: 'Rebanadas (slicing)'
+  en: 'Slices'
+explanation:
+  es: |
+    Una **rebanada** extrae un fragmento: `s[inicio:fin]`, desde `inicio` hasta `fin - 1` (el final **no** se incluye):
+
+    ```python
+    s = "Python"
+    print(s[0:2])     # Py
+    print(s[:3])      # Pyt   (sin inicio: desde el principio)
+    print(s[2:])      # thon  (sin fin: hasta el final)
+    print(s[-3:])     # hon   (los últimos 3)
+    print(s[::2])     # Pto   (de 2 en 2)
+    print(s[::-1])    # nohtyP (al revés)
+    ```
+
+    - Funciona igual con listas: `[1, 2, 3, 4, 5][1:4]` da `[2, 3, 4]`.
+    - Una rebanada **nunca falla** por pasarse del límite: `"ab"[0:10]` da `"ab"`.
+    - Siempre crea un texto o lista **nuevo**.
+  en: |
+    A **slice** extracts a fragment: `s[start:end]`, from `start` up to `end - 1` (the end is **not** included):
+
+    ```python
+    s = "Python"
+    print(s[0:2])     # Py
+    print(s[:3])      # Pyt   (no start: from the beginning)
+    print(s[2:])      # thon  (no end: until the end)
+    print(s[-3:])     # hon   (the last 3)
+    print(s[::2])     # Pto   (every 2nd)
+    print(s[::-1])    # nohtyP (backwards)
+    ```
+
+    - It works the same with lists: `[1, 2, 3, 4, 5][1:4]` gives `[2, 3, 4]`.
+    - A slice **never fails** for going past the limit: `"ab"[0:10]` gives `"ab"`.
+    - It always creates a **new** text or list.
+exercises:
+  - id: py.u08.l02.e01
+    type: predict_output
+    difficulty: 1
+    skills: [py.slicing]
+    prompt:
+      es: '¿Qué muestra este programa?'
+      en: 'What does this program show?'
+    code: |
+      print("Python"[0:2])
+    answer: "Py"
+    hints:
+      - {es: 'El final no se incluye.', en: 'The end is not included.'}
+    explanation:
+      es: 'Se toman los índices 0 y 1.'
+      en: 'Indexes 0 and 1 are taken.'
+
+  - id: py.u08.l02.e02
+    type: predict_output
+    difficulty: 1
+    skills: [py.slicing]
+    prompt:
+      es: '¿Qué muestra este programa?'
+      en: 'What does this program show?'
+    code: |
+      print("Python"[2:])
+    answer: "thon"
+    hints:
+      - {es: 'Sin fin, llega hasta el final.', en: 'With no end, it goes to the end.'}
+    explanation:
+      es: 'Desde el índice 2 hasta el último carácter.'
+      en: 'From index 2 to the last character.'
+
+  - id: py.u08.l02.e03
+    type: predict_output
+    difficulty: 1
+    skills: [py.slicing]
+    prompt:
+      es: '¿Qué muestra este programa?'
+      en: 'What does this program show?'
+    code: |
+      print("Python"[:3])
+    answer: "Pyt"
+    hints:
+      - {es: 'Sin inicio, empieza en 0.', en: 'With no start, it begins at 0.'}
+    explanation:
+      es: 'Los tres primeros caracteres.'
+      en: 'The first three characters.'
+
+  - id: py.u08.l02.e04
+    type: predict_output
+    difficulty: 2
+    skills: [py.slicing]
+    prompt:
+      es: '¿Qué muestra este programa?'
+      en: 'What does this program show?'
+    code: |
+      print("Python"[-3:])
+    answer: "hon"
+    hints:
+      - {es: 'Empieza 3 posiciones antes del final.', en: 'It starts 3 positions before the end.'}
+    explanation:
+      es: 'Los tres últimos caracteres.'
+      en: 'The last three characters.'
+
+  - id: py.u08.l02.e05
+    type: predict_output
+    difficulty: 2
+    skills: [py.slicing]
+    prompt:
+      es: '¿Qué muestra este programa?'
+      en: 'What does this program show?'
+    code: |
+      print("Python"[::2])
+    answer: "Pto"
+    hints:
+      - {es: 'Toma los índices 0, 2 y 4.', en: 'It takes indexes 0, 2 and 4.'}
+    explanation:
+      es: 'El tercer valor de la rebanada es el paso.'
+      en: 'The third value of the slice is the step.'
+
+  - id: py.u08.l02.e06
+    type: predict_output
+    difficulty: 2
+    skills: [py.slicing]
+    prompt:
+      es: '¿Qué muestra este programa?'
+      en: 'What does this program show?'
+    code: |
+      print("Python"[::-1])
+    answer: "nohtyP"
+    hints:
+      - {es: 'Un paso negativo recorre al revés.', en: 'A negative step walks backwards.'}
+    explanation:
+      es: 'Es la forma más corta de invertir un texto.'
+      en: 'It is the shortest way to reverse a text.'
+
+  - id: py.u08.l02.e07
+    type: predict_output
+    difficulty: 2
+    skills: [py.slicing, py.list]
+    prompt:
+      es: '¿Qué muestra este programa?'
+      en: 'What does this program show?'
+    code: |
+      print([1, 2, 3, 4, 5][1:4])
+    answer: "[2, 3, 4]"
+    hints:
+      - {es: 'Las rebanadas funcionan igual con listas.', en: 'Slices work the same with lists.'}
+    explanation:
+      es: 'Índices 1, 2 y 3.'
+      en: 'Indexes 1, 2 and 3.'
+
+  - id: py.u08.l02.e08
+    type: multiple_choice
+    difficulty: 2
+    skills: [py.slicing]
+    prompt:
+      es: '¿Qué expresión devuelve las dos últimas letras de `s`?'
+      en: 'Which expression returns the last two letters of `s`?'
+    options:
+      - {es: 's[-2:]', en: 's[-2:]'}
+      - {es: 's[-2]', en: 's[-2]'}
+      - {es: 's[:2]', en: 's[:2]'}
+      - {es: 's[2:]', en: 's[2:]'}
+    answer: 0
+    distractor_tags: {1: slice.index_vs_slice, 2: slice.first_vs_last, 3: slice.drop_vs_take}
+    hints:
+      - {es: 'Necesitas empezar 2 posiciones antes del final y llegar hasta él.', en: 'You need to start 2 positions before the end and go all the way to it.'}
+    explanation:
+      es: '`s[-2]` sería una sola letra; `s[:2]` las dos primeras; `s[2:]` todo menos las dos primeras.'
+      en: '`s[-2]` would be a single letter; `s[:2]` the first two; `s[2:]` everything except the first two.'
+
+  - id: py.u08.l02.e09
+    type: fill_code
+    difficulty: 3
+    skills: [py.slicing]
+    prompt:
+      es: 'Completa la rebanada para que el programa muestre `gra`.'
+      en: 'Fill in the slice so the program shows `gra`.'
+    code: |
+      print("programa"[___])
+    blanks:
+      - ["3:6"]
+    hints:
+      - {es: '`p`=0, `r`=1, `o`=2, `g`=3...', en: '`p`=0, `r`=1, `o`=2, `g`=3...'}
+    explanation:
+      es: 'La `g` está en el índice 3 y la rebanada termina antes del índice 6.'
+      en: 'The `g` is at index 3 and the slice ends before index 6.'
+
+  - id: py.u08.l02.e10
+    type: write_code
+    difficulty: 2
+    skills: [py.slicing, py.input]
+    prompt:
+      es: 'Lee una palabra y muestra sus tres primeras letras (o la palabra completa si tiene menos de tres).'
+      en: 'Read a word and show its first three letters (or the whole word if it has fewer than three).'
+    starter: |
+      # Escribe tu código aquí / Write your code here
+    reference_solution: |
+      palabra = input()
+      print(palabra[:3])
+    tests:
+      - {stdin: "python\n", expected_stdout: "pyt\n", visible: true}
+      - {stdin: "ab\n", expected_stdout: "ab\n", visible: false}
+      - {stdin: "sol\n", expected_stdout: "sol\n", visible: false}
+    wrong_examples:
+      - code: |
+          palabra = input()
+          print(palabra[0] + palabra[1] + palabra[2])
+        expect_fail_tag: index.out_of_range
+      - code: |
+          palabra = input()
+          print(palabra[:2])
+        expect_fail_tag: logic.off_by_one
+    hints:
+      - {es: 'Una rebanada no falla aunque el texto sea corto.', en: 'A slice does not fail even if the text is short.'}
+    explanation:
+      es: 'Indexar con `[2]` fallaría con textos de menos de 3 letras; la rebanada no.'
+      en: 'Indexing with `[2]` would fail for texts shorter than 3 letters; the slice does not.'
+
+  - id: py.u08.l02.e11
+    type: write_code
+    difficulty: 3
+    skills: [py.slicing, py.compare, py.input]
+    prompt:
+      es: 'Lee una palabra y muestra `True` si es un palíndromo (se lee igual al derecho y al revés), o `False` si no.'
+      en: 'Read a word and show `True` if it is a palindrome (it reads the same forwards and backwards), or `False` otherwise.'
+    starter: |
+      # Escribe tu código aquí / Write your code here
+    reference_solution: |
+      palabra = input()
+      print(palabra == palabra[::-1])
+    tests:
+      - {stdin: "oso\n", expected_stdout: "True\n", visible: true}
+      - {stdin: "casa\n", expected_stdout: "False\n", visible: false}
+      - {stdin: "reconocer\n", expected_stdout: "True\n", visible: false}
+      - {stdin: "a\n", expected_stdout: "True\n", visible: false}
+    wrong_examples:
+      - code: |
+          palabra = input()
+          print(palabra == palabra)
+        expect_fail_tag: logic.tautology
+    hints:
+      - {es: 'Compara la palabra con la palabra invertida.', en: 'Compare the word with the reversed word.'}
+    explanation:
+      es: 'Un palíndromo es igual a sí mismo al invertirse.'
+      en: 'A palindrome equals itself when reversed.'
+
+  - id: py.u08.l02.e12
+    type: write_code
+    difficulty: 4
+    skills: [py.slicing, py.input]
+    prompt:
+      es: |
+        Lee una palabra de **al menos 2 letras** y muestra la palabra con su primera y su última letra intercambiadas.
+        Ejemplo: `hola` → `aolh`.
+      en: |
+        Read a word of **at least 2 letters** and show the word with its first and its last letter swapped.
+        Example: `hola` → `aolh`.
+    starter: |
+      # Escribe tu código aquí / Write your code here
+    reference_solution: |
+      palabra = input()
+      print(palabra[-1] + palabra[1:-1] + palabra[0])
+    tests:
+      - {stdin: "hola\n", expected_stdout: "aolh\n", visible: true}
+      - {stdin: "ab\n", expected_stdout: "ba\n", visible: false}
+      - {stdin: "python\n", expected_stdout: "nythop\n", visible: false}
+    wrong_examples:
+      - code: |
+          palabra = input()
+          print(palabra[-1] + palabra[1:] + palabra[0])
+        expect_fail_tag: slice.wrong_bounds
+    hints:
+      - {es: 'El centro de la palabra es `palabra[1:-1]`.', en: 'The middle of the word is `palabra[1:-1]`.'}
+    explanation:
+      es: 'Con `palabra[1:]` la última letra aparecería dos veces.'
+      en: 'With `palabra[1:]` the last letter would appear twice.'

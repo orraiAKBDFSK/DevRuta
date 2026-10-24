@@ -1,0 +1,169 @@
+id: py.u01.l04
+language: python
+unit: py.u01
+position: 4
+skills: [py.output, py.variables, py.types.basic]
+status: draft
+reviewed_by: []
+title:
+  es: 'Repaso de la unidad 1'
+  en: 'Unit 1 review'
+explanation:
+  es: |
+    Repasa lo que viste: `print` muestra valores, las variables los guardan con `=`
+    y cada valor tiene un tipo (`int`, `float`, `str`, `bool`).
+    Si fallas, la explicación te dirá qué repasar.
+  en: |
+    Review what you learned: `print` shows values, variables store them with `=`
+    and every value has a type (`int`, `float`, `str`, `bool`).
+    If you miss one, the explanation will tell you what to review.
+exercises:
+  - id: py.u01.l04.e01
+    type: predict_output
+    difficulty: 2
+    skills: [py.variables]
+    prompt:
+      es: '¿Qué muestra este programa?'
+      en: 'What does this program show?'
+    code: |
+      x = 3
+      y = x
+      x = "hola"
+      print(y)
+    answer: "3"
+    hints:
+      - {es: 'y copió el valor de x antes de que x cambiara.', en: 'y copied the value of x before x changed.'}
+    explanation:
+      es: 'Repasa "Guardar datos en variables". `y` se quedó con el 3.'
+      en: 'Review "Storing data in variables". `y` kept the 3.'
+
+  - id: py.u01.l04.e02
+    type: predict_output
+    difficulty: 2
+    skills: [py.types.basic]
+    prompt:
+      es: '¿Qué muestra este programa?'
+      en: 'What does this program show?'
+    code: |
+      print(type(2.0))
+    answer: "<class 'float'>"
+    hints:
+      - {es: 'Tiene punto decimal aunque sea 2.0.', en: 'It has a decimal point even though it is 2.0.'}
+    explanation:
+      es: 'Repasa "Tipos de datos básicos". `2.0` es `float`, no `int`.'
+      en: 'Review "Basic data types". `2.0` is a `float`, not an `int`.'
+
+  - id: py.u01.l04.e03
+    type: order_lines
+    difficulty: 2
+    skills: [py.output, py.variables]
+    prompt:
+      es: 'Ordena las líneas para que el programa muestre `azul` y luego su tipo.'
+      en: 'Order the lines so the program shows `azul` and then its type.'
+    lines:
+      - 'color = "azul"'
+      - 'print(color)'
+      - 'print(type(color))'
+    hints:
+      - {es: 'Una variable debe existir antes de usarse.', en: 'A variable must exist before it is used.'}
+    explanation:
+      es: 'Primero se crea la variable, luego se usa.'
+      en: 'First the variable is created, then it is used.'
+
+  - id: py.u01.l04.e04
+    type: fill_code
+    difficulty: 2
+    skills: [py.types.basic, py.variables]
+    prompt:
+      es: 'Completa el valor para que el programa muestre `<class ''float''>`.'
+      en: 'Fill in the value so the program shows `<class ''float''>`.'
+    code: |
+      x = ___
+      print(type(x))
+    blanks:
+      - ["2.5", "1.0", "3.14"]
+    hints:
+      - {es: 'Un número con punto decimal.', en: 'A number with a decimal point.'}
+    explanation:
+      es: 'Cualquier número con parte decimal es `float`.'
+      en: 'Any number with a decimal part is a `float`.'
+
+  - id: py.u01.l04.e05
+    type: multiple_choice
+    difficulty: 2
+    skills: [py.output, py.types.basic]
+    prompt:
+      es: '¿Por qué `print(Hola)` da error, pero `print("Hola")` no?'
+      en: 'Why does `print(Hola)` fail but `print("Hola")` does not?'
+    options:
+      - {es: 'Sin comillas, Python busca una variable llamada Hola que no existe.', en: 'Without quotes, Python looks for a variable called Hola that does not exist.'}
+      - {es: 'Porque print solo acepta números.', en: 'Because print only accepts numbers.'}
+      - {es: 'Porque Hola debe ir en minúsculas.', en: 'Because Hola must be lowercase.'}
+      - {es: 'Los dos dan error.', en: 'Both fail.'}
+    answer: 0
+    distractor_tags: {1: output.misconception, 2: syntax.case}
+    hints:
+      - {es: 'Sin comillas, Python cree que es el nombre de una variable.', en: 'Without quotes, Python thinks it is a variable name.'}
+    explanation:
+      es: 'Es un `NameError`. Las comillas convierten el texto en un valor `str`.'
+      en: 'It is a `NameError`. Quotes turn the text into a `str` value.'
+
+  - id: py.u01.l04.e06
+    type: write_code
+    difficulty: 2
+    skills: [py.variables, py.output]
+    prompt:
+      es: |
+        Guarda `Luz` en una variable `nombre` y `30` en una variable `edad`.
+        Muestra primero el nombre y luego la edad, cada uno en su línea.
+      en: |
+        Store `Luz` in a variable `nombre` and `30` in a variable `edad`.
+        Show the name first and then the age, each on its own line.
+    starter: |
+      # Escribe tu código aquí / Write your code here
+    reference_solution: |
+      nombre = "Luz"
+      edad = 30
+      print(nombre)
+      print(edad)
+    tests:
+      - {stdin: "", expected_stdout: "Luz\n30\n", visible: true}
+    static_checks:
+      - {kind: requires_assignment, count_min: 2}
+    wrong_examples:
+      - code: |
+          print("Luz")
+          print(30)
+        expect_fail_tag: static.no_variable
+      - code: |
+          nombre = "Luz"
+          edad = 30
+          print(edad)
+          print(nombre)
+        expect_fail_tag: output.mismatch
+    hints:
+      - {es: 'Dos asignaciones y dos print.', en: 'Two assignments and two prints.'}
+      - {es: 'El texto lleva comillas; el número no.', en: 'The text has quotes; the number does not.'}
+    explanation:
+      es: 'El orden de los `print` es el orden de la salida.'
+      en: 'The order of the `print` calls is the order of the output.'
+
+  - id: py.u01.l04.e07
+    type: multiple_choice
+    difficulty: 1
+    skills: [py.variables]
+    prompt:
+      es: 'En `a = 5`, ¿qué significa el signo `=`?'
+      en: 'In `a = 5`, what does the `=` sign mean?'
+    options:
+      - {es: 'Guardar el 5 en el nombre a.', en: 'Store 5 under the name a.'}
+      - {es: 'Comparar si a es igual a 5.', en: 'Check whether a equals 5.'}
+      - {es: 'Restar 5 de a.', en: 'Subtract 5 from a.'}
+      - {es: 'Mostrar 5 en pantalla.', en: 'Show 5 on screen.'}
+    answer: 0
+    distractor_tags: {1: logic.assign_vs_compare}
+    hints:
+      - {es: 'Es una orden, no una pregunta.', en: 'It is an order, not a question.'}
+    explanation:
+      es: '`=` asigna. Para comparar se usa `==`, que verás en la unidad 3.'
+      en: '`=` assigns. Comparing uses `==`, which you will see in unit 3.'

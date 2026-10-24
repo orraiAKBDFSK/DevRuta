@@ -1,0 +1,158 @@
+# Habilidades de la ruta de Python y sus prerrequisitos (grafo acíclico).
+# `requires` lista las habilidades que conviene dominar antes.
+skills:
+  - id: py.output
+    name:
+      es: 'Mostrar resultados'
+      en: 'Showing output'
+    requires: []
+  - id: py.variables
+    name:
+      es: 'Variables'
+      en: 'Variables'
+    requires: [py.output]
+  - id: py.types.basic
+    name:
+      es: 'Tipos de datos básicos'
+      en: 'Basic data types'
+    requires: [py.variables]
+  - id: py.operators
+    name:
+      es: 'Operadores'
+      en: 'Operators'
+    requires: [py.types.basic]
+  - id: py.input
+    name:
+      es: 'Entrada de datos'
+      en: 'User input'
+    requires: [py.types.basic, py.output]
+  - id: py.strings.basic
+    name:
+      es: 'Texto básico'
+      en: 'Basic text'
+    requires: [py.types.basic]
+  - id: py.compare
+    name:
+      es: 'Comparaciones'
+      en: 'Comparisons'
+    requires: [py.operators]
+  - id: py.bool
+    name:
+      es: 'Lógica booleana'
+      en: 'Boolean logic'
+    requires: [py.compare]
+  - id: py.if
+    name:
+      es: 'Condicionales'
+      en: 'Conditionals'
+    requires: [py.bool]
+  - id: py.while
+    name:
+      es: 'Bucle while'
+      en: 'While loops'
+    requires: [py.if]
+  - id: py.for
+    name:
+      es: 'Bucle for'
+      en: 'For loops'
+    requires: [py.if]
+  - id: py.range
+    name:
+      es: 'Rangos'
+      en: 'Ranges'
+    requires: [py.for]
+  - id: py.list
+    name:
+      es: 'Listas'
+      en: 'Lists'
+    requires: [py.for]
+  - id: py.index
+    name:
+      es: 'Índices'
+      en: 'Indexes'
+    requires: [py.list]
+  - id: py.list.methods
+    name:
+      es: 'Métodos de listas'
+      en: 'List methods'
+    requires: [py.list]
+  - id: py.def
+    name:
+      es: 'Definir funciones'
+      en: 'Defining functions'
+    requires: [py.for]
+  - id: py.params
+    name:
+      es: 'Parámetros'
+      en: 'Parameters'
+    requires: [py.def]
+  - id: py.return
+    name:
+      es: 'Valores de retorno'
+      en: 'Return values'
+    requires: [py.params]
+  - id: py.scope
+    name:
+      es: 'Alcance de variables'
+      en: 'Variable scope'
+    requires: [py.return]
+  - id: py.tuple
+    name:
+      es: 'Tuplas'
+      en: 'Tuples'
+    requires: [py.list]
+  - id: py.dict
+    name:
+      es: 'Diccionarios'
+      en: 'Dictionaries'
+    requires: [py.list, py.def]
+  - id: py.set
+    name:
+      es: 'Conjuntos'
+      en: 'Sets'
+    requires: [py.list]
+  - id: py.slicing
+    name:
+      es: 'Rebanadas'
+      en: 'Slicing'
+    requires: [py.index]
+  - id: py.strings.methods
+    name:
+      es: 'Métodos de texto'
+      en: 'String methods'
+    requires: [py.strings.basic, py.list.methods]
+  - id: py.fstring
+    name:
+      es: 'Formato con f-strings'
+      en: 'f-string formatting'
+    requires: [py.strings.basic]
+  - id: py.errors.read
+    name:
+      es: 'Leer errores'
+      en: 'Reading errors'
+    requires: [py.def]
+  - id: py.try
+    name:
+      es: 'Manejo de excepciones'
+      en: 'Exception handling'
+    requires: [py.errors.read, py.if]
+  - id: py.debug
+    name:
+      es: 'Depuración'
+      en: 'Debugging'
+    requires: [py.errors.read]
+  - id: py.files
+    name:
+      es: 'Archivos'
+      en: 'Files'
+    requires: [py.try, py.strings.methods]
+  - id: py.modules
+    name:
+      es: 'Módulos'
+      en: 'Modules'
+    requires: [py.def, py.dict]
+  - id: py.project
+    name:
+      es: 'Proyectos'
+      en: 'Projects'
+    requires: [py.files, py.modules, py.dict]

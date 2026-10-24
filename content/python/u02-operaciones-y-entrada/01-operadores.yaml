@@ -1,0 +1,186 @@
+id: py.u02.l01
+language: python
+unit: py.u02
+position: 1
+skills: [py.operators]
+status: draft
+reviewed_by: []
+title:
+  es: 'Operaciones con números'
+  en: 'Operations with numbers'
+explanation:
+  es: |
+    Python puede hacer cálculos:
+
+    | Operador | Operación | Ejemplo | Resultado |
+    |---|---|---|---|
+    | `+` `-` `*` | suma, resta, multiplicación | `2 * 3` | `6` |
+    | `/` | división (siempre da `float`) | `7 / 2` | `3.5` |
+    | `//` | división entera | `7 // 2` | `3` |
+    | `%` | resto de la división | `7 % 2` | `1` |
+    | `**` | potencia | `2 ** 3` | `8` |
+
+    Se respeta el orden matemático: primero `**`, luego `*` `/` `//` `%`, luego `+` `-`.
+    Los paréntesis cambian el orden: `(2 + 3) * 4` es `20`.
+  en: |
+    Python can do calculations:
+
+    | Operator | Operation | Example | Result |
+    |---|---|---|---|
+    | `+` `-` `*` | add, subtract, multiply | `2 * 3` | `6` |
+    | `/` | division (always gives a `float`) | `7 / 2` | `3.5` |
+    | `//` | floor division | `7 // 2` | `3` |
+    | `%` | remainder of the division | `7 % 2` | `1` |
+    | `**` | power | `2 ** 3` | `8` |
+
+    The usual math order applies: `**` first, then `*` `/` `//` `%`, then `+` `-`.
+    Parentheses change the order: `(2 + 3) * 4` is `20`.
+exercises:
+  - id: py.u02.l01.e01
+    type: predict_output
+    difficulty: 1
+    skills: [py.operators]
+    prompt:
+      es: '¿Qué muestra este programa?'
+      en: 'What does this program show?'
+    code: |
+      print(7 + 3 * 2)
+    answer: "13"
+    hints:
+      - {es: 'La multiplicación se hace antes que la suma.', en: 'Multiplication happens before addition.'}
+    explanation:
+      es: 'Primero `3 * 2 = 6` y luego `7 + 6 = 13`.'
+      en: 'First `3 * 2 = 6`, then `7 + 6 = 13`.'
+
+  - id: py.u02.l01.e02
+    type: predict_output
+    difficulty: 1
+    skills: [py.operators]
+    prompt:
+      es: '¿Qué muestra este programa?'
+      en: 'What does this program show?'
+    code: |
+      print(7 / 2)
+    answer: "3.5"
+    hints:
+      - {es: '`/` es la división normal.', en: '`/` is regular division.'}
+    explanation:
+      es: '`/` siempre devuelve un `float`.'
+      en: '`/` always returns a `float`.'
+
+  - id: py.u02.l01.e03
+    type: predict_output
+    difficulty: 2
+    skills: [py.operators]
+    prompt:
+      es: '¿Qué muestra este programa?'
+      en: 'What does this program show?'
+    code: |
+      print(7 // 2)
+    answer: "3"
+    hints:
+      - {es: '`//` descarta la parte decimal.', en: '`//` drops the decimal part.'}
+    explanation:
+      es: 'En 7 caben 3 veces el 2 completas.'
+      en: '2 fits 3 whole times in 7.'
+
+  - id: py.u02.l01.e04
+    type: predict_output
+    difficulty: 2
+    skills: [py.operators]
+    prompt:
+      es: '¿Qué muestra este programa?'
+      en: 'What does this program show?'
+    code: |
+      print(7 % 2)
+    answer: "1"
+    hints:
+      - {es: 'Es lo que sobra al dividir 7 entre 2.', en: 'It is what is left over when dividing 7 by 2.'}
+    explanation:
+      es: '7 = 2 × 3 + 1, así que el resto es 1.'
+      en: '7 = 2 × 3 + 1, so the remainder is 1.'
+
+  - id: py.u02.l01.e05
+    type: multiple_choice
+    difficulty: 2
+    skills: [py.operators]
+    prompt:
+      es: '¿Para qué sirve `%` en Python?'
+      en: 'What is `%` for in Python?'
+    options:
+      - {es: 'Calcular porcentajes.', en: 'Calculating percentages.'}
+      - {es: 'Obtener el resto de una división.', en: 'Getting the remainder of a division.'}
+      - {es: 'Dividir sin decimales.', en: 'Dividing without decimals.'}
+      - {es: 'Elevar a una potencia.', en: 'Raising to a power.'}
+    answer: 1
+    distractor_tags: {0: op.percent_misconception, 2: op.mod_vs_floordiv}
+    hints:
+      - {es: 'Piensa en la división de 7 entre 2.', en: 'Think about dividing 7 by 2.'}
+    explanation:
+      es: '`%` se llama módulo y devuelve el resto. Sirve, por ejemplo, para saber si un número es par.'
+      en: '`%` is called modulo and returns the remainder. It is useful, for example, to check if a number is even.'
+
+  - id: py.u02.l01.e06
+    type: fill_code
+    difficulty: 2
+    skills: [py.operators]
+    prompt:
+      es: 'Completa el operador para que el programa muestre `8`.'
+      en: 'Fill in the operator so the program shows `8`.'
+    code: |
+      print(2 ___ 3)
+    blanks:
+      - ["**"]
+    hints:
+      - {es: 'Es la potencia, 2 elevado a 3.', en: 'It is the power, 2 to the 3rd.'}
+    explanation:
+      es: '`2 ** 3` es 2 × 2 × 2 = 8.'
+      en: '`2 ** 3` is 2 × 2 × 2 = 8.'
+
+  - id: py.u02.l01.e07
+    type: write_code
+    difficulty: 2
+    skills: [py.operators]
+    prompt:
+      es: 'Muestra el cociente entero de dividir 17 entre 5 (sin decimales).'
+      en: 'Show the whole-number quotient of dividing 17 by 5 (no decimals).'
+    starter: |
+      # Escribe tu código aquí / Write your code here
+    reference_solution: |
+      print(17 // 5)
+    tests:
+      - {stdin: "", expected_stdout: "3\n", visible: true}
+    wrong_examples:
+      - code: 'print(17 / 5)'
+        expect_fail_tag: op.floordiv_vs_div
+      - code: 'print(17 % 5)'
+        expect_fail_tag: op.mod_vs_floordiv
+    hints:
+      - {es: 'Hay un operador de dos barras.', en: 'There is a two-slash operator.'}
+    explanation:
+      es: '`//` da el cociente entero; `/` daría 3.4 y `%` daría el resto, 2.'
+      en: '`//` gives the whole quotient; `/` would give 3.4 and `%` would give the remainder, 2.'
+
+  - id: py.u02.l01.e08
+    type: write_code
+    difficulty: 3
+    skills: [py.operators]
+    prompt:
+      es: 'Muestra el promedio de los números 8, 6 y 10 calculándolo con una sola expresión.'
+      en: 'Show the average of the numbers 8, 6 and 10, computing it with a single expression.'
+    starter: |
+      # Escribe tu código aquí / Write your code here
+    reference_solution: |
+      print((8 + 6 + 10) / 3)
+    tests:
+      - {stdin: "", expected_stdout: "8.0\n", visible: true}
+    wrong_examples:
+      - code: 'print(8 + 6 + 10 / 3)'
+        expect_fail_tag: op.precedence
+      - code: 'print((8 + 6 + 10) // 3)'
+        expect_fail_tag: op.floordiv_vs_div
+    hints:
+      - {es: 'Suma primero, divide después. ¿Cómo fuerzas ese orden?', en: 'Add first, divide after. How do you force that order?'}
+    explanation:
+      es: 'Sin paréntesis solo el 10 se divide entre 3. Con paréntesis se divide la suma completa.'
+      en: 'Without parentheses only the 10 gets divided by 3. With parentheses the whole sum is divided.'

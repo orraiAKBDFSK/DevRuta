@@ -1,0 +1,349 @@
+id: py.u05.l04
+language: python
+unit: py.u05
+position: 4
+skills: [py.list, py.list.methods, py.index]
+status: draft
+reviewed_by: []
+title:
+  es: 'Patrones frecuentes con listas'
+  en: 'Common patterns with lists'
+explanation:
+  es: |
+    Python trae funciones para los cálculos más comunes sobre listas de números:
+
+    ```python
+    datos = [3, 9, 2]
+    print(max(datos))             # 9
+    print(min(datos))             # 2
+    print(sum(datos))             # 14
+    print(sum(datos) / len(datos))  # promedio
+    print(datos.index(9))         # 1  (posición de la primera aparición)
+    ```
+
+    Otros dos patrones muy usados:
+
+    - **Filtrar**: crear una lista nueva con los elementos que cumplen una condición.
+    - **Quitar repetidos**: recorrer la lista y agregar un elemento a la nueva solo si `not in` ella.
+  en: |
+    Python provides functions for the most common calculations on lists of numbers:
+
+    ```python
+    datos = [3, 9, 2]
+    print(max(datos))             # 9
+    print(min(datos))             # 2
+    print(sum(datos))             # 14
+    print(sum(datos) / len(datos))  # average
+    print(datos.index(9))         # 1  (position of the first occurrence)
+    ```
+
+    Two more very common patterns:
+
+    - **Filtering**: build a new list with the elements that meet a condition.
+    - **Removing duplicates**: walk through the list and add an element to the new one only if it is `not in` it.
+exercises:
+  - id: py.u05.l04.e01
+    type: predict_output
+    difficulty: 1
+    skills: [py.list]
+    prompt:
+      es: '¿Qué muestra este programa?'
+      en: 'What does this program show?'
+    code: |
+      print(max([3, 9, 2]))
+    answer: "9"
+    hints:
+      - {es: '`max` devuelve el mayor.', en: '`max` returns the largest.'}
+    explanation:
+      es: 'El mayor de la lista es 9.'
+      en: 'The largest in the list is 9.'
+
+  - id: py.u05.l04.e02
+    type: predict_output
+    difficulty: 1
+    skills: [py.list]
+    prompt:
+      es: '¿Qué muestra este programa?'
+      en: 'What does this program show?'
+    code: |
+      print(sum([1, 2, 3, 4]))
+    answer: "10"
+    hints:
+      - {es: '`sum` suma todos los elementos.', en: '`sum` adds up all the elements.'}
+    explanation:
+      es: '1 + 2 + 3 + 4 = 10.'
+      en: '1 + 2 + 3 + 4 = 10.'
+
+  - id: py.u05.l04.e03
+    type: predict_output
+    difficulty: 2
+    skills: [py.list]
+    prompt:
+      es: '¿Qué muestra este programa?'
+      en: 'What does this program show?'
+    code: |
+      datos = [3, 9, 2]
+      print(min(datos), max(datos))
+    answer: "2 9"
+    hints:
+      - {es: '`print(a, b)` separa con un espacio.', en: '`print(a, b)` separates with a space.'}
+    explanation:
+      es: 'Menor y mayor, separados por un espacio.'
+      en: 'Smallest and largest, separated by a space.'
+
+  - id: py.u05.l04.e04
+    type: multiple_choice
+    difficulty: 2
+    skills: [py.list, py.operators]
+    prompt:
+      es: '¿Qué expresión calcula el promedio de la lista `datos`?'
+      en: 'Which expression computes the average of the list `datos`?'
+    options:
+      - {es: 'sum(datos) / len(datos)', en: 'sum(datos) / len(datos)'}
+      - {es: 'sum(datos) / 2', en: 'sum(datos) / 2'}
+      - {es: 'len(datos) / sum(datos)', en: 'len(datos) / sum(datos)'}
+      - {es: 'max(datos) / min(datos)', en: 'max(datos) / min(datos)'}
+    answer: 0
+    distractor_tags: {1: logic.wrong_operation, 2: logic.inverted_operands, 3: logic.wrong_operation}
+    hints:
+      - {es: 'Promedio = suma total entre cantidad de datos.', en: 'Average = total sum divided by the number of values.'}
+    explanation:
+      es: 'La suma va en el numerador y la cantidad de elementos en el denominador.'
+      en: 'The sum goes in the numerator and the number of elements in the denominator.'
+
+  - id: py.u05.l04.e05
+    type: write_code
+    difficulty: 3
+    skills: [py.list, py.input]
+    prompt:
+      es: |
+        Lee un entero `n` (1 o mayor) y luego `n` enteros (uno por línea).
+        Muestra el menor y el mayor en una línea, separados por un espacio.
+      en: |
+        Read a whole number `n` (1 or greater) and then `n` whole numbers (one per line).
+        Show the smallest and the largest on one line, separated by a space.
+    starter: |
+      # Escribe tu código aquí / Write your code here
+    reference_solution: |
+      n = int(input())
+      lista = []
+      for i in range(n):
+          lista.append(int(input()))
+      print(min(lista), max(lista))
+    tests:
+      - {stdin: "3\n4\n9\n2\n", expected_stdout: "2 9\n", visible: true}
+      - {stdin: "1\n5\n", expected_stdout: "5 5\n", visible: false}
+      - {stdin: "4\n-3\n0\n8\n-7\n", expected_stdout: "-7 8\n", visible: false}
+    wrong_examples:
+      - code: |
+          n = int(input())
+          lista = []
+          for i in range(n):
+              lista.append(int(input()))
+          print(max(lista), min(lista))
+        expect_fail_tag: logic.swapped_order
+    hints:
+      - {es: 'Primero el menor, después el mayor.', en: 'The smallest first, then the largest.'}
+    explanation:
+      es: 'El orden de los argumentos de `print` es el orden de la salida.'
+      en: 'The order of the arguments of `print` is the order of the output.'
+
+  - id: py.u05.l04.e06
+    type: write_code
+    difficulty: 3
+    skills: [py.list, py.operators, py.input]
+    prompt:
+      es: |
+        Lee un entero `n` (1 o mayor) y luego `n` enteros (uno por línea). Muestra el promedio.
+      en: |
+        Read a whole number `n` (1 or greater) and then `n` whole numbers (one per line). Show the average.
+    starter: |
+      # Escribe tu código aquí / Write your code here
+    reference_solution: |
+      n = int(input())
+      lista = []
+      for i in range(n):
+          lista.append(int(input()))
+      print(sum(lista) / len(lista))
+    tests:
+      - {stdin: "4\n1\n2\n3\n4\n", expected_stdout: "2.5\n", visible: true}
+      - {stdin: "3\n2\n2\n2\n", expected_stdout: "2.0\n", visible: false}
+      - {stdin: "2\n10\n0\n", expected_stdout: "5.0\n", visible: false}
+    wrong_examples:
+      - code: |
+          n = int(input())
+          lista = []
+          for i in range(n):
+              lista.append(int(input()))
+          print(sum(lista) // len(lista))
+        expect_fail_tag: op.floordiv_vs_div
+      - code: |
+          n = int(input())
+          lista = []
+          for i in range(n):
+              lista.append(int(input()))
+          print(sum(lista))
+        expect_fail_tag: logic.missing_division
+    hints:
+      - {es: 'Usa `sum` y `len`.', en: 'Use `sum` and `len`.'}
+    explanation:
+      es: 'Con `//` se perderían los decimales.'
+      en: 'With `//` the decimals would be lost.'
+
+  - id: py.u05.l04.e07
+    type: write_code
+    difficulty: 3
+    skills: [py.list, py.for, py.if, py.input]
+    prompt:
+      es: |
+        Lee un entero `n` y luego `n` enteros (uno por línea). Muestra una lista nueva con solo los
+        mayores que 10, en el mismo orden en que aparecieron.
+      en: |
+        Read a whole number `n` and then `n` whole numbers (one per line). Show a new list with only those
+        greater than 10, in the same order they appeared.
+    starter: |
+      # Escribe tu código aquí / Write your code here
+    reference_solution: |
+      n = int(input())
+      lista = []
+      for i in range(n):
+          lista.append(int(input()))
+      grandes = []
+      for x in lista:
+          if x > 10:
+              grandes.append(x)
+      print(grandes)
+    tests:
+      - {stdin: "4\n5\n12\n10\n20\n", expected_stdout: "[12, 20]\n", visible: true}
+      - {stdin: "2\n1\n2\n", expected_stdout: "[]\n", visible: false}
+      - {stdin: "3\n30\n11\n40\n", expected_stdout: "[30, 11, 40]\n", visible: false}
+    wrong_examples:
+      - code: |
+          n = int(input())
+          lista = []
+          for i in range(n):
+              lista.append(int(input()))
+          grandes = []
+          for x in lista:
+              if x >= 10:
+                  grandes.append(x)
+          print(grandes)
+        expect_fail_tag: logic.off_by_one
+      - code: |
+          n = int(input())
+          lista = []
+          for i in range(n):
+              lista.append(int(input()))
+          grandes = []
+          for x in lista:
+              if x > 10:
+                  grandes.append(x)
+          grandes.sort(reverse=True)
+          print(grandes)
+        expect_fail_tag: logic.order_changed
+    hints:
+      - {es: 'Crea una lista vacía y agrega solo los que cumplan la condición.', en: 'Create an empty list and add only those that meet the condition.'}
+    explanation:
+      es: 'El 10 no es mayor que 10, así que no entra. Y no hay que reordenar los resultados.'
+      en: 'The 10 is not greater than 10, so it is left out. And the results must not be reordered.'
+
+  - id: py.u05.l04.e08
+    type: write_code
+    difficulty: 3
+    skills: [py.list, py.index, py.input]
+    prompt:
+      es: |
+        Lee un entero `n` (1 o mayor) y luego `n` enteros (uno por línea). Muestra la posición (índice) de la
+        **primera** aparición del mayor.
+      en: |
+        Read a whole number `n` (1 or greater) and then `n` whole numbers (one per line). Show the position (index) of the
+        **first** occurrence of the largest.
+    starter: |
+      # Escribe tu código aquí / Write your code here
+    reference_solution: |
+      n = int(input())
+      lista = []
+      for i in range(n):
+          lista.append(int(input()))
+      print(lista.index(max(lista)))
+    tests:
+      - {stdin: "4\n3\n9\n2\n9\n", expected_stdout: "1\n", visible: true}
+      - {stdin: "3\n5\n1\n2\n", expected_stdout: "0\n", visible: false}
+      - {stdin: "3\n1\n2\n8\n", expected_stdout: "2\n", visible: false}
+    wrong_examples:
+      - code: |
+          n = int(input())
+          lista = []
+          for i in range(n):
+              lista.append(int(input()))
+          print(max(lista))
+        expect_fail_tag: logic.value_vs_index
+      - code: |
+          n = int(input())
+          lista = []
+          for i in range(n):
+              lista.append(int(input()))
+          mejor = 0
+          for i in range(n):
+              if lista[i] >= lista[mejor]:
+                  mejor = i
+          print(mejor)
+        expect_fail_tag: logic.last_instead_of_first
+    hints:
+      - {es: '`lista.index(x)` devuelve la posición de la primera aparición de `x`.', en: '`lista.index(x)` returns the position of the first occurrence of `x`.'}
+    explanation:
+      es: 'Con `>=` se actualizaría también con los empates y se quedaría con la última posición.'
+      en: 'With `>=` ties would also update it and it would keep the last position.'
+
+  - id: py.u05.l04.e09
+    type: write_code
+    difficulty: 4
+    skills: [py.list, py.for, py.if, py.input]
+    prompt:
+      es: |
+        Lee un entero `n` y luego `n` enteros (uno por línea). Muestra una lista sin repetidos,
+        conservando el orden de la primera aparición de cada valor.
+      en: |
+        Read a whole number `n` and then `n` whole numbers (one per line). Show a list without duplicates,
+        keeping the order of the first appearance of each value.
+    starter: |
+      # Escribe tu código aquí / Write your code here
+    reference_solution: |
+      n = int(input())
+      lista = []
+      for i in range(n):
+          lista.append(int(input()))
+      unicos = []
+      for x in lista:
+          if x not in unicos:
+              unicos.append(x)
+      print(unicos)
+    tests:
+      - {stdin: "5\n1\n2\n1\n3\n2\n", expected_stdout: "[1, 2, 3]\n", visible: true}
+      - {stdin: "3\n4\n4\n4\n", expected_stdout: "[4]\n", visible: false}
+      - {stdin: "4\n9\n8\n7\n6\n", expected_stdout: "[9, 8, 7, 6]\n", visible: false}
+    wrong_examples:
+      - code: |
+          n = int(input())
+          lista = []
+          for i in range(n):
+              lista.append(int(input()))
+          print(lista)
+        expect_fail_tag: logic.missing_dedup
+      - code: |
+          n = int(input())
+          lista = []
+          for i in range(n):
+              lista.append(int(input()))
+          unicos = []
+          for x in lista:
+              if x not in unicos:
+                  unicos.append(x)
+          unicos.sort()
+          print(unicos)
+        expect_fail_tag: logic.order_changed
+    hints:
+      - {es: 'Antes de agregar un valor, pregunta si ya está en la lista nueva.', en: 'Before adding a value, ask whether it is already in the new list.'}
+    explanation:
+      es: 'Ordenar al final cambiaría el orden de aparición, que debe conservarse.'
+      en: 'Sorting at the end would change the order of appearance, which must be kept.'

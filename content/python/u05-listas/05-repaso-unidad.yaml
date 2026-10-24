@@ -1,0 +1,248 @@
+id: py.u05.l05
+language: python
+unit: py.u05
+position: 5
+skills: [py.list, py.index, py.list.methods]
+status: draft
+reviewed_by: []
+title:
+  es: 'Repaso y mini-programas'
+  en: 'Review and mini programs'
+explanation:
+  es: |
+    Repaso de listas: índices, métodos, recorridos y patrones.
+
+    Una trampa importante: `b = a` **no copia** la lista, solo da un segundo nombre a la misma lista.
+    Cambiar una cambia la otra. Para copiar usa `b = a.copy()`.
+  en: |
+    Review of lists: indexes, methods, walks and patterns.
+
+    An important trap: `b = a` **does not copy** the list, it only gives a second name to the same list.
+    Changing one changes the other. To copy, use `b = a.copy()`.
+exercises:
+  - id: py.u05.l05.e01
+    type: predict_output
+    difficulty: 3
+    skills: [py.list]
+    prompt:
+      es: '¿Qué muestra este programa? Ojo: `b = a` no crea una copia.'
+      en: 'What does this program show? Careful: `b = a` does not create a copy.'
+    code: |
+      a = [1, 2, 3]
+      b = a
+      b.append(4)
+      print(a)
+    answer: "[1, 2, 3, 4]"
+    hints:
+      - {es: '`a` y `b` son dos nombres de la misma lista.', en: '`a` and `b` are two names for the same list.'}
+    explanation:
+      es: 'Modificar `b` modifica la lista a la que apuntan los dos nombres.'
+      en: 'Modifying `b` modifies the list that both names point to.'
+
+  - id: py.u05.l05.e02
+    type: predict_output
+    difficulty: 3
+    skills: [py.list]
+    prompt:
+      es: '¿Qué muestra este programa? Ahora sí hay una copia.'
+      en: 'What does this program show? This time there is a copy.'
+    code: |
+      a = [1, 2, 3]
+      b = a.copy()
+      b.append(4)
+      print(a)
+    answer: "[1, 2, 3]"
+    hints:
+      - {es: '`copy()` crea una lista independiente.', en: '`copy()` creates an independent list.'}
+    explanation:
+      es: 'La copia no afecta a la lista original.'
+      en: 'The copy does not affect the original list.'
+
+  - id: py.u05.l05.e03
+    type: predict_output
+    difficulty: 2
+    skills: [py.index]
+    prompt:
+      es: '¿Qué muestra este programa?'
+      en: 'What does this program show?'
+    code: |
+      a = [3, 1, 2]
+      print(a[-2])
+    answer: "1"
+    hints:
+      - {es: '`-1` es el último; `-2` es el penúltimo.', en: '`-1` is the last; `-2` is the second to last.'}
+    explanation:
+      es: 'Repasa "Listas e índices". El penúltimo elemento es el 1.'
+      en: 'Review "Lists and indexes". The second to last element is 1.'
+
+  - id: py.u05.l05.e04
+    type: multiple_choice
+    difficulty: 2
+    skills: [py.list.methods]
+    prompt:
+      es: '¿Cuál es la diferencia entre `a.remove(5)` y `a.pop(5)`?'
+      en: 'What is the difference between `a.remove(5)` and `a.pop(5)`?'
+    options:
+      - {es: '`remove(5)` borra el valor 5; `pop(5)` borra el elemento de la posición 5.', en: '`remove(5)` deletes the value 5; `pop(5)` deletes the element at position 5.'}
+      - {es: '`remove(5)` borra la posición 5; `pop(5)` borra el valor 5.', en: '`remove(5)` deletes position 5; `pop(5)` deletes the value 5.'}
+      - {es: 'No hay diferencia.', en: 'There is no difference.'}
+      - {es: '`pop` solo funciona con números.', en: '`pop` only works with numbers.'}
+    answer: 0
+    distractor_tags: {1: list.pop_vs_remove, 2: list.pop_vs_remove}
+    hints:
+      - {es: '`remove` trabaja con valores; `pop` trabaja con posiciones.', en: '`remove` works with values; `pop` works with positions.'}
+    explanation:
+      es: 'Repasa "Métodos de listas". Además, `pop` devuelve el elemento que borra.'
+      en: 'Review "List methods". Also, `pop` returns the element it deletes.'
+
+  - id: py.u05.l05.e05
+    type: order_lines
+    difficulty: 3
+    skills: [py.list, py.for, py.list.methods]
+    prompt:
+      es: 'Ordena las líneas para que el programa muestre la lista de los cuadrados de 1, 2 y 3.'
+      en: 'Order the lines so the program shows the list of the squares of 1, 2 and 3.'
+    lines:
+      - 'cuadrados = []'
+      - 'for i in range(1, 4):'
+      - '    cuadrados.append(i * i)'
+      - 'print(cuadrados)'
+    hints:
+      - {es: 'Primero se crea la lista vacía; el `print` va al final.', en: 'First the empty list is created; the `print` goes last.'}
+    explanation:
+      es: 'Resultado: `[1, 4, 9]`.'
+      en: 'Result: `[1, 4, 9]`.'
+
+  - id: py.u05.l05.e06
+    type: write_code
+    difficulty: 3
+    skills: [py.list, py.list.methods, py.for, py.input]
+    prompt:
+      es: |
+        Lee un entero `n` y luego `n` nombres en minúsculas (uno por línea).
+        Muéstralos ordenados alfabéticamente, uno por línea.
+      en: |
+        Read a whole number `n` and then `n` lowercase names (one per line).
+        Show them sorted alphabetically, one per line.
+    starter: |
+      # Escribe tu código aquí / Write your code here
+    reference_solution: |
+      n = int(input())
+      nombres = []
+      for i in range(n):
+          nombres.append(input())
+      nombres.sort()
+      for nombre in nombres:
+          print(nombre)
+    tests:
+      - {stdin: "3\nluz\nana\nbea\n", expected_stdout: "ana\nbea\nluz\n", visible: true}
+      - {stdin: "1\nzoe\n", expected_stdout: "zoe\n", visible: false}
+      - {stdin: "4\nmar\nleo\nada\nleo\n", expected_stdout: "ada\nleo\nleo\nmar\n", visible: false}
+    wrong_examples:
+      - code: |
+          n = int(input())
+          nombres = []
+          for i in range(n):
+              nombres.append(input())
+          for nombre in nombres:
+              print(nombre)
+        expect_fail_tag: logic.missing_sort
+    hints:
+      - {es: '`sort()` también ordena textos alfabéticamente.', en: '`sort()` also sorts text alphabetically.'}
+    explanation:
+      es: 'No hace falta convertir con `int()`: los nombres son texto.'
+      en: 'No need to convert with `int()`: the names are text.'
+
+  - id: py.u05.l05.e07
+    type: write_code
+    difficulty: 3
+    skills: [py.list, py.list.methods, py.input]
+    prompt:
+      es: |
+        Lee un entero `n` (1 o mayor) y luego `n` enteros (uno por línea). Mueve el primer elemento
+        al final de la lista y muestra la lista.
+      en: |
+        Read a whole number `n` (1 or greater) and then `n` whole numbers (one per line). Move the first element
+        to the end of the list and show the list.
+    starter: |
+      # Escribe tu código aquí / Write your code here
+    reference_solution: |
+      n = int(input())
+      lista = []
+      for i in range(n):
+          lista.append(int(input()))
+      primero = lista.pop(0)
+      lista.append(primero)
+      print(lista)
+    tests:
+      - {stdin: "4\n1\n2\n3\n4\n", expected_stdout: "[2, 3, 4, 1]\n", visible: true}
+      - {stdin: "1\n7\n", expected_stdout: "[7]\n", visible: false}
+      - {stdin: "3\n5\n6\n7\n", expected_stdout: "[6, 7, 5]\n", visible: false}
+    wrong_examples:
+      - code: |
+          n = int(input())
+          lista = []
+          for i in range(n):
+              lista.append(int(input()))
+          ultimo = lista.pop()
+          lista.insert(0, ultimo)
+          print(lista)
+        expect_fail_tag: logic.wrong_direction
+      - code: |
+          n = int(input())
+          lista = []
+          for i in range(n):
+              lista.append(int(input()))
+          lista.reverse()
+          print(lista)
+        expect_fail_tag: logic.wrong_operation
+    hints:
+      - {es: '`pop(0)` quita y devuelve el primer elemento.', en: '`pop(0)` removes and returns the first element.'}
+    explanation:
+      es: 'Quitar el primero y agregarlo con `append` lo manda al final.'
+      en: 'Removing the first one and adding it with `append` sends it to the end.'
+
+  - id: py.u05.l05.e08
+    type: write_code
+    difficulty: 4
+    skills: [py.list, py.for, py.if, py.input]
+    prompt:
+      es: |
+        Lee un entero `n` y luego `n` notas enteras (una por línea). Una nota aprueba si es 60 o más.
+        Muestra `aprobadas de n` con el formato `3 de 4` (aprobadas, la palabra `de` y el total).
+      en: |
+        Read a whole number `n` and then `n` whole-number grades (one per line). A grade passes if it is 60 or more.
+        Show `passed of n` in the format `3 de 4` (passed, the word `de` and the total).
+    starter: |
+      # Escribe tu código aquí / Write your code here
+    reference_solution: |
+      n = int(input())
+      notas = []
+      for i in range(n):
+          notas.append(int(input()))
+      aprobadas = 0
+      for nota in notas:
+          if nota >= 60:
+              aprobadas = aprobadas + 1
+      print(aprobadas, "de", n)
+    tests:
+      - {stdin: "4\n70\n50\n60\n90\n", expected_stdout: "3 de 4\n", visible: true}
+      - {stdin: "2\n10\n20\n", expected_stdout: "0 de 2\n", visible: false}
+      - {stdin: "1\n60\n", expected_stdout: "1 de 1\n", visible: false}
+    wrong_examples:
+      - code: |
+          n = int(input())
+          notas = []
+          for i in range(n):
+              notas.append(int(input()))
+          aprobadas = 0
+          for nota in notas:
+              if nota > 60:
+                  aprobadas = aprobadas + 1
+          print(aprobadas, "de", n)
+        expect_fail_tag: logic.off_by_one
+    hints:
+      - {es: 'Usa un contador y compara cada nota con 60.', en: 'Use a counter and compare each grade with 60.'}
+    explanation:
+      es: 'El 60 aprueba: el límite exacto está incluido.'
+      en: 'The 60 passes: the exact boundary is included.'

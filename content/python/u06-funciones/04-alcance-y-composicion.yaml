@@ -1,0 +1,354 @@
+id: py.u06.l04
+language: python
+unit: py.u06
+position: 4
+skills: [py.scope, py.return, py.def]
+status: draft
+reviewed_by: []
+title:
+  es: 'Alcance de las variables y composición'
+  en: 'Variable scope and composition'
+explanation:
+  es: |
+    Las variables creadas **dentro** de una función son **locales**: solo existen mientras se ejecuta.
+    Fuera de ella no se pueden usar.
+
+    ```python
+    x = 5
+
+    def f():
+        x = 10          # otra variable, local a f
+        return x
+
+    print(f())   # 10
+    print(x)     # 5
+    ```
+
+    - Los **parámetros** también son locales.
+    - Una función puede **leer** una variable externa, pero es mejor pasarle los datos como argumentos
+      y recibir el resultado con `return`: así es más fácil de entender y de probar.
+    - Con números y textos, reasignar un parámetro no cambia la variable original.
+    - Con **listas**, un método como `append` dentro de la función **sí modifica** la lista original,
+      porque es la misma lista.
+    - Las funciones pueden llamarse entre sí: eso se llama **composición** y permite dividir un problema grande
+      en piezas pequeñas.
+  en: |
+    Variables created **inside** a function are **local**: they only exist while it runs.
+    You cannot use them outside.
+
+    ```python
+    x = 5
+
+    def f():
+        x = 10          # another variable, local to f
+        return x
+
+    print(f())   # 10
+    print(x)     # 5
+    ```
+
+    - **Parameters** are local too.
+    - A function can **read** an outside variable, but it is better to pass the data as arguments
+      and receive the result with `return`: that way it is easier to understand and test.
+    - With numbers and text, reassigning a parameter does not change the original variable.
+    - With **lists**, a method like `append` inside the function **does** modify the original list,
+      because it is the same list.
+    - Functions can call each other: this is called **composition** and lets you split a big problem
+      into small pieces.
+exercises:
+  - id: py.u06.l04.e01
+    type: predict_output
+    difficulty: 2
+    skills: [py.scope]
+    prompt:
+      es: '¿Qué muestra este programa? Escribe las dos líneas.'
+      en: 'What does this program show? Write both lines.'
+    code: |
+      x = 5
+
+      def f():
+          x = 10
+          return x
+
+      print(f())
+      print(x)
+    answer: "10\n5"
+    hints:
+      - {es: 'La `x` de dentro de la función es otra variable.', en: 'The `x` inside the function is another variable.'}
+    explanation:
+      es: 'La `x` local no cambia la `x` de fuera.'
+      en: 'The local `x` does not change the outer `x`.'
+
+  - id: py.u06.l04.e02
+    type: multiple_choice
+    difficulty: 2
+    skills: [py.scope]
+    prompt:
+      es: |
+        ¿Qué ocurre al ejecutar este programa?
+
+        ```python
+        def f():
+            y = 3
+
+        f()
+        print(y)
+        ```
+      en: |
+        What happens when running this program?
+
+        ```python
+        def f():
+            y = 3
+
+        f()
+        print(y)
+        ```
+    options:
+      - {es: 'Da un `NameError`: `y` solo existe dentro de `f`.', en: 'It raises a `NameError`: `y` only exists inside `f`.'}
+      - {es: 'Muestra 3.', en: 'It shows 3.'}
+      - {es: 'Muestra `None`.', en: 'It shows `None`.'}
+      - {es: 'Muestra 0.', en: 'It shows 0.'}
+    answer: 0
+    distractor_tags: {1: scope.local_leak}
+    hints:
+      - {es: 'Las variables creadas dentro de una función son locales.', en: 'Variables created inside a function are local.'}
+    explanation:
+      es: 'Al terminar la función, `y` desaparece.'
+      en: 'When the function ends, `y` disappears.'
+
+  - id: py.u06.l04.e03
+    type: predict_output
+    difficulty: 3
+    skills: [py.scope, py.list]
+    prompt:
+      es: '¿Qué muestra este programa?'
+      en: 'What does this program show?'
+    code: |
+      def agrega(lista):
+          lista.append(4)
+
+      a = [1, 2, 3]
+      agrega(a)
+      print(a)
+    answer: "[1, 2, 3, 4]"
+    hints:
+      - {es: 'La función recibe la misma lista, no una copia.', en: 'The function receives the same list, not a copy.'}
+    explanation:
+      es: 'Las listas se pueden modificar desde dentro de una función.'
+      en: 'Lists can be modified from inside a function.'
+
+  - id: py.u06.l04.e04
+    type: predict_output
+    difficulty: 3
+    skills: [py.scope]
+    prompt:
+      es: '¿Qué muestra este programa?'
+      en: 'What does this program show?'
+    code: |
+      def sube(n):
+          n = n + 1
+
+      x = 5
+      sube(x)
+      print(x)
+    answer: "5"
+    hints:
+      - {es: 'Con números, la función trabaja con su propia copia del valor.', en: 'With numbers, the function works with its own copy of the value.'}
+    explanation:
+      es: 'Reasignar `n` dentro de la función no cambia `x`.'
+      en: 'Reassigning `n` inside the function does not change `x`.'
+
+  - id: py.u06.l04.e05
+    type: predict_output
+    difficulty: 2
+    skills: [py.scope, py.return]
+    prompt:
+      es: '¿Qué muestra este programa?'
+      en: 'What does this program show?'
+    code: |
+      x = 2
+
+      def f():
+          return x * 3
+
+      print(f())
+    answer: "6"
+    hints:
+      - {es: 'Una función puede leer una variable externa si no crea una propia con el mismo nombre.', en: 'A function can read an outside variable if it does not create its own with the same name.'}
+    explanation:
+      es: 'Funciona, pero es mejor pasar `x` como parámetro para que la función no dependa de variables externas.'
+      en: 'It works, but it is better to pass `x` as a parameter so the function does not depend on outside variables.'
+
+  - id: py.u06.l04.e06
+    type: multiple_choice
+    difficulty: 3
+    skills: [py.scope, py.params]
+    prompt:
+      es: '¿Por qué suele ser mejor pasar datos por parámetros que leer variables externas?'
+      en: 'Why is it usually better to pass data through parameters than to read outside variables?'
+    options:
+      - {es: 'Porque la función se entiende y se prueba por sí sola, y se puede reutilizar con otros datos.', en: 'Because the function can be understood and tested on its own, and reused with other data.'}
+      - {es: 'Porque Python no permite leer variables externas.', en: 'Because Python does not allow reading outside variables.'}
+      - {es: 'Porque así el programa va más rápido.', en: 'Because it makes the program faster.'}
+      - {es: 'No hay ninguna ventaja.', en: 'There is no advantage.'}
+    answer: 0
+    distractor_tags: {1: scope.misconception}
+    hints:
+      - {es: 'Piensa en llamar a la misma función con distintos datos.', en: 'Think about calling the same function with different data.'}
+    explanation:
+      es: 'Una función que depende solo de sus parámetros es predecible y reutilizable.'
+      en: 'A function that depends only on its parameters is predictable and reusable.'
+
+  - id: py.u06.l04.e07
+    type: write_code
+    difficulty: 3
+    skills: [py.return, py.def, py.list, py.operators, py.input]
+    prompt:
+      es: |
+        Define `cuenta_pares(lista)` que **devuelva** cuántos números pares hay en la lista.
+        Lee un entero `n` y luego `n` enteros (uno por línea), y muestra el resultado.
+      en: |
+        Define `cuenta_pares(lista)` that **returns** how many even numbers are in the list.
+        Read a whole number `n` and then `n` whole numbers (one per line), and show the result.
+    starter: |
+      # Escribe tu código aquí / Write your code here
+    reference_solution: |
+      def cuenta_pares(lista):
+          cuenta = 0
+          for x in lista:
+              if x % 2 == 0:
+                  cuenta = cuenta + 1
+          return cuenta
+
+      n = int(input())
+      datos = []
+      for i in range(n):
+          datos.append(int(input()))
+      print(cuenta_pares(datos))
+    tests:
+      - {stdin: "5\n1\n2\n3\n4\n6\n", expected_stdout: "3\n", visible: true}
+      - {stdin: "0\n", expected_stdout: "0\n", visible: false}
+      - {stdin: "3\n1\n3\n5\n", expected_stdout: "0\n", visible: false}
+    static_checks:
+      - {kind: requires_function, name: cuenta_pares, returns: true}
+    wrong_examples:
+      - code: |
+          def cuenta_pares(lista):
+              return len(lista)
+
+          n = int(input())
+          datos = []
+          for i in range(n):
+              datos.append(int(input()))
+          print(cuenta_pares(datos))
+        expect_fail_tag: logic.wrong_operation
+    hints:
+      - {es: 'El contador se crea dentro de la función y se devuelve al final.', en: 'The counter is created inside the function and returned at the end.'}
+    explanation:
+      es: 'La variable `cuenta` es local: nace y muere dentro de la función.'
+      en: 'The variable `cuenta` is local: it is born and dies inside the function.'
+
+  - id: py.u06.l04.e08
+    type: write_code
+    difficulty: 4
+    skills: [py.def, py.return, py.for, py.if, py.input]
+    prompt:
+      es: |
+        Define `es_primo(n)` que **devuelva** `True` si `n` (2 o mayor) es primo y `False` si no.
+        Lee `n` y muestra, uno por línea, todos los primos entre 2 y `n` (ambos incluidos). Si `n` es 1, no muestres nada.
+      en: |
+        Define `es_primo(n)` that **returns** `True` if `n` (2 or greater) is prime and `False` otherwise.
+        Read `n` and show, one per line, all the primes between 2 and `n` (both included). If `n` is 1, show nothing.
+    starter: |
+      # Escribe tu código aquí / Write your code here
+    reference_solution: |
+      def es_primo(n):
+          for d in range(2, n):
+              if n % d == 0:
+                  return False
+          return True
+
+      n = int(input())
+      for i in range(2, n + 1):
+          if es_primo(i):
+              print(i)
+    tests:
+      - {stdin: "10\n", expected_stdout: "2\n3\n5\n7\n", visible: true}
+      - {stdin: "2\n", expected_stdout: "2\n", visible: false}
+      - {stdin: "7\n", expected_stdout: "2\n3\n5\n7\n", visible: false}
+      - {stdin: "1\n", expected_stdout: "", visible: false}
+    static_checks:
+      - {kind: requires_function, name: es_primo, returns: true}
+    wrong_examples:
+      - code: |
+          def es_primo(n):
+              for d in range(2, n):
+                  if n % d == 0:
+                      return False
+              return True
+
+          n = int(input())
+          for i in range(2, n):
+              if es_primo(i):
+                  print(i)
+        expect_fail_tag: logic.off_by_one
+      - code: |
+          def es_primo(n):
+              for d in range(2, n):
+                  if n % d == 0:
+                      return False
+                  return True
+
+          n = int(input())
+          for i in range(2, n + 1):
+              if es_primo(i):
+                  print(i)
+        expect_fail_tag: function.return_inside_loop
+    hints:
+      - {es: 'Si algún divisor divide a `n`, devuelve `False` de inmediato.', en: 'If any divisor divides `n`, return `False` right away.'}
+      - {es: 'El `return True` va al final, después del bucle.', en: 'The `return True` goes at the end, after the loop.'}
+    explanation:
+      es: 'Un `return` dentro del bucle termina la función en cuanto se cumple; el `True` final solo se alcanza si ningún divisor sirvió.'
+      en: 'A `return` inside the loop ends the function as soon as it triggers; the final `True` is only reached if no divisor worked.'
+
+  - id: py.u06.l04.e09
+    type: write_code
+    difficulty: 3
+    skills: [py.def, py.return, py.for, py.strings.basic, py.input]
+    prompt:
+      es: |
+        Define `invertir(texto)` que **devuelva** el texto al revés (sin usar `reverse`). Lee una palabra y muestra el resultado.
+      en: |
+        Define `invertir(texto)` that **returns** the text reversed (without using `reverse`). Read a word and show the result.
+    starter: |
+      # Escribe tu código aquí / Write your code here
+    reference_solution: |
+      def invertir(texto):
+          resultado = ""
+          for letra in texto:
+              resultado = letra + resultado
+          return resultado
+
+      print(invertir(input()))
+    tests:
+      - {stdin: "hola\n", expected_stdout: "aloh\n", visible: true}
+      - {stdin: "a\n", expected_stdout: "a\n", visible: false}
+      - {stdin: "python\n", expected_stdout: "nohtyp\n", visible: false}
+    static_checks:
+      - {kind: requires_function, name: invertir, returns: true}
+    wrong_examples:
+      - code: |
+          def invertir(texto):
+              resultado = ""
+              for letra in texto:
+                  resultado = resultado + letra
+              return resultado
+
+          print(invertir(input()))
+        expect_fail_tag: logic.order_not_reversed
+    hints:
+      - {es: 'Cada letra nueva debe ir delante de lo que ya tienes.', en: 'Each new letter must go in front of what you already have.'}
+    explanation:
+      es: 'Con `letra + resultado` cada letra se coloca al principio, invirtiendo el orden.'
+      en: 'With `letra + resultado` each letter is placed at the start, reversing the order.'

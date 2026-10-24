@@ -1,0 +1,35 @@
+<a class="skip-link" href="#contenido">{{ i18n.t('nav.skip') }}</a>
+
+<header class="topbar">
+  <a class="brand" routerLink="/inicio">{{ i18n.t('app.name') }}</a>
+
+  <nav [attr.aria-label]="i18n.t('app.name')">
+    @if (auth.isAuthenticated()) {
+      <a routerLink="/inicio" routerLinkActive="active">{{ i18n.t('nav.home') }}</a>
+      <a routerLink="/progreso" routerLinkActive="active">{{ i18n.t('nav.progress') }}</a>
+      <a routerLink="/perfil" routerLinkActive="active">{{ i18n.t('nav.profile') }}</a>
+      <button type="button" class="link-button" (click)="logout()">{{ i18n.t('nav.logout') }}</button>
+    } @else {
+      <a routerLink="/entrar" routerLinkActive="active">{{ i18n.t('nav.login') }}</a>
+      <a routerLink="/registro" routerLinkActive="active">{{ i18n.t('nav.register') }}</a>
+    }
+
+    <label class="visually-hidden" for="app-locale">{{ i18n.t('nav.language') }}</label>
+    <select id="app-locale" [value]="i18n.locale()" (change)="changeLocale($event)">
+      <option value="es">ES</option>
+      <option value="en">EN</option>
+    </select>
+  </nav>
+</header>
+
+@if (auth.isAuthenticated() && !auth.account()?.emailVerified) {
+  <div class="banner" role="status">
+    <span>{{ i18n.t('banner.unverified') }}</span>
+    <button type="button" class="link-button" (click)="resendVerification()">{{ i18n.t('banner.resend') }}</button>
+    <span>{{ verificationMessage() }}</span>
+  </div>
+}
+
+<main id="contenido">
+  <router-outlet />
+</main>

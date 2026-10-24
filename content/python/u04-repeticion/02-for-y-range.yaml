@@ -1,0 +1,248 @@
+id: py.u04.l02
+language: python
+unit: py.u04
+position: 2
+skills: [py.for, py.range]
+status: draft
+reviewed_by: []
+title:
+  es: 'Repetir con for y range'
+  en: 'Repeating with for and range'
+explanation:
+  es: |
+    Cuando sabes **cuántas veces** repetir, `for` es más cómodo que `while`:
+
+    ```python
+    for i in range(3):
+        print(i)
+    ```
+
+    Muestra `0`, `1` y `2`.
+
+    - `range(n)` genera los números desde **0 hasta n - 1** (n valores).
+    - `range(a, b)` genera desde `a` hasta `b - 1`: `range(1, 4)` da `1, 2, 3`.
+    - El final **nunca se incluye**.
+    - `for` también recorre textos letra por letra: `for letra in "hola":`.
+  en: |
+    When you know **how many times** to repeat, `for` is more convenient than `while`:
+
+    ```python
+    for i in range(3):
+        print(i)
+    ```
+
+    It shows `0`, `1` and `2`.
+
+    - `range(n)` generates the numbers from **0 to n - 1** (n values).
+    - `range(a, b)` generates from `a` up to `b - 1`: `range(1, 4)` gives `1, 2, 3`.
+    - The end is **never included**.
+    - `for` also walks through text letter by letter: `for letra in "hola":`.
+exercises:
+  - id: py.u04.l02.e01
+    type: predict_output
+    difficulty: 1
+    skills: [py.for, py.range]
+    prompt:
+      es: '¿Qué muestra este programa?'
+      en: 'What does this program show?'
+    code: |
+      for i in range(3):
+          print(i)
+    answer: "0\n1\n2"
+    hints:
+      - {es: '`range(3)` empieza en 0.', en: '`range(3)` starts at 0.'}
+    explanation:
+      es: 'Son 3 vueltas con los valores 0, 1 y 2.'
+      en: 'There are 3 turns with the values 0, 1 and 2.'
+
+  - id: py.u04.l02.e02
+    type: predict_output
+    difficulty: 1
+    skills: [py.for]
+    prompt:
+      es: '¿Qué muestra este programa?'
+      en: 'What does this program show?'
+    code: |
+      for letra in "hola":
+          print(letra)
+    answer: "h\no\nl\na"
+    hints:
+      - {es: 'Cada vuelta toma una letra del texto.', en: 'Each turn takes one letter of the text.'}
+    explanation:
+      es: 'Un texto se puede recorrer carácter por carácter.'
+      en: 'Text can be walked through character by character.'
+
+  - id: py.u04.l02.e03
+    type: predict_output
+    difficulty: 2
+    skills: [py.range]
+    prompt:
+      es: '¿Qué muestra este programa?'
+      en: 'What does this program show?'
+    code: |
+      for i in range(1, 4):
+          print(i)
+    answer: "1\n2\n3"
+    hints:
+      - {es: 'El segundo número del `range` no se incluye.', en: 'The second number in the `range` is not included.'}
+    explanation:
+      es: '`range(1, 4)` va de 1 a 3.'
+      en: '`range(1, 4)` goes from 1 to 3.'
+
+  - id: py.u04.l02.e04
+    type: multiple_choice
+    difficulty: 2
+    skills: [py.range]
+    prompt:
+      es: '¿Qué números genera `range(5)`?'
+      en: 'Which numbers does `range(5)` generate?'
+    options:
+      - {es: '0, 1, 2, 3, 4', en: '0, 1, 2, 3, 4'}
+      - {es: '1, 2, 3, 4, 5', en: '1, 2, 3, 4, 5'}
+      - {es: '0, 1, 2, 3, 4, 5', en: '0, 1, 2, 3, 4, 5'}
+      - {es: '1, 2, 3, 4', en: '1, 2, 3, 4'}
+    answer: 0
+    distractor_tags: {1: logic.off_by_one, 2: logic.off_by_one, 3: logic.off_by_one}
+    hints:
+      - {es: 'Son 5 valores y el primero es 0.', en: 'There are 5 values and the first one is 0.'}
+    explanation:
+      es: '`range(n)` da `n` números, de 0 a n - 1.'
+      en: '`range(n)` gives `n` numbers, from 0 to n - 1.'
+
+  - id: py.u04.l02.e05
+    type: fill_code
+    difficulty: 2
+    skills: [py.range]
+    prompt:
+      es: 'Completa el `range` para que el programa muestre `hola` exactamente 4 veces.'
+      en: 'Fill in the `range` so the program shows `hola` exactly 4 times.'
+    code: |
+      for i in range(___):
+          print("hola")
+    blanks:
+      - ["4"]
+    hints:
+      - {es: 'El número dentro de `range(n)` es la cantidad de vueltas.', en: 'The number inside `range(n)` is the number of turns.'}
+    explanation:
+      es: '`range(4)` da 4 vueltas.'
+      en: '`range(4)` gives 4 turns.'
+
+  - id: py.u04.l02.e06
+    type: predict_output
+    difficulty: 3
+    skills: [py.for, py.range, py.operators]
+    prompt:
+      es: '¿Qué muestra este programa?'
+      en: 'What does this program show?'
+    code: |
+      total = 0
+      for i in range(1, 5):
+          total = total + i
+      print(total)
+    answer: "10"
+    hints:
+      - {es: 'Suma los valores 1, 2, 3 y 4.', en: 'Add the values 1, 2, 3 and 4.'}
+    explanation:
+      es: '1 + 2 + 3 + 4 = 10. El 5 no entra en `range(1, 5)`.'
+      en: '1 + 2 + 3 + 4 = 10. The 5 is not part of `range(1, 5)`.'
+
+  - id: py.u04.l02.e07
+    type: write_code
+    difficulty: 2
+    skills: [py.for, py.range, py.input]
+    prompt:
+      es: 'Lee un entero `n` y muestra la palabra `hola` exactamente `n` veces, una por línea.'
+      en: 'Read a whole number `n` and show the word `hola` exactly `n` times, one per line.'
+    starter: |
+      # Escribe tu código aquí / Write your code here
+    reference_solution: |
+      n = int(input())
+      for i in range(n):
+          print("hola")
+    tests:
+      - {stdin: "3\n", expected_stdout: "hola\nhola\nhola\n", visible: true}
+      - {stdin: "1\n", expected_stdout: "hola\n", visible: false}
+      - {stdin: "0\n", expected_stdout: "", visible: false}
+    wrong_examples:
+      - code: |
+          n = int(input())
+          for i in range(n + 1):
+              print("hola")
+        expect_fail_tag: logic.off_by_one
+      - code: |
+          n = int(input())
+          print("hola" * n)
+        expect_fail_tag: output.mismatch
+    hints:
+      - {es: 'El `range` decide cuántas vueltas.', en: 'The `range` decides how many turns.'}
+    explanation:
+      es: '`range(n)` repite exactamente `n` veces, incluso cero.'
+      en: '`range(n)` repeats exactly `n` times, even zero.'
+
+  - id: py.u04.l02.e08
+    type: write_code
+    difficulty: 3
+    skills: [py.for, py.range, py.input, py.operators]
+    prompt:
+      es: 'Lee un entero `n` y muestra la suma de los números del 1 al `n`. Esta vez usa `for`.'
+      en: 'Read a whole number `n` and show the sum of the numbers from 1 to `n`. This time use `for`.'
+    starter: |
+      # Escribe tu código aquí / Write your code here
+    reference_solution: |
+      n = int(input())
+      total = 0
+      for i in range(1, n + 1):
+          total = total + i
+      print(total)
+    tests:
+      - {stdin: "4\n", expected_stdout: "10\n", visible: true}
+      - {stdin: "10\n", expected_stdout: "55\n", visible: false}
+      - {stdin: "1\n", expected_stdout: "1\n", visible: false}
+    wrong_examples:
+      - code: |
+          n = int(input())
+          total = 0
+          for i in range(1, n):
+              total = total + i
+          print(total)
+        expect_fail_tag: logic.off_by_one
+      - code: |
+          n = int(input())
+          total = 0
+          for i in range(n):
+              total = total + i
+          print(total)
+        expect_fail_tag: logic.off_by_one
+    hints:
+      - {es: 'Para incluir a `n` el final del `range` debe ser `n + 1`.', en: 'To include `n` the end of the `range` must be `n + 1`.'}
+    explanation:
+      es: 'El final de `range` no se incluye, por eso se escribe `n + 1`.'
+      en: 'The end of `range` is not included, which is why you write `n + 1`.'
+
+  - id: py.u04.l02.e09
+    type: write_code
+    difficulty: 2
+    skills: [py.for, py.input, py.strings.basic]
+    prompt:
+      es: 'Lee una palabra y muestra cada una de sus letras en una línea distinta.'
+      en: 'Read a word and show each of its letters on a separate line.'
+    starter: |
+      # Escribe tu código aquí / Write your code here
+    reference_solution: |
+      palabra = input()
+      for letra in palabra:
+          print(letra)
+    tests:
+      - {stdin: "sol\n", expected_stdout: "s\no\nl\n", visible: true}
+      - {stdin: "a\n", expected_stdout: "a\n", visible: false}
+      - {stdin: "python\n", expected_stdout: "p\ny\nt\nh\no\nn\n", visible: false}
+    wrong_examples:
+      - code: |
+          palabra = input()
+          print(palabra)
+        expect_fail_tag: output.mismatch
+    hints:
+      - {es: 'No necesitas `range`; recorre la propia palabra.', en: 'You do not need `range`; walk through the word itself.'}
+    explanation:
+      es: '`for letra in palabra` toma un carácter por vuelta.'
+      en: '`for letra in palabra` takes one character per turn.'

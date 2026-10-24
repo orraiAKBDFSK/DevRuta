@@ -1,0 +1,238 @@
+id: py.u04.l05
+language: python
+unit: py.u04
+position: 5
+skills: [py.while, py.for, py.range]
+status: draft
+reviewed_by: []
+title:
+  es: 'Repaso y mini-programas'
+  en: 'Review and mini programs'
+explanation:
+  es: |
+    Repaso de `while`, `for`, `range`, contadores, acumuladores, `break` y `continue`.
+    Regla práctica: usa `for` cuando sabes cuántas vueltas hay; usa `while` cuando
+    repites hasta que ocurra algo.
+  en: |
+    Review of `while`, `for`, `range`, counters, accumulators, `break` and `continue`.
+    Rule of thumb: use `for` when you know how many turns there are; use `while` when
+    you repeat until something happens.
+exercises:
+  - id: py.u04.l05.e01
+    type: predict_output
+    difficulty: 2
+    skills: [py.while]
+    prompt:
+      es: '¿Qué muestra este programa?'
+      en: 'What does this program show?'
+    code: |
+      i = 10
+      while i > 0:
+          i = i - 3
+      print(i)
+    answer: "-2"
+    hints:
+      - {es: 'Los valores de `i` son 10, 7, 4, 1 y después...', en: 'The values of `i` are 10, 7, 4, 1 and then...'}
+    explanation:
+      es: 'Repasa "Repetir con while". Al llegar a 1 se resta otra vez y queda -2, que ya no cumple `i > 0`.'
+      en: 'Review "Repeating with while". At 1 it subtracts again and gives -2, which no longer meets `i > 0`.'
+
+  - id: py.u04.l05.e02
+    type: predict_output
+    difficulty: 2
+    skills: [py.for, py.range]
+    prompt:
+      es: '¿Qué muestra este programa?'
+      en: 'What does this program show?'
+    code: |
+      for i in range(3):
+          print(i * 2)
+    answer: "0\n2\n4"
+    hints:
+      - {es: '`i` toma los valores 0, 1 y 2.', en: '`i` takes the values 0, 1 and 2.'}
+    explanation:
+      es: 'Repasa "Repetir con for y range".'
+      en: 'Review "Repeating with for and range".'
+
+  - id: py.u04.l05.e03
+    type: multiple_choice
+    difficulty: 2
+    skills: [py.while, py.for]
+    prompt:
+      es: 'Quieres pedir una contraseña una y otra vez hasta que el usuario escriba la correcta. ¿Qué bucle encaja mejor?'
+      en: 'You want to ask for a password again and again until the user types the correct one. Which loop fits best?'
+    options:
+      - {es: '`while`, porque no sabes cuántos intentos serán.', en: '`while`, because you do not know how many attempts there will be.'}
+      - {es: '`for` con `range(3)`, porque siempre son 3 intentos.', en: '`for` with `range(3)`, because it is always 3 attempts.'}
+      - {es: 'Ninguno, se resuelve con un `if`.', en: 'Neither, it is solved with an `if`.'}
+      - {es: 'Da igual, `for` no puede detenerse.', en: 'It does not matter, `for` cannot stop.'}
+    answer: 0
+    distractor_tags: {1: logic.loop_choice, 3: logic.break_misconception}
+    hints:
+      - {es: '¿Sabes de antemano cuántas vueltas habrá?', en: 'Do you know in advance how many turns there will be?'}
+    explanation:
+      es: 'Cuando la cantidad de vueltas depende de lo que ocurra, `while` es la herramienta natural.'
+      en: 'When the number of turns depends on what happens, `while` is the natural tool.'
+
+  - id: py.u04.l05.e04
+    type: order_lines
+    difficulty: 3
+    skills: [py.for, py.range, py.operators]
+    prompt:
+      es: 'Ordena las líneas para que el programa muestre la suma de los cuadrados de 1, 2 y 3.'
+      en: 'Order the lines so the program shows the sum of the squares of 1, 2 and 3.'
+    lines:
+      - 'total = 0'
+      - 'for i in range(1, 4):'
+      - '    total = total + i * i'
+      - 'print(total)'
+    hints:
+      - {es: 'El acumulador se crea antes del bucle y se muestra después.', en: 'The accumulator is created before the loop and shown after it.'}
+    explanation:
+      es: '1 + 4 + 9 = 14.'
+      en: '1 + 4 + 9 = 14.'
+
+  - id: py.u04.l05.e05
+    type: write_code
+    difficulty: 3
+    skills: [py.for, py.range, py.operators, py.input]
+    prompt:
+      es: 'Lee un entero `n` y muestra la suma de los números pares desde 1 hasta `n` (ambos incluidos).'
+      en: 'Read a whole number `n` and show the sum of the even numbers from 1 to `n` (both included).'
+    starter: |
+      # Escribe tu código aquí / Write your code here
+    reference_solution: |
+      n = int(input())
+      total = 0
+      for i in range(2, n + 1, 2):
+          total = total + i
+      print(total)
+    tests:
+      - {stdin: "10\n", expected_stdout: "30\n", visible: true}
+      - {stdin: "7\n", expected_stdout: "12\n", visible: false}
+      - {stdin: "1\n", expected_stdout: "0\n", visible: false}
+    wrong_examples:
+      - code: |
+          n = int(input())
+          total = 0
+          for i in range(1, n + 1, 2):
+              total = total + i
+          print(total)
+        expect_fail_tag: logic.odd_instead_of_even
+      - code: |
+          n = int(input())
+          total = 0
+          for i in range(0, n, 2):
+              total = total + i
+          print(total)
+        expect_fail_tag: logic.off_by_one
+    hints:
+      - {es: 'Puedes saltar de 2 en 2 con el tercer valor de `range`.', en: 'You can jump by 2 with the third value of `range`.'}
+    explanation:
+      es: 'Empezar en 2 con paso 2 solo visita pares; el final `n + 1` incluye a `n`.'
+      en: 'Starting at 2 with step 2 visits only even numbers; the end `n + 1` includes `n`.'
+
+  - id: py.u04.l05.e06
+    type: write_code
+    difficulty: 4
+    skills: [py.while, py.input, py.compare]
+    prompt:
+      es: |
+        El número secreto es 7. Lee intentos (enteros, uno por línea) hasta que el usuario acierte.
+        Muestra cuántos intentos necesitó, contando el acierto.
+      en: |
+        The secret number is 7. Read guesses (whole numbers, one per line) until the user gets it right.
+        Show how many attempts it took, counting the correct one.
+    starter: |
+      # Escribe tu código aquí / Write your code here
+    reference_solution: |
+      intentos = 0
+      numero = 0
+      while numero != 7:
+          numero = int(input())
+          intentos = intentos + 1
+      print(intentos)
+    tests:
+      - {stdin: "3\n9\n7\n", expected_stdout: "3\n", visible: true}
+      - {stdin: "7\n", expected_stdout: "1\n", visible: false}
+      - {stdin: "1\n2\n3\n4\n7\n", expected_stdout: "5\n", visible: false}
+    wrong_examples:
+      - code: |
+          intentos = 0
+          numero = 0
+          while numero != 7:
+              numero = int(input())
+          print(intentos)
+        expect_fail_tag: logic.missing_counter
+      - code: |
+          intentos = 0
+          numero = int(input())
+          while numero != 7:
+              intentos = intentos + 1
+          print(intentos)
+        expect_fail_tag: loop.infinite
+    hints:
+      - {es: 'Cada vuelta lee un número y suma un intento.', en: 'Each turn reads a number and adds one attempt.'}
+    explanation:
+      es: 'El valor inicial de `numero` solo sirve para entrar al bucle; el intento acertado también se cuenta.'
+      en: 'The initial value of `numero` only serves to enter the loop; the correct attempt is counted too.'
+
+  - id: py.u04.l05.e07
+    type: write_code
+    difficulty: 4
+    skills: [py.while, py.if, py.operators, py.input]
+    prompt:
+      es: |
+        Secuencia de Collatz: parte de un entero `n`; mientras `n` no sea 1, si es par divídelo entre 2
+        (división entera) y si es impar multiplícalo por 3 y súmale 1. Lee `n` y muestra cuántos pasos hacen falta
+        para llegar a 1. Ejemplo: 6 → 3 → 10 → 5 → 16 → 8 → 4 → 2 → 1 son 8 pasos.
+      en: |
+        Collatz sequence: start from a whole number `n`; while `n` is not 1, if it is even divide it by 2
+        (floor division) and if it is odd multiply it by 3 and add 1. Read `n` and show how many steps it takes
+        to reach 1. Example: 6 → 3 → 10 → 5 → 16 → 8 → 4 → 2 → 1 is 8 steps.
+    starter: |
+      # Escribe tu código aquí / Write your code here
+    reference_solution: |
+      n = int(input())
+      pasos = 0
+      while n != 1:
+          if n % 2 == 0:
+              n = n // 2
+          else:
+              n = 3 * n + 1
+          pasos = pasos + 1
+      print(pasos)
+    tests:
+      - {stdin: "6\n", expected_stdout: "8\n", visible: true}
+      - {stdin: "1\n", expected_stdout: "0\n", visible: false}
+      - {stdin: "7\n", expected_stdout: "16\n", visible: false}
+      - {stdin: "27\n", expected_stdout: "111\n", visible: false}
+    wrong_examples:
+      - code: |
+          n = int(input())
+          pasos = 1
+          while n != 1:
+              if n % 2 == 0:
+                  n = n // 2
+              else:
+                  n = 3 * n + 1
+              pasos = pasos + 1
+          print(pasos)
+        expect_fail_tag: logic.bad_initial_value
+      - code: |
+          n = int(input())
+          pasos = 0
+          while n != 1:
+              if n % 2 == 0:
+                  n = n // 2
+              else:
+                  n = n + 1
+              pasos = pasos + 1
+          print(pasos)
+        expect_fail_tag: logic.wrong_operation
+    hints:
+      - {es: 'Dentro del bucle hay un `if` que decide qué hacer con `n`.', en: 'Inside the loop there is an `if` that decides what to do with `n`.'}
+      - {es: 'Cuenta un paso por cada vez que cambias `n`.', en: 'Count one step each time you change `n`.'}
+    explanation:
+      es: 'Cada paso cambia `n` según sea par o impar; `//` mantiene los valores enteros.'
+      en: 'Each step changes `n` depending on whether it is even or odd; `//` keeps the values whole.'

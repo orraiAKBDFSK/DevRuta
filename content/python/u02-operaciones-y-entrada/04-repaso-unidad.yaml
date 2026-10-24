@@ -1,0 +1,176 @@
+id: py.u02.l04
+language: python
+unit: py.u02
+position: 4
+skills: [py.operators, py.input, py.strings.basic]
+status: draft
+reviewed_by: []
+title:
+  es: 'Repaso y mini-programas'
+  en: 'Review and mini programs'
+explanation:
+  es: |
+    Combina lo aprendido: operadores, `input()` con conversión de tipos y operaciones con texto.
+    Los dos últimos ejercicios son pequeños programas completos.
+  en: |
+    Combine what you learned: operators, `input()` with type conversion and text operations.
+    The last two exercises are small complete programs.
+exercises:
+  - id: py.u02.l04.e01
+    type: predict_output
+    difficulty: 2
+    skills: [py.operators]
+    prompt:
+      es: '¿Qué muestra este programa?'
+      en: 'What does this program show?'
+    code: |
+      print(10 - 2 * 3)
+    answer: "4"
+    hints:
+      - {es: 'Primero la multiplicación.', en: 'Multiplication first.'}
+    explanation:
+      es: 'Repasa "Operaciones con números". `2 * 3 = 6` y `10 - 6 = 4`.'
+      en: 'Review "Operations with numbers". `2 * 3 = 6` and `10 - 6 = 4`.'
+
+  - id: py.u02.l04.e02
+    type: predict_output
+    difficulty: 2
+    skills: [py.strings.basic]
+    prompt:
+      es: '¿Qué muestra este programa?'
+      en: 'What does this program show?'
+    code: |
+      print("5" + "3")
+    answer: "53"
+    hints:
+      - {es: 'Están entre comillas.', en: 'They are in quotes.'}
+    explanation:
+      es: 'Repasa "Trabajar con texto". Con texto, `+` une.'
+      en: 'Review "Working with text". With text, `+` joins.'
+
+  - id: py.u02.l04.e03
+    type: predict_output
+    difficulty: 2
+    skills: [py.input, py.operators]
+    prompt:
+      es: '¿Qué muestra este programa?'
+      en: 'What does this program show?'
+    code: |
+      print(int("5") + int("3"))
+    answer: "8"
+    hints:
+      - {es: 'int() convierte el texto en número antes de sumar.', en: 'int() turns the text into a number before adding.'}
+    explanation:
+      es: 'Repasa "Leer datos del usuario". Convertidos a `int`, `+` suma.'
+      en: 'Review "Reading user input". Once converted to `int`, `+` adds.'
+
+  - id: py.u02.l04.e04
+    type: order_lines
+    difficulty: 2
+    skills: [py.input, py.operators]
+    prompt:
+      es: 'Ordena las líneas para que el programa lea una edad y muestre la del año siguiente.'
+      en: 'Order the lines so the program reads an age and shows next year''s age.'
+    lines:
+      - 'edad = int(input())'
+      - 'siguiente = edad + 1'
+      - 'print(siguiente)'
+    hints:
+      - {es: 'Primero se lee, luego se calcula, al final se muestra.', en: 'First read, then calculate, finally show.'}
+    explanation:
+      es: 'Es el patrón básico de muchos programas: entrada → proceso → salida.'
+      en: 'This is the basic pattern of many programs: input → process → output.'
+
+  - id: py.u02.l04.e05
+    type: multiple_choice
+    difficulty: 2
+    skills: [py.operators]
+    prompt:
+      es: '¿Cuánto vale `17 % 5`?'
+      en: 'What is `17 % 5`?'
+    options:
+      - {es: '3', en: '3'}
+      - {es: '2', en: '2'}
+      - {es: '3.4', en: '3.4'}
+      - {es: '85', en: '85'}
+    answer: 1
+    distractor_tags: {0: op.mod_vs_floordiv, 2: op.mod_vs_div}
+    hints:
+      - {es: '17 = 5 × 3 + ?', en: '17 = 5 × 3 + ?'}
+    explanation:
+      es: '5 cabe 3 veces en 17 y sobran 2.'
+      en: '5 fits 3 times in 17 and 2 is left over.'
+
+  - id: py.u02.l04.e06
+    type: write_code
+    difficulty: 3
+    skills: [py.input, py.operators]
+    prompt:
+      es: 'Lee dos números enteros (cada uno en su línea) y muestra su promedio.'
+      en: 'Read two whole numbers (each on its own line) and show their average.'
+    starter: |
+      # Escribe tu código aquí / Write your code here
+    reference_solution: |
+      a = int(input())
+      b = int(input())
+      print((a + b) / 2)
+    tests:
+      - {stdin: "4\n6\n", expected_stdout: "5.0\n", visible: true}
+      - {stdin: "3\n4\n", expected_stdout: "3.5\n", visible: false}
+      - {stdin: "10\n0\n", expected_stdout: "5.0\n", visible: false}
+    wrong_examples:
+      - code: |
+          a = int(input())
+          b = int(input())
+          print(a + b / 2)
+        expect_fail_tag: op.precedence
+      - code: |
+          a = int(input())
+          b = int(input())
+          print((a + b) // 2)
+        expect_fail_tag: op.floordiv_vs_div
+    hints:
+      - {es: 'Suma entre paréntesis y luego divide entre 2.', en: 'Add inside parentheses, then divide by 2.'}
+    explanation:
+      es: 'Los paréntesis fuerzan que la suma se haga antes de dividir.'
+      en: 'Parentheses force the addition to happen before the division.'
+
+  - id: py.u02.l04.e07
+    type: write_code
+    difficulty: 3
+    skills: [py.input, py.operators, py.strings.basic]
+    prompt:
+      es: |
+        Lee un nombre y luego una edad (enteros), cada uno en su línea.
+        Muestra el nombre y la edad que tendrá el año siguiente, separados por un espacio.
+        Ejemplo: `Ana` y `20` → `Ana 21`.
+      en: |
+        Read a name and then an age (whole number), each on its own line.
+        Show the name and the age they will have next year, separated by a space.
+        Example: `Ana` and `20` → `Ana 21`.
+    starter: |
+      # Escribe tu código aquí / Write your code here
+    reference_solution: |
+      nombre = input()
+      edad = int(input())
+      print(nombre, edad + 1)
+    tests:
+      - {stdin: "Ana\n20\n", expected_stdout: "Ana 21\n", visible: true}
+      - {stdin: "Luis\n9\n", expected_stdout: "Luis 10\n", visible: false}
+    wrong_examples:
+      - code: |
+          nombre = input()
+          edad = int(input())
+          print(nombre, edad)
+        expect_fail_tag: logic.wrong_operation
+      - code: |
+          nombre = input()
+          edad = input()
+          print(nombre, edad + 1)
+        expect_fail_tag: io.input_not_cast
+    hints:
+      - {es: 'El orden de lectura es nombre primero y edad después.', en: 'Read the name first and the age second.'}
+      - {es: 'Convierte la edad con int() antes de sumar 1.', en: 'Convert the age with int() before adding 1.'}
+    explanation:
+      es: 'Entrada → conversión → cálculo → salida.'
+      en: 'Input → conversion → calculation → output.'

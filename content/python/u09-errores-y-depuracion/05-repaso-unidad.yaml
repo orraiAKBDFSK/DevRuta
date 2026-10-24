@@ -1,0 +1,258 @@
+id: py.u09.l05
+language: python
+unit: py.u09
+position: 5
+skills: [py.errors.read, py.try, py.debug]
+status: draft
+reviewed_by: []
+title:
+  es: 'Repaso y mini-programas'
+  en: 'Review and mini programs'
+explanation:
+  es: |
+    Repaso de tipos de error, `try` / `except` / `else` / `finally`, `raise` y depuración.
+    Los programas finales mezclan validación de datos con lógica de negocio.
+  en: |
+    Review of error types, `try` / `except` / `else` / `finally`, `raise` and debugging.
+    The final programs mix data validation with business logic.
+exercises:
+  - id: py.u09.l05.e01
+    type: multiple_choice
+    difficulty: 2
+    skills: [py.errors.read]
+    prompt:
+      es: '¿Qué error produce `"hola" + 1`?'
+      en: 'What error does `"hola" + 1` produce?'
+    options:
+      - {es: '`TypeError`', en: '`TypeError`'}
+      - {es: '`ValueError`', en: '`ValueError`'}
+      - {es: '`NameError`', en: '`NameError`'}
+      - {es: '`SyntaxError`', en: '`SyntaxError`'}
+    answer: 0
+    distractor_tags: {1: error.value_vs_type}
+    hints:
+      - {es: 'Los tipos no son compatibles.', en: 'The types are not compatible.'}
+    explanation:
+      es: 'Repasa "Leer los mensajes de error".'
+      en: 'Review "Reading error messages".'
+
+  - id: py.u09.l05.e02
+    type: predict_output
+    difficulty: 3
+    skills: [py.try, py.def]
+    prompt:
+      es: '¿Qué muestra este programa?'
+      en: 'What does this program show?'
+    code: |
+      def f(x):
+          try:
+              return int(x)
+          except ValueError:
+              return -1
+
+      print(f("5"), f("a"))
+    answer: "5 -1"
+    hints:
+      - {es: 'Evalúa cada llamada por separado.', en: 'Evaluate each call separately.'}
+    explanation:
+      es: 'Repasa "Manejar errores con try y except". La segunda llamada cae en el `except`.'
+      en: 'Review "Handling errors with try and except". The second call falls into the `except`.'
+
+  - id: py.u09.l05.e03
+    type: predict_output
+    difficulty: 4
+    skills: [py.try, py.return]
+    prompt:
+      es: '¿Qué muestra este programa? Escribe las dos líneas en el orden en que aparecen.'
+      en: 'What does this program show? Write both lines in the order they appear.'
+    code: |
+      def g():
+          try:
+              return "a"
+          finally:
+              print("b")
+
+      print(g())
+    answer: "b\na"
+    hints:
+      - {es: 'El `finally` se ejecuta antes de que la función entregue su valor.', en: 'The `finally` runs before the function hands over its value.'}
+    explanation:
+      es: 'Repasa "Lanzar y validar con raise". `b` se muestra dentro de `g()`, y `a` después, al hacer el `print` exterior.'
+      en: 'Review "Raising and validating with raise". `b` is shown inside `g()`, and `a` later, on the outer `print`.'
+
+  - id: py.u09.l05.e04
+    type: order_lines
+    difficulty: 3
+    skills: [py.try, py.input]
+    prompt:
+      es: 'Ordena las líneas para leer un entero: si es válido se muestra; si no, se muestra `invalido`.'
+      en: 'Order the lines to read a whole number: if it is valid it is shown; otherwise `invalido` is shown.'
+    lines:
+      - 'try:'
+      - '    n = int(input())'
+      - 'except ValueError:'
+      - '    print("invalido")'
+      - 'else:'
+      - '    print(n)'
+    hints:
+      - {es: 'El orden de los bloques es `try`, `except`, `else`.', en: 'The order of the blocks is `try`, `except`, `else`.'}
+    explanation:
+      es: 'El `else` solo se ejecuta si el `try` no falló.'
+      en: 'The `else` only runs if the `try` did not fail.'
+
+  - id: py.u09.l05.e05
+    type: write_code
+    difficulty: 4
+    skills: [py.try, py.strings.methods, py.if, py.input]
+    prompt:
+      es: |
+        Lee una línea con el formato `a op b`, donde `a` y `b` son enteros y `op` es `+`, `-`, `*` o `/`
+        (por ejemplo `6 / 3`). Muestra el resultado. Si algo está mal (formato, números, operador desconocido o división entre cero)
+        muestra `error`.
+      en: |
+        Read a line in the format `a op b`, where `a` and `b` are whole numbers and `op` is `+`, `-`, `*` or `/`
+        (for example `6 / 3`). Show the result. If anything is wrong (format, numbers, unknown operator or division by zero)
+        show `error`.
+    starter: |
+      # Escribe tu código aquí / Write your code here
+    reference_solution: |
+      try:
+          a, op, b = input().split()
+          a = int(a)
+          b = int(b)
+          if op == "+":
+              print(a + b)
+          elif op == "-":
+              print(a - b)
+          elif op == "*":
+              print(a * b)
+          elif op == "/":
+              print(a / b)
+          else:
+              print("error")
+      except (ValueError, ZeroDivisionError):
+          print("error")
+    tests:
+      - {stdin: "6 / 3\n", expected_stdout: "2.0\n", visible: true}
+      - {stdin: "6 / 0\n", expected_stdout: "error\n", visible: false}
+      - {stdin: "x + 1\n", expected_stdout: "error\n", visible: false}
+      - {stdin: "2 ^ 3\n", expected_stdout: "error\n", visible: false}
+      - {stdin: "4 * 5\n", expected_stdout: "20\n", visible: false}
+      - {stdin: "1 2\n", expected_stdout: "error\n", visible: false}
+    wrong_examples:
+      - code: |
+          a, op, b = input().split()
+          a = int(a)
+          b = int(b)
+          if op == "+":
+              print(a + b)
+          elif op == "-":
+              print(a - b)
+          elif op == "*":
+              print(a * b)
+          elif op == "/":
+              print(a / b)
+          else:
+              print("error")
+        expect_fail_tag: try.missing
+    hints:
+      - {es: 'Si la línea no tiene exactamente tres partes, desempaquetar lanza un `ValueError`.', en: 'If the line does not have exactly three parts, unpacking raises a `ValueError`.'}
+      - {es: 'Puedes capturar varios tipos de error a la vez: `except (ValueError, ZeroDivisionError):`.', en: 'You can catch several error types at once: `except (ValueError, ZeroDivisionError):`.'}
+    explanation:
+      es: 'Un solo `try` bien colocado cubre todos los fallos posibles de entrada.'
+      en: 'A single well-placed `try` covers all the possible input failures.'
+
+  - id: py.u09.l05.e06
+    type: write_code
+    difficulty: 4
+    skills: [py.try, py.for, py.strings.methods, py.input]
+    prompt:
+      es: |
+        Lee un entero `n` y luego `n` líneas con el formato `nombre,edad`. Suma las edades de las líneas válidas
+        (edad entera y exactamente un nombre y una edad) e ignora las demás. Muestra `suma invalidas`, separados por un espacio.
+      en: |
+        Read a whole number `n` and then `n` lines in the format `name,age`. Add up the ages of the valid lines
+        (whole-number age and exactly one name and one age) and ignore the rest. Show `sum invalid`, separated by a space.
+    starter: |
+      # Escribe tu código aquí / Write your code here
+    reference_solution: |
+      n = int(input())
+      suma = 0
+      invalidas = 0
+      for i in range(n):
+          try:
+              nombre, edad = input().split(",")
+              suma = suma + int(edad)
+          except ValueError:
+              invalidas = invalidas + 1
+      print(suma, invalidas)
+    tests:
+      - {stdin: "3\nana,20\nluis,x\nbea,30\n", expected_stdout: "50 1\n", visible: true}
+      - {stdin: "2\nana\nbeto,10\n", expected_stdout: "10 1\n", visible: false}
+      - {stdin: "1\na,b,c\n", expected_stdout: "0 1\n", visible: false}
+    wrong_examples:
+      - code: |
+          n = int(input())
+          suma = 0
+          invalidas = 0
+          for i in range(n):
+              nombre, edad = input().split(",")
+              suma = suma + int(edad)
+          print(suma, invalidas)
+        expect_fail_tag: try.missing
+    hints:
+      - {es: 'Desempaquetar y convertir pueden fallar con `ValueError`; ponlas dentro del mismo `try`.', en: 'Unpacking and converting can fail with `ValueError`; put them in the same `try`.'}
+    explanation:
+      es: 'Una línea con una coma de más o de menos también produce un `ValueError` al desempaquetar.'
+      en: 'A line with one comma too many or too few also produces a `ValueError` when unpacking.'
+
+  - id: py.u09.l05.e07
+    type: write_code
+    difficulty: 3
+    skills: [py.while, py.if, py.compare, py.input]
+    prompt:
+      es: |
+        La clave correcta es `python`. Lee intentos (uno por línea) hasta acertar o llegar a 3 intentos fallidos.
+        Muestra `acceso` si acertó o `bloqueado` si falló los 3.
+      en: |
+        The correct password is `python`. Read attempts (one per line) until it is guessed or 3 failed attempts are reached.
+        Show `acceso` if it was guessed or `bloqueado` if all 3 failed.
+    starter: |
+      # Escribe tu código aquí / Write your code here
+    reference_solution: |
+      fallos = 0
+      acierto = False
+      while fallos < 3 and not acierto:
+          intento = input()
+          if intento == "python":
+              acierto = True
+          else:
+              fallos = fallos + 1
+      if acierto:
+          print("acceso")
+      else:
+          print("bloqueado")
+    tests:
+      - {stdin: "a\nb\npython\n", expected_stdout: "acceso\n", visible: true}
+      - {stdin: "a\nb\nc\n", expected_stdout: "bloqueado\n", visible: false}
+      - {stdin: "python\n", expected_stdout: "acceso\n", visible: false}
+    wrong_examples:
+      - code: |
+          fallos = 0
+          acierto = False
+          while fallos < 2 and not acierto:
+              intento = input()
+              if intento == "python":
+                  acierto = True
+              else:
+                  fallos = fallos + 1
+          if acierto:
+              print("acceso")
+          else:
+              print("bloqueado")
+        expect_fail_tag: logic.off_by_one
+    hints:
+      - {es: 'La condición del `while` combina el número de fallos y si ya acertó.', en: 'The `while` condition combines the number of failures and whether it already succeeded.'}
+    explanation:
+      es: 'Con un límite de 2, el tercer intento no llegaría a leerse.'
+      en: 'With a limit of 2, the third attempt would never be read.'

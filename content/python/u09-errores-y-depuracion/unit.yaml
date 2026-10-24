@@ -1,0 +1,8 @@
+id: py.u09
+position: 9
+title:
+  es: 'Errores y depuración'
+  en: 'Errors and debugging'
+summary:
+  es: 'Leer los errores, manejarlos con try y except, y encontrar fallos en el código.'
+  en: 'Reading errors, handling them with try and except, and finding bugs in code.'

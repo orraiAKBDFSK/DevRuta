@@ -1,0 +1,417 @@
+id: py.u09.l04
+language: python
+unit: py.u09
+position: 4
+skills: [py.debug]
+status: draft
+reviewed_by: []
+title:
+  es: 'Depurar y probar'
+  en: 'Debugging and testing'
+explanation:
+  es: |
+    **Depurar** es encontrar y corregir la causa de un fallo. Un método que funciona casi siempre:
+
+    1. **Reproduce** el problema con una entrada concreta.
+    2. **Lee** el mensaje de error (si lo hay): tipo, línea y causa.
+    3. **Sigue el programa a mano** (*traza*): anota el valor de cada variable vuelta por vuelta.
+    4. **Muestra valores** con `print` en puntos clave para comprobar lo que crees que pasa.
+    5. Cambia **una sola cosa** a la vez y vuelve a probar.
+
+    Para comprobar que tu código hace lo que debe, usa `assert`:
+
+    ```python
+    assert doble(3) == 6, "doble(3) debería ser 6"
+    ```
+
+    Si la condición es `False`, lanza `AssertionError` con ese mensaje. Si es `True`, no pasa nada.
+    Escribir varios `assert` con casos normales y casos límite (0, vacío, negativos) es la forma más simple de probar una función.
+  en: |
+    **Debugging** is finding and fixing the cause of a failure. A method that almost always works:
+
+    1. **Reproduce** the problem with a concrete input.
+    2. **Read** the error message (if any): type, line and cause.
+    3. **Follow the program by hand** (*trace*): note down the value of each variable turn by turn.
+    4. **Show values** with `print` at key points to check what you think is happening.
+    5. Change **one thing** at a time and test again.
+
+    To check that your code does what it should, use `assert`:
+
+    ```python
+    assert doble(3) == 6, "doble(3) debería ser 6"
+    ```
+
+    If the condition is `False`, it raises `AssertionError` with that message. If it is `True`, nothing happens.
+    Writing several `assert` statements with normal cases and edge cases (0, empty, negatives) is the simplest way to test a function.
+exercises:
+  - id: py.u09.l04.e01
+    type: predict_output
+    difficulty: 2
+    skills: [py.debug]
+    prompt:
+      es: 'Sigue el programa a mano. ¿Qué muestra?'
+      en: 'Follow the program by hand. What does it show?'
+    code: |
+      x = 1
+      for i in range(3):
+          x = x * 2
+      print(x)
+    answer: "8"
+    hints:
+      - {es: 'Anota `x` tras cada vuelta: 2, 4, 8.', en: 'Note `x` after each turn: 2, 4, 8.'}
+    explanation:
+      es: 'Tres duplicaciones seguidas de 1 dan 8.'
+      en: 'Three doublings in a row from 1 give 8.'
+
+  - id: py.u09.l04.e02
+    type: predict_output
+    difficulty: 2
+    skills: [py.debug]
+    prompt:
+      es: 'Un programa con `print` de depuración. ¿Qué muestra? Escribe las tres líneas.'
+      en: 'A program with debugging `print` calls. What does it show? Write the three lines.'
+    code: |
+      total = 0
+      for n in [1, 2, 3]:
+          total = total + n
+          print("DEBUG", n, total)
+    answer: "DEBUG 1 1\nDEBUG 2 3\nDEBUG 3 6"
+    hints:
+      - {es: 'Cada vuelta muestra el elemento actual y el acumulado.', en: 'Each turn shows the current element and the running total.'}
+    explanation:
+      es: 'Mostrar valores intermedios permite ver dónde se desvía el programa de lo esperado.'
+      en: 'Showing intermediate values lets you see where the program drifts from what you expect.'
+
+  - id: py.u09.l04.e03
+    type: multiple_choice
+    difficulty: 1
+    skills: [py.debug]
+    prompt:
+      es: 'Tu programa falla con un mensaje de error. ¿Cuál es el mejor primer paso?'
+      en: 'Your program fails with an error message. What is the best first step?'
+    options:
+      - {es: 'Leer la última línea del mensaje y el número de línea que indica.', en: 'Read the last line of the message and the line number it points to.'}
+      - {es: 'Borrar el programa y empezar de nuevo.', en: 'Delete the program and start over.'}
+      - {es: 'Cambiar varias líneas al azar hasta que funcione.', en: 'Change several lines at random until it works.'}
+      - {es: 'Ignorar el mensaje y ejecutar otra vez.', en: 'Ignore the message and run it again.'}
+    answer: 0
+    distractor_tags: {2: debug.random_changes}
+    hints:
+      - {es: 'El mensaje ya te dice el tipo de error y dónde ocurrió.', en: 'The message already tells you the type of error and where it happened.'}
+    explanation:
+      es: 'Cambiar cosas al azar suele introducir errores nuevos.'
+      en: 'Changing things at random usually introduces new errors.'
+
+  - id: py.u09.l04.e04
+    type: predict_output
+    difficulty: 3
+    skills: [py.debug, py.try]
+    prompt:
+      es: '¿Qué muestra este programa?'
+      en: 'What does this program show?'
+    code: |
+      try:
+          assert 2 + 2 == 5, "mal"
+      except AssertionError as e:
+          print(e)
+    answer: "mal"
+    hints:
+      - {es: 'La condición es falsa, así que `assert` lanza un `AssertionError`.', en: 'The condition is false, so `assert` raises an `AssertionError`.'}
+    explanation:
+      es: 'El mensaje del `assert` es el que se guarda en `e`.'
+      en: 'The message of the `assert` is the one stored in `e`.'
+
+  - id: py.u09.l04.e05
+    type: multiple_choice
+    difficulty: 2
+    skills: [py.debug]
+    prompt:
+      es: '¿Para qué sirve principalmente `assert` al probar una función?'
+      en: 'What is `assert` mainly for when testing a function?'
+    options:
+      - {es: 'Para comprobar que una condición esperada se cumple y avisar si no.', en: 'To check that an expected condition holds and warn if it does not.'}
+      - {es: 'Para mostrar texto en pantalla.', en: 'To show text on screen.'}
+      - {es: 'Para repetir un bloque de código.', en: 'To repeat a block of code.'}
+      - {es: 'Para leer datos del usuario.', en: 'To read data from the user.'}
+    answer: 0
+    distractor_tags: {1: assert.misconception}
+    hints:
+      - {es: 'Si la condición es `True`, no ocurre nada.', en: 'If the condition is `True`, nothing happens.'}
+    explanation:
+      es: 'Es una forma de dejar escritas las expectativas sobre el código.'
+      en: 'It is a way to leave your expectations about the code in writing.'
+
+  - id: py.u09.l04.e06
+    type: write_code
+    difficulty: 3
+    skills: [py.debug, py.range, py.input]
+    prompt:
+      es: |
+        **Corrige el error.** Este programa debe leer un entero `n` y mostrar la suma de los números del 1 al `n`,
+        pero da un resultado incorrecto.
+      en: |
+        **Fix the bug.** This program must read a whole number `n` and show the sum of the numbers from 1 to `n`,
+        but it gives a wrong result.
+    starter: |
+      n = int(input())
+      total = 0
+      for i in range(1, n):
+          total = total + i
+      print(total)
+    reference_solution: |
+      n = int(input())
+      total = 0
+      for i in range(1, n + 1):
+          total = total + i
+      print(total)
+    tests:
+      - {stdin: "4\n", expected_stdout: "10\n", visible: true}
+      - {stdin: "1\n", expected_stdout: "1\n", visible: false}
+      - {stdin: "10\n", expected_stdout: "55\n", visible: false}
+    wrong_examples:
+      - code: |
+          n = int(input())
+          total = 0
+          for i in range(1, n):
+              total = total + i
+          print(total)
+        expect_fail_tag: logic.off_by_one
+    hints:
+      - {es: 'Prueba con `n = 4` y anota qué valores toma `i`.', en: 'Try `n = 4` and note which values `i` takes.'}
+    explanation:
+      es: 'El final de `range` no se incluye, así que el último número nunca se sumaba.'
+      en: 'The end of `range` is not included, so the last number was never added.'
+
+  - id: py.u09.l04.e07
+    type: write_code
+    difficulty: 3
+    skills: [py.debug, py.if, py.input]
+    prompt:
+      es: |
+        **Corrige el error.** Este programa debe leer un entero y decir si es `par` o `impar`, pero ni siquiera se ejecuta.
+      en: |
+        **Fix the bug.** This program must read a whole number and say whether it is `par` or `impar`, but it does not even run.
+    starter: |
+      n = int(input())
+      if n % 2 = 0:
+          print("par")
+      else:
+          print("impar")
+    reference_solution: |
+      n = int(input())
+      if n % 2 == 0:
+          print("par")
+      else:
+          print("impar")
+    tests:
+      - {stdin: "4\n", expected_stdout: "par\n", visible: true}
+      - {stdin: "3\n", expected_stdout: "impar\n", visible: false}
+      - {stdin: "0\n", expected_stdout: "par\n", visible: false}
+    wrong_examples:
+      - code: |
+          n = int(input())
+          if n % 2 = 0:
+              print("par")
+          else:
+              print("impar")
+        expect_fail_tag: logic.assign_vs_compare
+    hints:
+      - {es: 'Dentro de un `if` se hace una pregunta, no una asignación.', en: 'Inside an `if` you ask a question, not make an assignment.'}
+    explanation:
+      es: 'Es un `SyntaxError`: para comparar se usa `==`.'
+      en: 'It is a `SyntaxError`: comparing uses `==`.'
+
+  - id: py.u09.l04.e08
+    type: write_code
+    difficulty: 3
+    skills: [py.debug, py.return, py.def, py.input]
+    prompt:
+      es: |
+        **Corrige el error.** Se quiere mostrar el doble del número leído, pero el programa muestra `None`.
+      en: |
+        **Fix the bug.** The goal is to show the double of the number read, but the program shows `None`.
+    starter: |
+      def doble(x):
+          x * 2
+
+      print(doble(int(input())))
+    reference_solution: |
+      def doble(x):
+          return x * 2
+
+      print(doble(int(input())))
+    tests:
+      - {stdin: "4\n", expected_stdout: "8\n", visible: true}
+      - {stdin: "0\n", expected_stdout: "0\n", visible: false}
+      - {stdin: "-3\n", expected_stdout: "-6\n", visible: false}
+    static_checks:
+      - {kind: requires_function, name: doble, returns: true}
+    wrong_examples:
+      - code: |
+          def doble(x):
+              x * 2
+
+          print(doble(int(input())))
+        expect_fail_tag: function.missing_return
+    hints:
+      - {es: 'La función calcula el valor, pero no lo entrega.', en: 'The function calculates the value, but does not hand it over.'}
+    explanation:
+      es: 'Sin `return`, una función devuelve `None`.'
+      en: 'Without `return`, a function returns `None`.'
+
+  - id: py.u09.l04.e09
+    type: write_code
+    difficulty: 3
+    skills: [py.debug, py.input]
+    prompt:
+      es: |
+        **Corrige el error.** El programa debe leer dos enteros (uno por línea) y mostrar su suma, pero muestra otra cosa.
+      en: |
+        **Fix the bug.** The program must read two whole numbers (one per line) and show their sum, but it shows something else.
+    starter: |
+      a = input()
+      b = input()
+      print(a + b)
+    reference_solution: |
+      a = int(input())
+      b = int(input())
+      print(a + b)
+    tests:
+      - {stdin: "3\n4\n", expected_stdout: "7\n", visible: true}
+      - {stdin: "10\n-2\n", expected_stdout: "8\n", visible: false}
+    wrong_examples:
+      - code: |
+          a = input()
+          b = input()
+          print(a + b)
+        expect_fail_tag: io.input_not_cast
+    hints:
+      - {es: '¿Qué tipo devuelve `input()`?', en: 'What type does `input()` return?'}
+    explanation:
+      es: 'Con textos, `+` los une: `"3" + "4"` es `"34"`.'
+      en: 'With texts, `+` joins them: `"3" + "4"` is `"34"`.'
+
+  - id: py.u09.l04.e10
+    type: write_code
+    difficulty: 3
+    skills: [py.debug, py.while, py.input]
+    prompt:
+      es: |
+        **Corrige el error.** El programa debe contar hacia atrás desde `n` hasta 1, pero nunca termina.
+      en: |
+        **Fix the bug.** The program must count down from `n` to 1, but it never ends.
+    starter: |
+      n = int(input())
+      while n > 0:
+          print(n)
+    reference_solution: |
+      n = int(input())
+      while n > 0:
+          print(n)
+          n = n - 1
+    tests:
+      - {stdin: "3\n", expected_stdout: "3\n2\n1\n", visible: true}
+      - {stdin: "1\n", expected_stdout: "1\n", visible: false}
+      - {stdin: "0\n", expected_stdout: "", visible: false}
+    wrong_examples:
+      - code: |
+          n = int(input())
+          while n > 0:
+              print(n)
+        expect_fail_tag: loop.infinite
+    hints:
+      - {es: 'Dentro del bucle, ¿qué cambia el valor de `n`?', en: 'Inside the loop, what changes the value of `n`?'}
+    explanation:
+      es: 'Un `while` necesita algo que acerque la condición a `False`.'
+      en: 'A `while` needs something that brings the condition closer to `False`.'
+
+  - id: py.u09.l04.e11
+    type: write_code
+    difficulty: 4
+    skills: [py.debug, py.list, py.compare, py.input]
+    prompt:
+      es: |
+        **Corrige el error.** El programa lee `n` y luego `n` enteros (uno por línea) y debe mostrar el mayor.
+        Funciona con números positivos, pero falla con negativos.
+      en: |
+        **Fix the bug.** The program reads `n` and then `n` whole numbers (one per line) and must show the largest.
+        It works with positive numbers but fails with negatives.
+    starter: |
+      n = int(input())
+      mayor = 0
+      for i in range(n):
+          x = int(input())
+          if x > mayor:
+              mayor = x
+      print(mayor)
+    reference_solution: |
+      n = int(input())
+      mayor = int(input())
+      for i in range(n - 1):
+          x = int(input())
+          if x > mayor:
+              mayor = x
+      print(mayor)
+    tests:
+      - {stdin: "3\n-5\n-2\n-9\n", expected_stdout: "-2\n", visible: true}
+      - {stdin: "2\n4\n1\n", expected_stdout: "4\n", visible: false}
+      - {stdin: "1\n-7\n", expected_stdout: "-7\n", visible: false}
+    wrong_examples:
+      - code: |
+          n = int(input())
+          mayor = 0
+          for i in range(n):
+              x = int(input())
+              if x > mayor:
+                  mayor = x
+          print(mayor)
+        expect_fail_tag: logic.bad_initial_value
+    hints:
+      - {es: 'Prueba el programa con `-5`, `-2` y `-9`: ¿qué valor tiene `mayor` al empezar?', en: 'Try the program with `-5`, `-2` and `-9`: what value does `mayor` have at the start?'}
+      - {es: 'El valor inicial debe ser un dato real de la lista, no un número inventado.', en: 'The initial value must be a real piece of data from the list, not an invented number.'}
+    explanation:
+      es: 'Con 0 como valor inicial, ningún negativo puede ser "mayor". Se parte del primer dato leído.'
+      en: 'With 0 as the initial value, no negative can be "larger". Start from the first value read.'
+
+  - id: py.u09.l04.e12
+    type: write_code
+    difficulty: 4
+    skills: [py.debug, py.def, py.return, py.compare]
+    prompt:
+      es: |
+        Define `es_bisiesto(anio)` que **devuelva** `True` si el año es bisiesto. Antes de usarla, escribe cuatro `assert`
+        que la comprueben con 2000 (sí), 1900 (no), 2024 (sí) y 2023 (no). Si todo pasa, el programa debe mostrar `ok`.
+      en: |
+        Define `es_bisiesto(anio)` that **returns** `True` if the year is a leap year. Before using it, write four `assert` statements
+        that check it with 2000 (yes), 1900 (no), 2024 (yes) and 2023 (no). If everything passes, the program must show `ok`.
+    starter: |
+      # Escribe tu código aquí / Write your code here
+    reference_solution: |
+      def es_bisiesto(anio):
+          return anio % 4 == 0 and (anio % 100 != 0 or anio % 400 == 0)
+
+      assert es_bisiesto(2000) == True
+      assert es_bisiesto(1900) == False
+      assert es_bisiesto(2024) == True
+      assert es_bisiesto(2023) == False
+      print("ok")
+    tests:
+      - {stdin: "", expected_stdout: "ok\n", visible: true}
+    static_checks:
+      - {kind: requires_function, name: es_bisiesto, returns: true}
+    wrong_examples:
+      - code: |
+          def es_bisiesto(anio):
+              return anio % 4 == 0
+
+          assert es_bisiesto(2000) == True
+          assert es_bisiesto(1900) == False
+          assert es_bisiesto(2024) == True
+          assert es_bisiesto(2023) == False
+          print("ok")
+        expect_fail_tag: logic.missing_exception
+    hints:
+      - {es: 'Si un `assert` falla, el programa se detiene con `AssertionError` y no llega a mostrar `ok`.', en: 'If an `assert` fails, the program stops with `AssertionError` and never shows `ok`.'}
+    explanation:
+      es: 'Los casos límite (1900 y 2000) son los que revelan los errores de la regla de los siglos.'
+      en: 'The edge cases (1900 and 2000) are the ones that reveal errors in the century rule.'

@@ -1,0 +1,245 @@
+id: py.u05.l01
+language: python
+unit: py.u05
+position: 1
+skills: [py.list, py.index]
+status: draft
+reviewed_by: []
+title:
+  es: 'Listas e índices'
+  en: 'Lists and indexes'
+explanation:
+  es: |
+    Una **lista** guarda varios valores en una sola variable, entre corchetes y separados por comas:
+
+    ```python
+    notas = [7, 9, 6]
+    print(notas)        # [7, 9, 6]
+    print(len(notas))   # 3
+    ```
+
+    Cada elemento tiene una posición, llamada **índice**, que **empieza en 0**:
+
+    ```python
+    print(notas[0])     # 7   (el primero)
+    print(notas[2])     # 6
+    print(notas[-1])    # 6   (el último)
+    ```
+
+    - Un índice negativo cuenta desde el final: `-1` es el último, `-2` el penúltimo.
+    - Usar un índice que no existe da un `IndexError`.
+    - Las listas se pueden modificar: `notas[0] = 10`.
+    - Una lista puede estar vacía: `[]`.
+  en: |
+    A **list** stores several values in a single variable, between square brackets and separated by commas:
+
+    ```python
+    notas = [7, 9, 6]
+    print(notas)        # [7, 9, 6]
+    print(len(notas))   # 3
+    ```
+
+    Each element has a position, called an **index**, that **starts at 0**:
+
+    ```python
+    print(notas[0])     # 7   (the first one)
+    print(notas[2])     # 6
+    print(notas[-1])    # 6   (the last one)
+    ```
+
+    - A negative index counts from the end: `-1` is the last, `-2` the second to last.
+    - Using an index that does not exist raises an `IndexError`.
+    - Lists can be modified: `notas[0] = 10`.
+    - A list can be empty: `[]`.
+exercises:
+  - id: py.u05.l01.e01
+    type: predict_output
+    difficulty: 1
+    skills: [py.index]
+    prompt:
+      es: '¿Qué muestra este programa?'
+      en: 'What does this program show?'
+    code: |
+      a = [10, 20, 30]
+      print(a[0])
+    answer: "10"
+    hints:
+      - {es: 'El primer índice es 0, no 1.', en: 'The first index is 0, not 1.'}
+    explanation:
+      es: 'Los índices empiezan en 0, así que `a[0]` es el primer elemento.'
+      en: 'Indexes start at 0, so `a[0]` is the first element.'
+
+  - id: py.u05.l01.e02
+    type: predict_output
+    difficulty: 1
+    skills: [py.index]
+    prompt:
+      es: '¿Qué muestra este programa?'
+      en: 'What does this program show?'
+    code: |
+      a = [10, 20, 30]
+      print(a[-1])
+    answer: "30"
+    hints:
+      - {es: 'Un índice negativo cuenta desde el final.', en: 'A negative index counts from the end.'}
+    explanation:
+      es: '`-1` es el último elemento.'
+      en: '`-1` is the last element.'
+
+  - id: py.u05.l01.e03
+    type: predict_output
+    difficulty: 1
+    skills: [py.list]
+    prompt:
+      es: '¿Qué muestra este programa?'
+      en: 'What does this program show?'
+    code: |
+      print(len([4, 5, 6, 7]))
+    answer: "4"
+    hints:
+      - {es: '`len` cuenta los elementos.', en: '`len` counts the elements.'}
+    explanation:
+      es: 'La lista tiene 4 elementos; su último índice es 3.'
+      en: 'The list has 4 elements; its last index is 3.'
+
+  - id: py.u05.l01.e04
+    type: predict_output
+    difficulty: 2
+    skills: [py.list, py.index]
+    prompt:
+      es: '¿Qué muestra este programa? Escribe la lista tal como la muestra Python, con corchetes y espacios tras las comas.'
+      en: 'What does this program show? Write the list the way Python shows it, with brackets and a space after each comma.'
+    code: |
+      a = [1, 2, 3]
+      a[1] = 9
+      print(a)
+    answer: "[1, 9, 3]"
+    hints:
+      - {es: 'La asignación reemplaza el elemento de ese índice.', en: 'The assignment replaces the element at that index.'}
+    explanation:
+      es: 'A diferencia del texto, una lista se puede modificar elemento a elemento.'
+      en: 'Unlike text, a list can be modified element by element.'
+
+  - id: py.u05.l01.e05
+    type: multiple_choice
+    difficulty: 2
+    skills: [py.index]
+    prompt:
+      es: |
+        Una lista tiene 3 elementos. ¿Qué pasa al ejecutar `a[3]`?
+
+        ```python
+        a = [10, 20, 30]
+        print(a[3])
+        ```
+      en: |
+        A list has 3 elements. What happens when running `a[3]`?
+
+        ```python
+        a = [10, 20, 30]
+        print(a[3])
+        ```
+    options:
+      - {es: 'Da un error `IndexError`: el último índice es 2.', en: 'It raises an `IndexError`: the last index is 2.'}
+      - {es: 'Muestra 30.', en: 'It shows 30.'}
+      - {es: 'Muestra 0.', en: 'It shows 0.'}
+      - {es: 'Muestra una lista vacía.', en: 'It shows an empty list.'}
+    answer: 0
+    distractor_tags: {1: logic.off_by_one, 2: index.misconception}
+    hints:
+      - {es: 'Con 3 elementos los índices válidos son 0, 1 y 2.', en: 'With 3 elements the valid indexes are 0, 1 and 2.'}
+    explanation:
+      es: 'El índice válido más alto es `len(a) - 1`.'
+      en: 'The highest valid index is `len(a) - 1`.'
+
+  - id: py.u05.l01.e06
+    type: fill_code
+    difficulty: 2
+    skills: [py.index]
+    prompt:
+      es: 'Completa el índice para que el programa muestre `kiwi`.'
+      en: 'Fill in the index so the program shows `kiwi`.'
+    code: |
+      frutas = ["pera", "uva", "kiwi"]
+      print(frutas[___])
+    blanks:
+      - ["2", "-1"]
+    hints:
+      - {es: '`kiwi` es el tercer elemento.', en: '`kiwi` is the third element.'}
+    explanation:
+      es: 'Sirven tanto `2` como `-1`.'
+      en: 'Both `2` and `-1` work.'
+
+  - id: py.u05.l01.e07
+    type: write_code
+    difficulty: 2
+    skills: [py.list, py.input]
+    prompt:
+      es: 'Lee tres enteros (uno por línea), guárdalos en una lista en ese orden y muestra la lista.'
+      en: 'Read three whole numbers (one per line), store them in a list in that order and show the list.'
+    starter: |
+      # Escribe tu código aquí / Write your code here
+    reference_solution: |
+      a = int(input())
+      b = int(input())
+      c = int(input())
+      lista = [a, b, c]
+      print(lista)
+    tests:
+      - {stdin: "3\n1\n2\n", expected_stdout: "[3, 1, 2]\n", visible: true}
+      - {stdin: "10\n20\n30\n", expected_stdout: "[10, 20, 30]\n", visible: false}
+    wrong_examples:
+      - code: |
+          a = input()
+          b = input()
+          c = input()
+          print([a, b, c])
+        expect_fail_tag: io.input_not_cast
+      - code: |
+          a = int(input())
+          b = int(input())
+          c = int(input())
+          print(a, b, c)
+        expect_fail_tag: output.mismatch
+    hints:
+      - {es: 'Convierte cada entrada con `int()` antes de guardarla.', en: 'Convert each input with `int()` before storing it.'}
+    explanation:
+      es: 'Sin `int()`, la lista contendría textos y se mostraría con comillas: `[''3'', ''1'', ''2'']`.'
+      en: 'Without `int()`, the list would hold text and be shown with quotes: `[''3'', ''1'', ''2'']`.'
+
+  - id: py.u05.l01.e08
+    type: write_code
+    difficulty: 3
+    skills: [py.list, py.index, py.input]
+    prompt:
+      es: 'Lee tres enteros (uno por línea), guárdalos en una lista, intercambia el primero con el último y muestra la lista.'
+      en: 'Read three whole numbers (one per line), store them in a list, swap the first with the last and show the list.'
+    starter: |
+      # Escribe tu código aquí / Write your code here
+    reference_solution: |
+      a = int(input())
+      b = int(input())
+      c = int(input())
+      lista = [a, b, c]
+      temporal = lista[0]
+      lista[0] = lista[-1]
+      lista[-1] = temporal
+      print(lista)
+    tests:
+      - {stdin: "1\n2\n3\n", expected_stdout: "[3, 2, 1]\n", visible: true}
+      - {stdin: "5\n6\n7\n", expected_stdout: "[7, 6, 5]\n", visible: false}
+    wrong_examples:
+      - code: |
+          a = int(input())
+          b = int(input())
+          c = int(input())
+          lista = [a, b, c]
+          lista[0] = lista[-1]
+          lista[-1] = lista[0]
+          print(lista)
+        expect_fail_tag: logic.swap_without_temp
+    hints:
+      - {es: 'Si copias un valor encima de otro, el original se pierde. Guarda uno en una variable temporal.', en: 'If you copy a value over another, the original is lost. Save one in a temporary variable.'}
+    explanation:
+      es: 'Sin variable temporal, los dos extremos acaban con el mismo valor.'
+      en: 'Without a temporary variable, both ends end up with the same value.'

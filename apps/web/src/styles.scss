@@ -1,0 +1,495 @@
+:root {
+  --bg: #ffffff;
+  --surface: #f6f7f9;
+  --text: #1b1f24;
+  --muted: #5a6572;
+  --border: #d0d7de;
+  --accent: #1a56db;
+  --accent-text: #ffffff;
+  --danger: #b42318;
+  --ok: #067647;
+  color-scheme: light dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #12161b;
+    --surface: #1b2128;
+    --text: #e8edf2;
+    --muted: #9aa7b4;
+    --border: #36404b;
+    --accent: #6ea0ff;
+    --accent-text: #0b1220;
+    --danger: #ff8a80;
+    --ok: #5dd39e;
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  line-height: 1.5;
+}
+
+a {
+  color: var(--accent);
+}
+
+h2 {
+  margin-top: 0;
+}
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.card.danger {
+  border-color: var(--danger);
+}
+
+.field {
+  margin-bottom: 1rem;
+}
+
+.field label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+.field.checkbox {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  column-gap: 0.5rem;
+  align-items: start;
+}
+
+.field.checkbox label {
+  font-weight: 400;
+  margin: 0;
+}
+
+.field.checkbox .field-error {
+  grid-column: 1 / -1;
+}
+
+input[type='text'],
+input[type='email'],
+input[type='password'],
+input[type='number'],
+select {
+  width: 100%;
+  padding: 0.6rem 0.75rem;
+  font: inherit;
+  color: inherit;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 0.375rem;
+}
+
+nav select {
+  width: auto;
+  padding: 0.3rem 0.5rem;
+}
+
+:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
+
+button {
+  font: inherit;
+  padding: 0.6rem 1rem;
+  min-height: 2.75rem;
+  color: var(--accent-text);
+  background: var(--accent);
+  border: 0;
+  border-radius: 0.375rem;
+  cursor: pointer;
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: progress;
+}
+
+.link-button {
+  color: var(--accent);
+  background: none;
+  text-decoration: underline;
+  padding: 0.25rem;
+  min-height: 0;
+}
+
+.danger-button {
+  background: var(--danger);
+  color: var(--bg);
+}
+
+.hint {
+  margin: 0.25rem 0 0;
+  color: var(--muted);
+  font-size: 0.875rem;
+}
+
+.field-error,
+.form-error {
+  color: var(--danger);
+  margin: 0.25rem 0;
+}
+
+.form-ok {
+  color: var(--ok);
+  margin: 0.25rem 0;
+}
+
+.alt {
+  margin-bottom: 0;
+}
+
+a.button {
+  display: inline-block;
+  padding: 0.6rem 1rem;
+  color: var(--accent-text);
+  background: var(--accent);
+  border-radius: 0.375rem;
+  text-decoration: none;
+}
+
+.badge {
+  display: inline-block;
+  margin-left: 0.5rem;
+  padding: 0 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  color: var(--muted);
+  vertical-align: middle;
+}
+
+.chip {
+  display: inline-block;
+  margin: 0 0.25rem 0.25rem 0;
+  padding: 0 0.5rem;
+  font-size: 0.8rem;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+}
+
+.lesson-list {
+  padding-left: 1.25rem;
+}
+
+.lesson-list li {
+  margin: 0.5rem 0;
+}
+
+.lesson-list .skills {
+  display: block;
+  font-size: 0.8rem;
+}
+
+.breadcrumb {
+  margin-bottom: 0.75rem;
+  font-size: 0.9rem;
+}
+
+.pager {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.markdown {
+  overflow-wrap: anywhere;
+}
+
+.markdown table {
+  border-collapse: collapse;
+  display: block;
+  max-width: 100%;
+  overflow-x: auto;
+  margin: 1rem 0;
+}
+
+.markdown th,
+.markdown td {
+  padding: 0.35rem 0.6rem;
+  border: 1px solid var(--border);
+  text-align: left;
+}
+
+.markdown pre {
+  overflow-x: auto;
+  padding: 0.75rem;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 0.375rem;
+}
+
+.markdown code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.9em;
+}
+
+.markdown :not(pre) > code {
+  padding: 0.1rem 0.3rem;
+  background: var(--bg);
+  border-radius: 0.25rem;
+}
+
+.exercises {
+  margin-top: 1.5rem;
+}
+
+.exercise-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+
+.exercise-header h4 {
+  margin: 0;
+}
+
+.badge.ok {
+  color: var(--ok);
+  border-color: var(--ok);
+}
+
+.options {
+  display: grid;
+  gap: 0.5rem;
+  margin: 0.75rem 0;
+}
+
+.option {
+  display: flex;
+  gap: 0.5rem;
+  align-items: flex-start;
+  padding: 0.5rem 0.75rem;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 0.375rem;
+  cursor: pointer;
+}
+
+.option p {
+  display: inline;
+  margin: 0;
+}
+
+pre.code {
+  overflow-x: auto;
+  margin: 0.75rem 0;
+  padding: 0.75rem;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 0.375rem;
+}
+
+pre.code code,
+.code-line {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.9em;
+  white-space: pre;
+}
+
+input.blank {
+  width: 6rem;
+  margin: 0 0.15rem;
+  padding: 0.1rem 0.35rem;
+  font: inherit;
+  color: inherit;
+  background: var(--surface);
+  border: 1px solid var(--accent);
+  border-radius: 0.25rem;
+}
+
+textarea {
+  width: 100%;
+  padding: 0.6rem 0.75rem;
+  font: 0.9em ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  color: inherit;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 0.375rem;
+}
+
+.field-label {
+  display: block;
+  margin-bottom: 0.25rem;
+  font-weight: 600;
+}
+
+.order-list {
+  padding-left: 0;
+  list-style: none;
+}
+
+.order-list li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin: 0.35rem 0;
+  padding: 0.35rem 0.5rem;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 0.375rem;
+  overflow-x: auto;
+}
+
+.order-buttons {
+  display: flex;
+  gap: 0.25rem;
+}
+
+button.small {
+  min-height: 2.75rem;
+  min-width: 2.75rem;
+  padding: 0.25rem 0.6rem;
+}
+
+button.secondary {
+  color: var(--accent);
+  background: transparent;
+  border: 1px solid var(--accent);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 0.75rem;
+}
+
+.hint-text {
+  margin: 0.5rem 0;
+  padding: 0.5rem 0.75rem;
+  background: var(--bg);
+  border-left: 3px solid var(--accent);
+}
+
+.hint-text p {
+  display: inline;
+  margin: 0;
+}
+
+.feedback {
+  min-height: 1.5rem;
+  margin-top: 0.5rem;
+}
+
+.explanation {
+  padding: 0.5rem 0.75rem;
+  background: var(--bg);
+  border-left: 3px solid var(--ok);
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.skip-link {
+  position: absolute;
+  left: -999px;
+}
+
+.skip-link:focus {
+  left: 0.5rem;
+  top: 0.5rem;
+  background: var(--bg);
+  padding: 0.5rem;
+  z-index: 10;
+}
+
+textarea.code-editor {
+  min-height: 12rem;
+  tab-size: 4;
+  white-space: pre;
+  overflow: auto;
+  resize: vertical;
+}
+
+pre.code.error {
+  border-color: var(--danger);
+}
+
+.tests {
+  padding-left: 0;
+  list-style: none;
+}
+
+.tests li {
+  margin: 0.5rem 0;
+  padding: 0.5rem 0.75rem;
+  background: var(--bg);
+  border-left: 3px solid var(--border);
+}
+
+.tests li.pass {
+  border-left-color: var(--ok);
+}
+
+.tests li.fail {
+  border-left-color: var(--danger);
+}
+
+progress {
+  width: 100%;
+  height: 1rem;
+}
+
+.big {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 0.25rem 0;
+}
+
+.achievements {
+  display: grid;
+  gap: 0.75rem;
+  padding-left: 0;
+  list-style: none;
+}
+
+.achievements li {
+  display: grid;
+  gap: 0.15rem;
+  padding: 0.75rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
+  opacity: 0.75;
+}
+
+.achievements li.unlocked {
+  opacity: 1;
+  border-color: var(--ok);
+}
+
+.form-ok.xp {
+  font-weight: 600;
+}

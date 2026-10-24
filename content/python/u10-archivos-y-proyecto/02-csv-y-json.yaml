@@ -1,0 +1,379 @@
+id: py.u10.l02
+language: python
+unit: py.u10
+position: 2
+skills: [py.files, py.modules]
+status: draft
+reviewed_by: []
+title:
+  es: 'Datos estructurados: CSV y JSON'
+  en: 'Structured data: CSV and JSON'
+explanation:
+  es: |
+    Los datos suelen guardarse en formatos estándar.
+
+    **CSV simple**: una fila por línea y valores separados por comas, p. ej. `ana,20`. Se procesa con `split(",")`.
+
+    **JSON**: formato de texto para diccionarios, listas, números, textos, `true`/`false`/`null`.
+    Python lo maneja con la biblioteca `json` (`import json` la carga; verás más en la siguiente lección):
+
+    ```python
+    import json
+
+    texto = json.dumps({"a": 1, "b": [1, 2]})   # objeto -> texto: {"a": 1, "b": [1, 2]}
+    datos = json.loads('{"x": 5}')              # texto -> objeto
+    print(datos["x"])                           # 5
+
+    with open("d.json", "w") as f:
+        json.dump(datos, f)                     # objeto -> archivo
+    with open("d.json") as f:
+        leido = json.load(f)                    # archivo -> objeto
+    ```
+
+    - JSON usa **comillas dobles**; no admite comas finales ni comillas simples.
+    - Las tuplas se guardan como listas y las claves de los diccionarios pasan a ser **textos**.
+  en: |
+    Data is often stored in standard formats.
+
+    **Simple CSV**: one row per line and comma-separated values, e.g. `ana,20`. It is processed with `split(",")`.
+
+    **JSON**: a text format for dictionaries, lists, numbers, texts, `true`/`false`/`null`.
+    Python handles it with the `json` library (`import json` loads it; you will see more in the next lesson):
+
+    ```python
+    import json
+
+    texto = json.dumps({"a": 1, "b": [1, 2]})   # object -> text: {"a": 1, "b": [1, 2]}
+    datos = json.loads('{"x": 5}')              # text -> object
+    print(datos["x"])                           # 5
+
+    with open("d.json", "w") as f:
+        json.dump(datos, f)                     # object -> file
+    with open("d.json") as f:
+        leido = json.load(f)                    # file -> object
+    ```
+
+    - JSON uses **double quotes**; it does not allow trailing commas or single quotes.
+    - Tuples are stored as lists and dictionary keys become **texts**.
+exercises:
+  - id: py.u10.l02.e01
+    type: predict_output
+    difficulty: 1
+    skills: [py.files, py.modules]
+    prompt:
+      es: '¿Qué muestra este programa? Fíjate en las comillas.'
+      en: 'What does this program show? Mind the quotes.'
+    code: |
+      import json
+
+      print(json.dumps({"a": 1, "b": [1, 2]}))
+    answer: "{\"a\": 1, \"b\": [1, 2]}"
+    hints:
+      - {es: 'JSON usa comillas dobles.', en: 'JSON uses double quotes.'}
+    explanation:
+      es: 'A diferencia de `print(diccionario)`, el resultado de `json.dumps` usa comillas dobles.'
+      en: 'Unlike `print(dictionary)`, the result of `json.dumps` uses double quotes.'
+
+  - id: py.u10.l02.e02
+    type: predict_output
+    difficulty: 2
+    skills: [py.files, py.modules]
+    prompt:
+      es: '¿Qué muestra este programa?'
+      en: 'What does this program show?'
+    code: |
+      import json
+
+      datos = json.loads('{"x": 5}')
+      print(datos["x"])
+    answer: "5"
+    hints:
+      - {es: '`loads` convierte el texto en un diccionario.', en: '`loads` turns the text into a dictionary.'}
+    explanation:
+      es: 'Después de `loads`, `datos` es un diccionario normal.'
+      en: 'After `loads`, `datos` is a normal dictionary.'
+
+  - id: py.u10.l02.e03
+    type: predict_output
+    difficulty: 2
+    skills: [py.files, py.tuple]
+    prompt:
+      es: '¿Qué muestra este programa?'
+      en: 'What does this program show?'
+    code: |
+      import json
+
+      print(json.dumps((1, 2)))
+    answer: "[1, 2]"
+    hints:
+      - {es: 'JSON no tiene tuplas.', en: 'JSON has no tuples.'}
+    explanation:
+      es: 'Las tuplas se guardan como listas.'
+      en: 'Tuples are stored as lists.'
+
+  - id: py.u10.l02.e04
+    type: predict_output
+    difficulty: 3
+    skills: [py.files, py.dict]
+    prompt:
+      es: '¿Qué muestra este programa? Fíjate en la clave.'
+      en: 'What does this program show? Look at the key.'
+    code: |
+      import json
+
+      d = {1: "a"}
+      print(json.loads(json.dumps(d)))
+    answer: "{'1': 'a'}"
+    hints:
+      - {es: 'En JSON las claves siempre son textos.', en: 'In JSON keys are always texts.'}
+    explanation:
+      es: 'Al hacer el viaje de ida y vuelta, la clave `1` se convierte en `"1"`.'
+      en: 'After the round trip, the key `1` becomes `"1"`.'
+
+  - id: py.u10.l02.e05
+    type: multiple_choice
+    difficulty: 2
+    skills: [py.files]
+    prompt:
+      es: '¿Cuál de estos textos es JSON válido?'
+      en: 'Which of these texts is valid JSON?'
+    options:
+      - {es: '{"a": 1}', en: '{"a": 1}'}
+      - {es: "{'a': 1}", en: "{'a': 1}"}
+      - {es: '{a: 1}', en: '{a: 1}'}
+      - {es: '{"a": 1,}', en: '{"a": 1,}'}
+    answer: 0
+    distractor_tags: {1: json.single_quotes, 2: json.unquoted_key, 3: json.trailing_comma}
+    hints:
+      - {es: 'Las claves van entre comillas dobles y no se admite coma final.', en: 'Keys go in double quotes and a trailing comma is not allowed.'}
+    explanation:
+      es: 'JSON es más estricto que la sintaxis de Python.'
+      en: 'JSON is stricter than Python syntax.'
+
+  - id: py.u10.l02.e06
+    type: write_code
+    difficulty: 3
+    skills: [py.files, py.strings.methods, py.fstring, py.input]
+    prompt:
+      es: |
+        Lee un entero `n` (1 o mayor) y luego `n` líneas con el formato `nombre,edad`.
+        Muestra el promedio de las edades con un decimal.
+      en: |
+        Read a whole number `n` (1 or greater) and then `n` lines in the format `name,age`.
+        Show the average of the ages with one decimal.
+    starter: |
+      # Escribe tu código aquí / Write your code here
+    reference_solution: |
+      n = int(input())
+      total = 0
+      for i in range(n):
+          nombre, edad = input().split(",")
+          total = total + int(edad)
+      print(f"{total / n:.1f}")
+    tests:
+      - {stdin: "2\nana,20\nluis,30\n", expected_stdout: "25.0\n", visible: true}
+      - {stdin: "3\na,10\nb,20\nc,25\n", expected_stdout: "18.3\n", visible: false}
+      - {stdin: "1\nz,7\n", expected_stdout: "7.0\n", visible: false}
+    wrong_examples:
+      - code: |
+          n = int(input())
+          total = 0
+          for i in range(n):
+              nombre, edad = input().split(",")
+              total = total + int(edad)
+          print(total / n)
+        expect_fail_tag: fstring.missing_format
+    hints:
+      - {es: '`split(",")` separa cada línea en nombre y edad.', en: '`split(",")` splits each line into name and age.'}
+    explanation:
+      es: '55 / 3 = 18.333... y se muestra como `18.3`.'
+      en: '55 / 3 = 18.333... and it is shown as `18.3`.'
+
+  - id: py.u10.l02.e07
+    type: write_code
+    difficulty: 4
+    skills: [py.files, py.dict, py.modules, py.input]
+    prompt:
+      es: |
+        Lee un entero `n` y luego `n` pares de líneas: una clave (texto) y un valor (entero). Guarda el diccionario en
+        el archivo `d.json` con `json.dump`, léelo de nuevo con `json.load` y muestra el resultado con `json.dumps`.
+      en: |
+        Read a whole number `n` and then `n` pairs of lines: a key (text) and a value (whole number). Save the dictionary in
+        the file `d.json` with `json.dump`, read it back with `json.load` and show the result with `json.dumps`.
+    starter: |
+      import json
+
+      # Escribe tu código aquí / Write your code here
+    reference_solution: |
+      import json
+
+      n = int(input())
+      d = {}
+      for i in range(n):
+          clave = input()
+          d[clave] = int(input())
+
+      with open("d.json", "w") as f:
+          json.dump(d, f)
+      with open("d.json") as f:
+          leido = json.load(f)
+      print(json.dumps(leido))
+    tests:
+      - {stdin: "2\na\n1\nb\n2\n", expected_stdout: "{\"a\": 1, \"b\": 2}\n", visible: true}
+      - {stdin: "0\n", expected_stdout: "{}\n", visible: false}
+      - {stdin: "1\nx\n9\n", expected_stdout: "{\"x\": 9}\n", visible: false}
+    wrong_examples:
+      - code: |
+          import json
+
+          n = int(input())
+          d = {}
+          for i in range(n):
+              clave = input()
+              d[clave] = int(input())
+          print(d)
+        expect_fail_tag: json.single_quotes
+    hints:
+      - {es: '`json.dump(objeto, archivo)` escribe y `json.load(archivo)` lee.', en: '`json.dump(object, file)` writes and `json.load(file)` reads.'}
+    explanation:
+      es: 'Guardar y volver a cargar permite que los datos sobrevivan a la ejecución del programa.'
+      en: 'Saving and loading again lets the data outlive the execution of the program.'
+
+  - id: py.u10.l02.e08
+    type: write_code
+    difficulty: 3
+    skills: [py.modules, py.dict, py.fstring, py.input]
+    prompt:
+      es: |
+        Lee una línea que contiene un objeto JSON con las claves `nombre` y `edad`, por ejemplo
+        `{"nombre": "Ana", "edad": 20}`. Muestra `Ana tiene 20`.
+      en: |
+        Read a line that contains a JSON object with the keys `nombre` and `edad`, for example
+        `{"nombre": "Ana", "edad": 20}`. Show `Ana tiene 20`.
+    starter: |
+      import json
+
+      # Escribe tu código aquí / Write your code here
+    reference_solution: |
+      import json
+
+      datos = json.loads(input())
+      print(f"{datos['nombre']} tiene {datos['edad']}")
+    tests:
+      - {stdin: "{\"nombre\": \"Ana\", \"edad\": 20}\n", expected_stdout: "Ana tiene 20\n", visible: true}
+      - {stdin: "{\"edad\": 7, \"nombre\": \"Luis\"}\n", expected_stdout: "Luis tiene 7\n", visible: false}
+    wrong_examples:
+      - code: |
+          import json
+
+          datos = input()
+          print(datos)
+        expect_fail_tag: logic.missing_step
+    hints:
+      - {es: '`json.loads` convierte el texto de la línea en un diccionario.', en: '`json.loads` turns the text of the line into a dictionary.'}
+      - {es: 'Dentro de una f-string con comillas dobles, usa comillas simples para las claves.', en: 'Inside an f-string with double quotes, use single quotes for the keys.'}
+    explanation:
+      es: 'El orden de las claves en el JSON no importa.'
+      en: 'The order of the keys in the JSON does not matter.'
+
+  - id: py.u10.l02.e09
+    type: write_code
+    difficulty: 4
+    skills: [py.files, py.strings.methods, py.compare, py.input]
+    prompt:
+      es: |
+        Lee un entero `n` y luego `n` líneas con el formato `nombre,nota` (nota entera, 0 o mayor). Guárdalas en un archivo,
+        léelo de nuevo y muestra el nombre con la nota más alta. Si hay empate, el que apareció primero.
+      en: |
+        Read a whole number `n` and then `n` lines in the format `name,grade` (whole grade, 0 or greater). Save them in a file,
+        read it back and show the name with the highest grade. If there is a tie, the one that appeared first.
+    starter: |
+      # Escribe tu código aquí / Write your code here
+    reference_solution: |
+      n = int(input())
+      with open("notas.csv", "w") as f:
+          for i in range(n):
+              f.write(input() + "\n")
+
+      mejor = ""
+      mejor_nota = -1
+      with open("notas.csv") as f:
+          for linea in f:
+              nombre, nota = linea.strip().split(",")
+              nota = int(nota)
+              if nota > mejor_nota:
+                  mejor = nombre
+                  mejor_nota = nota
+      print(mejor)
+    tests:
+      - {stdin: "3\nana,7\nluis,9\nbea,9\n", expected_stdout: "luis\n", visible: true}
+      - {stdin: "1\nz,1\n", expected_stdout: "z\n", visible: false}
+      - {stdin: "3\na,5\nb,8\nc,2\n", expected_stdout: "b\n", visible: false}
+    wrong_examples:
+      - code: |
+          n = int(input())
+          with open("notas.csv", "w") as f:
+              for i in range(n):
+                  f.write(input() + "\n")
+
+          mejor = ""
+          mejor_nota = -1
+          with open("notas.csv") as f:
+              for linea in f:
+                  nombre, nota = linea.strip().split(",")
+                  nota = int(nota)
+                  if nota >= mejor_nota:
+                      mejor = nombre
+                      mejor_nota = nota
+          print(mejor)
+        expect_fail_tag: logic.tie_handling
+    hints:
+      - {es: 'Actualiza solo si la nota es estrictamente mayor.', en: 'Update only if the grade is strictly greater.'}
+    explanation:
+      es: 'Con `>=`, un empate reemplazaría al primero por el último.'
+      en: 'With `>=`, a tie would replace the first with the last.'
+
+  - id: py.u10.l02.e10
+    type: write_code
+    difficulty: 4
+    skills: [py.modules, py.dict, py.list, py.strings.methods, py.input]
+    prompt:
+      es: |
+        Lee un entero `n` y luego `n` líneas con el formato `nombre,edad`. Muestra, con `json.dumps`, la lista de diccionarios
+        `{"nombre": ..., "edad": ...}` en el mismo orden, con la edad como número.
+      en: |
+        Read a whole number `n` and then `n` lines in the format `name,age`. Show, with `json.dumps`, the list of dictionaries
+        `{"nombre": ..., "edad": ...}` in the same order, with the age as a number.
+    starter: |
+      import json
+
+      # Escribe tu código aquí / Write your code here
+    reference_solution: |
+      import json
+
+      n = int(input())
+      lista = []
+      for i in range(n):
+          nombre, edad = input().split(",")
+          lista.append({"nombre": nombre, "edad": int(edad)})
+      print(json.dumps(lista))
+    tests:
+      - {stdin: "2\nana,20\nluis,30\n", expected_stdout: "[{\"nombre\": \"ana\", \"edad\": 20}, {\"nombre\": \"luis\", \"edad\": 30}]\n", visible: true}
+      - {stdin: "0\n", expected_stdout: "[]\n", visible: false}
+      - {stdin: "1\nz,5\n", expected_stdout: "[{\"nombre\": \"z\", \"edad\": 5}]\n", visible: false}
+    wrong_examples:
+      - code: |
+          import json
+
+          n = int(input())
+          lista = []
+          for i in range(n):
+              nombre, edad = input().split(",")
+              lista.append({"nombre": nombre, "edad": edad})
+          print(json.dumps(lista))
+        expect_fail_tag: io.input_not_cast
+    hints:
+      - {es: 'Convierte la edad con `int()` antes de guardarla; si no, sería un texto.', en: 'Convert the age with `int()` before storing it; otherwise it would be a text.'}
+    explanation:
+      es: 'Es la conversión CSV → JSON: los números se guardan como números.'
+      en: 'It is the CSV → JSON conversion: numbers are stored as numbers.'

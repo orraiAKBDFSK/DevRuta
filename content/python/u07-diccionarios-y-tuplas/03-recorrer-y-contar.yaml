@@ -1,0 +1,311 @@
+id: py.u07.l03
+language: python
+unit: py.u07
+position: 3
+skills: [py.dict, py.for]
+status: draft
+reviewed_by: []
+title:
+  es: 'Recorrer diccionarios y contar'
+  en: 'Walking through dictionaries and counting'
+explanation:
+  es: |
+    Hay tres formas de recorrer un diccionario:
+
+    ```python
+    notas = {"Ana": 8, "Luis": 6}
+    for nombre in notas:               # solo las claves
+        print(nombre)
+    for valor in notas.values():       # solo los valores
+        print(valor)
+    for nombre, nota in notas.items(): # clave y valor a la vez
+        print(nombre, nota)
+    ```
+
+    Un uso muy frecuente es **contar cuántas veces aparece cada elemento**:
+
+    ```python
+    conteo = {}
+    for x in ["a", "b", "a"]:
+        conteo[x] = conteo.get(x, 0) + 1
+    print(conteo)    # {'a': 2, 'b': 1}
+    ```
+
+    `conteo.get(x, 0)` devuelve 0 la primera vez que aparece `x`, así que no hace falta comprobar si existe.
+  en: |
+    There are three ways to walk through a dictionary:
+
+    ```python
+    notas = {"Ana": 8, "Luis": 6}
+    for nombre in notas:               # keys only
+        print(nombre)
+    for valor in notas.values():       # values only
+        print(valor)
+    for nombre, nota in notas.items(): # key and value at once
+        print(nombre, nota)
+    ```
+
+    A very common use is **counting how many times each element appears**:
+
+    ```python
+    conteo = {}
+    for x in ["a", "b", "a"]:
+        conteo[x] = conteo.get(x, 0) + 1
+    print(conteo)    # {'a': 2, 'b': 1}
+    ```
+
+    `conteo.get(x, 0)` returns 0 the first time `x` appears, so there is no need to check whether it exists.
+exercises:
+  - id: py.u07.l03.e01
+    type: predict_output
+    difficulty: 1
+    skills: [py.dict, py.for]
+    prompt:
+      es: '¿Qué muestra este programa?'
+      en: 'What does this program show?'
+    code: |
+      d = {"a": 1, "b": 2}
+      for k in d:
+          print(k)
+    answer: "a\nb"
+    hints:
+      - {es: 'Recorrer un diccionario da sus claves.', en: 'Walking through a dictionary gives its keys.'}
+    explanation:
+      es: 'Por defecto, `for` recorre las claves, en el orden en que se agregaron.'
+      en: 'By default, `for` walks through the keys, in the order they were added.'
+
+  - id: py.u07.l03.e02
+    type: predict_output
+    difficulty: 1
+    skills: [py.dict, py.for]
+    prompt:
+      es: '¿Qué muestra este programa?'
+      en: 'What does this program show?'
+    code: |
+      d = {"a": 1, "b": 2}
+      for v in d.values():
+          print(v)
+    answer: "1\n2"
+    hints:
+      - {es: '`values()` da solo los valores.', en: '`values()` gives only the values.'}
+    explanation:
+      es: 'Se recorren los valores, no las claves.'
+      en: 'The values are walked through, not the keys.'
+
+  - id: py.u07.l03.e03
+    type: predict_output
+    difficulty: 2
+    skills: [py.dict, py.for, py.tuple]
+    prompt:
+      es: '¿Qué muestra este programa?'
+      en: 'What does this program show?'
+    code: |
+      d = {"a": 1, "b": 2}
+      for k, v in d.items():
+          print(k, v)
+    answer: "a 1\nb 2"
+    hints:
+      - {es: '`items()` entrega pares (clave, valor) que se desempaquetan.', en: '`items()` gives (key, value) pairs that get unpacked.'}
+    explanation:
+      es: 'Cada vuelta recibe una tupla y la desempaqueta en `k` y `v`.'
+      en: 'Each turn receives a tuple and unpacks it into `k` and `v`.'
+
+  - id: py.u07.l03.e04
+    type: predict_output
+    difficulty: 2
+    skills: [py.dict]
+    prompt:
+      es: '¿Qué muestra este programa?'
+      en: 'What does this program show?'
+    code: |
+      print(sum({"a": 1, "b": 2, "c": 3}.values()))
+    answer: "6"
+    hints:
+      - {es: '`sum` puede sumar los valores directamente.', en: '`sum` can add up the values directly.'}
+    explanation:
+      es: '1 + 2 + 3 = 6.'
+      en: '1 + 2 + 3 = 6.'
+
+  - id: py.u07.l03.e05
+    type: predict_output
+    difficulty: 3
+    skills: [py.dict, py.for]
+    prompt:
+      es: '¿Qué muestra este programa?'
+      en: 'What does this program show?'
+    code: |
+      d = {}
+      for x in ["a", "b", "a"]:
+          d[x] = d.get(x, 0) + 1
+      print(d)
+    answer: "{'a': 2, 'b': 1}"
+    hints:
+      - {es: 'Sigue el diccionario vuelta por vuelta.', en: 'Follow the dictionary turn by turn.'}
+    explanation:
+      es: 'La primera `"a"` crea el par con 1; la segunda lo sube a 2.'
+      en: 'The first `"a"` creates the pair with 1; the second raises it to 2.'
+
+  - id: py.u07.l03.e06
+    type: multiple_choice
+    difficulty: 3
+    skills: [py.dict]
+    prompt:
+      es: |
+        ¿Por qué falla este código?
+
+        ```python
+        d = {}
+        d["a"] = d["a"] + 1
+        ```
+      en: |
+        Why does this code fail?
+
+        ```python
+        d = {}
+        d["a"] = d["a"] + 1
+        ```
+    options:
+      - {es: 'Porque `d["a"]` no existe todavía y da un `KeyError`.', en: 'Because `d["a"]` does not exist yet and raises a `KeyError`.'}
+      - {es: 'Porque no se puede sumar a un diccionario.', en: 'Because you cannot add to a dictionary.'}
+      - {es: 'Porque las claves deben ser números.', en: 'Because keys must be numbers.'}
+      - {es: 'No falla.', en: 'It does not fail.'}
+    answer: 0
+    distractor_tags: {1: dict.misconception}
+    hints:
+      - {es: 'Piensa qué valor tiene `d["a"]` antes de la asignación.', en: 'Think about what `d["a"]` is before the assignment.'}
+    explanation:
+      es: 'La solución es `d.get("a", 0) + 1`.'
+      en: 'The fix is `d.get("a", 0) + 1`.'
+
+  - id: py.u07.l03.e07
+    type: write_code
+    difficulty: 3
+    skills: [py.dict, py.for, py.input]
+    prompt:
+      es: 'Lee un entero `n` y luego `n` palabras (una por línea). Muestra un diccionario con cuántas veces aparece cada palabra.'
+      en: 'Read a whole number `n` and then `n` words (one per line). Show a dictionary with how many times each word appears.'
+    starter: |
+      # Escribe tu código aquí / Write your code here
+    reference_solution: |
+      n = int(input())
+      conteo = {}
+      for i in range(n):
+          palabra = input()
+          conteo[palabra] = conteo.get(palabra, 0) + 1
+      print(conteo)
+    tests:
+      - {stdin: "4\na\nb\na\nc\n", expected_stdout: "{'a': 2, 'b': 1, 'c': 1}\n", visible: true}
+      - {stdin: "0\n", expected_stdout: "{}\n", visible: false}
+      - {stdin: "3\nx\nx\nx\n", expected_stdout: "{'x': 3}\n", visible: false}
+    wrong_examples:
+      - code: |
+          n = int(input())
+          conteo = {}
+          for i in range(n):
+              palabra = input()
+              conteo[palabra] = conteo[palabra] + 1
+          print(conteo)
+        expect_fail_tag: dict.keyerror_unhandled
+      - code: |
+          n = int(input())
+          palabras = []
+          for i in range(n):
+              palabras.append(input())
+          print(palabras)
+        expect_fail_tag: logic.wrong_structure
+    hints:
+      - {es: 'Usa `get(palabra, 0) + 1`.', en: 'Use `get(palabra, 0) + 1`.'}
+    explanation:
+      es: 'El patrón de conteo funciona incluso cuando la palabra aparece por primera vez.'
+      en: 'The counting pattern works even when the word appears for the first time.'
+
+  - id: py.u07.l03.e08
+    type: write_code
+    difficulty: 3
+    skills: [py.dict, py.for, py.input]
+    prompt:
+      es: |
+        Lee un entero `n` y luego `n` pares de líneas: un producto (texto) y su precio (entero).
+        Muestra el total de todos los precios.
+      en: |
+        Read a whole number `n` and then `n` pairs of lines: a product (text) and its price (whole number).
+        Show the total of all the prices.
+    starter: |
+      # Escribe tu código aquí / Write your code here
+    reference_solution: |
+      n = int(input())
+      precios = {}
+      for i in range(n):
+          producto = input()
+          precios[producto] = int(input())
+      print(sum(precios.values()))
+    tests:
+      - {stdin: "2\npan\n3\nleche\n5\n", expected_stdout: "8\n", visible: true}
+      - {stdin: "1\nx\n7\n", expected_stdout: "7\n", visible: false}
+      - {stdin: "3\na\n1\nb\n2\nc\n4\n", expected_stdout: "7\n", visible: false}
+    wrong_examples:
+      - code: |
+          n = int(input())
+          precios = {}
+          for i in range(n):
+              producto = input()
+              precios[producto] = int(input())
+          print(len(precios))
+        expect_fail_tag: logic.wrong_operation
+    hints:
+      - {es: '`sum(d.values())` suma todos los valores.', en: '`sum(d.values())` adds up all the values.'}
+    explanation:
+      es: 'Se guardan los pares y luego se suman los valores.'
+      en: 'The pairs are stored and then the values are added up.'
+
+  - id: py.u07.l03.e09
+    type: write_code
+    difficulty: 4
+    skills: [py.dict, py.for, py.if, py.input]
+    prompt:
+      es: |
+        Lee un entero `n` (1 o mayor) y luego `n` palabras (una por línea). Muestra la palabra que más veces aparece.
+        Si hay empate, muestra la que apareció primero.
+      en: |
+        Read a whole number `n` (1 or greater) and then `n` words (one per line). Show the word that appears the most.
+        If there is a tie, show the one that appeared first.
+    starter: |
+      # Escribe tu código aquí / Write your code here
+    reference_solution: |
+      n = int(input())
+      conteo = {}
+      for i in range(n):
+          palabra = input()
+          conteo[palabra] = conteo.get(palabra, 0) + 1
+      mejor = None
+      mejor_cuenta = 0
+      for palabra, cuenta in conteo.items():
+          if cuenta > mejor_cuenta:
+              mejor = palabra
+              mejor_cuenta = cuenta
+      print(mejor)
+    tests:
+      - {stdin: "5\na\nb\na\nc\nb\n", expected_stdout: "a\n", visible: true}
+      - {stdin: "3\nx\ny\ny\n", expected_stdout: "y\n", visible: false}
+      - {stdin: "1\nz\n", expected_stdout: "z\n", visible: false}
+    wrong_examples:
+      - code: |
+          n = int(input())
+          conteo = {}
+          for i in range(n):
+              palabra = input()
+              conteo[palabra] = conteo.get(palabra, 0) + 1
+          mejor = None
+          mejor_cuenta = 0
+          for palabra, cuenta in conteo.items():
+              if cuenta >= mejor_cuenta:
+                  mejor = palabra
+                  mejor_cuenta = cuenta
+          print(mejor)
+        expect_fail_tag: logic.tie_handling
+    hints:
+      - {es: 'Cuenta primero con un diccionario; después busca el mayor recorriéndolo con `items()`.', en: 'Count first with a dictionary; then find the largest by walking through it with `items()`.'}
+      - {es: 'Para quedarte con el primero en un empate, actualiza solo si es estrictamente mayor.', en: 'To keep the first one in a tie, update only if it is strictly greater.'}
+    explanation:
+      es: 'Con `>=` un empate reemplazaría a la palabra anterior por la última.'
+      en: 'With `>=` a tie would replace the earlier word with the last one.'

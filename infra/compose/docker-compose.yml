@@ -1,0 +1,113 @@
+# Entorno de desarrollo local.
+#
+#   docker compose up -d db                 -> solo PostgreSQL (lo habitual: API y web se ejecutan en tu máquina)
+#   docker compose --profile full up --build -> PostgreSQL + API + web en contenedores (prueba de integración local)
+#
+# Las credenciales por defecto son SOLO para desarrollo. Copia .env.example a .env para cambiarlas.
+name: plataforma
+
+services:
+  db:
+    image: postgres:18
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-plataforma}
+      POSTGRES_USER: ${POSTGRES_USER:-plataforma}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-plataforma}
+    ports:
+      # Solo accesible desde tu propia máquina. Si ya tienes PostgreSQL en el 5432, define POSTGRES_PORT en .env.
+      - "127.0.0.1:${POSTGRES_PORT:-5432}:5432"
+    volumes:
+      - db-data:/var/lib/postgresql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  # Servidor SMTP falso para desarrollo: recibe los correos de la aplicación y los muestra en una web
+  # (http://localhost:8025). Nada sale a Internet ni a ningún destinatario real.
+  mailpit:
+    image: axllent/mailpit:v1.31.3
+    ports:
+      - "127.0.0.1:${MAILPIT_SMTP_PORT:-1025}:1025"
+      - "127.0.0.1:${MAILPIT_UI_PORT:-8025}:8025"
+    healthcheck:
+      test: ["CMD", "/mailpit", "readyz"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  api:
+    profiles: ["full"]
+    build:
+      context: ../../apps/api
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/${POSTGRES_DB:-plataforma}
+      SPRING_DATASOURCE_USERNAME: ${POSTGRES_USER:-plataforma}
+      SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD:-plataforma}
+      SPRING_MAIL_HOST: mailpit
+      SPRING_MAIL_PORT: "1025"
+      MAIL_FROM: "Plataforma <no-reply@localhost>"
+      PUBLIC_BASE_URL: http://127.0.0.1:8081
+      # Contenido de las lecciones: se importa al arrancar, incluidas las lecciones en borrador (solo desarrollo).
+      # En producción el estado mínimo es PUBLISHED y el contenido llega por el proceso de despliegue.
+      APP_CONTENT_PATH: /content
+      APP_CONTENT_IMPORT_ON_STARTUP: "true"
+      APP_CONTENT_MIN_STATUS: DRAFT
+      RUNNER_URL: http://runner:8090
+      RUNNER_TOKEN: ${RUNNER_TOKEN:-dev-only-runner-token-change-me}
+    volumes:
+      - ../../content:/content:ro
+    depends_on:
+      runner:
+        condition: service_healthy
+      db:
+        condition: service_healthy
+      mailpit:
+        condition: service_healthy
+    ports:
+      - "127.0.0.1:8080:8080"
+
+  # Construye la imagen del sandbox (intérprete + arnés) y termina. Es una imagen, no un servicio: el runner la lanza
+  # una vez por envío, siempre con red desactivada y sin privilegios (ver apps/runner y docs/adr/0007).
+  sandbox-python:
+    profiles: ["full"]
+    image: plataforma-sandbox-python:local
+    build:
+      context: ../../apps/runner/sandbox
+      dockerfile: Dockerfile.python
+    entrypoint: ["true"]
+    restart: "no"
+
+  # Ejecuta el código de los estudiantes. SOLO DESARROLLO: monta el socket de Docker, que equivale a ser root en la
+  # máquina. No publica ningún puerto: solo la API lo alcanza, con un token. En producción debe ir en una máquina
+  # aparte, con Docker sin root y gVisor (ver docs/adr/0007).
+  runner:
+    profiles: ["full"]
+    build:
+      context: ../../apps/runner
+    environment:
+      RUNNER_TOKEN: ${RUNNER_TOKEN:-dev-only-runner-token-change-me}
+      SANDBOX_IMAGE_PYTHON: plataforma-sandbox-python:local
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    depends_on:
+      sandbox-python:
+        condition: service_completed_successfully
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request,sys; sys.exit(0 if urllib.request.urlopen('http://127.0.0.1:8090/healthz', timeout=4).status == 200 else 1)"]
+      interval: 10s
+      timeout: 5s
+      retries: 6
+
+  web:
+    profiles: ["full"]
+    build:
+      context: ../../apps/web
+    depends_on:
+      - api
+    ports:
+      - "127.0.0.1:8081:80"
+
+volumes:
+  db-data:

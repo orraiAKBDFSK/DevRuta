@@ -1,0 +1,359 @@
+id: py.u10.l03
+language: python
+unit: py.u10
+position: 3
+skills: [py.modules]
+status: draft
+reviewed_by: []
+title:
+  es: 'Módulos y biblioteca estándar'
+  en: 'Modules and the standard library'
+explanation:
+  es: |
+    Un **módulo** es un archivo de Python con funciones y datos listos para usar. Python incluye muchos
+    (la **biblioteca estándar**) y se cargan con `import`:
+
+    ```python
+    import math
+    print(math.sqrt(16))          # 4.0
+    print(math.floor(3.7), math.ceil(3.2))   # 3 4
+
+    from math import pi           # trae solo un nombre
+    print(round(pi, 2))           # 3.14
+
+    from collections import Counter
+    c = Counter("abca")
+    print(c["a"], c["z"])         # 2 0   (cuenta; 0 si no está)
+    print(c.most_common(1))       # [('a', 2)]
+
+    import statistics
+    print(statistics.mean([1, 2, 3, 4]))   # 2.5
+    ```
+
+    - `import modulo` obliga a escribir `modulo.nombre`; `from modulo import nombre` permite usar `nombre` directamente.
+    - Tus propios archivos `.py` también son módulos que puedes importar.
+    - Al final de un archivo suele escribirse `if __name__ == "__main__":` seguido del código que debe ejecutarse **solo cuando
+      el archivo se ejecuta directamente**, no cuando otro archivo lo importa.
+  en: |
+    A **module** is a Python file with functions and data ready to use. Python includes many
+    (the **standard library**) and they are loaded with `import`:
+
+    ```python
+    import math
+    print(math.sqrt(16))          # 4.0
+    print(math.floor(3.7), math.ceil(3.2))   # 3 4
+
+    from math import pi           # brings only one name
+    print(round(pi, 2))           # 3.14
+
+    from collections import Counter
+    c = Counter("abca")
+    print(c["a"], c["z"])         # 2 0   (counts; 0 if absent)
+    print(c.most_common(1))       # [('a', 2)]
+
+    import statistics
+    print(statistics.mean([1, 2, 3, 4]))   # 2.5
+    ```
+
+    - `import module` requires writing `module.name`; `from module import name` lets you use `name` directly.
+    - Your own `.py` files are also modules you can import.
+    - At the end of a file you usually write `if __name__ == "__main__":` followed by the code that must run **only when
+      the file is run directly**, not when another file imports it.
+exercises:
+  - id: py.u10.l03.e01
+    type: predict_output
+    difficulty: 1
+    skills: [py.modules]
+    prompt:
+      es: '¿Qué muestra este programa?'
+      en: 'What does this program show?'
+    code: |
+      import math
+
+      print(math.sqrt(16))
+    answer: "4.0"
+    hints:
+      - {es: 'La raíz cuadrada devuelve siempre un `float`.', en: 'The square root always returns a `float`.'}
+    explanation:
+      es: '`math.sqrt` calcula la raíz cuadrada.'
+      en: '`math.sqrt` computes the square root.'
+
+  - id: py.u10.l03.e02
+    type: predict_output
+    difficulty: 2
+    skills: [py.modules]
+    prompt:
+      es: '¿Qué muestra este programa?'
+      en: 'What does this program show?'
+    code: |
+      import math
+
+      print(math.floor(3.7), math.ceil(3.2))
+    answer: "3 4"
+    hints:
+      - {es: '`floor` redondea hacia abajo y `ceil` hacia arriba.', en: '`floor` rounds down and `ceil` rounds up.'}
+    explanation:
+      es: 'Ambas devuelven enteros.'
+      en: 'Both return whole numbers.'
+
+  - id: py.u10.l03.e03
+    type: predict_output
+    difficulty: 2
+    skills: [py.modules]
+    prompt:
+      es: '¿Qué muestra este programa?'
+      en: 'What does this program show?'
+    code: |
+      from math import pi
+
+      print(round(pi, 2))
+    answer: "3.14"
+    hints:
+      - {es: '`round(x, 2)` redondea a dos decimales.', en: '`round(x, 2)` rounds to two decimals.'}
+    explanation:
+      es: 'Con `from ... import`, `pi` se usa sin escribir `math.`.'
+      en: 'With `from ... import`, `pi` is used without writing `math.`.'
+
+  - id: py.u10.l03.e04
+    type: predict_output
+    difficulty: 3
+    skills: [py.modules, py.dict]
+    prompt:
+      es: '¿Qué muestra este programa?'
+      en: 'What does this program show?'
+    code: |
+      from collections import Counter
+
+      c = Counter("abca")
+      print(c["a"], c["z"])
+    answer: "2 0"
+    hints:
+      - {es: 'Un `Counter` devuelve 0 para lo que no está, en vez de dar `KeyError`.', en: 'A `Counter` returns 0 for what is not there, instead of raising `KeyError`.'}
+    explanation:
+      es: '`Counter` es como el diccionario de conteo de la unidad 7, ya hecho.'
+      en: '`Counter` is like the counting dictionary from unit 7, ready-made.'
+
+  - id: py.u10.l03.e05
+    type: predict_output
+    difficulty: 3
+    skills: [py.modules, py.list]
+    prompt:
+      es: '¿Qué muestra este programa? Escribe la lista tal como la muestra Python.'
+      en: 'What does this program show? Write the list the way Python shows it.'
+    code: |
+      from collections import Counter
+
+      print(Counter("aabbbc").most_common(1))
+    answer: "[('b', 3)]"
+    hints:
+      - {es: '`most_common(1)` da una lista con el par más frecuente.', en: '`most_common(1)` gives a list with the most frequent pair.'}
+    explanation:
+      es: 'Cada par es una tupla `(elemento, cantidad)`.'
+      en: 'Each pair is a tuple `(element, count)`.'
+
+  - id: py.u10.l03.e06
+    type: predict_output
+    difficulty: 2
+    skills: [py.modules]
+    prompt:
+      es: '¿Qué muestra este programa?'
+      en: 'What does this program show?'
+    code: |
+      import statistics
+
+      print(statistics.mean([1, 2, 3, 4]))
+    answer: "2.5"
+    hints:
+      - {es: '`mean` es el promedio.', en: '`mean` is the average.'}
+    explanation:
+      es: 'Equivale a `sum(lista) / len(lista)`.'
+      en: 'It is equivalent to `sum(lista) / len(lista)`.'
+
+  - id: py.u10.l03.e07
+    type: multiple_choice
+    difficulty: 2
+    skills: [py.modules]
+    prompt:
+      es: '¿Para qué sirve `import`?'
+      en: 'What is `import` for?'
+    options:
+      - {es: 'Para usar código ya escrito en otro módulo, sin tener que programarlo de nuevo.', en: 'To use code already written in another module, without programming it again.'}
+      - {es: 'Para leer datos del usuario.', en: 'To read data from the user.'}
+      - {es: 'Para crear un archivo nuevo.', en: 'To create a new file.'}
+      - {es: 'Para repetir un bloque de código.', en: 'To repeat a block of code.'}
+    answer: 0
+    distractor_tags: {1: import.misconception}
+    hints:
+      - {es: 'Piensa en `math`, `json` y `collections`.', en: 'Think of `math`, `json` and `collections`.'}
+    explanation:
+      es: 'Reutilizar código probado es más rápido y más seguro que reescribirlo.'
+      en: 'Reusing tested code is faster and safer than rewriting it.'
+
+  - id: py.u10.l03.e08
+    type: multiple_choice
+    difficulty: 3
+    skills: [py.modules]
+    prompt:
+      es: '¿Qué hace `if __name__ == "__main__":` al final de un archivo?'
+      en: 'What does `if __name__ == "__main__":` do at the end of a file?'
+    options:
+      - {es: 'Ejecuta el código de su bloque solo cuando el archivo se ejecuta directamente, no cuando se importa.', en: 'It runs the code in its block only when the file is run directly, not when imported.'}
+      - {es: 'Impide que el archivo se importe.', en: 'It prevents the file from being imported.'}
+      - {es: 'Ejecuta el código dos veces.', en: 'It runs the code twice.'}
+      - {es: 'Es obligatorio en todos los programas.', en: 'It is required in every program.'}
+    answer: 0
+    distractor_tags: {3: main_guard.misconception}
+    hints:
+      - {es: 'Sirve para que un archivo pueda ser programa y módulo a la vez.', en: 'It lets a file be both a program and a module.'}
+    explanation:
+      es: 'Así otro archivo puede importar tus funciones sin que se ejecute el programa principal.'
+      en: 'That way another file can import your functions without running the main program.'
+
+  - id: py.u10.l03.e09
+    type: fill_code
+    difficulty: 2
+    skills: [py.modules]
+    prompt:
+      es: 'Completa el nombre del módulo para que el programa muestre `5.0`.'
+      en: 'Fill in the module name so the program shows `5.0`.'
+    code: |
+      import ___
+
+      print(math.sqrt(25))
+    blanks:
+      - [math]
+    hints:
+      - {es: 'Es el mismo nombre que se usa antes del punto.', en: 'It is the same name used before the dot.'}
+    explanation:
+      es: 'Sin el `import`, `math` daría un `NameError`.'
+      en: 'Without the `import`, `math` would give a `NameError`.'
+
+  - id: py.u10.l03.e10
+    type: write_code
+    difficulty: 3
+    skills: [py.modules, py.fstring, py.operators, py.input]
+    prompt:
+      es: |
+        Lee cuatro enteros (uno por línea): `x1`, `y1`, `x2`, `y2`. Muestra la distancia entre los puntos
+        `(x1, y1)` y `(x2, y2)` con dos decimales. Usa `math.sqrt`.
+      en: |
+        Read four whole numbers (one per line): `x1`, `y1`, `x2`, `y2`. Show the distance between the points
+        `(x1, y1)` and `(x2, y2)` with two decimals. Use `math.sqrt`.
+    starter: |
+      import math
+
+      # Escribe tu código aquí / Write your code here
+    reference_solution: |
+      import math
+
+      x1 = int(input())
+      y1 = int(input())
+      x2 = int(input())
+      y2 = int(input())
+      d = math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2)
+      print(f"{d:.2f}")
+    tests:
+      - {stdin: "0\n0\n3\n4\n", expected_stdout: "5.00\n", visible: true}
+      - {stdin: "1\n1\n4\n5\n", expected_stdout: "5.00\n", visible: false}
+      - {stdin: "0\n0\n1\n1\n", expected_stdout: "1.41\n", visible: false}
+    wrong_examples:
+      - code: |
+          import math
+
+          x1 = int(input())
+          y1 = int(input())
+          x2 = int(input())
+          y2 = int(input())
+          d = math.sqrt((x2 - x1) + (y2 - y1))
+          print(f"{d:.2f}")
+        expect_fail_tag: logic.wrong_formula
+    hints:
+      - {es: 'Es el teorema de Pitágoras: raíz de (dx² + dy²).', en: 'It is the Pythagorean theorem: root of (dx² + dy²).'}
+    explanation:
+      es: 'Para (0,0) y (1,1), la distancia es √2 ≈ 1.41.'
+      en: 'For (0,0) and (1,1), the distance is √2 ≈ 1.41.'
+
+  - id: py.u10.l03.e11
+    type: write_code
+    difficulty: 3
+    skills: [py.modules, py.dict, py.tuple, py.input]
+    prompt:
+      es: |
+        Lee una línea de palabras separadas por espacios. Usa `Counter` para mostrar la palabra más frecuente y cuántas veces
+        aparece, separadas por un espacio. Si hay empate, la primera que apareció.
+      en: |
+        Read a line of words separated by spaces. Use `Counter` to show the most frequent word and how many times
+        it appears, separated by a space. If there is a tie, the first one that appeared.
+    starter: |
+      from collections import Counter
+
+      # Escribe tu código aquí / Write your code here
+    reference_solution: |
+      from collections import Counter
+
+      palabras = input().split()
+      palabra, veces = Counter(palabras).most_common(1)[0]
+      print(palabra, veces)
+    tests:
+      - {stdin: "a b a c b a\n", expected_stdout: "a 3\n", visible: true}
+      - {stdin: "x y\n", expected_stdout: "x 1\n", visible: false}
+      - {stdin: "z z y y y\n", expected_stdout: "y 3\n", visible: false}
+    wrong_examples:
+      - code: |
+          from collections import Counter
+
+          palabras = input().split()
+          print(len(palabras))
+        expect_fail_tag: logic.wrong_operation
+    hints:
+      - {es: '`most_common(1)[0]` es la tupla `(palabra, veces)`; desempaquétala.', en: '`most_common(1)[0]` is the tuple `(palabra, veces)`; unpack it.'}
+    explanation:
+      es: 'Los empates se resuelven en orden de aparición.'
+      en: 'Ties are resolved in order of appearance.'
+
+  - id: py.u10.l03.e12
+    type: write_code
+    difficulty: 4
+    skills: [py.modules, py.def, py.return, py.fstring, py.input]
+    prompt:
+      es: |
+        Define `area_circulo(r)` que **devuelva** el área de un círculo de radio `r` (usa `math.pi`). Escribe el código principal
+        dentro de `if __name__ == "__main__":`: lee un radio (puede tener decimales) y muestra el área con dos decimales.
+      en: |
+        Define `area_circulo(r)` that **returns** the area of a circle of radius `r` (use `math.pi`). Write the main code
+        inside `if __name__ == "__main__":`: read a radius (it may have decimals) and show the area with two decimals.
+    starter: |
+      import math
+
+      # Escribe tu código aquí / Write your code here
+    reference_solution: |
+      import math
+
+      def area_circulo(r):
+          return math.pi * r ** 2
+
+      if __name__ == "__main__":
+          radio = float(input())
+          print(f"{area_circulo(radio):.2f}")
+    tests:
+      - {stdin: "1\n", expected_stdout: "3.14\n", visible: true}
+      - {stdin: "2\n", expected_stdout: "12.57\n", visible: false}
+      - {stdin: "0\n", expected_stdout: "0.00\n", visible: false}
+    static_checks:
+      - {kind: requires_function, name: area_circulo, returns: true}
+    wrong_examples:
+      - code: |
+          import math
+
+          def area_circulo(r):
+              return math.pi * r
+
+          if __name__ == "__main__":
+              radio = float(input())
+              print(f"{area_circulo(radio):.2f}")
+        expect_fail_tag: logic.wrong_formula
+    hints:
+      - {es: 'Área = π × r².', en: 'Area = π × r².'}
+    explanation:
+      es: 'Separar la función del código principal permite reutilizar la función desde otros archivos.'
+      en: 'Separating the function from the main code lets you reuse the function from other files.'

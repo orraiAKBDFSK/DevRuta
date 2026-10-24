@@ -1,0 +1,385 @@
+id: py.u10.l01
+language: python
+unit: py.u10
+position: 1
+skills: [py.files]
+status: draft
+reviewed_by: []
+title:
+  es: 'Leer y escribir archivos de texto'
+  en: 'Reading and writing text files'
+explanation:
+  es: |
+    Un programa puede guardar datos en un **archivo** y leerlos después. La forma recomendada es `with open(...)`,
+    que cierra el archivo automáticamente al terminar el bloque:
+
+    ```python
+    with open("notas.txt", "w") as f:     # "w" = escribir (borra lo anterior)
+        f.write("uno\ndos\n")             # hay que poner \n para cambiar de línea
+
+    with open("notas.txt") as f:          # modo "r" (leer) por defecto
+        print(f.read())                   # todo el contenido como un texto
+
+    with open("notas.txt") as f:
+        for linea in f:                   # una línea por vuelta
+            print(linea.strip())          # strip() quita el \n final
+    ```
+
+    | Modo | Qué hace |
+    |---|---|
+    | `"r"` | leer (falla con `FileNotFoundError` si no existe) |
+    | `"w"` | escribir; **borra** el contenido anterior o crea el archivo |
+    | `"a"` | agregar al final; crea el archivo si no existe |
+
+    Otros métodos útiles: `f.readlines()` (lista de líneas) y `f.readline()` (una línea).
+  en: |
+    A program can save data in a **file** and read it later. The recommended way is `with open(...)`,
+    which closes the file automatically at the end of the block:
+
+    ```python
+    with open("notas.txt", "w") as f:     # "w" = write (erases what was there)
+        f.write("uno\ndos\n")             # you must add \n to change line
+
+    with open("notas.txt") as f:          # mode "r" (read) by default
+        print(f.read())                   # the whole content as one text
+
+    with open("notas.txt") as f:
+        for linea in f:                   # one line per turn
+            print(linea.strip())          # strip() removes the trailing \n
+    ```
+
+    | Mode | What it does |
+    |---|---|
+    | `"r"` | read (fails with `FileNotFoundError` if it does not exist) |
+    | `"w"` | write; **erases** the previous content or creates the file |
+    | `"a"` | append at the end; creates the file if it does not exist |
+
+    Other useful methods: `f.readlines()` (list of lines) and `f.readline()` (one line).
+exercises:
+  - id: py.u10.l01.e01
+    type: predict_output
+    difficulty: 1
+    skills: [py.files]
+    prompt:
+      es: '¿Qué muestra este programa?'
+      en: 'What does this program show?'
+    code: |
+      with open("a.txt", "w") as f:
+          f.write("hola")
+
+      with open("a.txt") as f:
+          print(f.read())
+    answer: "hola"
+    hints:
+      - {es: 'Primero se escribe el archivo y después se lee.', en: 'First the file is written and then read.'}
+    explanation:
+      es: 'Lo que se escribe con `"w"` se puede leer después con `read()`.'
+      en: 'What is written with `"w"` can be read later with `read()`.'
+
+  - id: py.u10.l01.e02
+    type: predict_output
+    difficulty: 2
+    skills: [py.files]
+    prompt:
+      es: '¿Qué muestra este programa? Escribe las dos líneas.'
+      en: 'What does this program show? Write both lines.'
+    code: |
+      with open("a.txt", "w") as f:
+          f.write("uno\ndos\n")
+
+      with open("a.txt") as f:
+          for linea in f:
+              print(linea.strip())
+    answer: "uno\ndos"
+    hints:
+      - {es: 'Cada línea del archivo termina con `\n`.', en: 'Each line of the file ends with `\n`.'}
+    explanation:
+      es: '`strip()` quita ese `\n`, y `print` agrega el suyo.'
+      en: '`strip()` removes that `\n`, and `print` adds its own.'
+
+  - id: py.u10.l01.e03
+    type: predict_output
+    difficulty: 2
+    skills: [py.files]
+    prompt:
+      es: '¿Qué muestra este programa? Escribe la lista tal como la muestra Python.'
+      en: 'What does this program show? Write the list the way Python shows it.'
+    code: |
+      with open("a.txt", "w") as f:
+          f.write("a\n")
+
+      with open("a.txt", "a") as f:
+          f.write("b\n")
+
+      with open("a.txt") as f:
+          print(f.read().split())
+    answer: "['a', 'b']"
+    hints:
+      - {es: 'El modo `"a"` agrega al final sin borrar.', en: 'Mode `"a"` appends at the end without erasing.'}
+    explanation:
+      es: 'El archivo contiene `a`, salto de línea, `b`, salto de línea; `split()` los separa.'
+      en: 'The file contains `a`, a line break, `b`, a line break; `split()` separates them.'
+
+  - id: py.u10.l01.e04
+    type: predict_output
+    difficulty: 2
+    skills: [py.files, py.list]
+    prompt:
+      es: '¿Qué muestra este programa?'
+      en: 'What does this program show?'
+    code: |
+      with open("a.txt", "w") as f:
+          f.write("x\ny\nz\n")
+
+      with open("a.txt") as f:
+          print(len(f.readlines()))
+    answer: "3"
+    hints:
+      - {es: '`readlines()` devuelve una lista con una línea por elemento.', en: '`readlines()` returns a list with one line per element.'}
+    explanation:
+      es: 'Tres líneas, tres elementos.'
+      en: 'Three lines, three elements.'
+
+  - id: py.u10.l01.e05
+    type: multiple_choice
+    difficulty: 2
+    skills: [py.files]
+    prompt:
+      es: '¿Cuál es la diferencia entre abrir un archivo con `"w"` y con `"a"`?'
+      en: 'What is the difference between opening a file with `"w"` and with `"a"`?'
+    options:
+      - {es: '`"w"` borra el contenido anterior; `"a"` agrega al final.', en: '`"w"` erases the previous content; `"a"` appends at the end.'}
+      - {es: '`"w"` agrega al final; `"a"` borra el contenido anterior.', en: '`"w"` appends at the end; `"a"` erases the previous content.'}
+      - {es: 'No hay diferencia.', en: 'There is no difference.'}
+      - {es: '`"a"` solo funciona con números.', en: '`"a"` only works with numbers.'}
+    answer: 0
+    distractor_tags: {1: file.mode_confusion, 2: file.mode_confusion}
+    hints:
+      - {es: '"a" viene de "append" (agregar).', en: '"a" comes from "append".'}
+    explanation:
+      es: 'Abrir con `"w"` un archivo importante por error puede borrar sus datos.'
+      en: 'Opening an important file with `"w"` by mistake can erase its data.'
+
+  - id: py.u10.l01.e06
+    type: multiple_choice
+    difficulty: 2
+    skills: [py.files]
+    prompt:
+      es: |
+        ¿Qué contiene el archivo después de este programa?
+
+        ```python
+        with open("a.txt", "w") as f:
+            f.write("a")
+            f.write("b")
+        ```
+      en: |
+        What does the file contain after this program?
+
+        ```python
+        with open("a.txt", "w") as f:
+            f.write("a")
+            f.write("b")
+        ```
+    options:
+      - {es: '`ab`, en una sola línea.', en: '`ab`, on a single line.'}
+      - {es: '`a` y `b` en dos líneas.', en: '`a` and `b` on two lines.'}
+      - {es: 'Solo `b`.', en: 'Only `b`.'}
+      - {es: 'Está vacío.', en: 'It is empty.'}
+    answer: 0
+    distractor_tags: {1: file.newline_missing}
+    hints:
+      - {es: '`write` no agrega saltos de línea por sí solo.', en: '`write` does not add line breaks on its own.'}
+    explanation:
+      es: 'Para separar líneas hay que escribir `"\n"` explícitamente.'
+      en: 'To separate lines you must write `"\n"` explicitly.'
+
+  - id: py.u10.l01.e07
+    type: fill_code
+    difficulty: 2
+    skills: [py.files]
+    prompt:
+      es: 'Completa el modo para que se cree el archivo y el programa muestre `x`.'
+      en: 'Fill in the mode so the file is created and the program shows `x`.'
+    code: |
+      with open("n.txt", "___") as f:
+          f.write("x")
+
+      with open("n.txt") as f:
+          print(f.read())
+    blanks:
+      - ["w", "a"]
+    hints:
+      - {es: 'Hay que abrirlo para escribir.', en: 'It must be opened for writing.'}
+    explanation:
+      es: 'Con `"w"` o `"a"` el archivo se crea si no existe.'
+      en: 'With `"w"` or `"a"` the file is created if it does not exist.'
+
+  - id: py.u10.l01.e08
+    type: write_code
+    difficulty: 3
+    skills: [py.files, py.for, py.strings.methods, py.input]
+    prompt:
+      es: |
+        Lee un entero `n` y luego `n` líneas de texto. Guárdalas en el archivo `datos.txt` (una por línea),
+        vuelve a abrirlo y muestra cada línea en mayúsculas.
+      en: |
+        Read a whole number `n` and then `n` lines of text. Save them in the file `datos.txt` (one per line),
+        open it again and show each line in uppercase.
+    starter: |
+      # Escribe tu código aquí / Write your code here
+    reference_solution: |
+      n = int(input())
+      with open("datos.txt", "w") as f:
+          for i in range(n):
+              f.write(input() + "\n")
+
+      with open("datos.txt") as f:
+          for linea in f:
+              print(linea.strip().upper())
+    tests:
+      - {stdin: "2\nhola\nmundo\n", expected_stdout: "HOLA\nMUNDO\n", visible: true}
+      - {stdin: "1\nabc def\n", expected_stdout: "ABC DEF\n", visible: false}
+      - {stdin: "0\n", expected_stdout: "", visible: false}
+    wrong_examples:
+      - code: |
+          n = int(input())
+          with open("datos.txt", "w") as f:
+              for i in range(n):
+                  f.write(input() + "\n")
+
+          with open("datos.txt") as f:
+              for linea in f:
+                  print(linea.strip())
+        expect_fail_tag: logic.missing_step
+    hints:
+      - {es: 'Al escribir, agrega `"\n"` a cada línea.', en: 'When writing, add `"\n"` to each line.'}
+      - {es: 'Al leer, usa `strip()` para quitar el salto de línea sobrante.', en: 'When reading, use `strip()` to remove the extra line break.'}
+    explanation:
+      es: 'Sin `strip()`, `print` agregaría una línea en blanco tras cada línea.'
+      en: 'Without `strip()`, `print` would add a blank line after each line.'
+
+  - id: py.u10.l01.e09
+    type: write_code
+    difficulty: 3
+    skills: [py.files, py.try]
+    prompt:
+      es: |
+        Intenta abrir y mostrar el archivo `no_existe.txt`. Como no existe, el programa no debe caerse:
+        debe mostrar `no existe`.
+      en: |
+        Try to open and show the file `no_existe.txt`. Since it does not exist, the program must not crash:
+        it must show `no existe`.
+    starter: |
+      # Escribe tu código aquí / Write your code here
+    reference_solution: |
+      try:
+          with open("no_existe.txt") as f:
+              print(f.read())
+      except FileNotFoundError:
+          print("no existe")
+    tests:
+      - {stdin: "", expected_stdout: "no existe\n", visible: true}
+    wrong_examples:
+      - code: |
+          with open("no_existe.txt") as f:
+              print(f.read())
+        expect_fail_tag: try.missing
+    hints:
+      - {es: 'El error que buscas se llama `FileNotFoundError`.', en: 'The error you are looking for is called `FileNotFoundError`.'}
+    explanation:
+      es: 'Abrir un archivo es una operación que puede fallar, así que conviene protegerla con `try`.'
+      en: 'Opening a file is an operation that can fail, so it is worth protecting with `try`.'
+
+  - id: py.u10.l01.e10
+    type: write_code
+    difficulty: 3
+    skills: [py.files, py.list, py.input]
+    prompt:
+      es: |
+        Lee un entero `n` (1 o mayor) y luego `n` entradas de texto. Agrégalas, una por línea, al archivo `log.txt`
+        (ábrelo con modo `"a"`). Después lee el archivo y muestra la cantidad de líneas y la última, separadas por un espacio.
+      en: |
+        Read a whole number `n` (1 or greater) and then `n` text entries. Append them, one per line, to the file `log.txt`
+        (open it with mode `"a"`). Then read the file and show the number of lines and the last one, separated by a space.
+    starter: |
+      # Escribe tu código aquí / Write your code here
+    reference_solution: |
+      n = int(input())
+      with open("log.txt", "a") as f:
+          for i in range(n):
+              f.write(input() + "\n")
+
+      lineas = []
+      with open("log.txt") as f:
+          for linea in f:
+              lineas.append(linea.strip())
+      print(len(lineas), lineas[-1])
+    tests:
+      - {stdin: "3\na\nb\nc\n", expected_stdout: "3 c\n", visible: true}
+      - {stdin: "1\nsolo\n", expected_stdout: "1 solo\n", visible: false}
+    wrong_examples:
+      - code: |
+          n = int(input())
+          with open("log.txt", "a") as f:
+              for i in range(n):
+                  f.write(input())
+
+          lineas = []
+          with open("log.txt") as f:
+              for linea in f:
+                  lineas.append(linea.strip())
+          print(len(lineas), lineas[-1])
+        expect_fail_tag: file.newline_missing
+    hints:
+      - {es: 'Si no escribes `"\n"`, todo quedará en una sola línea.', en: 'If you do not write `"\n"`, everything ends up on a single line.'}
+    explanation:
+      es: 'El modo `"a"` es el habitual para archivos de registro (*logs*).'
+      en: 'Mode `"a"` is the usual one for log files.'
+
+  - id: py.u10.l01.e11
+    type: write_code
+    difficulty: 3
+    skills: [py.files, py.strings.methods, py.input]
+    prompt:
+      es: |
+        Lee un entero `n` y luego `n` líneas de texto. Guárdalas en un archivo, léelas de nuevo
+        y muestra cuántas palabras hay en total.
+      en: |
+        Read a whole number `n` and then `n` lines of text. Save them in a file, read them back
+        and show how many words there are in total.
+    starter: |
+      # Escribe tu código aquí / Write your code here
+    reference_solution: |
+      n = int(input())
+      with open("texto.txt", "w") as f:
+          for i in range(n):
+              f.write(input() + "\n")
+
+      palabras = 0
+      with open("texto.txt") as f:
+          for linea in f:
+              palabras = palabras + len(linea.split())
+      print(palabras)
+    tests:
+      - {stdin: "2\nhola mundo\nadios\n", expected_stdout: "3\n", visible: true}
+      - {stdin: "1\na b c d\n", expected_stdout: "4\n", visible: false}
+      - {stdin: "0\n", expected_stdout: "0\n", visible: false}
+    wrong_examples:
+      - code: |
+          n = int(input())
+          with open("texto.txt", "w") as f:
+              for i in range(n):
+                  f.write(input() + "\n")
+
+          lineas = 0
+          with open("texto.txt") as f:
+              for linea in f:
+                  lineas = lineas + 1
+          print(lineas)
+        expect_fail_tag: logic.wrong_operation
+    hints:
+      - {es: 'Cuenta las palabras de cada línea con `len(linea.split())`.', en: 'Count the words of each line with `len(linea.split())`.'}
+    explanation:
+      es: 'Un acumulador sobre las líneas del archivo suma las palabras de cada una.'
+      en: 'An accumulator over the lines of the file adds up the words of each one.'

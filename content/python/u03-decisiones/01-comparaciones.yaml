@@ -1,0 +1,184 @@
+id: py.u03.l01
+language: python
+unit: py.u03
+position: 1
+skills: [py.compare]
+status: draft
+reviewed_by: []
+title:
+  es: 'Comparar valores'
+  en: 'Comparing values'
+explanation:
+  es: |
+    Una **comparación** hace una pregunta y responde `True` (verdadero) o `False` (falso):
+
+    | Operador | Pregunta | Ejemplo | Resultado |
+    |---|---|---|---|
+    | `==` | ¿son iguales? | `4 == 4` | `True` |
+    | `!=` | ¿son distintos? | `4 != 4` | `False` |
+    | `<` `>` | ¿menor? ¿mayor? | `3 < 5` | `True` |
+    | `<=` `>=` | ¿menor o igual? ¿mayor o igual? | `5 >= 5` | `True` |
+
+    Cuidado: `=` **guarda** un valor y `==` **compara**. El resultado de una comparación es un `bool`.
+  en: |
+    A **comparison** asks a question and answers `True` or `False`:
+
+    | Operator | Question | Example | Result |
+    |---|---|---|---|
+    | `==` | are they equal? | `4 == 4` | `True` |
+    | `!=` | are they different? | `4 != 4` | `False` |
+    | `<` `>` | smaller? bigger? | `3 < 5` | `True` |
+    | `<=` `>=` | smaller or equal? bigger or equal? | `5 >= 5` | `True` |
+
+    Careful: `=` **stores** a value and `==` **compares**. The result of a comparison is a `bool`.
+exercises:
+  - id: py.u03.l01.e01
+    type: predict_output
+    difficulty: 1
+    skills: [py.compare]
+    prompt:
+      es: '¿Qué muestra este programa?'
+      en: 'What does this program show?'
+    code: |
+      print(5 > 3)
+    answer: "True"
+    hints:
+      - {es: '¿Es 5 mayor que 3?', en: 'Is 5 greater than 3?'}
+    explanation:
+      es: 'La comparación es cierta, así que el resultado es `True`.'
+      en: 'The comparison is true, so the result is `True`.'
+
+  - id: py.u03.l01.e02
+    type: predict_output
+    difficulty: 1
+    skills: [py.compare]
+    prompt:
+      es: '¿Qué muestra este programa?'
+      en: 'What does this program show?'
+    code: |
+      print(4 == 5)
+    answer: "False"
+    hints:
+      - {es: '`==` pregunta si ambos valores son iguales.', en: '`==` asks whether both values are equal.'}
+    explanation:
+      es: '4 y 5 no son iguales.'
+      en: '4 and 5 are not equal.'
+
+  - id: py.u03.l01.e03
+    type: multiple_choice
+    difficulty: 2
+    skills: [py.compare, py.variables]
+    prompt:
+      es: '¿Cuál es la diferencia entre `=` y `==`?'
+      en: 'What is the difference between `=` and `==`?'
+    options:
+      - {es: '`=` guarda un valor y `==` compara dos valores.', en: '`=` stores a value and `==` compares two values.'}
+      - {es: '`=` compara y `==` guarda.', en: '`=` compares and `==` stores.'}
+      - {es: 'Son lo mismo.', en: 'They are the same.'}
+      - {es: '`==` solo sirve con texto.', en: '`==` only works with text.'}
+    answer: 0
+    distractor_tags: {1: logic.assign_vs_compare, 2: logic.assign_vs_compare}
+    hints:
+      - {es: 'Una es una orden y la otra es una pregunta.', en: 'One is an order and the other is a question.'}
+    explanation:
+      es: '`x = 5` guarda; `x == 5` pregunta si x vale 5.'
+      en: '`x = 5` stores; `x == 5` asks whether x is 5.'
+
+  - id: py.u03.l01.e04
+    type: predict_output
+    difficulty: 2
+    skills: [py.compare]
+    prompt:
+      es: '¿Qué muestra este programa?'
+      en: 'What does this program show?'
+    code: |
+      print(3 != 3)
+    answer: "False"
+    hints:
+      - {es: '`!=` significa "distinto de".', en: '`!=` means "different from".'}
+    explanation:
+      es: '3 es igual a 3, por lo tanto NO son distintos.'
+      en: '3 equals 3, so they are NOT different.'
+
+  - id: py.u03.l01.e05
+    type: fill_code
+    difficulty: 2
+    skills: [py.compare]
+    prompt:
+      es: 'Completa el operador para que el programa muestre `True`.'
+      en: 'Fill in the operator so the program shows `True`.'
+    code: |
+      print(10 ___ 10)
+    blanks:
+      - [">=", "<=", "=="]
+    hints:
+      - {es: 'Los dos valores son iguales.', en: 'Both values are equal.'}
+    explanation:
+      es: 'Con valores iguales funcionan `==`, `>=` y `<=`.'
+      en: 'With equal values `==`, `>=` and `<=` all work.'
+
+  - id: py.u03.l01.e06
+    type: predict_output
+    difficulty: 2
+    skills: [py.compare, py.strings.basic]
+    prompt:
+      es: '¿Qué muestra este programa? Fíjate en las mayúsculas.'
+      en: 'What does this program show? Mind the capital letters.'
+    code: |
+      print("a" == "A")
+    answer: "False"
+    hints:
+      - {es: 'Para Python, mayúscula y minúscula son caracteres distintos.', en: 'For Python, capital and lowercase are different characters.'}
+    explanation:
+      es: 'Los textos se comparan carácter por carácter, distinguiendo mayúsculas.'
+      en: 'Text is compared character by character, and case matters.'
+
+  - id: py.u03.l01.e07
+    type: write_code
+    difficulty: 2
+    skills: [py.compare, py.input]
+    prompt:
+      es: |
+        Lee una edad (entero) y muestra `True` si es mayor o igual a 18, o `False` si no.
+      en: |
+        Read an age (whole number) and show `True` if it is 18 or more, or `False` otherwise.
+    starter: |
+      # Escribe tu código aquí / Write your code here
+    reference_solution: |
+      edad = int(input())
+      print(edad >= 18)
+    tests:
+      - {stdin: "20\n", expected_stdout: "True\n", visible: true}
+      - {stdin: "18\n", expected_stdout: "True\n", visible: false}
+      - {stdin: "17\n", expected_stdout: "False\n", visible: false}
+    wrong_examples:
+      - code: |
+          edad = int(input())
+          print(edad > 18)
+        expect_fail_tag: logic.off_by_one
+      - code: |
+          edad = int(input())
+          print(edad == 18)
+        expect_fail_tag: logic.wrong_operator
+    hints:
+      - {es: 'Puedes pasarle una comparación directamente a print.', en: 'You can pass a comparison directly to print.'}
+      - {es: '"Mayor o igual" incluye al 18.', en: '"Greater or equal" includes 18.'}
+    explanation:
+      es: 'Con `>` el 18 daría `False`; el límite exacto es un error muy común.'
+      en: 'With `>` the value 18 would give `False`; the exact boundary is a very common mistake.'
+
+  - id: py.u03.l01.e08
+    type: predict_output
+    difficulty: 2
+    skills: [py.compare, py.types.basic]
+    prompt:
+      es: '¿Qué muestra este programa?'
+      en: 'What does this program show?'
+    code: |
+      print(type(3 < 4))
+    answer: "<class 'bool'>"
+    hints:
+      - {es: 'Una comparación devuelve verdadero o falso.', en: 'A comparison returns true or false.'}
+    explanation:
+      es: 'El resultado de comparar es un valor de tipo `bool`.'
+      en: 'The result of comparing is a value of type `bool`.'

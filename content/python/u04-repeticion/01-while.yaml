@@ -1,0 +1,286 @@
+id: py.u04.l01
+language: python
+unit: py.u04
+position: 1
+skills: [py.while]
+status: draft
+reviewed_by: []
+title:
+  es: 'Repetir con while'
+  en: 'Repeating with while'
+explanation:
+  es: |
+    `while` repite un bloque **mientras** la condición sea `True`:
+
+    ```python
+    i = 1
+    while i <= 3:
+        print(i)
+        i = i + 1
+    ```
+
+    Muestra `1`, `2` y `3`. Un bucle correcto necesita tres cosas:
+
+    1. Una variable que **empiece** con un valor (`i = 1`).
+    2. Una condición que se **revise** en cada vuelta (`i <= 3`).
+    3. Algo dentro del bloque que **cambie** esa variable (`i = i + 1`).
+
+    Si olvidas el paso 3, la condición nunca deja de ser `True` y el programa no termina (**bucle infinito**).
+  en: |
+    `while` repeats a block **as long as** the condition is `True`:
+
+    ```python
+    i = 1
+    while i <= 3:
+        print(i)
+        i = i + 1
+    ```
+
+    It shows `1`, `2` and `3`. A correct loop needs three things:
+
+    1. A variable that **starts** with a value (`i = 1`).
+    2. A condition that is **checked** on every turn (`i <= 3`).
+    3. Something inside the block that **changes** that variable (`i = i + 1`).
+
+    If you forget step 3, the condition never stops being `True` and the program never ends (an **infinite loop**).
+exercises:
+  - id: py.u04.l01.e01
+    type: predict_output
+    difficulty: 1
+    skills: [py.while]
+    prompt:
+      es: '¿Qué muestra este programa?'
+      en: 'What does this program show?'
+    code: |
+      i = 1
+      while i <= 3:
+          print(i)
+          i = i + 1
+    answer: "1\n2\n3"
+    hints:
+      - {es: 'Sigue el valor de `i` vuelta por vuelta.', en: 'Follow the value of `i` turn by turn.'}
+    explanation:
+      es: 'El bucle se detiene cuando `i` vale 4, porque `4 <= 3` es `False`.'
+      en: 'The loop stops when `i` is 4, because `4 <= 3` is `False`.'
+
+  - id: py.u04.l01.e02
+    type: predict_output
+    difficulty: 2
+    skills: [py.while]
+    prompt:
+      es: '¿Qué muestra este programa?'
+      en: 'What does this program show?'
+    code: |
+      n = 0
+      while n < 3:
+          n = n + 1
+      print(n)
+    answer: "3"
+    hints:
+      - {es: 'El `print` está fuera del bucle.', en: 'The `print` is outside the loop.'}
+    explanation:
+      es: 'El bucle sube `n` hasta 3 y solo después se ejecuta el `print`, una única vez.'
+      en: 'The loop raises `n` to 3 and only then does the `print` run, just once.'
+
+  - id: py.u04.l01.e03
+    type: multiple_choice
+    difficulty: 2
+    skills: [py.while]
+    prompt:
+      es: |
+        ¿Por qué este programa nunca termina?
+
+        ```python
+        i = 1
+        while i <= 3:
+            print(i)
+        ```
+      en: |
+        Why does this program never end?
+
+        ```python
+        i = 1
+        while i <= 3:
+            print(i)
+        ```
+    options:
+      - {es: 'Porque `i` nunca cambia, así que la condición siempre es `True`.', en: 'Because `i` never changes, so the condition is always `True`.'}
+      - {es: 'Porque `print` no se puede usar dentro de un `while`.', en: 'Because `print` cannot be used inside a `while`.'}
+      - {es: 'Porque falta un `else`.', en: 'Because an `else` is missing.'}
+      - {es: 'Porque 3 es un número demasiado pequeño.', en: 'Because 3 is too small a number.'}
+    answer: 0
+    distractor_tags: {2: syntax.else_not_required}
+    hints:
+      - {es: '¿Qué línea cambia el valor de `i`?', en: 'Which line changes the value of `i`?'}
+    explanation:
+      es: 'Falta `i = i + 1`. Sin ella, `i` siempre vale 1 y el bucle es infinito.'
+      en: '`i = i + 1` is missing. Without it, `i` is always 1 and the loop is infinite.'
+
+  - id: py.u04.l01.e04
+    type: fill_code
+    difficulty: 2
+    skills: [py.while, py.compare]
+    prompt:
+      es: 'Completa la condición para que el programa cuente de 5 a 1 (sin mostrar el 0).'
+      en: 'Fill in the condition so the program counts from 5 to 1 (without showing 0).'
+    code: |
+      i = 5
+      while i ___ 0:
+          print(i)
+          i = i - 1
+    blanks:
+      - [">"]
+    hints:
+      - {es: 'Debe seguir mientras `i` sea mayor que cero.', en: 'It must keep going while `i` is greater than zero.'}
+    explanation:
+      es: 'Con `>=` también se mostraría el 0.'
+      en: 'With `>=` the 0 would be shown too.'
+
+  - id: py.u04.l01.e05
+    type: order_lines
+    difficulty: 3
+    skills: [py.while]
+    prompt:
+      es: 'Ordena las líneas para que el programa cuente hacia atrás de 3 a 1 y luego muestre `fin`.'
+      en: 'Order the lines so the program counts down from 3 to 1 and then shows `fin`.'
+    lines:
+      - 'n = 3'
+      - 'while n > 0:'
+      - '    print(n)'
+      - '    n = n - 1'
+      - 'print("fin")'
+    hints:
+      - {es: 'El `print("fin")` no está indentado.', en: 'The `print("fin")` is not indented.'}
+    explanation:
+      es: 'Lo que está indentado se repite; lo que no, se ejecuta una vez al terminar el bucle.'
+      en: 'What is indented repeats; what is not runs once when the loop ends.'
+
+  - id: py.u04.l01.e06
+    type: write_code
+    difficulty: 2
+    skills: [py.while, py.input, py.compare]
+    prompt:
+      es: 'Lee un entero `n` y muestra los números del 1 al `n`, uno por línea. Si `n` es 0, no muestres nada.'
+      en: 'Read a whole number `n` and show the numbers from 1 to `n`, one per line. If `n` is 0, show nothing.'
+    starter: |
+      # Escribe tu código aquí / Write your code here
+    reference_solution: |
+      n = int(input())
+      i = 1
+      while i <= n:
+          print(i)
+          i = i + 1
+    tests:
+      - {stdin: "3\n", expected_stdout: "1\n2\n3\n", visible: true}
+      - {stdin: "1\n", expected_stdout: "1\n", visible: false}
+      - {stdin: "0\n", expected_stdout: "", visible: false}
+    wrong_examples:
+      - code: |
+          n = int(input())
+          i = 0
+          while i <= n:
+              print(i)
+              i = i + 1
+        expect_fail_tag: logic.off_by_one
+      - code: |
+          n = int(input())
+          i = 1
+          while i < n:
+              print(i)
+              i = i + 1
+        expect_fail_tag: logic.off_by_one
+    hints:
+      - {es: 'Empieza `i` en 1 y avanza de uno en uno.', en: 'Start `i` at 1 and advance one at a time.'}
+      - {es: 'La condición debe incluir a `n`.', en: 'The condition must include `n`.'}
+    explanation:
+      es: 'Los errores de uno de más o de menos son los más frecuentes en los bucles.'
+      en: 'Off-by-one errors are the most frequent ones in loops.'
+
+  - id: py.u04.l01.e07
+    type: write_code
+    difficulty: 3
+    skills: [py.while, py.input, py.operators]
+    prompt:
+      es: 'Lee un entero `n` y muestra la suma de los números del 1 al `n`. Usa una variable acumuladora.'
+      en: 'Read a whole number `n` and show the sum of the numbers from 1 to `n`. Use an accumulator variable.'
+    starter: |
+      # Escribe tu código aquí / Write your code here
+    reference_solution: |
+      n = int(input())
+      total = 0
+      i = 1
+      while i <= n:
+          total = total + i
+          i = i + 1
+      print(total)
+    tests:
+      - {stdin: "4\n", expected_stdout: "10\n", visible: true}
+      - {stdin: "10\n", expected_stdout: "55\n", visible: false}
+      - {stdin: "1\n", expected_stdout: "1\n", visible: false}
+    wrong_examples:
+      - code: |
+          n = int(input())
+          total = 0
+          i = 1
+          while i < n:
+              total = total + i
+              i = i + 1
+          print(total)
+        expect_fail_tag: logic.off_by_one
+      - code: |
+          n = int(input())
+          total = 0
+          i = 1
+          while i <= n:
+              total = total + i
+              i = i + 1
+              print(total)
+        expect_fail_tag: logic.print_inside_loop
+    hints:
+      - {es: 'Crea `total = 0` antes del bucle y súmale `i` en cada vuelta.', en: 'Create `total = 0` before the loop and add `i` to it on every turn.'}
+      - {es: 'Muestra el resultado después del bucle, no dentro.', en: 'Show the result after the loop, not inside it.'}
+    explanation:
+      es: 'Un acumulador es una variable que va creciendo vuelta tras vuelta.'
+      en: 'An accumulator is a variable that grows turn after turn.'
+
+  - id: py.u04.l01.e08
+    type: write_code
+    difficulty: 3
+    skills: [py.while, py.input]
+    prompt:
+      es: 'Lee números enteros (uno por línea) hasta que llegue un `0`. Muestra la suma de todos los leídos antes del 0.'
+      en: 'Read whole numbers (one per line) until a `0` arrives. Show the sum of all those read before the 0.'
+    starter: |
+      # Escribe tu código aquí / Write your code here
+    reference_solution: |
+      total = 0
+      n = int(input())
+      while n != 0:
+          total = total + n
+          n = int(input())
+      print(total)
+    tests:
+      - {stdin: "3\n4\n0\n", expected_stdout: "7\n", visible: true}
+      - {stdin: "0\n", expected_stdout: "0\n", visible: false}
+      - {stdin: "5\n-2\n10\n0\n", expected_stdout: "13\n", visible: false}
+    wrong_examples:
+      - code: |
+          total = 0
+          n = int(input())
+          while n != 0:
+              total = total + n
+          print(total)
+        expect_fail_tag: loop.infinite
+      - code: |
+          total = 0
+          n = int(input())
+          while n > 0:
+              total = total + n
+              n = int(input())
+          print(total)
+        expect_fail_tag: logic.wrong_condition
+    hints:
+      - {es: 'Lee un primer número antes del bucle y otro al final de cada vuelta.', en: 'Read a first number before the loop and another at the end of each turn.'}
+    explanation:
+      es: 'Dentro del bucle hay que leer el siguiente dato; si no, `n` nunca cambia y el bucle no termina.'
+      en: 'Inside the loop you must read the next value; otherwise `n` never changes and the loop never ends.'

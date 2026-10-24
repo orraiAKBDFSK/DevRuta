@@ -1,0 +1,222 @@
+id: py.u03.l05
+language: python
+unit: py.u03
+position: 5
+skills: [py.compare, py.bool, py.if]
+status: draft
+reviewed_by: []
+title:
+  es: 'Repaso y mini-programas'
+  en: 'Review and mini programs'
+explanation:
+  es: |
+    Repaso de comparaciones, `and`/`or`/`not`, `if`, `elif` y `else`.
+    Los últimos ejercicios son programas completos con varios casos límite: pruébalos con cuidado.
+  en: |
+    Review of comparisons, `and`/`or`/`not`, `if`, `elif` and `else`.
+    The last exercises are complete programs with several boundary cases: test them carefully.
+exercises:
+  - id: py.u03.l05.e01
+    type: predict_output
+    difficulty: 2
+    skills: [py.bool, py.compare]
+    prompt:
+      es: '¿Qué muestra este programa?'
+      en: 'What does this program show?'
+    code: |
+      print(10 > 3 and 3 > 5)
+    answer: "False"
+    hints:
+      - {es: 'Evalúa cada lado de `and` por separado.', en: 'Evaluate each side of `and` separately.'}
+    explanation:
+      es: 'Repasa "Combinar condiciones". `3 > 5` es `False`, así que `and` da `False`.'
+      en: 'Review "Combining conditions". `3 > 5` is `False`, so `and` gives `False`.'
+
+  - id: py.u03.l05.e02
+    type: predict_output
+    difficulty: 2
+    skills: [py.if, py.operators]
+    prompt:
+      es: '¿Qué muestra este programa?'
+      en: 'What does this program show?'
+    code: |
+      n = 9
+      if n % 2 == 0:
+          print("par")
+      elif n % 3 == 0:
+          print("multiplo de 3")
+      else:
+          print("otro")
+    answer: "multiplo de 3"
+    hints:
+      - {es: '9 no es par.', en: '9 is not even.'}
+    explanation:
+      es: 'Repasa "Varias opciones con elif". Falla el primer caso y se cumple el segundo.'
+      en: 'Review "Multiple options with elif". The first case fails and the second one matches.'
+
+  - id: py.u03.l05.e03
+    type: multiple_choice
+    difficulty: 2
+    skills: [py.compare, py.if]
+    prompt:
+      es: |
+        ¿Qué error tiene este código?
+
+        ```python
+        if x = 5:
+            print("cinco")
+        ```
+      en: |
+        What is wrong with this code?
+
+        ```python
+        if x = 5:
+            print("cinco")
+        ```
+    options:
+      - {es: 'Usa `=` (guardar) donde debería usar `==` (comparar).', en: 'It uses `=` (store) where it should use `==` (compare).'}
+      - {es: 'Falta un `else`.', en: 'An `else` is missing.'}
+      - {es: 'Faltan paréntesis alrededor de la condición.', en: 'Parentheses around the condition are missing.'}
+      - {es: 'No tiene errores.', en: 'It has no errors.'}
+    answer: 0
+    distractor_tags: {1: syntax.else_not_required, 2: syntax.parentheses_misconception}
+    hints:
+      - {es: 'Dentro de un `if` se hace una pregunta.', en: 'Inside an `if` you ask a question.'}
+    explanation:
+      es: 'Repasa "Comparar valores". Python da un `SyntaxError`; la forma correcta es `if x == 5:`.'
+      en: 'Review "Comparing values". Python raises a `SyntaxError`; the right form is `if x == 5:`.'
+
+  - id: py.u03.l05.e04
+    type: write_code
+    difficulty: 3
+    skills: [py.if, py.compare, py.input]
+    prompt:
+      es: 'Lee dos enteros (cada uno en su línea) y muestra el mayor.'
+      en: 'Read two whole numbers (each on its own line) and show the larger one.'
+    starter: |
+      # Escribe tu código aquí / Write your code here
+    reference_solution: |
+      a = int(input())
+      b = int(input())
+      if a >= b:
+          print(a)
+      else:
+          print(b)
+    tests:
+      - {stdin: "3\n7\n", expected_stdout: "7\n", visible: true}
+      - {stdin: "9\n2\n", expected_stdout: "9\n", visible: false}
+      - {stdin: "5\n5\n", expected_stdout: "5\n", visible: false}
+    wrong_examples:
+      - code: |
+          a = int(input())
+          b = int(input())
+          print(a)
+        expect_fail_tag: logic.missing_branch
+      - code: |
+          a = int(input())
+          b = int(input())
+          print(b)
+        expect_fail_tag: logic.missing_branch
+    hints:
+      - {es: 'Compara `a` con `b` y muestra el que corresponda.', en: 'Compare `a` with `b` and show the right one.'}
+    explanation:
+      es: 'Si son iguales, cualquiera de los dos sirve.'
+      en: 'If they are equal, either one works.'
+
+  - id: py.u03.l05.e05
+    type: write_code
+    difficulty: 4
+    skills: [py.if, py.compare, py.input]
+    prompt:
+      es: |
+        Una entrada de cine cuesta 5 para menores de 12 años, 10 para quienes tienen de 12 a 64 años
+        y 6 para quienes tienen 65 o más. Lee la edad (entero) y muestra el precio.
+      en: |
+        A cinema ticket costs 5 for people under 12, 10 for ages 12 to 64
+        and 6 for age 65 or more. Read the age (whole number) and show the price.
+    starter: |
+      # Escribe tu código aquí / Write your code here
+    reference_solution: |
+      edad = int(input())
+      if edad < 12:
+          print(5)
+      elif edad < 65:
+          print(10)
+      else:
+          print(6)
+    tests:
+      - {stdin: "8\n", expected_stdout: "5\n", visible: true}
+      - {stdin: "12\n", expected_stdout: "10\n", visible: false}
+      - {stdin: "64\n", expected_stdout: "10\n", visible: false}
+      - {stdin: "65\n", expected_stdout: "6\n", visible: false}
+      - {stdin: "80\n", expected_stdout: "6\n", visible: false}
+    wrong_examples:
+      - code: |
+          edad = int(input())
+          if edad <= 12:
+              print(5)
+          elif edad < 65:
+              print(10)
+          else:
+              print(6)
+        expect_fail_tag: logic.off_by_one
+      - code: |
+          edad = int(input())
+          if edad < 12:
+              print(5)
+          elif edad <= 65:
+              print(10)
+          else:
+              print(6)
+        expect_fail_tag: logic.off_by_one
+    hints:
+      - {es: 'Piensa en los valores límite: 11, 12, 64 y 65.', en: 'Think about the boundary values 11, 12, 64 and 65.'}
+    explanation:
+      es: 'Los errores de uno de más o de menos aparecen justo en los límites.'
+      en: 'Off-by-one errors show up right at the boundaries.'
+
+  - id: py.u03.l05.e06
+    type: write_code
+    difficulty: 4
+    skills: [py.if, py.bool, py.operators, py.input]
+    prompt:
+      es: |
+        Lee un año (entero). Muestra `bisiesto` si es divisible entre 4 y, además, no es divisible entre 100
+        salvo que también lo sea entre 400. En otro caso muestra `no bisiesto`.
+      en: |
+        Read a year (whole number). Show `bisiesto` if it is divisible by 4 and, in addition, is not divisible by 100
+        unless it is also divisible by 400. Otherwise show `no bisiesto`.
+    starter: |
+      # Escribe tu código aquí / Write your code here
+    reference_solution: |
+      anio = int(input())
+      if anio % 4 == 0 and (anio % 100 != 0 or anio % 400 == 0):
+          print("bisiesto")
+      else:
+          print("no bisiesto")
+    tests:
+      - {stdin: "2024\n", expected_stdout: "bisiesto\n", visible: true}
+      - {stdin: "1900\n", expected_stdout: "no bisiesto\n", visible: false}
+      - {stdin: "2000\n", expected_stdout: "bisiesto\n", visible: false}
+      - {stdin: "2023\n", expected_stdout: "no bisiesto\n", visible: false}
+    wrong_examples:
+      - code: |
+          anio = int(input())
+          if anio % 4 == 0:
+              print("bisiesto")
+          else:
+              print("no bisiesto")
+        expect_fail_tag: logic.missing_condition
+      - code: |
+          anio = int(input())
+          if anio % 4 == 0 and anio % 100 != 0:
+              print("bisiesto")
+          else:
+              print("no bisiesto")
+        expect_fail_tag: logic.missing_exception
+    hints:
+      - {es: 'Hazlo por partes: primero la regla de 4, luego la excepción de 100, luego la de 400.', en: 'Do it in parts: first the rule of 4, then the exception of 100, then the one of 400.'}
+      - {es: 'Usa paréntesis para agrupar las dos últimas condiciones con `or`.', en: 'Use parentheses to group the last two conditions with `or`.'}
+    explanation:
+      es: '1900 es divisible entre 100 pero no entre 400, así que no es bisiesto; 2000 sí lo es.'
+      en: '1900 is divisible by 100 but not by 400, so it is not a leap year; 2000 is.'

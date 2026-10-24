@@ -1,0 +1,204 @@
+id: py.u01.l03
+language: python
+unit: py.u01
+position: 3
+skills: [py.types.basic]
+status: draft
+reviewed_by: []
+title:
+  es: 'Tipos de datos básicos'
+  en: 'Basic data types'
+explanation:
+  es: |
+    Cada valor tiene un **tipo**. Los cuatro básicos son:
+
+    | Tipo | Qué guarda | Ejemplo |
+    |---|---|---|
+    | `int` | números enteros | `42` |
+    | `float` | números con decimales | `3.14` |
+    | `str` | texto | `"hola"` |
+    | `bool` | verdadero o falso | `True`, `False` |
+
+    Con `type(...)` Python te dice el tipo de un valor:
+
+    ```python
+    print(type(42))      # <class 'int'>
+    print(type("42"))    # <class 'str'>
+    ```
+
+    Ojo: `42` y `"42"` **no son lo mismo**. El segundo está entre comillas, así que es texto.
+  en: |
+    Every value has a **type**. The four basic ones are:
+
+    | Type | What it stores | Example |
+    |---|---|---|
+    | `int` | whole numbers | `42` |
+    | `float` | numbers with decimals | `3.14` |
+    | `str` | text | `"hello"` |
+    | `bool` | true or false | `True`, `False` |
+
+    With `type(...)` Python tells you the type of a value:
+
+    ```python
+    print(type(42))      # <class 'int'>
+    print(type("42"))    # <class 'str'>
+    ```
+
+    Careful: `42` and `"42"` are **not the same**. The second one is in quotes, so it is text.
+exercises:
+  - id: py.u01.l03.e01
+    type: multiple_choice
+    difficulty: 1
+    skills: [py.types.basic]
+    prompt:
+      es: '¿Qué tipo tiene el valor `3.14`?'
+      en: 'What type does the value `3.14` have?'
+    options:
+      - {es: 'int', en: 'int'}
+      - {es: 'float', en: 'float'}
+      - {es: 'str', en: 'str'}
+      - {es: 'bool', en: 'bool'}
+    answer: 1
+    hints:
+      - {es: 'Tiene punto decimal.', en: 'It has a decimal point.'}
+    explanation:
+      es: 'Los números con parte decimal son `float`.'
+      en: 'Numbers with a decimal part are `float`.'
+
+  - id: py.u01.l03.e02
+    type: predict_output
+    difficulty: 1
+    skills: [py.types.basic]
+    prompt:
+      es: '¿Qué muestra este programa? Escribe la salida exacta.'
+      en: 'What does this program show? Write the exact output.'
+    code: |
+      print(type(5))
+    answer: "<class 'int'>"
+    hints:
+      - {es: '5 es un número entero.', en: '5 is a whole number.'}
+    explanation:
+      es: '`type` devuelve el tipo y `print` lo muestra como `<class ...>`.'
+      en: '`type` returns the type and `print` shows it as `<class ...>`.'
+
+  - id: py.u01.l03.e03
+    type: predict_output
+    difficulty: 2
+    skills: [py.types.basic]
+    prompt:
+      es: '¿Qué muestra este programa? Fíjate en las comillas.'
+      en: 'What does this program show? Mind the quotes.'
+    code: |
+      print(type("5"))
+    answer: "<class 'str'>"
+    hints:
+      - {es: 'Todo lo que va entre comillas es texto.', en: 'Anything between quotes is text.'}
+    explanation:
+      es: 'Aunque parezca un número, `"5"` está entre comillas, así que es `str`.'
+      en: 'Even though it looks like a number, `"5"` is in quotes, so it is `str`.'
+
+  - id: py.u01.l03.e04
+    type: multiple_choice
+    difficulty: 2
+    skills: [py.types.basic]
+    prompt:
+      es: '¿Cuál de estos valores es de tipo `str`?'
+      en: 'Which of these values is of type `str`?'
+    options:
+      - {es: '42', en: '42'}
+      - {es: '4.2', en: '4.2'}
+      - {es: '"42"', en: '"42"'}
+      - {es: 'True', en: 'True'}
+    answer: 2
+    distractor_tags: {0: type.int_vs_str, 1: type.float_vs_str}
+    hints:
+      - {es: 'Busca las comillas.', en: 'Look for the quotes.'}
+    explanation:
+      es: 'Solo `"42"` está entre comillas.'
+      en: 'Only `"42"` is in quotes.'
+
+  - id: py.u01.l03.e05
+    type: fill_code
+    difficulty: 2
+    skills: [py.types.basic]
+    prompt:
+      es: 'Completa el valor para que el programa muestre `<class ''bool''>`.'
+      en: 'Fill in the value so the program shows `<class ''bool''>`.'
+    code: |
+      print(type(___))
+    blanks:
+      - ["True", "False"]
+    hints:
+      - {es: 'Solo hay dos valores de este tipo.', en: 'There are only two values of this type.'}
+    explanation:
+      es: '`True` y `False` (con mayúscula inicial) son los dos valores `bool`.'
+      en: '`True` and `False` (capitalised) are the two `bool` values.'
+
+  - id: py.u01.l03.e06
+    type: write_code
+    difficulty: 2
+    skills: [py.types.basic, py.variables]
+    prompt:
+      es: |
+        Crea tres variables: `nombre` con un texto, `edad` con un número entero y
+        `altura` con un número decimal. Luego muestra el tipo de cada una, en ese orden,
+        con tres `print`.
+      en: |
+        Create three variables: `nombre` with a text, `edad` with a whole number and
+        `altura` with a decimal number. Then show the type of each one, in that order,
+        with three `print` calls.
+    starter: |
+      # Escribe tu código aquí / Write your code here
+    reference_solution: |
+      nombre = "Ana"
+      edad = 20
+      altura = 1.65
+      print(type(nombre))
+      print(type(edad))
+      print(type(altura))
+    tests:
+      - {stdin: "", expected_stdout: "<class 'str'>\n<class 'int'>\n<class 'float'>\n", visible: true}
+    static_checks:
+      - {kind: requires_assignment, count_min: 3}
+    wrong_examples:
+      - code: |
+          nombre = "Ana"
+          edad = "20"
+          altura = 1.65
+          print(type(nombre))
+          print(type(edad))
+          print(type(altura))
+        expect_fail_tag: type.int_vs_str
+      - code: |
+          nombre = "Ana"
+          edad = 20
+          altura = 165
+          print(type(nombre))
+          print(type(edad))
+          print(type(altura))
+        expect_fail_tag: type.float_vs_int
+    hints:
+      - {es: 'Para que sea float el número debe llevar punto decimal.', en: 'To be a float the number must have a decimal point.'}
+      - {es: 'Un int no lleva comillas ni punto: 20.', en: 'An int has no quotes and no point: 20.'}
+    explanation:
+      es: 'El tipo lo decide la forma en que escribes el valor.'
+      en: 'The type is decided by how you write the value.'
+
+  - id: py.u01.l03.e07
+    type: multiple_choice
+    difficulty: 2
+    skills: [py.types.basic]
+    prompt:
+      es: '¿Son lo mismo `5` y `"5"` en Python?'
+      en: 'Are `5` and `"5"` the same thing in Python?'
+    options:
+      - {es: 'Sí, Python ignora las comillas.', en: 'Yes, Python ignores the quotes.'}
+      - {es: 'No: `5` es un int y `"5"` es un str.', en: 'No: `5` is an int and `"5"` is a str.'}
+      - {es: 'No: `5` es un float y `"5"` es un int.', en: 'No: `5` is a float and `"5"` is an int.'}
+      - {es: 'Solo son distintos dentro de un print.', en: 'They only differ inside a print.'}
+    answer: 1
+    hints:
+      - {es: 'Recuerda la tabla de tipos de la lección.', en: 'Remember the table of types in the lesson.'}
+    explanation:
+      es: 'Tienen tipos distintos y por eso se comportan distinto, como verás con las operaciones.'
+      en: 'They have different types, so they behave differently, as you will see with operations.'

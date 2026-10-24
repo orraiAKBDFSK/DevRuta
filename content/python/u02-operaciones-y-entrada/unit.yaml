@@ -1,0 +1,8 @@
+id: py.u02
+position: 2
+title:
+  es: 'Operaciones y entrada'
+  en: 'Operations and input'
+summary:
+  es: 'Hacer cálculos, leer datos del usuario y trabajar con texto.'
+  en: 'Doing calculations, reading user input and working with text.'

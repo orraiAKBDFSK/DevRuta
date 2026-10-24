@@ -1,0 +1,89 @@
+spring:
+  application:
+    name: api
+  jpa:
+    open-in-view: false
+    hibernate:
+      # El esquema lo gestiona Flyway; Hibernate solo valida que coincide.
+      ddl-auto: validate
+  # La conexión a la base de datos NO se define aquí. En producción se entrega por variables de entorno
+  # (SPRING_DATASOURCE_URL, SPRING_DATASOURCE_USERNAME, SPRING_DATASOURCE_PASSWORD).
+  # En desarrollo local se activa el perfil "dev" (ver application-dev.yml).
+
+  session:
+    # Las sesiones viven en PostgreSQL (tabla creada por Flyway, no por Spring).
+    jdbc:
+      initialize-schema: never
+    # Caducidad por inactividad.
+    timeout: 7d
+  mail:
+    # Servidor SMTP del proveedor. En producción se entrega por variables de entorno:
+    # SPRING_MAIL_HOST, SPRING_MAIL_PORT, SPRING_MAIL_USERNAME, SPRING_MAIL_PASSWORD.
+    # En desarrollo apunta a Mailpit (ver application-dev.yml).
+    properties:
+      mail:
+        # Al generar el Message-ID, JavaMail averigua el nombre del equipo por DNS salvo que se le dé esta dirección;
+        # sin ella cada envío puede tardar varios segundos. Es el mismo remitente que usa la aplicación.
+        from: ${app.mail.from}
+        smtp:
+          auth: ${MAIL_SMTP_AUTH:false}
+          starttls:
+            enable: ${MAIL_SMTP_STARTTLS:false}
+            # Si se pide STARTTLS, se exige: sin cifrado no se envía.
+            required: ${MAIL_SMTP_STARTTLS:false}
+          # Nombre que se anuncia en el saludo SMTP (EHLO). Fijarlo evita que JavaMail consulte el DNS para
+          # averiguar el nombre del servidor. Conviene un nombre del dominio de envío.
+          localhost: ${MAIL_SMTP_LOCALHOST:localhost}
+          # Tiempos máximos (ms): un proveedor caído no debe dejar hilos colgados.
+          connectiontimeout: 5000
+          timeout: 10000
+          writetimeout: 10000
+
+app:
+  content:
+    # Carpeta con el contenido (content/ del repositorio) y estado mínimo para importarlo. Por defecto solo se importan
+    # lecciones PUBLISHED (con revisión humana); en desarrollo se usa DRAFT (ver application-dev.yml).
+    path: content
+    min-status: PUBLISHED
+    import-on-startup: false
+  name: Plataforma
+  runner:
+    # Servicio de ejecución aislada (apps/runner). Sin URL, los ejercicios de escribir código quedan desactivados.
+    # El token debe coincidir con RUNNER_TOKEN del runner (mínimo 16 caracteres) y es un secreto.
+    url: ${RUNNER_URL:}
+    token: ${RUNNER_TOKEN:}
+    timeout: 30s
+  # Dirección pública de la web: se usa para construir los enlaces de los correos. Obligatoria en producción.
+  public-base-url: ${PUBLIC_BASE_URL}
+  mail:
+    # Remitente. Debe ser una dirección del dominio autenticado con SPF y DKIM. Obligatoria en producción.
+    from: ${MAIL_FROM}
+  security:
+    tokens:
+      verify-ttl: 24h
+      reset-ttl: 30m
+    email:
+      max-sends: 3
+      window: 1h
+
+server:
+  servlet:
+    # Todo cuelga de /api: el frontend y la API comparten origen, en desarrollo (proxy) y en producción (nginx).
+    context-path: /api
+    session:
+      cookie:
+        name: SESSION
+        http-only: true
+        same-site: lax
+        # En producción (HTTPS) debe ser true: SESSION_COOKIE_SECURE=true.
+        secure: ${SESSION_COOKIE_SECURE:false}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      probes:
+        enabled: true

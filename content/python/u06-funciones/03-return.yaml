@@ -1,0 +1,344 @@
+id: py.u06.l03
+language: python
+unit: py.u06
+position: 3
+skills: [py.return]
+status: draft
+reviewed_by: []
+title:
+  es: 'Devolver valores con return'
+  en: 'Returning values with return'
+explanation:
+  es: |
+    Una función puede **devolver** un resultado con `return`, para usarlo después:
+
+    ```python
+    def doble(x):
+        return x * 2
+
+    resultado = doble(4)
+    print(resultado)        # 8
+    print(doble(4) + 1)     # 9
+    ```
+
+    - `return` entrega un valor a quien llamó a la función **y termina la función** al instante.
+    - Una función sin `return` devuelve `None` (la ausencia de valor).
+    - **`print` y `return` no son lo mismo**: `print` muestra algo en pantalla; `return` entrega un valor
+      que el resto del programa puede guardar y reutilizar.
+  en: |
+    A function can **return** a result with `return`, so you can use it later:
+
+    ```python
+    def doble(x):
+        return x * 2
+
+    resultado = doble(4)
+    print(resultado)        # 8
+    print(doble(4) + 1)     # 9
+    ```
+
+    - `return` hands a value to whoever called the function **and ends the function** immediately.
+    - A function without `return` returns `None` (the absence of a value).
+    - **`print` and `return` are not the same**: `print` shows something on screen; `return` hands over a value
+      that the rest of the program can store and reuse.
+exercises:
+  - id: py.u06.l03.e01
+    type: predict_output
+    difficulty: 1
+    skills: [py.return]
+    prompt:
+      es: '¿Qué muestra este programa?'
+      en: 'What does this program show?'
+    code: |
+      def doble(x):
+          return x * 2
+
+      print(doble(4))
+    answer: "8"
+    hints:
+      - {es: '`doble(4)` se convierte en el valor que devuelve.', en: '`doble(4)` becomes the value it returns.'}
+    explanation:
+      es: 'La función devuelve 8 y `print` lo muestra.'
+      en: 'The function returns 8 and `print` shows it.'
+
+  - id: py.u06.l03.e02
+    type: predict_output
+    difficulty: 3
+    skills: [py.return]
+    prompt:
+      es: '¿Qué muestra este programa? Escribe las dos líneas.'
+      en: 'What does this program show? Write both lines.'
+    code: |
+      def f(x):
+          print(x * 2)
+
+      r = f(3)
+      print(r)
+    answer: "6\nNone"
+    hints:
+      - {es: 'Esta función muestra un valor, pero no lo devuelve.', en: 'This function shows a value, but does not return it.'}
+    explanation:
+      es: 'Sin `return`, la función devuelve `None`, y eso es lo que guarda `r`.'
+      en: 'Without `return`, the function returns `None`, and that is what `r` stores.'
+
+  - id: py.u06.l03.e03
+    type: predict_output
+    difficulty: 3
+    skills: [py.return]
+    prompt:
+      es: '¿Qué muestra este programa?'
+      en: 'What does this program show?'
+    code: |
+      def f():
+          return 1
+          print("nunca")
+
+      print(f())
+    answer: "1"
+    hints:
+      - {es: '`return` termina la función de inmediato.', en: '`return` ends the function immediately.'}
+    explanation:
+      es: 'La línea después de `return` nunca se ejecuta.'
+      en: 'The line after `return` never runs.'
+
+  - id: py.u06.l03.e04
+    type: multiple_choice
+    difficulty: 2
+    skills: [py.return]
+    prompt:
+      es: '¿Cuál es la diferencia entre `print` y `return`?'
+      en: 'What is the difference between `print` and `return`?'
+    options:
+      - {es: '`print` muestra en pantalla; `return` entrega un valor para seguir usándolo.', en: '`print` shows on screen; `return` hands over a value to keep using it.'}
+      - {es: '`return` muestra en pantalla; `print` entrega un valor.', en: '`return` shows on screen; `print` hands over a value.'}
+      - {es: 'Son equivalentes.', en: 'They are equivalent.'}
+      - {es: '`return` solo funciona con números.', en: '`return` only works with numbers.'}
+    answer: 0
+    distractor_tags: {1: io.print_vs_return, 2: io.print_vs_return}
+    hints:
+      - {es: 'Piensa si puedes guardar en una variable lo que muestra un `print`.', en: 'Think about whether you can store in a variable what a `print` shows.'}
+    explanation:
+      es: 'Lo que devuelve `return` se puede guardar y reutilizar; lo que muestra `print` solo se ve.'
+      en: 'What `return` hands over can be stored and reused; what `print` shows can only be seen.'
+
+  - id: py.u06.l03.e05
+    type: predict_output
+    difficulty: 3
+    skills: [py.return, py.params]
+    prompt:
+      es: '¿Qué muestra este programa?'
+      en: 'What does this program show?'
+    code: |
+      def suma(a, b):
+          return a + b
+
+      print(suma(suma(1, 2), 3))
+    answer: "6"
+    hints:
+      - {es: 'Resuelve primero la llamada de dentro.', en: 'Solve the inner call first.'}
+    explanation:
+      es: '`suma(1, 2)` es 3, y luego `suma(3, 3)` es 6.'
+      en: '`suma(1, 2)` is 3, and then `suma(3, 3)` is 6.'
+
+  - id: py.u06.l03.e06
+    type: fill_code
+    difficulty: 2
+    skills: [py.return]
+    prompt:
+      es: 'Completa la función para que devuelva el cuadrado de `x` y el programa muestre `25`.'
+      en: 'Fill in the function so it returns the square of `x` and the program shows `25`.'
+    code: |
+      def cuadrado(x):
+          ___ x * x
+
+      print(cuadrado(5))
+    blanks:
+      - [return]
+    hints:
+      - {es: 'La palabra que entrega un valor.', en: 'The word that hands over a value.'}
+    explanation:
+      es: 'Con `print` en lugar de `return` se mostraría 25 pero también aparecería `None`.'
+      en: 'With `print` instead of `return` it would show 25 but also `None`.'
+
+  - id: py.u06.l03.e07
+    type: write_code
+    difficulty: 3
+    skills: [py.return, py.def, py.operators, py.input]
+    prompt:
+      es: |
+        Define `es_par(n)` que **devuelva** `True` si `n` es par y `False` si no.
+        Lee un entero y muestra el resultado de llamar a la función.
+      en: |
+        Define `es_par(n)` that **returns** `True` if `n` is even and `False` otherwise.
+        Read a whole number and show the result of calling the function.
+    starter: |
+      # Escribe tu código aquí / Write your code here
+    reference_solution: |
+      def es_par(n):
+          return n % 2 == 0
+
+      print(es_par(int(input())))
+    tests:
+      - {stdin: "4\n", expected_stdout: "True\n", visible: true}
+      - {stdin: "7\n", expected_stdout: "False\n", visible: false}
+      - {stdin: "0\n", expected_stdout: "True\n", visible: false}
+    static_checks:
+      - {kind: requires_function, name: es_par, returns: true}
+    wrong_examples:
+      - code: |
+          def es_par(n):
+              print(n % 2 == 0)
+
+          print(es_par(int(input())))
+        expect_fail_tag: io.print_vs_return
+      - code: |
+          def es_par(n):
+              return n % 2 == 1
+
+          print(es_par(int(input())))
+        expect_fail_tag: logic.inverted_condition
+    hints:
+      - {es: 'Puedes devolver directamente el resultado de una comparación.', en: 'You can return the result of a comparison directly.'}
+    explanation:
+      es: 'Si la función usa `print` en lugar de `return`, el programa mostraría también `None`.'
+      en: 'If the function uses `print` instead of `return`, the program would also show `None`.'
+
+  - id: py.u06.l03.e08
+    type: write_code
+    difficulty: 3
+    skills: [py.return, py.def, py.if, py.input]
+    prompt:
+      es: |
+        Define `mayor(a, b)` que **devuelva** el mayor de dos números (sin usar `max`).
+        Lee dos enteros (uno por línea) y muestra el resultado.
+      en: |
+        Define `mayor(a, b)` that **returns** the larger of two numbers (without using `max`).
+        Read two whole numbers (one per line) and show the result.
+    starter: |
+      # Escribe tu código aquí / Write your code here
+    reference_solution: |
+      def mayor(a, b):
+          if a >= b:
+              return a
+          return b
+
+      x = int(input())
+      y = int(input())
+      print(mayor(x, y))
+    tests:
+      - {stdin: "3\n7\n", expected_stdout: "7\n", visible: true}
+      - {stdin: "9\n2\n", expected_stdout: "9\n", visible: false}
+      - {stdin: "5\n5\n", expected_stdout: "5\n", visible: false}
+    static_checks:
+      - {kind: requires_function, name: mayor, returns: true}
+    wrong_examples:
+      - code: |
+          def mayor(a, b):
+              return a
+
+          x = int(input())
+          y = int(input())
+          print(mayor(x, y))
+        expect_fail_tag: logic.missing_branch
+    hints:
+      - {es: 'Puedes usar un `return` dentro de un `if` y otro al final.', en: 'You can use one `return` inside an `if` and another one at the end.'}
+    explanation:
+      es: 'Cuando se ejecuta un `return`, la función termina; por eso no hace falta un `else`.'
+      en: 'When a `return` runs, the function ends; that is why an `else` is not needed.'
+
+  - id: py.u06.l03.e09
+    type: write_code
+    difficulty: 3
+    skills: [py.return, py.def, py.list, py.input]
+    prompt:
+      es: |
+        Define `promedio(lista)` que **devuelva** el promedio de una lista de números.
+        Lee un entero `n` y luego `n` enteros (uno por línea), y muestra el promedio.
+      en: |
+        Define `promedio(lista)` that **returns** the average of a list of numbers.
+        Read a whole number `n` and then `n` whole numbers (one per line), and show the average.
+    starter: |
+      # Escribe tu código aquí / Write your code here
+    reference_solution: |
+      def promedio(lista):
+          return sum(lista) / len(lista)
+
+      n = int(input())
+      datos = []
+      for i in range(n):
+          datos.append(int(input()))
+      print(promedio(datos))
+    tests:
+      - {stdin: "4\n1\n2\n3\n4\n", expected_stdout: "2.5\n", visible: true}
+      - {stdin: "2\n10\n0\n", expected_stdout: "5.0\n", visible: false}
+      - {stdin: "3\n6\n6\n6\n", expected_stdout: "6.0\n", visible: false}
+    static_checks:
+      - {kind: requires_function, name: promedio, returns: true}
+    wrong_examples:
+      - code: |
+          def promedio(lista):
+              return sum(lista) // len(lista)
+
+          n = int(input())
+          datos = []
+          for i in range(n):
+              datos.append(int(input()))
+          print(promedio(datos))
+        expect_fail_tag: op.floordiv_vs_div
+    hints:
+      - {es: 'Una lista también se puede pasar como argumento.', en: 'A list can also be passed as an argument.'}
+    explanation:
+      es: 'El parámetro `lista` recibe la lista completa.'
+      en: 'The parameter `lista` receives the whole list.'
+
+  - id: py.u06.l03.e10
+    type: write_code
+    difficulty: 4
+    skills: [py.return, py.def, py.for, py.input]
+    prompt:
+      es: |
+        Define `factorial(n)` que **devuelva** el factorial de `n` (el producto de 1 a `n`; el de 0 es 1).
+        Lee `n` y muestra el resultado.
+      en: |
+        Define `factorial(n)` that **returns** the factorial of `n` (the product of 1 to `n`; the one of 0 is 1).
+        Read `n` and show the result.
+    starter: |
+      # Escribe tu código aquí / Write your code here
+    reference_solution: |
+      def factorial(n):
+          resultado = 1
+          for i in range(1, n + 1):
+              resultado = resultado * i
+          return resultado
+
+      print(factorial(int(input())))
+    tests:
+      - {stdin: "5\n", expected_stdout: "120\n", visible: true}
+      - {stdin: "0\n", expected_stdout: "1\n", visible: false}
+      - {stdin: "1\n", expected_stdout: "1\n", visible: false}
+      - {stdin: "10\n", expected_stdout: "3628800\n", visible: false}
+    static_checks:
+      - {kind: requires_function, name: factorial, returns: true}
+    wrong_examples:
+      - code: |
+          def factorial(n):
+              resultado = 1
+              for i in range(1, n):
+                  resultado = resultado * i
+              return resultado
+
+          print(factorial(int(input())))
+        expect_fail_tag: logic.off_by_one
+      - code: |
+          def factorial(n):
+              resultado = 1
+              for i in range(1, n + 1):
+                  resultado = resultado * i
+
+          print(factorial(int(input())))
+        expect_fail_tag: function.missing_return
+    hints:
+      - {es: 'El `return` va después del bucle, fuera de él.', en: 'The `return` goes after the loop, outside of it.'}
+    explanation:
+      es: 'Si olvidas el `return`, la función devuelve `None` y se mostraría `None`.'
+      en: 'If you forget the `return`, the function returns `None` and `None` would be shown.'

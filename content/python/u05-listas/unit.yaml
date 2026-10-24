@@ -1,0 +1,8 @@
+id: py.u05
+position: 5
+title:
+  es: 'Listas'
+  en: 'Lists'
+summary:
+  es: 'Guardar colecciones de datos, recorrerlas y transformarlas.'
+  en: 'Storing collections of data, walking through them and transforming them.'

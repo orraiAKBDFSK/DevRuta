@@ -1,0 +1,252 @@
+id: py.u03.l04
+language: python
+unit: py.u03
+position: 4
+skills: [py.if, py.bool]
+status: draft
+reviewed_by: []
+title:
+  es: 'Varias opciones con elif'
+  en: 'Multiple options with elif'
+explanation:
+  es: |
+    Cuando hay más de dos casos usa `elif` ("si no, si..."):
+
+    ```python
+    nota = 75
+    if nota >= 90:
+        print("A")
+    elif nota >= 70:
+        print("B")
+    else:
+        print("C")
+    ```
+
+    - Python revisa las condiciones **de arriba abajo** y ejecuta **solo la primera** que sea `True`.
+    - Por eso el **orden importa**: pon primero los casos más específicos.
+    - Varios `if` seguidos (sin `elif`) son independientes: pueden ejecutarse más de uno.
+  en: |
+    When there are more than two cases use `elif` ("else, if..."):
+
+    ```python
+    nota = 75
+    if nota >= 90:
+        print("A")
+    elif nota >= 70:
+        print("B")
+    else:
+        print("C")
+    ```
+
+    - Python checks the conditions **from top to bottom** and runs **only the first** one that is `True`.
+    - That is why **order matters**: put the most specific cases first.
+    - Several `if` in a row (without `elif`) are independent: more than one may run.
+exercises:
+  - id: py.u03.l04.e01
+    type: predict_output
+    difficulty: 2
+    skills: [py.if]
+    prompt:
+      es: '¿Qué muestra este programa?'
+      en: 'What does this program show?'
+    code: |
+      nota = 75
+      if nota >= 90:
+          print("A")
+      elif nota >= 70:
+          print("B")
+      else:
+          print("C")
+    answer: "B"
+    hints:
+      - {es: 'Se revisa de arriba abajo y se detiene en la primera condición verdadera.', en: 'It checks from top to bottom and stops at the first true condition.'}
+    explanation:
+      es: '75 no es >= 90, pero sí es >= 70, así que muestra `B`.'
+      en: '75 is not >= 90, but it is >= 70, so it shows `B`.'
+
+  - id: py.u03.l04.e02
+    type: predict_output
+    difficulty: 3
+    skills: [py.if]
+    prompt:
+      es: '¿Qué muestra este programa? Son dos `if` independientes.'
+      en: 'What does this program show? These are two independent `if` statements.'
+    code: |
+      x = 10
+      if x > 5:
+          print("a")
+      if x > 8:
+          print("b")
+    answer: "a\nb"
+    hints:
+      - {es: 'Cada `if` se evalúa por separado.', en: 'Each `if` is evaluated separately.'}
+    explanation:
+      es: 'Las dos condiciones son `True`, así que se ejecutan los dos bloques.'
+      en: 'Both conditions are `True`, so both blocks run.'
+
+  - id: py.u03.l04.e03
+    type: predict_output
+    difficulty: 3
+    skills: [py.if]
+    prompt:
+      es: '¿Qué muestra este programa? Ahora el segundo es un `elif`.'
+      en: 'What does this program show? Now the second one is an `elif`.'
+    code: |
+      x = 10
+      if x > 5:
+          print("a")
+      elif x > 8:
+          print("b")
+    answer: "a"
+    hints:
+      - {es: 'Un `elif` solo se revisa si lo anterior fue `False`.', en: 'An `elif` is only checked if the previous condition was `False`.'}
+    explanation:
+      es: 'Como el `if` ya se cumplió, el `elif` ni se evalúa.'
+      en: 'Since the `if` already matched, the `elif` is not even evaluated.'
+
+  - id: py.u03.l04.e04
+    type: multiple_choice
+    difficulty: 3
+    skills: [py.if]
+    prompt:
+      es: '¿Cuándo conviene usar `elif` en lugar de varios `if` seguidos?'
+      en: 'When should you use `elif` instead of several `if` in a row?'
+    options:
+      - {es: 'Cuando los casos son excluyentes y solo debe ejecutarse uno.', en: 'When the cases are mutually exclusive and only one should run.'}
+      - {es: 'Cuando quieres que se ejecuten todos los bloques.', en: 'When you want every block to run.'}
+      - {es: 'Nunca, `elif` es solo otra forma de escribir `else`.', en: 'Never, `elif` is just another way to write `else`.'}
+      - {es: 'Solo cuando se comparan textos.', en: 'Only when comparing text.'}
+    answer: 0
+    distractor_tags: {1: logic.elif_vs_if}
+    hints:
+      - {es: 'Piensa en una clasificación: una persona no puede ser niña y adulta a la vez.', en: 'Think of a classification: a person cannot be a child and an adult at once.'}
+    explanation:
+      es: '`elif` garantiza que solo se ejecute una rama.'
+      en: '`elif` guarantees that only one branch runs.'
+
+  - id: py.u03.l04.e05
+    type: order_lines
+    difficulty: 3
+    skills: [py.if, py.input]
+    prompt:
+      es: 'Ordena las líneas para que el programa diga si un número es negativo, cero o positivo.'
+      en: 'Order the lines so the program says whether a number is negative, zero or positive.'
+    lines:
+      - 'n = int(input())'
+      - 'if n < 0:'
+      - '    print("negativo")'
+      - 'elif n == 0:'
+      - '    print("cero")'
+      - 'else:'
+      - '    print("positivo")'
+    hints:
+      - {es: 'El `else` va al final y cubre lo que no cumplió nada.', en: 'The `else` goes last and covers whatever matched nothing.'}
+    explanation:
+      es: 'Estructura: `if` → `elif` → `else`.'
+      en: 'Structure: `if` → `elif` → `else`.'
+
+  - id: py.u03.l04.e06
+    type: write_code
+    difficulty: 3
+    skills: [py.if, py.compare, py.input]
+    prompt:
+      es: |
+        Lee una nota entera y muestra `A` si es 90 o más, `B` si es 80 o más, `C` si es 70 o más
+        y `D` en cualquier otro caso.
+      en: |
+        Read a whole-number grade and show `A` if it is 90 or more, `B` if 80 or more, `C` if 70 or more
+        and `D` otherwise.
+    starter: |
+      # Escribe tu código aquí / Write your code here
+    reference_solution: |
+      nota = int(input())
+      if nota >= 90:
+          print("A")
+      elif nota >= 80:
+          print("B")
+      elif nota >= 70:
+          print("C")
+      else:
+          print("D")
+    tests:
+      - {stdin: "95\n", expected_stdout: "A\n", visible: true}
+      - {stdin: "90\n", expected_stdout: "A\n", visible: false}
+      - {stdin: "85\n", expected_stdout: "B\n", visible: false}
+      - {stdin: "70\n", expected_stdout: "C\n", visible: false}
+      - {stdin: "50\n", expected_stdout: "D\n", visible: false}
+    wrong_examples:
+      - code: |
+          nota = int(input())
+          if nota > 90:
+              print("A")
+          elif nota >= 80:
+              print("B")
+          elif nota >= 70:
+              print("C")
+          else:
+              print("D")
+        expect_fail_tag: logic.off_by_one
+      - code: |
+          nota = int(input())
+          if nota >= 90:
+              print("A")
+          if nota >= 80:
+              print("B")
+          if nota >= 70:
+              print("C")
+          else:
+              print("D")
+        expect_fail_tag: logic.elif_vs_if
+    hints:
+      - {es: 'Empieza por la nota más alta.', en: 'Start with the highest grade.'}
+      - {es: 'Usa `elif` para que solo se muestre una letra.', en: 'Use `elif` so only one letter is shown.'}
+    explanation:
+      es: 'Con `if` sueltos, una nota de 95 mostraría A, B y C a la vez.'
+      en: 'With separate `if` statements, a grade of 95 would show A, B and C together.'
+
+  - id: py.u03.l04.e07
+    type: write_code
+    difficulty: 4
+    skills: [py.if, py.operators, py.input]
+    prompt:
+      es: |
+        Lee un entero `n`. Si es múltiplo de 15 muestra `FizzBuzz`; si no, y es múltiplo de 3 muestra `Fizz`;
+        si no, y es múltiplo de 5 muestra `Buzz`; en cualquier otro caso muestra el propio número.
+      en: |
+        Read a whole number `n`. If it is a multiple of 15 show `FizzBuzz`; otherwise, if it is a multiple of 3 show `Fizz`;
+        otherwise, if it is a multiple of 5 show `Buzz`; in any other case show the number itself.
+    starter: |
+      # Escribe tu código aquí / Write your code here
+    reference_solution: |
+      n = int(input())
+      if n % 15 == 0:
+          print("FizzBuzz")
+      elif n % 3 == 0:
+          print("Fizz")
+      elif n % 5 == 0:
+          print("Buzz")
+      else:
+          print(n)
+    tests:
+      - {stdin: "15\n", expected_stdout: "FizzBuzz\n", visible: true}
+      - {stdin: "9\n", expected_stdout: "Fizz\n", visible: false}
+      - {stdin: "10\n", expected_stdout: "Buzz\n", visible: false}
+      - {stdin: "7\n", expected_stdout: "7\n", visible: false}
+      - {stdin: "30\n", expected_stdout: "FizzBuzz\n", visible: false}
+    wrong_examples:
+      - code: |
+          n = int(input())
+          if n % 3 == 0:
+              print("Fizz")
+          elif n % 5 == 0:
+              print("Buzz")
+          elif n % 15 == 0:
+              print("FizzBuzz")
+          else:
+              print(n)
+        expect_fail_tag: logic.condition_order
+    hints:
+      - {es: 'Un múltiplo de 15 también lo es de 3 y de 5. ¿Qué caso debes comprobar primero?', en: 'A multiple of 15 is also a multiple of 3 and 5. Which case must you check first?'}
+    explanation:
+      es: 'El caso más específico (15) va primero; si no, el 15 caería en el caso de 3.'
+      en: 'The most specific case (15) goes first; otherwise 15 would fall into the case of 3.'

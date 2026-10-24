@@ -1,0 +1,156 @@
+id: py.u01.l02
+language: python
+unit: py.u01
+position: 2
+skills: [py.variables]
+status: draft
+reviewed_by: []
+title:
+  es: 'Guardar datos en variables'
+  en: 'Storing data in variables'
+explanation:
+  es: |
+    Una **variable** es un nombre que guarda un valor para usarlo después:
+
+    ```python
+    edad = 20
+    print(edad)   # muestra 20
+    ```
+
+    - El signo `=` **no** significa "igual": significa "guarda el valor de la derecha en el nombre de la izquierda".
+    - Una variable puede cambiar: `edad = 21` reemplaza el valor anterior.
+    - Los nombres usan letras, números y `_`, y no pueden empezar con un número ni llevar espacios.
+  en: |
+    A **variable** is a name that stores a value so you can use it later:
+
+    ```python
+    age = 20
+    print(age)   # shows 20
+    ```
+
+    - The `=` sign does **not** mean "equals": it means "store the value on the right under the name on the left".
+    - A variable can change: `age = 21` replaces the previous value.
+    - Names use letters, digits and `_`, cannot start with a digit and cannot contain spaces.
+exercises:
+  - id: py.u01.l02.e01
+    type: predict_output
+    difficulty: 1
+    skills: [py.variables]
+    prompt:
+      es: '¿Qué muestra este programa?'
+      en: 'What does this program show?'
+    code: |
+      x = 5
+      print(x)
+    answer: "5"
+    hints:
+      - {es: 'print muestra el valor guardado en x.', en: 'print shows the value stored in x.'}
+    explanation:
+      es: '`x` guarda 5 y `print(x)` muestra su valor (sin comillas, porque es la variable).'
+      en: '`x` stores 5 and `print(x)` shows its value (no quotes, since it is the variable).'
+
+  - id: py.u01.l02.e02
+    type: predict_output
+    difficulty: 1
+    skills: [py.variables]
+    prompt:
+      es: '¿Qué muestra este programa?'
+      en: 'What does this program show?'
+    code: |
+      x = 5
+      x = 8
+      print(x)
+    answer: "8"
+    hints:
+      - {es: 'Una variable solo recuerda su valor más reciente.', en: 'A variable only remembers its latest value.'}
+    explanation:
+      es: 'La segunda asignación reemplaza el 5 por un 8.'
+      en: 'The second assignment replaces 5 with 8.'
+
+  - id: py.u01.l02.e03
+    type: fill_code
+    difficulty: 1
+    skills: [py.variables]
+    prompt:
+      es: 'Completa para guardar el valor 20 en `edad`.'
+      en: 'Complete it to store the value 20 in `edad`.'
+    code: |
+      edad ___ 20
+      print(edad)
+    blanks:
+      - ["="]
+    hints:
+      - {es: 'Es el símbolo de asignación.', en: 'It is the assignment symbol.'}
+    explanation:
+      es: '`=` guarda el valor de la derecha en el nombre de la izquierda.'
+      en: '`=` stores the value on the right in the name on the left.'
+
+  - id: py.u01.l02.e04
+    type: multiple_choice
+    difficulty: 2
+    skills: [py.variables]
+    prompt:
+      es: '¿Cuál de estos es un nombre de variable válido?'
+      en: 'Which of these is a valid variable name?'
+    options:
+      - {es: '2nombre', en: '2name'}
+      - {es: 'mi nombre', en: 'my name'}
+      - {es: 'mi_nombre', en: 'my_name'}
+      - {es: 'mi-nombre', en: 'my-name'}
+    answer: 2
+    distractor_tags: {0: name.starts_with_digit, 1: name.has_space, 3: name.has_hyphen}
+    hints:
+      - {es: 'No puede empezar con número, ni tener espacios ni guiones.', en: 'It cannot start with a digit or contain spaces or hyphens.'}
+    explanation:
+      es: 'Para separar palabras se usa el guion bajo `_`.'
+      en: 'Use the underscore `_` to separate words.'
+
+  - id: py.u01.l02.e05
+    type: predict_output
+    difficulty: 2
+    skills: [py.variables]
+    prompt:
+      es: '¿Qué muestra este programa? Fíjate en el orden de las líneas.'
+      en: 'What does this program show? Mind the order of the lines.'
+    code: |
+      a = 2
+      b = a
+      a = 7
+      print(b)
+    answer: "2"
+    hints:
+      - {es: 'b copió el valor de a en el momento de la línea 2.', en: 'b copied the value of a at line 2.'}
+    explanation:
+      es: 'Cambiar `a` después no modifica `b`; `b` se quedó con el 2.'
+      en: 'Changing `a` later does not change `b`; `b` kept the 2.'
+
+  - id: py.u01.l02.e06
+    type: write_code
+    difficulty: 2
+    skills: [py.variables, py.output]
+    prompt:
+      es: |
+        Crea una variable `ciudad` con el texto `Lima` y muéstrala con `print`.
+        Debes usar la variable, no escribir el texto directamente en el `print`.
+      en: |
+        Create a variable `ciudad` with the text `Lima` and show it with `print`.
+        You must use the variable, not write the text directly inside `print`.
+    starter: |
+      # Escribe tu código aquí / Write your code here
+    reference_solution: |
+      ciudad = "Lima"
+      print(ciudad)
+    tests:
+      - {stdin: "", expected_stdout: "Lima\n", visible: true}
+    static_checks:
+      - {kind: requires_assignment, count_min: 1}
+    wrong_examples:
+      - code: 'print("Lima")'
+        expect_fail_tag: static.no_variable
+      - code: 'ciudad = "Lima"'
+        expect_fail_tag: output.mismatch
+    hints:
+      - {es: 'Primero asigna con `=`, luego muestra la variable.', en: 'First assign with `=`, then show the variable.'}
+    explanation:
+      es: 'Guardar el valor en una variable permite reutilizarlo y cambiarlo en un solo lugar.'
+      en: 'Storing the value in a variable lets you reuse it and change it in one place.'

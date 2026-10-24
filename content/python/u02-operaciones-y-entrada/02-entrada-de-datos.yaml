@@ -1,0 +1,239 @@
+id: py.u02.l02
+language: python
+unit: py.u02
+position: 2
+skills: [py.input, py.types.basic]
+status: draft
+reviewed_by: []
+title:
+  es: 'Leer datos del usuario'
+  en: 'Reading user input'
+explanation:
+  es: |
+    `input()` detiene el programa y espera a que el usuario escriba algo:
+
+    ```python
+    nombre = input()
+    print("Hola,", nombre)
+    ```
+
+    - `input()` **siempre devuelve texto** (`str`), aunque el usuario escriba un número.
+    - Para usarlo como número lo conviertes: `int(...)` para enteros, `float(...)` para decimales.
+
+    ```python
+    edad = int(input())
+    print(edad + 1)
+    ```
+
+    - `print(a, b)` muestra los valores separados por un espacio.
+  en: |
+    `input()` pauses the program and waits for the user to type something:
+
+    ```python
+    nombre = input()
+    print("Hola,", nombre)
+    ```
+
+    - `input()` **always returns text** (`str`), even if the user types a number.
+    - To use it as a number you convert it: `int(...)` for whole numbers, `float(...)` for decimals.
+
+    ```python
+    edad = int(input())
+    print(edad + 1)
+    ```
+
+    - `print(a, b)` shows the values separated by a space.
+exercises:
+  - id: py.u02.l02.e01
+    type: multiple_choice
+    difficulty: 1
+    skills: [py.input]
+    prompt:
+      es: 'El usuario escribe `25`. ¿De qué tipo es el valor que devuelve `input()`?'
+      en: 'The user types `25`. What type is the value `input()` returns?'
+    options:
+      - {es: 'int', en: 'int'}
+      - {es: 'float', en: 'float'}
+      - {es: 'str', en: 'str'}
+      - {es: 'bool', en: 'bool'}
+    answer: 2
+    distractor_tags: {0: io.input_not_cast}
+    hints:
+      - {es: 'input() no adivina el tipo.', en: 'input() does not guess the type.'}
+    explanation:
+      es: '`input()` siempre devuelve `str`. Hay que convertirlo con `int()` o `float()`.'
+      en: '`input()` always returns `str`. You must convert it with `int()` or `float()`.'
+
+  - id: py.u02.l02.e02
+    type: write_code
+    difficulty: 1
+    skills: [py.input, py.output]
+    prompt:
+      es: |
+        Lee un nombre con `input()` y muestra `Hola,` seguido del nombre.
+        Ejemplo: si el usuario escribe `Ana`, se muestra `Hola, Ana`.
+      en: |
+        Read a name with `input()` and show `Hola,` followed by the name.
+        Example: if the user types `Ana`, it shows `Hola, Ana`.
+    starter: |
+      # Escribe tu código aquí / Write your code here
+    reference_solution: |
+      nombre = input()
+      print("Hola,", nombre)
+    tests:
+      - {stdin: "Ana\n", expected_stdout: "Hola, Ana\n", visible: true}
+      - {stdin: "Luis\n", expected_stdout: "Hola, Luis\n", visible: false}
+    wrong_examples:
+      - code: 'print("Hola, nombre")'
+        expect_fail_tag: static.hardcoded_output
+      - code: |
+          nombre = input()
+          print("Hola,")
+        expect_fail_tag: output.mismatch
+    hints:
+      - {es: 'Guarda lo que devuelve input() en una variable.', en: 'Store what input() returns in a variable.'}
+      - {es: 'print("Hola,", nombre) separa los valores con un espacio.', en: 'print("Hola,", nombre) separates the values with a space.'}
+    explanation:
+      es: 'El programa debe funcionar con cualquier nombre, no solo con el del ejemplo.'
+      en: 'The program must work with any name, not only the one in the example.'
+
+  - id: py.u02.l02.e03
+    type: multiple_choice
+    difficulty: 2
+    skills: [py.input, py.types.basic]
+    prompt:
+      es: |
+        ¿Qué pasa con este programa si el usuario escribe `5`?
+
+        ```python
+        numero = input()
+        print(numero + 1)
+        ```
+      en: |
+        What happens with this program if the user types `5`?
+
+        ```python
+        numero = input()
+        print(numero + 1)
+        ```
+    options:
+      - {es: 'Muestra 6.', en: 'It shows 6.'}
+      - {es: 'Muestra 51.', en: 'It shows 51.'}
+      - {es: 'Da un error porque no se puede sumar un texto y un número.', en: 'It fails because you cannot add text and a number.'}
+      - {es: 'No muestra nada.', en: 'It shows nothing.'}
+    answer: 2
+    distractor_tags: {0: io.input_not_cast, 1: type.str_plus_int}
+    hints:
+      - {es: '¿De qué tipo es numero?', en: 'What type is numero?'}
+    explanation:
+      es: '`numero` es `str`; sumar `str + int` produce un `TypeError`. La solución es `int(input())`.'
+      en: '`numero` is `str`; adding `str + int` raises a `TypeError`. The fix is `int(input())`.'
+
+  - id: py.u02.l02.e04
+    type: fill_code
+    difficulty: 2
+    skills: [py.input, py.types.basic]
+    prompt:
+      es: 'Completa la conversión para poder sumar 1 al número que escribe el usuario.'
+      en: 'Fill in the conversion so you can add 1 to the number the user types.'
+    code: |
+      numero = ___(input())
+      print(numero + 1)
+    blanks:
+      - [int]
+    hints:
+      - {es: 'Es la función que convierte a número entero.', en: 'It is the function that converts to a whole number.'}
+    explanation:
+      es: '`int(...)` convierte el texto en un entero.'
+      en: '`int(...)` turns the text into a whole number.'
+
+  - id: py.u02.l02.e05
+    type: write_code
+    difficulty: 2
+    skills: [py.input, py.operators]
+    prompt:
+      es: 'Lee un número entero y muestra su doble.'
+      en: 'Read a whole number and show its double.'
+    starter: |
+      # Escribe tu código aquí / Write your code here
+    reference_solution: |
+      n = int(input())
+      print(n * 2)
+    tests:
+      - {stdin: "4\n", expected_stdout: "8\n", visible: true}
+      - {stdin: "10\n", expected_stdout: "20\n", visible: false}
+      - {stdin: "0\n", expected_stdout: "0\n", visible: false}
+    wrong_examples:
+      - code: |
+          n = input()
+          print(n * 2)
+        expect_fail_tag: io.input_not_cast
+      - code: |
+          n = int(input())
+          print(n + 2)
+        expect_fail_tag: logic.wrong_operation
+    hints:
+      - {es: 'Convierte con int() antes de multiplicar.', en: 'Convert with int() before multiplying.'}
+    explanation:
+      es: 'Con texto, `"4" * 2` da `"44"`. Convertir a `int` primero da el resultado numérico.'
+      en: 'With text, `"4" * 2` gives `"44"`. Converting to `int` first gives the numeric result.'
+
+  - id: py.u02.l02.e06
+    type: write_code
+    difficulty: 2
+    skills: [py.input, py.operators]
+    prompt:
+      es: 'Lee dos números enteros (cada uno en su línea) y muestra su suma.'
+      en: 'Read two whole numbers (each on its own line) and show their sum.'
+    starter: |
+      # Escribe tu código aquí / Write your code here
+    reference_solution: |
+      a = int(input())
+      b = int(input())
+      print(a + b)
+    tests:
+      - {stdin: "3\n4\n", expected_stdout: "7\n", visible: true}
+      - {stdin: "10\n-2\n", expected_stdout: "8\n", visible: false}
+    wrong_examples:
+      - code: |
+          a = input()
+          b = input()
+          print(a + b)
+        expect_fail_tag: io.input_not_cast
+      - code: |
+          a = int(input())
+          b = int(input())
+          print(a - b)
+        expect_fail_tag: logic.wrong_operation
+    hints:
+      - {es: 'Llama a input() dos veces.', en: 'Call input() twice.'}
+    explanation:
+      es: 'Sin convertir, `"3" + "4"` es `"34"`, que no es la suma.'
+      en: 'Without converting, `"3" + "4"` is `"34"`, which is not the sum.'
+
+  - id: py.u02.l02.e07
+    type: write_code
+    difficulty: 3
+    skills: [py.input, py.operators, py.types.basic]
+    prompt:
+      es: 'Lee un número (puede tener decimales) y muestra su mitad.'
+      en: 'Read a number (it may have decimals) and show its half.'
+    starter: |
+      # Escribe tu código aquí / Write your code here
+    reference_solution: |
+      x = float(input())
+      print(x / 2)
+    tests:
+      - {stdin: "5\n", expected_stdout: "2.5\n", visible: true}
+      - {stdin: "9.5\n", expected_stdout: "4.75\n", visible: false}
+      - {stdin: "3\n", expected_stdout: "1.5\n", visible: false}
+    wrong_examples:
+      - code: |
+          x = int(input())
+          print(x / 2)
+        expect_fail_tag: io.int_for_decimal
+    hints:
+      - {es: 'int() no acepta "9.5". ¿Qué otra función conoces?', en: 'int() does not accept "9.5". What other function do you know?'}
+    explanation:
+      es: 'Para datos con decimales se usa `float()`.'
+      en: 'For data with decimals use `float()`.'

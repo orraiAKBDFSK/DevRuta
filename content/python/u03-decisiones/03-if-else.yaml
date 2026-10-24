@@ -1,0 +1,249 @@
+id: py.u03.l03
+language: python
+unit: py.u03
+position: 3
+skills: [py.if]
+status: draft
+reviewed_by: []
+title:
+  es: 'Tomar decisiones con if y else'
+  en: 'Making decisions with if and else'
+explanation:
+  es: |
+    `if` ejecuta un bloque de código **solo si** la condición es `True`. `else` cubre el caso contrario:
+
+    ```python
+    edad = 20
+    if edad >= 18:
+        print("mayor de edad")
+    else:
+        print("menor de edad")
+    ```
+
+    - La línea del `if` y la del `else` terminan en **dos puntos** `:`.
+    - El bloque va **indentado** (4 espacios). La indentación le dice a Python qué líneas pertenecen al `if`.
+    - Las líneas sin indentar después del bloque se ejecutan siempre.
+  en: |
+    `if` runs a block of code **only if** the condition is `True`. `else` covers the opposite case:
+
+    ```python
+    edad = 20
+    if edad >= 18:
+        print("mayor de edad")
+    else:
+        print("menor de edad")
+    ```
+
+    - The `if` line and the `else` line end with a **colon** `:`.
+    - The block is **indented** (4 spaces). Indentation tells Python which lines belong to the `if`.
+    - Unindented lines after the block always run.
+exercises:
+  - id: py.u03.l03.e01
+    type: predict_output
+    difficulty: 1
+    skills: [py.if]
+    prompt:
+      es: '¿Qué muestra este programa?'
+      en: 'What does this program show?'
+    code: |
+      x = 10
+      if x > 5:
+          print("si")
+      else:
+          print("no")
+    answer: "si"
+    hints:
+      - {es: '¿Es 10 mayor que 5?', en: 'Is 10 greater than 5?'}
+    explanation:
+      es: 'La condición es `True`, así que se ejecuta el bloque del `if` y no el del `else`.'
+      en: 'The condition is `True`, so the `if` block runs and the `else` block does not.'
+
+  - id: py.u03.l03.e02
+    type: predict_output
+    difficulty: 2
+    skills: [py.if]
+    prompt:
+      es: '¿Qué muestra este programa? Fíjate en la indentación.'
+      en: 'What does this program show? Mind the indentation.'
+    code: |
+      x = 3
+      if x > 5:
+          print("A")
+      print("B")
+    answer: "B"
+    hints:
+      - {es: 'Solo la línea indentada pertenece al `if`.', en: 'Only the indented line belongs to the `if`.'}
+    explanation:
+      es: 'La condición es `False`, así que se salta `print("A")`. `print("B")` no está indentado y se ejecuta siempre.'
+      en: 'The condition is `False`, so `print("A")` is skipped. `print("B")` is not indented and always runs.'
+
+  - id: py.u03.l03.e03
+    type: multiple_choice
+    difficulty: 2
+    skills: [py.if]
+    prompt:
+      es: |
+        Este programa da error. ¿Por qué?
+
+        ```python
+        if x > 5
+            print("grande")
+        ```
+      en: |
+        This program fails. Why?
+
+        ```python
+        if x > 5
+            print("grande")
+        ```
+    options:
+      - {es: 'Faltan los dos puntos al final del `if`.', en: 'The colon at the end of the `if` is missing.'}
+      - {es: 'Falta un `else`.', en: 'An `else` is missing.'}
+      - {es: '`print` debe ir en mayúsculas.', en: '`print` must be capitalised.'}
+      - {es: 'No se puede comparar con 5.', en: 'You cannot compare with 5.'}
+    answer: 0
+    distractor_tags: {1: syntax.else_not_required, 2: syntax.case}
+    hints:
+      - {es: 'Mira el final de la primera línea.', en: 'Look at the end of the first line.'}
+    explanation:
+      es: 'Es un `SyntaxError`: toda línea que abre un bloque (`if`, `else`...) termina en `:`. El `else` es opcional.'
+      en: 'It is a `SyntaxError`: every line that opens a block (`if`, `else`...) ends with `:`. The `else` is optional.'
+
+  - id: py.u03.l03.e04
+    type: order_lines
+    difficulty: 3
+    skills: [py.if, py.input, py.operators]
+    prompt:
+      es: 'Ordena las líneas para que el programa lea un número y diga si es par o impar.'
+      en: 'Order the lines so the program reads a number and says whether it is even or odd.'
+    lines:
+      - 'n = int(input())'
+      - 'if n % 2 == 0:'
+      - '    print("par")'
+      - 'else:'
+      - '    print("impar")'
+    hints:
+      - {es: 'Primero se lee el dato; luego se decide.', en: 'First read the data; then decide.'}
+    explanation:
+      es: 'El `else` va al mismo nivel que el `if`, y cada bloque está indentado.'
+      en: 'The `else` is at the same level as the `if`, and each block is indented.'
+
+  - id: py.u03.l03.e05
+    type: fill_code
+    difficulty: 2
+    skills: [py.if, py.compare]
+    prompt:
+      es: 'Completa la condición para que el programa muestre `mayor`.'
+      en: 'Fill in the condition so the program shows `mayor`.'
+    code: |
+      edad = 20
+      if edad ___ 18:
+          print("mayor")
+      else:
+          print("menor")
+    blanks:
+      - [">=", ">"]
+    hints:
+      - {es: '20 es más grande que 18.', en: '20 is bigger than 18.'}
+    explanation:
+      es: 'Con 20, tanto `>` como `>=` dan `True`.'
+      en: 'With 20, both `>` and `>=` give `True`.'
+
+  - id: py.u03.l03.e06
+    type: write_code
+    difficulty: 2
+    skills: [py.if, py.input, py.compare]
+    prompt:
+      es: |
+        Lee un entero. Si es mayor que 0 muestra `positivo`; en caso contrario muestra `no positivo`.
+      en: |
+        Read a whole number. If it is greater than 0 show `positivo`; otherwise show `no positivo`.
+    starter: |
+      # Escribe tu código aquí / Write your code here
+    reference_solution: |
+      n = int(input())
+      if n > 0:
+          print("positivo")
+      else:
+          print("no positivo")
+    tests:
+      - {stdin: "5\n", expected_stdout: "positivo\n", visible: true}
+      - {stdin: "0\n", expected_stdout: "no positivo\n", visible: false}
+      - {stdin: "-3\n", expected_stdout: "no positivo\n", visible: false}
+    wrong_examples:
+      - code: |
+          n = int(input())
+          if n >= 0:
+              print("positivo")
+          else:
+              print("no positivo")
+        expect_fail_tag: logic.off_by_one
+      - code: |
+          n = int(input())
+          print("positivo")
+        expect_fail_tag: logic.missing_branch
+    hints:
+      - {es: 'El cero NO es positivo.', en: 'Zero is NOT positive.'}
+    explanation:
+      es: 'Con `>=` el cero se clasificaría mal. Revisa siempre los valores límite.'
+      en: 'With `>=` zero would be misclassified. Always check the boundary values.'
+
+  - id: py.u03.l03.e07
+    type: write_code
+    difficulty: 3
+    skills: [py.if, py.input, py.compare, py.strings.basic]
+    prompt:
+      es: |
+        Lee una clave. Si es exactamente `python` muestra `acceso`; si no, muestra `denegado`.
+      en: |
+        Read a password. If it is exactly `python` show `acceso`; otherwise show `denegado`.
+    starter: |
+      # Escribe tu código aquí / Write your code here
+    reference_solution: |
+      clave = input()
+      if clave == "python":
+          print("acceso")
+      else:
+          print("denegado")
+    tests:
+      - {stdin: "python\n", expected_stdout: "acceso\n", visible: true}
+      - {stdin: "Python\n", expected_stdout: "denegado\n", visible: false}
+      - {stdin: "abc\n", expected_stdout: "denegado\n", visible: false}
+    wrong_examples:
+      - code: |
+          clave = input()
+          print("acceso")
+        expect_fail_tag: logic.missing_branch
+      - code: |
+          clave = input()
+          if clave != "python":
+              print("acceso")
+          else:
+              print("denegado")
+        expect_fail_tag: logic.inverted_condition
+    hints:
+      - {es: 'Compara texto con `==`.', en: 'Compare text with `==`.'}
+    explanation:
+      es: 'Al comparar texto importan las mayúsculas: `Python` no es igual a `python`.'
+      en: 'Case matters when comparing text: `Python` is not equal to `python`.'
+
+  - id: py.u03.l03.e08
+    type: predict_output
+    difficulty: 3
+    skills: [py.if]
+    prompt:
+      es: '¿Qué muestra este programa? Escribe todas las líneas.'
+      en: 'What does this program show? Write all the lines.'
+    code: |
+      x = 3
+      if x > 5:
+          print("A")
+      else:
+          print("B")
+      print("C")
+    answer: "B\nC"
+    hints:
+      - {es: 'Se ejecuta una sola rama y luego sigue el resto del programa.', en: 'Only one branch runs and then the rest of the program continues.'}
+    explanation:
+      es: 'Se ejecuta el `else` (`B`) y luego la línea sin indentar (`C`).'
+      en: 'The `else` runs (`B`) and then the unindented line (`C`).'

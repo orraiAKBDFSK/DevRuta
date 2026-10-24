@@ -1,0 +1,263 @@
+id: py.u07.l04
+language: python
+unit: py.u07
+position: 4
+skills: [py.set]
+status: draft
+reviewed_by: []
+title:
+  es: 'Conjuntos'
+  en: 'Sets'
+explanation:
+  es: |
+    Un **conjunto** (`set`) guarda elementos **sin repetir** y **sin orden**:
+
+    ```python
+    s = {1, 2, 2, 3}
+    print(len(s))            # 3  (el 2 solo cuenta una vez)
+    s.add(4)                 # agrega un elemento
+    print(3 in s)            # True
+    unicos = set([1, 1, 2])  # quita repetidos de una lista
+    ```
+
+    - Un conjunto vacío se crea con `set()`; `{}` crea un diccionario vacío.
+    - Como **no tienen orden**, no se puede usar índice, y el orden en que se muestran no es fiable.
+      Para mostrarlos de forma estable usa `sorted(conjunto)`, que devuelve una lista ordenada.
+    - Operaciones entre conjuntos: `a | b` (unión), `a & b` (intersección: lo que tienen en común) y `a - b` (lo que está en `a` y no en `b`).
+  en: |
+    A **set** (`set`) stores elements **without repeats** and **without order**:
+
+    ```python
+    s = {1, 2, 2, 3}
+    print(len(s))            # 3  (the 2 only counts once)
+    s.add(4)                 # adds an element
+    print(3 in s)            # True
+    unicos = set([1, 1, 2])  # removes repeats from a list
+    ```
+
+    - An empty set is created with `set()`; `{}` creates an empty dictionary.
+    - Since they have **no order**, you cannot use an index, and the order in which they are shown is not reliable.
+      To show them in a stable way use `sorted(set)`, which returns a sorted list.
+    - Operations between sets: `a | b` (union), `a & b` (intersection: what they have in common) and `a - b` (what is in `a` and not in `b`).
+exercises:
+  - id: py.u07.l04.e01
+    type: predict_output
+    difficulty: 1
+    skills: [py.set]
+    prompt:
+      es: '¿Qué muestra este programa?'
+      en: 'What does this program show?'
+    code: |
+      print(len({1, 2, 2, 3}))
+    answer: "3"
+    hints:
+      - {es: 'Los repetidos no cuentan.', en: 'Repeats do not count.'}
+    explanation:
+      es: 'El conjunto es `{1, 2, 3}`.'
+      en: 'The set is `{1, 2, 3}`.'
+
+  - id: py.u07.l04.e02
+    type: predict_output
+    difficulty: 1
+    skills: [py.set]
+    prompt:
+      es: '¿Qué muestra este programa?'
+      en: 'What does this program show?'
+    code: |
+      print(len(set([1, 1, 1, 2])))
+    answer: "2"
+    hints:
+      - {es: '`set(lista)` quita los repetidos.', en: '`set(lista)` removes the repeats.'}
+    explanation:
+      es: 'Solo quedan el 1 y el 2.'
+      en: 'Only the 1 and the 2 remain.'
+
+  - id: py.u07.l04.e03
+    type: predict_output
+    difficulty: 2
+    skills: [py.set]
+    prompt:
+      es: '¿Qué muestra este programa?'
+      en: 'What does this program show?'
+    code: |
+      s = {1, 2}
+      s.add(3)
+      s.add(2)
+      print(len(s))
+    answer: "3"
+    hints:
+      - {es: 'Agregar un elemento que ya existe no cambia el conjunto.', en: 'Adding an element that already exists does not change the set.'}
+    explanation:
+      es: 'Queda `{1, 2, 3}`.'
+      en: 'It ends up as `{1, 2, 3}`.'
+
+  - id: py.u07.l04.e04
+    type: predict_output
+    difficulty: 2
+    skills: [py.set]
+    prompt:
+      es: '¿Qué muestra este programa? Escribe la lista tal como la muestra Python.'
+      en: 'What does this program show? Write the list the way Python shows it.'
+    code: |
+      print(sorted({3, 1, 2}))
+    answer: "[1, 2, 3]"
+    hints:
+      - {es: '`sorted` devuelve una lista ordenada.', en: '`sorted` returns a sorted list.'}
+    explanation:
+      es: '`sorted` funciona con cualquier colección y devuelve siempre una lista.'
+      en: '`sorted` works with any collection and always returns a list.'
+
+  - id: py.u07.l04.e05
+    type: predict_output
+    difficulty: 3
+    skills: [py.set]
+    prompt:
+      es: '¿Qué muestra este programa? Escribe las tres líneas.'
+      en: 'What does this program show? Write the three lines.'
+    code: |
+      a = {1, 2, 3}
+      b = {2, 3, 4}
+      print(sorted(a & b))
+      print(sorted(a | b))
+      print(sorted(a - b))
+    answer: "[2, 3]\n[1, 2, 3, 4]\n[1]"
+    hints:
+      - {es: '`&` es lo común, `|` es todo junto y `-` es lo que solo está en el primero.', en: '`&` is what they share, `|` is everything together and `-` is what is only in the first.'}
+    explanation:
+      es: 'Intersección, unión y diferencia.'
+      en: 'Intersection, union and difference.'
+
+  - id: py.u07.l04.e06
+    type: multiple_choice
+    difficulty: 2
+    skills: [py.set, py.dict]
+    prompt:
+      es: '¿Cómo se crea un conjunto vacío?'
+      en: 'How do you create an empty set?'
+    options:
+      - {es: '`set()`', en: '`set()`'}
+      - {es: '`{}`', en: '`{}`'}
+      - {es: '`[]`', en: '`[]`'}
+      - {es: '`()`', en: '`()`'}
+    answer: 0
+    distractor_tags: {1: set.empty_braces_is_dict, 2: set.empty_vs_list, 3: set.empty_vs_tuple}
+    hints:
+      - {es: 'Las llaves vacías ya significan otra cosa.', en: 'Empty braces already mean something else.'}
+    explanation:
+      es: '`{}` crea un diccionario vacío; `[]`, una lista vacía; `()`, una tupla vacía.'
+      en: '`{}` creates an empty dictionary; `[]`, an empty list; `()`, an empty tuple.'
+
+  - id: py.u07.l04.e07
+    type: write_code
+    difficulty: 3
+    skills: [py.set, py.list, py.input]
+    prompt:
+      es: 'Lee un entero `n` y luego `n` enteros (uno por línea). Muestra cuántos valores **distintos** hay.'
+      en: 'Read a whole number `n` and then `n` whole numbers (one per line). Show how many **distinct** values there are.'
+    starter: |
+      # Escribe tu código aquí / Write your code here
+    reference_solution: |
+      n = int(input())
+      vistos = set()
+      for i in range(n):
+          vistos.add(int(input()))
+      print(len(vistos))
+    tests:
+      - {stdin: "5\n1\n2\n1\n3\n2\n", expected_stdout: "3\n", visible: true}
+      - {stdin: "0\n", expected_stdout: "0\n", visible: false}
+      - {stdin: "3\n4\n4\n4\n", expected_stdout: "1\n", visible: false}
+    wrong_examples:
+      - code: |
+          n = int(input())
+          vistos = []
+          for i in range(n):
+              vistos.append(int(input()))
+          print(len(vistos))
+        expect_fail_tag: logic.missing_dedup
+    hints:
+      - {es: 'Empieza con `set()` y usa `add`.', en: 'Start with `set()` and use `add`.'}
+    explanation:
+      es: 'Un conjunto descarta los repetidos automáticamente.'
+      en: 'A set discards repeats automatically.'
+
+  - id: py.u07.l04.e08
+    type: write_code
+    difficulty: 4
+    skills: [py.set, py.list, py.input]
+    prompt:
+      es: |
+        Lee un entero `n`, luego `n` enteros (lista A); después un entero `m` y `m` enteros (lista B), uno por línea.
+        Muestra la lista ordenada de los valores que están en **ambas** listas, sin repetidos.
+      en: |
+        Read a whole number `n`, then `n` whole numbers (list A); then a whole number `m` and `m` whole numbers (list B), one per line.
+        Show the sorted list of the values that are in **both** lists, without repeats.
+    starter: |
+      # Escribe tu código aquí / Write your code here
+    reference_solution: |
+      n = int(input())
+      a = set()
+      for i in range(n):
+          a.add(int(input()))
+      m = int(input())
+      b = set()
+      for i in range(m):
+          b.add(int(input()))
+      print(sorted(a & b))
+    tests:
+      - {stdin: "3\n1\n2\n3\n3\n2\n3\n4\n", expected_stdout: "[2, 3]\n", visible: true}
+      - {stdin: "2\n1\n2\n2\n3\n4\n", expected_stdout: "[]\n", visible: false}
+      - {stdin: "4\n5\n5\n1\n2\n3\n5\n2\n2\n", expected_stdout: "[2, 5]\n", visible: false}
+    wrong_examples:
+      - code: |
+          n = int(input())
+          a = set()
+          for i in range(n):
+              a.add(int(input()))
+          m = int(input())
+          b = set()
+          for i in range(m):
+              b.add(int(input()))
+          print(sorted(a | b))
+        expect_fail_tag: set.union_vs_intersection
+    hints:
+      - {es: 'Convierte cada lista en un conjunto y usa `&`.', en: 'Turn each list into a set and use `&`.'}
+    explanation:
+      es: 'La intersección contiene solo lo que está en los dos conjuntos.'
+      en: 'The intersection contains only what is in both sets.'
+
+  - id: py.u07.l04.e09
+    type: write_code
+    difficulty: 3
+    skills: [py.set, py.list, py.compare, py.input]
+    prompt:
+      es: |
+        Lee un entero `n` y luego `n` enteros (uno por línea). Muestra `True` si hay algún valor repetido
+        y `False` si todos son distintos.
+      en: |
+        Read a whole number `n` and then `n` whole numbers (one per line). Show `True` if any value is repeated
+        and `False` if all are different.
+    starter: |
+      # Escribe tu código aquí / Write your code here
+    reference_solution: |
+      n = int(input())
+      datos = []
+      for i in range(n):
+          datos.append(int(input()))
+      print(len(set(datos)) != len(datos))
+    tests:
+      - {stdin: "3\n1\n2\n3\n", expected_stdout: "False\n", visible: true}
+      - {stdin: "4\n1\n2\n1\n5\n", expected_stdout: "True\n", visible: false}
+      - {stdin: "0\n", expected_stdout: "False\n", visible: false}
+    wrong_examples:
+      - code: |
+          n = int(input())
+          datos = []
+          for i in range(n):
+              datos.append(int(input()))
+          print(len(set(datos)) == len(datos))
+        expect_fail_tag: logic.inverted_condition
+    hints:
+      - {es: 'Compara cuántos elementos hay con y sin repetidos.', en: 'Compare how many elements there are with and without repeats.'}
+    explanation:
+      es: 'Si el conjunto es más pequeño que la lista, hubo repetidos.'
+      en: 'If the set is smaller than the list, there were repeats.'

@@ -1,0 +1,285 @@
+id: py.u04.l03
+language: python
+unit: py.u04
+position: 3
+skills: [py.range, py.for]
+status: draft
+reviewed_by: []
+title:
+  es: 'Pasos, contadores y acumuladores'
+  en: 'Steps, counters and accumulators'
+explanation:
+  es: |
+    `range` acepta un tercer valor, el **paso**: `range(inicio, fin, paso)`.
+
+    ```python
+    for i in range(0, 10, 3):    # 0, 3, 6, 9
+        print(i)
+    for i in range(5, 0, -1):    # 5, 4, 3, 2, 1
+        print(i)
+    ```
+
+    Dos patrones muy usados dentro de un bucle:
+
+    - **Acumulador**: `total = total + i` suma o junta valores.
+    - **Contador**: `if condicion: cuenta = cuenta + 1` cuenta cuántas veces algo se cumple.
+  en: |
+    `range` accepts a third value, the **step**: `range(start, end, step)`.
+
+    ```python
+    for i in range(0, 10, 3):    # 0, 3, 6, 9
+        print(i)
+    for i in range(5, 0, -1):    # 5, 4, 3, 2, 1
+        print(i)
+    ```
+
+    Two very common patterns inside a loop:
+
+    - **Accumulator**: `total = total + i` adds up or collects values.
+    - **Counter**: `if condition: count = count + 1` counts how many times something holds.
+exercises:
+  - id: py.u04.l03.e01
+    type: predict_output
+    difficulty: 2
+    skills: [py.range]
+    prompt:
+      es: '¿Qué muestra este programa?'
+      en: 'What does this program show?'
+    code: |
+      for i in range(0, 10, 3):
+          print(i)
+    answer: "0\n3\n6\n9"
+    hints:
+      - {es: 'Cada vuelta suma 3 al valor anterior.', en: 'Each turn adds 3 to the previous value.'}
+    explanation:
+      es: 'El siguiente sería 12, que ya supera el final (10).'
+      en: 'The next one would be 12, which already exceeds the end (10).'
+
+  - id: py.u04.l03.e02
+    type: predict_output
+    difficulty: 2
+    skills: [py.range]
+    prompt:
+      es: '¿Qué muestra este programa?'
+      en: 'What does this program show?'
+    code: |
+      for i in range(5, 0, -1):
+          print(i)
+    answer: "5\n4\n3\n2\n1"
+    hints:
+      - {es: 'Un paso negativo cuenta hacia atrás.', en: 'A negative step counts backwards.'}
+    explanation:
+      es: 'El final (0) no se incluye, igual que en los otros `range`.'
+      en: 'The end (0) is not included, just like in other `range` calls.'
+
+  - id: py.u04.l03.e03
+    type: predict_output
+    difficulty: 3
+    skills: [py.for, py.if, py.operators]
+    prompt:
+      es: '¿Qué muestra este programa?'
+      en: 'What does this program show?'
+    code: |
+      cuenta = 0
+      for i in range(10):
+          if i % 2 == 0:
+              cuenta = cuenta + 1
+      print(cuenta)
+    answer: "5"
+    hints:
+      - {es: 'Cuenta los números pares entre 0 y 9.', en: 'Count the even numbers between 0 and 9.'}
+    explanation:
+      es: 'Los pares son 0, 2, 4, 6 y 8: cinco en total.'
+      en: 'The even numbers are 0, 2, 4, 6 and 8: five in total.'
+
+  - id: py.u04.l03.e04
+    type: multiple_choice
+    difficulty: 3
+    skills: [py.range]
+    prompt:
+      es: '¿Qué `range` recorre los números pares del 2 al 10, ambos incluidos?'
+      en: 'Which `range` walks through the even numbers from 2 to 10, both included?'
+    options:
+      - {es: 'range(2, 11, 2)', en: 'range(2, 11, 2)'}
+      - {es: 'range(2, 10, 2)', en: 'range(2, 10, 2)'}
+      - {es: 'range(10, 2, 2)', en: 'range(10, 2, 2)'}
+      - {es: 'range(2, 11)', en: 'range(2, 11)'}
+    answer: 0
+    distractor_tags: {1: logic.off_by_one, 2: logic.wrong_direction, 3: logic.missing_step}
+    hints:
+      - {es: 'El final no se incluye, así que debe ser mayor que 10.', en: 'The end is not included, so it must be greater than 10.'}
+    explanation:
+      es: '`range(2, 10, 2)` se detendría en 8; `range(2, 11)` incluiría también los impares.'
+      en: '`range(2, 10, 2)` would stop at 8; `range(2, 11)` would include the odd numbers too.'
+
+  - id: py.u04.l03.e05
+    type: fill_code
+    difficulty: 3
+    skills: [py.range]
+    prompt:
+      es: 'Completa el `range` para que el programa cuente de 10 a 1.'
+      en: 'Fill in the `range` so the program counts from 10 to 1.'
+    code: |
+      for i in range(10, ___, -1):
+          print(i)
+    blanks:
+      - ["0"]
+    hints:
+      - {es: 'El final no se incluye.', en: 'The end is not included.'}
+    explanation:
+      es: 'Con final 0, el último valor mostrado es 1.'
+      en: 'With end 0, the last value shown is 1.'
+
+  - id: py.u04.l03.e06
+    type: write_code
+    difficulty: 3
+    skills: [py.range, py.for, py.input]
+    prompt:
+      es: 'Lee un entero `n` y muestra los números pares desde el 2 hasta `n` (incluido si es par), uno por línea.'
+      en: 'Read a whole number `n` and show the even numbers from 2 up to `n` (included if even), one per line.'
+    starter: |
+      # Escribe tu código aquí / Write your code here
+    reference_solution: |
+      n = int(input())
+      for i in range(2, n + 1, 2):
+          print(i)
+    tests:
+      - {stdin: "6\n", expected_stdout: "2\n4\n6\n", visible: true}
+      - {stdin: "7\n", expected_stdout: "2\n4\n6\n", visible: false}
+      - {stdin: "1\n", expected_stdout: "", visible: false}
+    wrong_examples:
+      - code: |
+          n = int(input())
+          for i in range(2, n, 2):
+              print(i)
+        expect_fail_tag: logic.off_by_one
+      - code: |
+          n = int(input())
+          for i in range(1, n + 1):
+              print(i)
+        expect_fail_tag: logic.missing_step
+    hints:
+      - {es: 'Usa un paso de 2 empezando en 2.', en: 'Use a step of 2 starting at 2.'}
+    explanation:
+      es: 'Con `n + 1` como final, el propio `n` entra si es par.'
+      en: 'With `n + 1` as the end, `n` itself is included if it is even.'
+
+  - id: py.u04.l03.e07
+    type: write_code
+    difficulty: 3
+    skills: [py.for, py.if, py.operators, py.input]
+    prompt:
+      es: 'Lee un entero `n` y muestra cuántos múltiplos de 3 hay entre 1 y `n` (ambos incluidos).'
+      en: 'Read a whole number `n` and show how many multiples of 3 there are between 1 and `n` (both included).'
+    starter: |
+      # Escribe tu código aquí / Write your code here
+    reference_solution: |
+      n = int(input())
+      cuenta = 0
+      for i in range(1, n + 1):
+          if i % 3 == 0:
+              cuenta = cuenta + 1
+      print(cuenta)
+    tests:
+      - {stdin: "10\n", expected_stdout: "3\n", visible: true}
+      - {stdin: "9\n", expected_stdout: "3\n", visible: false}
+      - {stdin: "2\n", expected_stdout: "0\n", visible: false}
+    wrong_examples:
+      - code: |
+          n = int(input())
+          cuenta = 0
+          for i in range(1, n):
+              if i % 3 == 0:
+                  cuenta = cuenta + 1
+          print(cuenta)
+        expect_fail_tag: logic.off_by_one
+      - code: |
+          n = int(input())
+          for i in range(1, n + 1):
+              if i % 3 == 0:
+                  print(i)
+        expect_fail_tag: logic.print_instead_of_count
+    hints:
+      - {es: 'Crea un contador en 0 antes del bucle.', en: 'Create a counter at 0 before the loop.'}
+      - {es: 'Súmale 1 solo cuando `i % 3 == 0`.', en: 'Add 1 only when `i % 3 == 0`.'}
+    explanation:
+      es: 'Un contador combina un bucle, un `if` y una variable que empieza en 0.'
+      en: 'A counter combines a loop, an `if` and a variable that starts at 0.'
+
+  - id: py.u04.l03.e08
+    type: write_code
+    difficulty: 3
+    skills: [py.for, py.range, py.input, py.operators]
+    prompt:
+      es: |
+        Lee un entero `n` y muestra su tabla de multiplicar del 1 al 10, con el formato `n x i = resultado`.
+        Ejemplo para 2: `2 x 1 = 2`.
+      en: |
+        Read a whole number `n` and show its multiplication table from 1 to 10, in the format `n x i = result`.
+        Example for 2: `2 x 1 = 2`.
+    starter: |
+      # Escribe tu código aquí / Write your code here
+    reference_solution: |
+      n = int(input())
+      for i in range(1, 11):
+          print(n, "x", i, "=", n * i)
+    tests:
+      - {stdin: "2\n", expected_stdout: "2 x 1 = 2\n2 x 2 = 4\n2 x 3 = 6\n2 x 4 = 8\n2 x 5 = 10\n2 x 6 = 12\n2 x 7 = 14\n2 x 8 = 16\n2 x 9 = 18\n2 x 10 = 20\n", visible: true}
+      - {stdin: "5\n", expected_stdout: "5 x 1 = 5\n5 x 2 = 10\n5 x 3 = 15\n5 x 4 = 20\n5 x 5 = 25\n5 x 6 = 30\n5 x 7 = 35\n5 x 8 = 40\n5 x 9 = 45\n5 x 10 = 50\n", visible: false}
+    wrong_examples:
+      - code: |
+          n = int(input())
+          for i in range(1, 10):
+              print(n, "x", i, "=", n * i)
+        expect_fail_tag: logic.off_by_one
+      - code: |
+          n = int(input())
+          for i in range(1, 11):
+              print(n, "x", i, "=", n + i)
+        expect_fail_tag: logic.wrong_operation
+    hints:
+      - {es: '`print(a, b, c)` separa los valores con un espacio.', en: '`print(a, b, c)` separates the values with a space.'}
+    explanation:
+      es: 'El 10 debe entrar, así que el final del `range` es 11.'
+      en: 'The 10 must be included, so the end of the `range` is 11.'
+
+  - id: py.u04.l03.e09
+    type: write_code
+    difficulty: 4
+    skills: [py.for, py.range, py.operators, py.input]
+    prompt:
+      es: 'Lee un entero `n` (0 o mayor) y muestra su factorial: el producto de todos los enteros de 1 a `n`. El factorial de 0 es 1.'
+      en: 'Read a whole number `n` (0 or greater) and show its factorial: the product of all whole numbers from 1 to `n`. The factorial of 0 is 1.'
+    starter: |
+      # Escribe tu código aquí / Write your code here
+    reference_solution: |
+      n = int(input())
+      resultado = 1
+      for i in range(1, n + 1):
+          resultado = resultado * i
+      print(resultado)
+    tests:
+      - {stdin: "5\n", expected_stdout: "120\n", visible: true}
+      - {stdin: "0\n", expected_stdout: "1\n", visible: false}
+      - {stdin: "1\n", expected_stdout: "1\n", visible: false}
+      - {stdin: "10\n", expected_stdout: "3628800\n", visible: false}
+    wrong_examples:
+      - code: |
+          n = int(input())
+          resultado = 0
+          for i in range(1, n + 1):
+              resultado = resultado * i
+          print(resultado)
+        expect_fail_tag: logic.bad_initial_value
+      - code: |
+          n = int(input())
+          resultado = 1
+          for i in range(1, n):
+              resultado = resultado * i
+          print(resultado)
+        expect_fail_tag: logic.off_by_one
+    hints:
+      - {es: 'Un acumulador que multiplica debe empezar en 1, no en 0.', en: 'An accumulator that multiplies must start at 1, not 0.'}
+    explanation:
+      es: 'Empezar en 0 haría que todo producto fuera 0.'
+      en: 'Starting at 0 would make every product 0.'

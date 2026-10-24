@@ -1,0 +1,340 @@
+id: py.u09.l01
+language: python
+unit: py.u09
+position: 1
+skills: [py.errors.read]
+status: draft
+reviewed_by: []
+title:
+  es: 'Leer los mensajes de error'
+  en: 'Reading error messages'
+explanation:
+  es: |
+    Cuando un programa falla, Python muestra un **traceback** (rastro del error):
+
+    ```
+    Traceback (most recent call last):
+      File "main.py", line 3, in <module>
+        print(x)
+    NameError: name 'x' is not defined
+    ```
+
+    Cómo leerlo:
+
+    1. Empieza por la **última línea**: dice el **tipo** de error (`NameError`) y el **motivo**.
+    2. Mira el **número de línea** (`line 3`) y la línea de código que se muestra.
+    3. Si hay varias llamadas, la última es donde ocurrió el fallo.
+
+    Errores frecuentes:
+
+    | Error | Causa típica |
+    |---|---|
+    | `SyntaxError` | falta un `:`, un paréntesis o una comilla |
+    | `IndentationError` | indentación incorrecta |
+    | `NameError` | usar una variable que no existe (o mal escrita) |
+    | `TypeError` | operación entre tipos incompatibles, como `"5" + 5` |
+    | `ValueError` | valor con el tipo correcto pero inválido, como `int("abc")` |
+    | `IndexError` | índice fuera de rango en una lista o texto |
+    | `KeyError` | clave inexistente en un diccionario |
+    | `ZeroDivisionError` | dividir entre cero |
+    | `AttributeError` | método que el objeto no tiene |
+  en: |
+    When a program fails, Python shows a **traceback**:
+
+    ```
+    Traceback (most recent call last):
+      File "main.py", line 3, in <module>
+        print(x)
+    NameError: name 'x' is not defined
+    ```
+
+    How to read it:
+
+    1. Start with the **last line**: it gives the error **type** (`NameError`) and the **reason**.
+    2. Look at the **line number** (`line 3`) and the line of code shown.
+    3. If there are several calls, the last one is where the failure happened.
+
+    Common errors:
+
+    | Error | Typical cause |
+    |---|---|
+    | `SyntaxError` | a missing `:`, parenthesis or quote |
+    | `IndentationError` | wrong indentation |
+    | `NameError` | using a variable that does not exist (or is misspelled) |
+    | `TypeError` | operation between incompatible types, such as `"5" + 5` |
+    | `ValueError` | right type but invalid value, such as `int("abc")` |
+    | `IndexError` | index out of range in a list or text |
+    | `KeyError` | missing key in a dictionary |
+    | `ZeroDivisionError` | dividing by zero |
+    | `AttributeError` | a method the object does not have |
+exercises:
+  - id: py.u09.l01.e01
+    type: multiple_choice
+    difficulty: 1
+    skills: [py.errors.read]
+    prompt:
+      es: |
+        Este programa falla con el siguiente mensaje. ¿Cuál es la causa?
+
+        ```
+        Traceback (most recent call last):
+          File "main.py", line 3, in <module>
+            print(x)
+        NameError: name 'x' is not defined
+        ```
+      en: |
+        This program fails with the following message. What is the cause?
+
+        ```
+        Traceback (most recent call last):
+          File "main.py", line 3, in <module>
+            print(x)
+        NameError: name 'x' is not defined
+        ```
+    options:
+      - {es: 'La variable `x` no existe en ese punto del programa.', en: 'The variable `x` does not exist at that point in the program.'}
+      - {es: '`print` está mal escrito.', en: '`print` is misspelled.'}
+      - {es: 'Falta una comilla.', en: 'A quote is missing.'}
+      - {es: 'El número es demasiado grande.', en: 'The number is too large.'}
+    answer: 0
+    distractor_tags: {1: error.confusion, 2: error.confusion}
+    hints:
+      - {es: 'Lee la última línea del mensaje.', en: 'Read the last line of the message.'}
+    explanation:
+      es: 'Un `NameError` indica que se usó un nombre que no está definido: puede faltar la asignación o estar mal escrito.'
+      en: 'A `NameError` means a name that is not defined was used: the assignment may be missing or the name misspelled.'
+
+  - id: py.u09.l01.e02
+    type: multiple_choice
+    difficulty: 1
+    skills: [py.errors.read]
+    prompt:
+      es: '¿Qué error produce `print(10 / 0)`?'
+      en: 'What error does `print(10 / 0)` produce?'
+    options:
+      - {es: '`ZeroDivisionError`', en: '`ZeroDivisionError`'}
+      - {es: '`ValueError`', en: '`ValueError`'}
+      - {es: '`TypeError`', en: '`TypeError`'}
+      - {es: '`SyntaxError`', en: '`SyntaxError`'}
+    answer: 0
+    distractor_tags: {1: error.confusion, 2: error.confusion}
+    hints:
+      - {es: 'El nombre del error describe la operación.', en: 'The name of the error describes the operation.'}
+    explanation:
+      es: 'Dividir entre cero no está definido en matemáticas ni en Python.'
+      en: 'Dividing by zero is undefined in mathematics and in Python.'
+
+  - id: py.u09.l01.e03
+    type: multiple_choice
+    difficulty: 1
+    skills: [py.errors.read]
+    prompt:
+      es: '¿Qué error produce `int("abc")`?'
+      en: 'What error does `int("abc")` produce?'
+    options:
+      - {es: '`ValueError`', en: '`ValueError`'}
+      - {es: '`TypeError`', en: '`TypeError`'}
+      - {es: '`NameError`', en: '`NameError`'}
+      - {es: '`IndexError`', en: '`IndexError`'}
+    answer: 0
+    distractor_tags: {1: error.value_vs_type}
+    hints:
+      - {es: 'El argumento es un texto (tipo correcto) pero su contenido no sirve.', en: 'The argument is a text (right type) but its content is not usable.'}
+    explanation:
+      es: 'Es un `ValueError`: el tipo es correcto (texto), pero el valor no representa un número.'
+      en: 'It is a `ValueError`: the type is right (text), but the value does not represent a number.'
+
+  - id: py.u09.l01.e04
+    type: multiple_choice
+    difficulty: 1
+    skills: [py.errors.read]
+    prompt:
+      es: '¿Qué error produce `[1, 2, 3][5]`?'
+      en: 'What error does `[1, 2, 3][5]` produce?'
+    options:
+      - {es: '`IndexError`', en: '`IndexError`'}
+      - {es: '`KeyError`', en: '`KeyError`'}
+      - {es: '`ValueError`', en: '`ValueError`'}
+      - {es: '`NameError`', en: '`NameError`'}
+    answer: 0
+    distractor_tags: {1: error.index_vs_key}
+    hints:
+      - {es: 'Se pide una posición que no existe.', en: 'A position that does not exist is requested.'}
+    explanation:
+      es: 'La lista solo tiene índices 0, 1 y 2.'
+      en: 'The list only has indexes 0, 1 and 2.'
+
+  - id: py.u09.l01.e05
+    type: multiple_choice
+    difficulty: 2
+    skills: [py.errors.read]
+    prompt:
+      es: '¿Qué error produce `{"a": 1}["b"]`?'
+      en: 'What error does `{"a": 1}["b"]` produce?'
+    options:
+      - {es: '`KeyError`', en: '`KeyError`'}
+      - {es: '`IndexError`', en: '`IndexError`'}
+      - {es: '`ValueError`', en: '`ValueError`'}
+      - {es: '`TypeError`', en: '`TypeError`'}
+    answer: 0
+    distractor_tags: {1: error.index_vs_key}
+    hints:
+      - {es: 'Se busca una clave que no está en el diccionario.', en: 'A key that is not in the dictionary is being looked up.'}
+    explanation:
+      es: '`KeyError` es el equivalente de `IndexError` para diccionarios.'
+      en: '`KeyError` is the dictionary equivalent of `IndexError`.'
+
+  - id: py.u09.l01.e06
+    type: multiple_choice
+    difficulty: 2
+    skills: [py.errors.read]
+    prompt:
+      es: '¿Qué error produce `"5" + 5`?'
+      en: 'What error does `"5" + 5` produce?'
+    options:
+      - {es: '`TypeError`', en: '`TypeError`'}
+      - {es: '`ValueError`', en: '`ValueError`'}
+      - {es: 'Ninguno: da `10`.', en: 'None: it gives `10`.'}
+      - {es: 'Ninguno: da `"55"`.', en: 'None: it gives `"55"`.'}
+    answer: 0
+    distractor_tags: {1: error.value_vs_type, 2: type.str_plus_int, 3: type.str_plus_int}
+    hints:
+      - {es: 'Python no mezcla texto y número con `+`.', en: 'Python does not mix text and numbers with `+`.'}
+    explanation:
+      es: 'Los tipos son incompatibles para esa operación.'
+      en: 'The types are incompatible for that operation.'
+
+  - id: py.u09.l01.e07
+    type: multiple_choice
+    difficulty: 2
+    skills: [py.errors.read]
+    prompt:
+      es: |
+        Python no llega a ejecutar este programa y muestra un error. ¿Cuál?
+
+        ```python
+        if x > 3
+            print("grande")
+        ```
+      en: |
+        Python does not even run this program and shows an error. Which one?
+
+        ```python
+        if x > 3
+            print("grande")
+        ```
+    options:
+      - {es: '`SyntaxError`, porque falta `:` al final del `if`.', en: '`SyntaxError`, because the `:` at the end of the `if` is missing.'}
+      - {es: '`NameError`, porque `x` no existe.', en: '`NameError`, because `x` does not exist.'}
+      - {es: '`TypeError`, porque se compara con 3.', en: '`TypeError`, because it is compared with 3.'}
+      - {es: '`ValueError`, porque 3 es demasiado pequeño.', en: '`ValueError`, because 3 is too small.'}
+    answer: 0
+    distractor_tags: {1: error.syntax_vs_runtime}
+    hints:
+      - {es: 'Los errores de sintaxis se detectan antes de ejecutar nada.', en: 'Syntax errors are detected before anything runs.'}
+    explanation:
+      es: 'Aunque `x` tampoco exista, Python primero lee todo el programa y se detiene en el error de sintaxis.'
+      en: 'Even though `x` does not exist either, Python first reads the whole program and stops at the syntax error.'
+
+  - id: py.u09.l01.e08
+    type: multiple_choice
+    difficulty: 2
+    skills: [py.errors.read]
+    prompt:
+      es: |
+        ¿Qué error produce este programa?
+
+        ```python
+        print("a")
+            print("b")
+        ```
+      en: |
+        What error does this program produce?
+
+        ```python
+        print("a")
+            print("b")
+        ```
+    options:
+      - {es: '`IndentationError`: la segunda línea está indentada sin motivo.', en: '`IndentationError`: the second line is indented for no reason.'}
+      - {es: '`NameError`', en: '`NameError`'}
+      - {es: '`TypeError`', en: '`TypeError`'}
+      - {es: 'Ninguno, muestra `a` y `b`.', en: 'None, it shows `a` and `b`.'}
+    answer: 0
+    distractor_tags: {3: indent.wrong}
+    hints:
+      - {es: 'En Python la indentación forma parte de la sintaxis.', en: 'In Python indentation is part of the syntax.'}
+    explanation:
+      es: 'Solo se indenta después de una línea que abre un bloque (`if`, `for`, `def`...).'
+      en: 'You only indent after a line that opens a block (`if`, `for`, `def`...).'
+
+  - id: py.u09.l01.e09
+    type: multiple_choice
+    difficulty: 3
+    skills: [py.errors.read, py.range]
+    prompt:
+      es: |
+        Este programa falla. ¿Por qué?
+
+        ```python
+        numeros = [1, 2, 3]
+        total = 0
+        for i in range(4):
+            total = total + numeros[i]
+        print(total)
+        ```
+
+        ```
+        File "main.py", line 4, in <module>
+          total = total + numeros[i]
+        IndexError: list index out of range
+        ```
+      en: |
+        This program fails. Why?
+
+        ```python
+        numeros = [1, 2, 3]
+        total = 0
+        for i in range(4):
+            total = total + numeros[i]
+        print(total)
+        ```
+
+        ```
+        File "main.py", line 4, in <module>
+          total = total + numeros[i]
+        IndexError: list index out of range
+        ```
+    options:
+      - {es: '`range(4)` genera el índice 3, y la lista solo tiene índices 0, 1 y 2.', en: '`range(4)` generates the index 3, and the list only has indexes 0, 1 and 2.'}
+      - {es: '`total` no está definido.', en: '`total` is not defined.'}
+      - {es: 'No se puede sumar dentro de un `for`.', en: 'You cannot add inside a `for`.'}
+      - {es: 'La lista debería tener 4 elementos y le falta uno.', en: 'The list should have 4 elements and one is missing.'}
+    answer: 0
+    distractor_tags: {3: error.blame_data}
+    hints:
+      - {es: 'Compara cuántas vueltas da el bucle con cuántos elementos hay.', en: 'Compare how many turns the loop takes with how many elements there are.'}
+      - {es: 'Mejor aún: usa `range(len(numeros))`.', en: 'Even better: use `range(len(numeros))`.'}
+    explanation:
+      es: 'En la cuarta vuelta `i` vale 3 y `numeros[3]` no existe. El número de línea y la línea de código apuntan al lugar exacto.'
+      en: 'On the fourth turn `i` is 3 and `numeros[3]` does not exist. The line number and the line of code point to the exact place.'
+
+  - id: py.u09.l01.e10
+    type: multiple_choice
+    difficulty: 2
+    skills: [py.errors.read]
+    prompt:
+      es: '¿Qué error produce `"hola".push("a")`?'
+      en: 'What error does `"hola".push("a")` produce?'
+    options:
+      - {es: '`AttributeError`: los textos no tienen ese método.', en: '`AttributeError`: text does not have that method.'}
+      - {es: '`NameError`', en: '`NameError`'}
+      - {es: '`ValueError`', en: '`ValueError`'}
+      - {es: '`IndexError`', en: '`IndexError`'}
+    answer: 0
+    distractor_tags: {1: error.confusion}
+    hints:
+      - {es: 'El objeto existe, pero le pides algo que no tiene.', en: 'The object exists, but you ask it for something it does not have.'}
+    explanation:
+      es: 'Es habitual al confundir métodos de otros lenguajes o tipos, como `push` (que no existe) con `append` de las listas.'
+      en: 'It is common when mixing up methods from other languages or types, such as `push` (which does not exist) with the `append` of lists.'

@@ -1,0 +1,201 @@
+id: py.u02.l03
+language: python
+unit: py.u02
+position: 3
+skills: [py.strings.basic]
+status: draft
+reviewed_by: []
+title:
+  es: 'Trabajar con texto'
+  en: 'Working with text'
+explanation:
+  es: |
+    Con el texto también se puede operar:
+
+    ```python
+    print("Hola" + "Mundo")   # HolaMundo   (unir)
+    print("ab" * 3)           # ababab      (repetir)
+    print(len("Python"))      # 6           (cantidad de caracteres)
+    ```
+
+    - `+` une texto con texto. **No** puede unir texto con un número: usa `str(...)`.
+      `"Edad: " + str(20)` da `Edad: 20`.
+    - `\n` dentro del texto es un salto de línea: `print("a\nb")` escribe `a` y `b` en líneas distintas.
+  en: |
+    You can also operate on text:
+
+    ```python
+    print("Hola" + "Mundo")   # HolaMundo   (join)
+    print("ab" * 3)           # ababab      (repeat)
+    print(len("Python"))      # 6           (number of characters)
+    ```
+
+    - `+` joins text with text. It **cannot** join text with a number: use `str(...)`.
+      `"Edad: " + str(20)` gives `Edad: 20`.
+    - `\n` inside text is a line break: `print("a\nb")` writes `a` and `b` on different lines.
+exercises:
+  - id: py.u02.l03.e01
+    type: predict_output
+    difficulty: 1
+    skills: [py.strings.basic]
+    prompt:
+      es: '¿Qué muestra este programa?'
+      en: 'What does this program show?'
+    code: |
+      print("Hola" + "Mundo")
+    answer: "HolaMundo"
+    hints:
+      - {es: '`+` une sin añadir espacios.', en: '`+` joins without adding spaces.'}
+    explanation:
+      es: 'Unir textos no agrega espacios; si los quieres, debes escribirlos.'
+      en: 'Joining text adds no spaces; if you want them you must write them.'
+
+  - id: py.u02.l03.e02
+    type: predict_output
+    difficulty: 1
+    skills: [py.strings.basic]
+    prompt:
+      es: '¿Qué muestra este programa?'
+      en: 'What does this program show?'
+    code: |
+      print("ab" * 3)
+    answer: "ababab"
+    hints:
+      - {es: '`*` repite el texto.', en: '`*` repeats the text.'}
+    explanation:
+      es: 'Multiplicar un texto por un entero lo repite esa cantidad de veces.'
+      en: 'Multiplying text by an integer repeats it that many times.'
+
+  - id: py.u02.l03.e03
+    type: predict_output
+    difficulty: 1
+    skills: [py.strings.basic]
+    prompt:
+      es: '¿Qué muestra este programa?'
+      en: 'What does this program show?'
+    code: |
+      print(len("Python"))
+    answer: "6"
+    hints:
+      - {es: 'Cuenta las letras.', en: 'Count the letters.'}
+    explanation:
+      es: '`len` devuelve la cantidad de caracteres.'
+      en: '`len` returns the number of characters.'
+
+  - id: py.u02.l03.e04
+    type: multiple_choice
+    difficulty: 2
+    skills: [py.strings.basic, py.types.basic]
+    prompt:
+      es: '¿Qué ocurre con `print("Edad: " + 20)`?'
+      en: 'What happens with `print("Edad: " + 20)`?'
+    options:
+      - {es: 'Muestra Edad: 20.', en: 'It shows Edad: 20.'}
+      - {es: 'Da un error porque no se puede unir texto con un número.', en: 'It fails because you cannot join text with a number.'}
+      - {es: 'Muestra solo Edad:.', en: 'It shows only Edad:.'}
+      - {es: 'Muestra solo 20.', en: 'It shows only 20.'}
+    answer: 1
+    distractor_tags: {0: type.str_plus_int}
+    hints:
+      - {es: 'Mira los tipos de cada lado del +.', en: 'Look at the types on each side of the +.'}
+    explanation:
+      es: 'Es un `TypeError`. Lo correcto es `"Edad: " + str(20)` o `print("Edad:", 20)`.'
+      en: 'It is a `TypeError`. The right way is `"Edad: " + str(20)` or `print("Edad:", 20)`.'
+
+  - id: py.u02.l03.e05
+    type: fill_code
+    difficulty: 2
+    skills: [py.strings.basic]
+    prompt:
+      es: 'Completa los operadores para que el programa muestre `Hola Ana`.'
+      en: 'Fill in the operators so the program shows `Hola Ana`.'
+    code: |
+      print("Hola" ___ " " ___ "Ana")
+    blanks:
+      - ["+"]
+      - ["+"]
+    hints:
+      - {es: 'Es el operador que une textos.', en: 'It is the operator that joins text.'}
+    explanation:
+      es: 'El espacio entre comillas también es un texto que se une.'
+      en: 'The space between quotes is also text being joined.'
+
+  - id: py.u02.l03.e06
+    type: predict_output
+    difficulty: 2
+    skills: [py.strings.basic]
+    prompt:
+      es: '¿Qué muestra este programa? Escribe las líneas tal como aparecen.'
+      en: 'What does this program show? Write the lines as they appear.'
+    code: |
+      print("a\nb")
+    answer: "a\nb"
+    hints:
+      - {es: '`\n` es un salto de línea.', en: '`\n` is a line break.'}
+    explanation:
+      es: 'El texto se divide en dos líneas, `a` y `b`.'
+      en: 'The text is split into two lines, `a` and `b`.'
+
+  - id: py.u02.l03.e07
+    type: write_code
+    difficulty: 2
+    skills: [py.strings.basic, py.input]
+    prompt:
+      es: 'Lee una palabra y muéstrala repetida 3 veces, sin espacios entre ellas.'
+      en: 'Read a word and show it repeated 3 times, with no spaces between the copies.'
+    starter: |
+      # Escribe tu código aquí / Write your code here
+    reference_solution: |
+      palabra = input()
+      print(palabra * 3)
+    tests:
+      - {stdin: "ja\n", expected_stdout: "jajaja\n", visible: true}
+      - {stdin: "ok\n", expected_stdout: "okokok\n", visible: false}
+    wrong_examples:
+      - code: |
+          p = input()
+          print(p, p, p)
+        expect_fail_tag: output.mismatch
+      - code: |
+          p = input()
+          print(p + 3)
+        expect_fail_tag: type.str_plus_int
+    hints:
+      - {es: 'Multiplicar un texto lo repite.', en: 'Multiplying text repeats it.'}
+    explanation:
+      es: '`print(a, b, c)` separa con espacios; `texto * 3` no.'
+      en: '`print(a, b, c)` separates with spaces; `text * 3` does not.'
+
+  - id: py.u02.l03.e08
+    type: write_code
+    difficulty: 3
+    skills: [py.strings.basic, py.input, py.types.basic]
+    prompt:
+      es: |
+        Lee un nombre y muestra el nombre, dos puntos, un espacio y la cantidad de letras.
+        Ejemplo: `Ana` → `Ana: 3`. Usa `+` y `str(...)`.
+      en: |
+        Read a name and show the name, a colon, a space and the number of letters.
+        Example: `Ana` → `Ana: 3`. Use `+` and `str(...)`.
+    starter: |
+      # Escribe tu código aquí / Write your code here
+    reference_solution: |
+      nombre = input()
+      print(nombre + ": " + str(len(nombre)))
+    tests:
+      - {stdin: "Ana\n", expected_stdout: "Ana: 3\n", visible: true}
+      - {stdin: "Beatriz\n", expected_stdout: "Beatriz: 7\n", visible: false}
+    wrong_examples:
+      - code: |
+          nombre = input()
+          print(nombre + ": " + len(nombre))
+        expect_fail_tag: type.str_plus_int
+      - code: |
+          nombre = input()
+          print(nombre + ":" + str(len(nombre)))
+        expect_fail_tag: output.mismatch
+    hints:
+      - {es: 'len() devuelve un número; conviértelo con str() para unirlo.', en: 'len() returns a number; convert it with str() to join it.'}
+    explanation:
+      es: 'Para unir con `+` ambos lados deben ser texto.'
+      en: 'To join with `+` both sides must be text.'

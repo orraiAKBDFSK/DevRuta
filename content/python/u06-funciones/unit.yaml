@@ -1,0 +1,8 @@
+id: py.u06
+position: 6
+title:
+  es: 'Funciones'
+  en: 'Functions'
+summary:
+  es: 'Dividir el código en piezas reutilizables con parámetros y valores de retorno.'
+  en: 'Splitting code into reusable pieces with parameters and return values.'

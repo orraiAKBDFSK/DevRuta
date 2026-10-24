@@ -1,0 +1,8 @@
+id: py.u07
+position: 7
+title:
+  es: 'Diccionarios, tuplas y conjuntos'
+  en: 'Dictionaries, tuples and sets'
+summary:
+  es: 'Elegir la estructura de datos adecuada: buscar por clave, agrupar y quitar repetidos.'
+  en: 'Choosing the right data structure: looking up by key, grouping and removing duplicates.'

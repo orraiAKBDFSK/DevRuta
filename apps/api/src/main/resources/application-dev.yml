@@ -1,0 +1,22 @@
+# Perfil de desarrollo local: servicios del Docker Compose de infra/compose.
+# Estas credenciales y direcciones son SOLO para desarrollo. Nunca se usan en producción.
+spring:
+  datasource:
+    # POSTGRES_PORT debe coincidir con el de infra/compose/.env (por defecto 5432).
+    url: jdbc:postgresql://localhost:${POSTGRES_PORT:5432}/plataforma
+    username: plataforma
+    password: plataforma
+  mail:
+    # Mailpit: servidor SMTP falso; los correos se leen en http://localhost:8025 y no salen a ningún destinatario real.
+    host: localhost
+    port: ${MAILPIT_SMTP_PORT:1025}
+
+app:
+  content:
+    # Importa el contenido de content/ al arrancar, incluidas las lecciones en borrador.
+    import-on-startup: true
+    path: ../../content
+    min-status: DRAFT
+  public-base-url: http://localhost:4200
+  mail:
+    from: "Plataforma <no-reply@localhost>"

@@ -1,0 +1,150 @@
+id: py.u01.l01
+language: python
+unit: py.u01
+position: 1
+skills: [py.output]
+status: draft
+reviewed_by: []
+title:
+  es: 'Mostrar texto en pantalla'
+  en: 'Showing text on screen'
+explanation:
+  es: |
+    Un programa es una lista de instrucciones que el computador sigue **en orden**.
+    La instrucción más básica es `print`, que muestra algo en pantalla:
+
+    ```python
+    print("Hola, mundo")
+    ```
+
+    - El texto va entre comillas (`"` o `'`). A eso se le llama *cadena de texto*.
+    - Los paréntesis encierran lo que quieres mostrar.
+    - Cada `print` escribe en una línea nueva.
+  en: |
+    A program is a list of instructions the computer follows **in order**.
+    The most basic instruction is `print`, which shows something on screen:
+
+    ```python
+    print("Hello, world")
+    ```
+
+    - Text goes between quotes (`"` or `'`). This is called a *string*.
+    - The parentheses wrap what you want to show.
+    - Each `print` writes on a new line.
+exercises:
+  - id: py.u01.l01.e01
+    type: multiple_choice
+    difficulty: 1
+    skills: [py.output]
+    prompt:
+      es: '¿Qué instrucción de Python muestra texto en pantalla?'
+      en: 'Which Python instruction shows text on screen?'
+    options:
+      - {es: 'print("Hola")', en: 'print("Hello")'}
+      - {es: 'mostrar("Hola")', en: 'show("Hello")'}
+      - {es: 'echo "Hola"', en: 'echo "Hello"'}
+      - {es: 'escribir("Hola")', en: 'write("Hello")'}
+    answer: 0
+    hints:
+      - {es: 'Es una palabra en inglés que significa "imprimir".', en: 'It is an English word that means "to print".'}
+    explanation:
+      es: 'En Python se usa `print(...)`. Las otras opciones existen en otros lenguajes o no existen.'
+      en: 'Python uses `print(...)`. The others exist in other languages or do not exist at all.'
+
+  - id: py.u01.l01.e02
+    type: predict_output
+    difficulty: 1
+    skills: [py.output]
+    prompt:
+      es: '¿Qué muestra este programa? Escribe la salida exacta, línea por línea.'
+      en: 'What does this program show? Write the exact output, line by line.'
+    code: |
+      print("Hola")
+      print("Mundo")
+    answer: "Hola\nMundo"
+    hints:
+      - {es: 'Cada print escribe en una línea nueva.', en: 'Each print writes on a new line.'}
+    explanation:
+      es: 'Las instrucciones se ejecutan en orden y cada `print` termina con un salto de línea.'
+      en: 'Instructions run in order and each `print` ends with a line break.'
+
+  - id: py.u01.l01.e03
+    type: order_lines
+    difficulty: 1
+    skills: [py.output]
+    prompt:
+      es: 'Ordena las líneas para que el programa muestre "Uno", luego "Dos" y luego "Tres".'
+      en: 'Order the lines so the program shows "Uno", then "Dos", then "Tres".'
+    lines:
+      - 'print("Uno")'
+      - 'print("Dos")'
+      - 'print("Tres")'
+    hints:
+      - {es: 'Piensa en qué línea debe ejecutarse primero.', en: 'Think about which line has to run first.'}
+    explanation:
+      es: 'El orden de las líneas es el orden de la salida.'
+      en: 'The order of the lines is the order of the output.'
+
+  - id: py.u01.l01.e04
+    type: fill_code
+    difficulty: 1
+    skills: [py.output]
+    prompt:
+      es: 'Completa el programa para que muestre `Hola mundo`.'
+      en: 'Complete the program so it shows `Hola mundo`.'
+    code: |
+      ___("Hola mundo")
+    blanks:
+      - [print]
+    hints:
+      - {es: 'Es la instrucción que viste al inicio de la lección.', en: 'It is the instruction you saw at the start of the lesson.'}
+    explanation:
+      es: 'Sin `print` el programa no mostraría nada.'
+      en: 'Without `print` the program would show nothing.'
+
+  - id: py.u01.l01.e05
+    type: write_code
+    difficulty: 1
+    skills: [py.output]
+    prompt:
+      es: 'Escribe un programa que muestre exactamente: `Hola, mundo`'
+      en: 'Write a program that shows exactly this text (in Spanish): `Hola, mundo`'
+    starter: |
+      # Escribe tu código aquí / Write your code here
+    reference_solution: |
+      print("Hola, mundo")
+    tests:
+      - {stdin: "", expected_stdout: "Hola, mundo\n", visible: true}
+    wrong_examples:
+      - code: 'print("Hola mundo")'
+        expect_fail_tag: output.mismatch
+      - code: 'print(Hola, mundo)'
+        expect_fail_tag: name.undefined
+      - code: 'print("hola, mundo")'
+        expect_fail_tag: output.mismatch
+    hints:
+      - {es: 'Usa print y pon el texto entre comillas.', en: 'Use print and put the text between quotes.'}
+      - {es: 'Revisa mayúsculas, coma y espacios; deben coincidir exactamente.', en: 'Check capitals, comma and spaces; they must match exactly.'}
+    explanation:
+      es: 'La salida debe coincidir carácter por carácter.'
+      en: 'The output must match character by character.'
+
+  - id: py.u01.l01.e06
+    type: multiple_choice
+    difficulty: 2
+    skills: [py.output]
+    prompt:
+      es: '¿Qué problema tiene `print("Hola)`?'
+      en: 'What is wrong with `print("Hello)`?'
+    options:
+      - {es: 'Falta cerrar las comillas.', en: 'The closing quote is missing.'}
+      - {es: 'Print debe ir en mayúsculas.', en: 'Print must be capitalised.'}
+      - {es: 'Faltan dos puntos al final.', en: 'A colon is missing at the end.'}
+      - {es: 'No tiene ningún problema.', en: 'Nothing is wrong.'}
+    answer: 0
+    distractor_tags: {1: syntax.case, 2: syntax.missing_colon}
+    hints:
+      - {es: 'Cuenta cuántas comillas hay.', en: 'Count how many quotes there are.'}
+    explanation:
+      es: 'El texto empezó con `"` pero nunca se cerró, así que Python da un error de sintaxis.'
+      en: 'The text started with `"` but was never closed, so Python raises a syntax error.'

@@ -1,0 +1,328 @@
+id: py.u06.l05
+language: python
+unit: py.u06
+position: 5
+skills: [py.def, py.params, py.return, py.scope]
+status: draft
+reviewed_by: []
+title:
+  es: 'Repaso y mini-programas'
+  en: 'Review and mini programs'
+explanation:
+  es: |
+    Repaso de funciones: definir, llamar, parámetros, valores por defecto, `return` y alcance.
+    Los últimos ejercicios combinan varias funciones pequeñas.
+  en: |
+    Review of functions: defining, calling, parameters, default values, `return` and scope.
+    The last exercises combine several small functions.
+exercises:
+  - id: py.u06.l05.e01
+    type: predict_output
+    difficulty: 2
+    skills: [py.params, py.return]
+    prompt:
+      es: '¿Qué muestra este programa? Escribe las dos líneas.'
+      en: 'What does this program show? Write both lines.'
+    code: |
+      def f(a, b=2):
+          return a * b
+
+      print(f(3))
+      print(f(3, 4))
+    answer: "6\n12"
+    hints:
+      - {es: 'Si no pasas `b`, vale 2.', en: 'If you do not pass `b`, it is 2.'}
+    explanation:
+      es: 'Repasa "Parámetros y argumentos". Primero 3 × 2 y después 3 × 4.'
+      en: 'Review "Parameters and arguments". First 3 × 2 and then 3 × 4.'
+
+  - id: py.u06.l05.e02
+    type: predict_output
+    difficulty: 3
+    skills: [py.return]
+    prompt:
+      es: '¿Qué muestra este programa? Escribe las dos líneas.'
+      en: 'What does this program show? Write both lines.'
+    code: |
+      def g(x):
+          print(x)
+
+      y = g(1)
+      print(y)
+    answer: "1\nNone"
+    hints:
+      - {es: 'La función no tiene `return`.', en: 'The function has no `return`.'}
+    explanation:
+      es: 'Repasa "Devolver valores con return". Sin `return`, `y` vale `None`.'
+      en: 'Review "Returning values with return". Without `return`, `y` is `None`.'
+
+  - id: py.u06.l05.e03
+    type: multiple_choice
+    difficulty: 2
+    skills: [py.params]
+    prompt:
+      es: |
+        ¿Qué ocurre al ejecutar este programa?
+
+        ```python
+        def suma(a, b):
+            return a + b
+
+        print(suma(1))
+        ```
+      en: |
+        What happens when running this program?
+
+        ```python
+        def suma(a, b):
+            return a + b
+
+        print(suma(1))
+        ```
+    options:
+      - {es: 'Da un `TypeError`: falta el argumento `b`.', en: 'It raises a `TypeError`: the argument `b` is missing.'}
+      - {es: 'Muestra 1.', en: 'It shows 1.'}
+      - {es: 'Muestra 0.', en: 'It shows 0.'}
+      - {es: 'Muestra `None`.', en: 'It shows `None`.'}
+    answer: 0
+    distractor_tags: {1: function.missing_argument}
+    hints:
+      - {es: '¿Cuántos parámetros sin valor por defecto tiene `suma`?', en: 'How many parameters without a default value does `suma` have?'}
+    explanation:
+      es: 'Hay que pasar tantos argumentos como parámetros sin valor por defecto.'
+      en: 'You must pass as many arguments as parameters without a default value.'
+
+  - id: py.u06.l05.e04
+    type: order_lines
+    difficulty: 2
+    skills: [py.def, py.return]
+    prompt:
+      es: 'Ordena las líneas para definir `cubo` y mostrar el cubo de 3.'
+      en: 'Order the lines to define `cubo` and show the cube of 3.'
+    lines:
+      - 'def cubo(x):'
+      - '    return x ** 3'
+      - 'print(cubo(3))'
+    hints:
+      - {es: 'Primero la definición, después la llamada.', en: 'First the definition, then the call.'}
+    explanation:
+      es: 'Resultado: 27.'
+      en: 'Result: 27.'
+
+  - id: py.u06.l05.e05
+    type: write_code
+    difficulty: 3
+    skills: [py.def, py.return, py.input, py.operators]
+    prompt:
+      es: |
+        Define `a_fahrenheit(c)` que **devuelva** la temperatura en grados Fahrenheit: `c * 9 / 5 + 32`.
+        Lee los grados Celsius (pueden tener decimales) y muestra el resultado.
+      en: |
+        Define `a_fahrenheit(c)` that **returns** the temperature in degrees Fahrenheit: `c * 9 / 5 + 32`.
+        Read the degrees Celsius (they may have decimals) and show the result.
+    starter: |
+      # Escribe tu código aquí / Write your code here
+    reference_solution: |
+      def a_fahrenheit(c):
+          return c * 9 / 5 + 32
+
+      print(a_fahrenheit(float(input())))
+    tests:
+      - {stdin: "0\n", expected_stdout: "32.0\n", visible: true}
+      - {stdin: "100\n", expected_stdout: "212.0\n", visible: false}
+      - {stdin: "-40\n", expected_stdout: "-40.0\n", visible: false}
+    static_checks:
+      - {kind: requires_function, name: a_fahrenheit, returns: true}
+    wrong_examples:
+      - code: |
+          def a_fahrenheit(c):
+              return c * 9 / 5
+
+          print(a_fahrenheit(float(input())))
+        expect_fail_tag: logic.missing_term
+      - code: |
+          def a_fahrenheit(c):
+              return c * 5 / 9 + 32
+
+          print(a_fahrenheit(float(input())))
+        expect_fail_tag: logic.wrong_formula
+    hints:
+      - {es: 'Convierte la entrada con `float()` antes de llamar a la función.', en: 'Convert the input with `float()` before calling the function.'}
+    explanation:
+      es: 'Con -40 los dos sistemas coinciden: -40 °C = -40 °F.'
+      en: 'At -40 both systems agree: -40 °C = -40 °F.'
+
+  - id: py.u06.l05.e06
+    type: write_code
+    difficulty: 3
+    skills: [py.def, py.return, py.for, py.if, py.strings.basic, py.input]
+    prompt:
+      es: |
+        Define `contar_vocales(texto)` que **devuelva** cuántas vocales minúsculas (`a`, `e`, `i`, `o`, `u`) tiene el texto.
+        Lee una palabra y muestra el resultado.
+      en: |
+        Define `contar_vocales(texto)` that **returns** how many lowercase vowels (`a`, `e`, `i`, `o`, `u`) the text has.
+        Read a word and show the result.
+    starter: |
+      # Escribe tu código aquí / Write your code here
+    reference_solution: |
+      def contar_vocales(texto):
+          cuenta = 0
+          for letra in texto:
+              if letra in "aeiou":
+                  cuenta = cuenta + 1
+          return cuenta
+
+      print(contar_vocales(input()))
+    tests:
+      - {stdin: "murcielago\n", expected_stdout: "5\n", visible: true}
+      - {stdin: "xyz\n", expected_stdout: "0\n", visible: false}
+      - {stdin: "aeiou\n", expected_stdout: "5\n", visible: false}
+    static_checks:
+      - {kind: requires_function, name: contar_vocales, returns: true}
+    wrong_examples:
+      - code: |
+          def contar_vocales(texto):
+              return len(texto)
+
+          print(contar_vocales(input()))
+        expect_fail_tag: logic.wrong_operation
+    hints:
+      - {es: '`in` también funciona con texto: `"a" in "aeiou"` es `True`.', en: '`in` also works with text: `"a" in "aeiou"` is `True`.'}
+    explanation:
+      es: 'Es el patrón de contador, ahora dentro de una función.'
+      en: 'It is the counter pattern, now inside a function.'
+
+  - id: py.u06.l05.e07
+    type: write_code
+    difficulty: 4
+    skills: [py.def, py.return, py.list, py.list.methods, py.scope, py.input]
+    prompt:
+      es: |
+        Define `ordenar_desc(lista)` que **devuelva una lista nueva** ordenada de mayor a menor **sin modificar la original**.
+        Lee un entero `n` y luego `n` enteros (uno por línea). Muestra primero la lista ordenada y después la original.
+      en: |
+        Define `ordenar_desc(lista)` that **returns a new list** sorted from largest to smallest **without modifying the original**.
+        Read a whole number `n` and then `n` whole numbers (one per line). Show the sorted list first and then the original.
+    starter: |
+      # Escribe tu código aquí / Write your code here
+    reference_solution: |
+      def ordenar_desc(lista):
+          nueva = lista.copy()
+          nueva.sort()
+          nueva.reverse()
+          return nueva
+
+      n = int(input())
+      datos = []
+      for i in range(n):
+          datos.append(int(input()))
+      print(ordenar_desc(datos))
+      print(datos)
+    tests:
+      - {stdin: "3\n2\n9\n5\n", expected_stdout: "[9, 5, 2]\n[2, 9, 5]\n", visible: true}
+      - {stdin: "1\n4\n", expected_stdout: "[4]\n[4]\n", visible: false}
+      - {stdin: "4\n1\n3\n2\n3\n", expected_stdout: "[3, 3, 2, 1]\n[1, 3, 2, 3]\n", visible: false}
+    static_checks:
+      - {kind: requires_function, name: ordenar_desc, returns: true}
+    wrong_examples:
+      - code: |
+          def ordenar_desc(lista):
+              lista.sort()
+              lista.reverse()
+              return lista
+
+          n = int(input())
+          datos = []
+          for i in range(n):
+              datos.append(int(input()))
+          print(ordenar_desc(datos))
+          print(datos)
+        expect_fail_tag: scope.mutated_argument
+    hints:
+      - {es: 'Haz una copia con `copy()` antes de ordenar.', en: 'Make a copy with `copy()` before sorting.'}
+    explanation:
+      es: 'Sin la copia, `sort()` y `reverse()` cambiarían la lista original, porque es la misma lista.'
+      en: 'Without the copy, `sort()` and `reverse()` would change the original list, because it is the same list.'
+
+  - id: py.u06.l05.e08
+    type: write_code
+    difficulty: 4
+    skills: [py.def, py.return, py.params, py.if, py.input]
+    prompt:
+      es: |
+        Define `calcular(a, b, op)` que **devuelva** el resultado de aplicar la operación `op` (`+`, `-`, `*` o `/`) a `a` y `b`.
+        Si `op` es `/` y `b` es 0, debe devolver el texto `error`. Lee `a` y `b` (enteros) y luego `op`, cada uno en su línea,
+        y muestra el resultado.
+      en: |
+        Define `calcular(a, b, op)` that **returns** the result of applying the operation `op` (`+`, `-`, `*` or `/`) to `a` and `b`.
+        If `op` is `/` and `b` is 0, it must return the text `error`. Read `a` and `b` (whole numbers) and then `op`, each on its own line,
+        and show the result.
+    starter: |
+      # Escribe tu código aquí / Write your code here
+    reference_solution: |
+      def calcular(a, b, op):
+          if op == "+":
+              return a + b
+          elif op == "-":
+              return a - b
+          elif op == "*":
+              return a * b
+          elif op == "/":
+              if b == 0:
+                  return "error"
+              return a / b
+
+      x = int(input())
+      y = int(input())
+      o = input()
+      print(calcular(x, y, o))
+    tests:
+      - {stdin: "6\n3\n+\n", expected_stdout: "9\n", visible: true}
+      - {stdin: "6\n3\n-\n", expected_stdout: "3\n", visible: false}
+      - {stdin: "6\n3\n*\n", expected_stdout: "18\n", visible: false}
+      - {stdin: "6\n3\n/\n", expected_stdout: "2.0\n", visible: false}
+      - {stdin: "6\n0\n/\n", expected_stdout: "error\n", visible: false}
+    static_checks:
+      - {kind: requires_function, name: calcular, returns: true}
+    wrong_examples:
+      - code: |
+          def calcular(a, b, op):
+              if op == "+":
+                  return a + b
+              elif op == "-":
+                  return a - b
+              elif op == "*":
+                  return a * b
+              elif op == "/":
+                  return a / b
+
+          x = int(input())
+          y = int(input())
+          o = input()
+          print(calcular(x, y, o))
+        expect_fail_tag: logic.missing_edge_case
+      - code: |
+          def calcular(a, b, op):
+              if op == "+":
+                  return a + b
+              elif op == "-":
+                  return a - b
+              elif op == "*":
+                  return a * b
+              elif op == "/":
+                  if b == 0:
+                      return "error"
+                  return a // b
+
+          x = int(input())
+          y = int(input())
+          o = input()
+          print(calcular(x, y, o))
+        expect_fail_tag: op.floordiv_vs_div
+    hints:
+      - {es: 'Usa `if`/`elif` para elegir la operación.', en: 'Use `if`/`elif` to choose the operation.'}
+      - {es: 'Revisa el caso de dividir entre cero antes de dividir.', en: 'Check the divide-by-zero case before dividing.'}
+    explanation:
+      es: 'Dividir entre cero produce un `ZeroDivisionError`, así que hay que prever ese caso.'
+      en: 'Dividing by zero raises a `ZeroDivisionError`, so that case must be handled.'

@@ -1,0 +1,323 @@
+id: py.u08.l04
+language: python
+unit: py.u08
+position: 4
+skills: [py.fstring]
+status: draft
+reviewed_by: []
+title:
+  es: 'Formatear texto con f-strings'
+  en: 'Formatting text with f-strings'
+explanation:
+  es: |
+    Una **f-string** es un texto con una `f` delante, que permite insertar valores con llaves `{}`:
+
+    ```python
+    nombre = "Ana"
+    edad = 20
+    print(f"Nombre: {nombre}, Edad: {edad}")   # Nombre: Ana, Edad: 20
+    print(f"Dentro de un año: {edad + 1}")      # se pueden calcular expresiones
+    ```
+
+    También se puede dar **formato** a lo que se inserta, después de dos puntos:
+
+    ```python
+    pi = 3.14159
+    print(f"{pi:.2f}")        # 3.14   (2 decimales)
+    print(f"[{'ab':>5}]")     # [   ab] (alineado a la derecha en 5 espacios)
+    ```
+
+    Sin la `f`, las llaves se muestran tal cual: `print("{nombre}")` escribe `{nombre}`.
+  en: |
+    An **f-string** is a text with an `f` in front, which lets you insert values with braces `{}`:
+
+    ```python
+    nombre = "Ana"
+    edad = 20
+    print(f"Nombre: {nombre}, Edad: {edad}")   # Nombre: Ana, Edad: 20
+    print(f"Dentro de un año: {edad + 1}")      # expressions can be calculated
+    ```
+
+    You can also **format** what is inserted, after a colon:
+
+    ```python
+    pi = 3.14159
+    print(f"{pi:.2f}")        # 3.14   (2 decimals)
+    print(f"[{'ab':>5}]")     # [   ab] (right-aligned in 5 spaces)
+    ```
+
+    Without the `f`, the braces are shown as they are: `print("{nombre}")` writes `{nombre}`.
+exercises:
+  - id: py.u08.l04.e01
+    type: predict_output
+    difficulty: 1
+    skills: [py.fstring]
+    prompt:
+      es: '¿Qué muestra este programa?'
+      en: 'What does this program show?'
+    code: |
+      nombre = "Ana"
+      print(f"Hola, {nombre}")
+    answer: "Hola, Ana"
+    hints:
+      - {es: 'Lo que está entre llaves se reemplaza por su valor.', en: 'What is between braces is replaced by its value.'}
+    explanation:
+      es: 'La variable `nombre` se inserta en el texto.'
+      en: 'The variable `nombre` is inserted into the text.'
+
+  - id: py.u08.l04.e02
+    type: predict_output
+    difficulty: 2
+    skills: [py.fstring]
+    prompt:
+      es: '¿Qué muestra este programa?'
+      en: 'What does this program show?'
+    code: |
+      print(f"{2 + 3} manzanas")
+    answer: "5 manzanas"
+    hints:
+      - {es: 'Dentro de las llaves puede ir una expresión.', en: 'An expression can go inside the braces.'}
+    explanation:
+      es: 'Se calcula `2 + 3` y se inserta el resultado.'
+      en: '`2 + 3` is calculated and the result is inserted.'
+
+  - id: py.u08.l04.e03
+    type: predict_output
+    difficulty: 2
+    skills: [py.fstring]
+    prompt:
+      es: '¿Qué muestra este programa?'
+      en: 'What does this program show?'
+    code: |
+      edad = 20
+      print(f"Edad: {edad} - Siguiente: {edad + 1}")
+    answer: "Edad: 20 - Siguiente: 21"
+    hints:
+      - {es: 'Hay dos llaves, con dos valores.', en: 'There are two sets of braces, with two values.'}
+    explanation:
+      es: 'Cada par de llaves se evalúa por separado.'
+      en: 'Each pair of braces is evaluated separately.'
+
+  - id: py.u08.l04.e04
+    type: predict_output
+    difficulty: 2
+    skills: [py.fstring]
+    prompt:
+      es: '¿Qué muestra este programa?'
+      en: 'What does this program show?'
+    code: |
+      print(f"{3.14159:.2f}")
+    answer: "3.14"
+    hints:
+      - {es: '`.2f` pide dos decimales.', en: '`.2f` asks for two decimals.'}
+    explanation:
+      es: 'El número se redondea a dos decimales.'
+      en: 'The number is rounded to two decimals.'
+
+  - id: py.u08.l04.e05
+    type: predict_output
+    difficulty: 3
+    skills: [py.fstring]
+    prompt:
+      es: '¿Qué muestra este programa? Cuenta bien los espacios.'
+      en: 'What does this program show? Count the spaces carefully.'
+    code: |
+      palabra = "ab"
+      print(f"[{palabra:>5}]")
+    answer: "[   ab]"
+    hints:
+      - {es: '`>5` reserva 5 espacios y alinea a la derecha.', en: '`>5` reserves 5 spaces and aligns to the right.'}
+    explanation:
+      es: '"ab" ocupa 2 de los 5 espacios, así que se añaden 3 espacios a la izquierda.'
+      en: '"ab" takes 2 of the 5 spaces, so 3 spaces are added on the left.'
+
+  - id: py.u08.l04.e06
+    type: multiple_choice
+    difficulty: 2
+    skills: [py.fstring]
+    prompt:
+      es: |
+        ¿Qué muestra este programa?
+
+        ```python
+        nombre = "Ana"
+        print("Hola, {nombre}")
+        ```
+      en: |
+        What does this program show?
+
+        ```python
+        nombre = "Ana"
+        print("Hola, {nombre}")
+        ```
+    options:
+      - {es: '`Hola, {nombre}`, porque falta la `f` delante de las comillas.', en: '`Hola, {nombre}`, because the `f` before the quotes is missing.'}
+      - {es: '`Hola, Ana`', en: '`Hola, Ana`'}
+      - {es: 'Un error.', en: 'An error.'}
+      - {es: '`Hola, nombre`', en: '`Hola, nombre`'}
+    answer: 0
+    distractor_tags: {1: fstring.missing_prefix}
+    hints:
+      - {es: 'Sin `f`, el texto es un texto normal.', en: 'Without `f`, the text is a normal text.'}
+    explanation:
+      es: 'La `f` es lo que activa la sustitución dentro de las llaves.'
+      en: 'The `f` is what activates the substitution inside the braces.'
+
+  - id: py.u08.l04.e07
+    type: fill_code
+    difficulty: 2
+    skills: [py.fstring]
+    prompt:
+      es: 'Completa para que el programa muestre `Total: 5`.'
+      en: 'Fill in so the program shows `Total: 5`.'
+    code: |
+      total = 5
+      print(___"Total: {total}")
+    blanks:
+      - [f]
+    hints:
+      - {es: 'Una letra delante de las comillas.', en: 'One letter in front of the quotes.'}
+    explanation:
+      es: 'Es la marca de una f-string.'
+      en: 'It is the mark of an f-string.'
+
+  - id: py.u08.l04.e08
+    type: write_code
+    difficulty: 2
+    skills: [py.fstring, py.input]
+    prompt:
+      es: |
+        Lee un nombre y una edad (entero), uno por línea. Muestra `Nombre: X, Edad: Y` usando una f-string.
+      en: |
+        Read a name and an age (whole number), one per line. Show `Nombre: X, Edad: Y` using an f-string.
+    starter: |
+      # Escribe tu código aquí / Write your code here
+    reference_solution: |
+      nombre = input()
+      edad = int(input())
+      print(f"Nombre: {nombre}, Edad: {edad}")
+    tests:
+      - {stdin: "Ana\n20\n", expected_stdout: "Nombre: Ana, Edad: 20\n", visible: true}
+      - {stdin: "Luis\n9\n", expected_stdout: "Nombre: Luis, Edad: 9\n", visible: false}
+    wrong_examples:
+      - code: |
+          nombre = input()
+          edad = int(input())
+          print("Nombre:", nombre, "Edad:", edad)
+        expect_fail_tag: output.mismatch
+    hints:
+      - {es: 'Respeta exactamente la coma y los espacios del formato.', en: 'Follow the comma and the spaces of the format exactly.'}
+    explanation:
+      es: 'Con comas en `print` se pierde la coma del formato y se añaden espacios distintos.'
+      en: 'With commas in `print` the comma of the format is lost and different spaces are added.'
+
+  - id: py.u08.l04.e09
+    type: write_code
+    difficulty: 3
+    skills: [py.fstring, py.operators, py.input]
+    prompt:
+      es: |
+        Lee un precio (puede tener decimales) y una cantidad (entero), uno por línea.
+        Muestra el total con exactamente dos decimales.
+      en: |
+        Read a price (it may have decimals) and a quantity (whole number), one per line.
+        Show the total with exactly two decimals.
+    starter: |
+      # Escribe tu código aquí / Write your code here
+    reference_solution: |
+      precio = float(input())
+      cantidad = int(input())
+      print(f"{precio * cantidad:.2f}")
+    tests:
+      - {stdin: "2.5\n4\n", expected_stdout: "10.00\n", visible: true}
+      - {stdin: "1.1\n3\n", expected_stdout: "3.30\n", visible: false}
+      - {stdin: "10\n1\n", expected_stdout: "10.00\n", visible: false}
+    wrong_examples:
+      - code: |
+          precio = float(input())
+          cantidad = int(input())
+          print(precio * cantidad)
+        expect_fail_tag: fstring.missing_format
+    hints:
+      - {es: 'Dentro de las llaves puedes calcular y dar formato: `{a * b:.2f}`.', en: 'Inside the braces you can calculate and format: `{a * b:.2f}`.'}
+    explanation:
+      es: 'Sin formato, 10.0 y 3.3000000000000003 se mostrarían tal cual.'
+      en: 'Without formatting, 10.0 and 3.3000000000000003 would be shown as they are.'
+
+  - id: py.u08.l04.e10
+    type: write_code
+    difficulty: 3
+    skills: [py.fstring, py.for, py.dict, py.input]
+    prompt:
+      es: |
+        Lee un entero `n` y luego `n` pares de líneas: un producto y su precio (entero). Muestra cada línea como
+        `producto: precio` y, al final, `Total: suma`.
+      en: |
+        Read a whole number `n` and then `n` pairs of lines: a product and its price (whole number). Show each line as
+        `producto: precio` and, at the end, `Total: suma`.
+    starter: |
+      # Escribe tu código aquí / Write your code here
+    reference_solution: |
+      n = int(input())
+      total = 0
+      for i in range(n):
+          producto = input()
+          precio = int(input())
+          print(f"{producto}: {precio}")
+          total = total + precio
+      print(f"Total: {total}")
+    tests:
+      - {stdin: "2\npan\n3\nleche\n5\n", expected_stdout: "pan: 3\nleche: 5\nTotal: 8\n", visible: true}
+      - {stdin: "1\nx\n7\n", expected_stdout: "x: 7\nTotal: 7\n", visible: false}
+      - {stdin: "0\n", expected_stdout: "Total: 0\n", visible: false}
+    wrong_examples:
+      - code: |
+          n = int(input())
+          total = 0
+          for i in range(n):
+              producto = input()
+              precio = int(input())
+              print(f"{producto}: {precio}")
+              total = total + precio
+          print(total)
+        expect_fail_tag: output.mismatch
+    hints:
+      - {es: 'Muestra cada línea dentro del bucle y el total después.', en: 'Show each line inside the loop and the total after it.'}
+    explanation:
+      es: 'El total lleva su propia etiqueta.'
+      en: 'The total has its own label.'
+
+  - id: py.u08.l04.e11
+    type: write_code
+    difficulty: 4
+    skills: [py.fstring, py.strings.basic, py.input]
+    prompt:
+      es: |
+        Lee un entero `n` entre 0 y 10. Muestra una barra de progreso de 10 posiciones con `#` para las llenas y `.` para
+        las vacías, entre corchetes, seguida del porcentaje. Ejemplo para 3: `[###.......] 30%`.
+      en: |
+        Read a whole number `n` between 0 and 10. Show a 10-position progress bar with `#` for the filled ones and `.` for
+        the empty ones, between square brackets, followed by the percentage. Example for 3: `[###.......] 30%`.
+    starter: |
+      # Escribe tu código aquí / Write your code here
+    reference_solution: |
+      n = int(input())
+      llenos = "#" * n
+      vacios = "." * (10 - n)
+      print(f"[{llenos}{vacios}] {n * 10}%")
+    tests:
+      - {stdin: "3\n", expected_stdout: "[###.......] 30%\n", visible: true}
+      - {stdin: "0\n", expected_stdout: "[..........] 0%\n", visible: false}
+      - {stdin: "10\n", expected_stdout: "[##########] 100%\n", visible: false}
+    wrong_examples:
+      - code: |
+          n = int(input())
+          llenos = "#" * n
+          vacios = "." * n
+          print(f"[{llenos}{vacios}] {n * 10}%")
+        expect_fail_tag: logic.wrong_operation
+    hints:
+      - {es: 'La cantidad de vacíos es lo que falta para llegar a 10.', en: 'The number of empty ones is what is missing to reach 10.'}
+    explanation:
+      es: 'Repetir texto con `*` y combinarlo con una f-string evita bucles.'
+      en: 'Repeating text with `*` and combining it with an f-string avoids loops.'

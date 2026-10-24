@@ -1,0 +1,7 @@
+# Solo para CI y para verificar el contenido a mano: publica el puerto del runner en 127.0.0.1.
+# El Compose normal NO lo publica (solo la API debe poder llamarlo).
+#   docker compose -f docker-compose.yml -f ci-runner-port.yml --profile full up -d runner
+services:
+  runner:
+    ports:
+      - "127.0.0.1:8090:8090"

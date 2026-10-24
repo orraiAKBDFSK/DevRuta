@@ -1,0 +1,8 @@
+id: py.u04
+position: 4
+title:
+  es: 'Repetición'
+  en: 'Loops'
+summary:
+  es: 'Repetir tareas con while y for, y construir contadores y acumuladores.'
+  en: 'Repeating tasks with while and for, and building counters and accumulators.'

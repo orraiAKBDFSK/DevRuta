@@ -1,0 +1,293 @@
+id: py.u06.l02
+language: python
+unit: py.u06
+position: 2
+skills: [py.params, py.def]
+status: draft
+reviewed_by: []
+title:
+  es: 'Parámetros y argumentos'
+  en: 'Parameters and arguments'
+explanation:
+  es: |
+    Una función puede recibir datos mediante **parámetros**, que se escriben entre los paréntesis de `def`:
+
+    ```python
+    def saludar(nombre):
+        print("Hola,", nombre)
+
+    saludar("Ana")      # Hola, Ana
+    saludar("Luis")     # Hola, Luis
+    ```
+
+    - `nombre` es el **parámetro** (el nombre dentro de la función).
+    - `"Ana"` es el **argumento** (el valor que pasas al llamar).
+    - Con varios parámetros, los argumentos se asignan **por orden**: `resta(10, 3)` no es lo mismo que `resta(3, 10)`.
+    - Un parámetro puede tener un **valor por defecto**: `def saludar(nombre="amigo"):`. Si no pasas argumento, se usa ese valor.
+  en: |
+    A function can receive data through **parameters**, written between the parentheses of `def`:
+
+    ```python
+    def saludar(nombre):
+        print("Hola,", nombre)
+
+    saludar("Ana")      # Hola, Ana
+    saludar("Luis")     # Hola, Luis
+    ```
+
+    - `nombre` is the **parameter** (the name inside the function).
+    - `"Ana"` is the **argument** (the value you pass when calling).
+    - With several parameters, arguments are assigned **in order**: `resta(10, 3)` is not the same as `resta(3, 10)`.
+    - A parameter can have a **default value**: `def saludar(nombre="amigo"):`. If you pass no argument, that value is used.
+exercises:
+  - id: py.u06.l02.e01
+    type: predict_output
+    difficulty: 1
+    skills: [py.params]
+    prompt:
+      es: '¿Qué muestra este programa?'
+      en: 'What does this program show?'
+    code: |
+      def doble(x):
+          print(x * 2)
+
+      doble(5)
+    answer: "10"
+    hints:
+      - {es: 'Dentro de la función, `x` vale lo que pasaste al llamarla.', en: 'Inside the function, `x` is whatever you passed when calling it.'}
+    explanation:
+      es: 'El argumento 5 se guarda en el parámetro `x`.'
+      en: 'The argument 5 is stored in the parameter `x`.'
+
+  - id: py.u06.l02.e02
+    type: predict_output
+    difficulty: 2
+    skills: [py.params]
+    prompt:
+      es: '¿Qué muestra este programa?'
+      en: 'What does this program show?'
+    code: |
+      def resta(a, b):
+          print(a - b)
+
+      resta(10, 3)
+    answer: "7"
+    hints:
+      - {es: 'El primer argumento va a `a` y el segundo a `b`.', en: 'The first argument goes to `a` and the second to `b`.'}
+    explanation:
+      es: '`a` vale 10 y `b` vale 3, así que 10 - 3 = 7.'
+      en: '`a` is 10 and `b` is 3, so 10 - 3 = 7.'
+
+  - id: py.u06.l02.e03
+    type: predict_output
+    difficulty: 2
+    skills: [py.params]
+    prompt:
+      es: '¿Qué muestra este programa? Fíjate en el orden de los argumentos.'
+      en: 'What does this program show? Mind the order of the arguments.'
+    code: |
+      def resta(a, b):
+          print(a - b)
+
+      resta(3, 10)
+    answer: "-7"
+    hints:
+      - {es: 'Ahora `a` vale 3.', en: 'Now `a` is 3.'}
+    explanation:
+      es: 'El orden de los argumentos importa en la resta.'
+      en: 'The order of the arguments matters in subtraction.'
+
+  - id: py.u06.l02.e04
+    type: multiple_choice
+    difficulty: 2
+    skills: [py.params]
+    prompt:
+      es: 'En `def f(x):` y la llamada `f(7)`, ¿qué es `x` y qué es `7`?'
+      en: 'In `def f(x):` and the call `f(7)`, what is `x` and what is `7`?'
+    options:
+      - {es: '`x` es el parámetro y `7` es el argumento.', en: '`x` is the parameter and `7` is the argument.'}
+      - {es: '`x` es el argumento y `7` es el parámetro.', en: '`x` is the argument and `7` is the parameter.'}
+      - {es: 'Ambos son parámetros.', en: 'Both are parameters.'}
+      - {es: 'Ambos son argumentos.', en: 'Both are arguments.'}
+    answer: 0
+    distractor_tags: {1: function.param_vs_arg}
+    hints:
+      - {es: 'El parámetro está en la definición; el argumento, en la llamada.', en: 'The parameter is in the definition; the argument is in the call.'}
+    explanation:
+      es: 'Parámetro = nombre en `def`. Argumento = valor en la llamada.'
+      en: 'Parameter = name in `def`. Argument = value in the call.'
+
+  - id: py.u06.l02.e05
+    type: fill_code
+    difficulty: 2
+    skills: [py.params]
+    prompt:
+      es: 'Completa el argumento para que el programa muestre `8`.'
+      en: 'Fill in the argument so the program shows `8`.'
+    code: |
+      def potencia(base, exp):
+          print(base ** exp)
+
+      potencia(2, ___)
+    blanks:
+      - ["3"]
+    hints:
+      - {es: '2 elevado a qué número da 8.', en: '2 raised to which number gives 8.'}
+    explanation:
+      es: '2 ** 3 = 8.'
+      en: '2 ** 3 = 8.'
+
+  - id: py.u06.l02.e06
+    type: predict_output
+    difficulty: 3
+    skills: [py.params]
+    prompt:
+      es: '¿Qué muestra este programa? Escribe las dos líneas.'
+      en: 'What does this program show? Write both lines.'
+    code: |
+      def saludar(nombre="amigo"):
+          print("Hola,", nombre)
+
+      saludar()
+      saludar("Ana")
+    answer: "Hola, amigo\nHola, Ana"
+    hints:
+      - {es: 'Si no pasas argumento, se usa el valor por defecto.', en: 'If you pass no argument, the default value is used.'}
+    explanation:
+      es: 'La primera llamada usa `"amigo"`; la segunda lo reemplaza por `"Ana"`.'
+      en: 'The first call uses `"amigo"`; the second replaces it with `"Ana"`.'
+
+  - id: py.u06.l02.e07
+    type: write_code
+    difficulty: 3
+    skills: [py.params, py.def, py.input]
+    prompt:
+      es: |
+        Define una función `mostrar_area(base, altura)` que muestre el área de un rectángulo (base por altura).
+        Lee la base y la altura (enteros, una por línea) y llama a la función.
+      en: |
+        Define a function `mostrar_area(base, altura)` that shows the area of a rectangle (base times height).
+        Read the base and the height (whole numbers, one per line) and call the function.
+    starter: |
+      # Escribe tu código aquí / Write your code here
+    reference_solution: |
+      def mostrar_area(base, altura):
+          print(base * altura)
+
+      b = int(input())
+      a = int(input())
+      mostrar_area(b, a)
+    tests:
+      - {stdin: "3\n4\n", expected_stdout: "12\n", visible: true}
+      - {stdin: "5\n5\n", expected_stdout: "25\n", visible: false}
+      - {stdin: "7\n1\n", expected_stdout: "7\n", visible: false}
+    static_checks:
+      - {kind: requires_function, name: mostrar_area}
+    wrong_examples:
+      - code: |
+          b = int(input())
+          a = int(input())
+          print(b * a)
+        expect_fail_tag: static.no_function
+      - code: |
+          def mostrar_area(base, altura):
+              print(base + altura)
+
+          b = int(input())
+          a = int(input())
+          mostrar_area(b, a)
+        expect_fail_tag: logic.wrong_operation
+    hints:
+      - {es: 'La función recibe dos parámetros y muestra el producto.', en: 'The function receives two parameters and shows the product.'}
+    explanation:
+      es: 'Los datos se leen fuera de la función y se le pasan como argumentos.'
+      en: 'The data is read outside the function and passed to it as arguments.'
+
+  - id: py.u06.l02.e08
+    type: write_code
+    difficulty: 3
+    skills: [py.params, py.def, py.for, py.input]
+    prompt:
+      es: |
+        Define `repetir(texto, veces)` que muestre `texto` en una línea distinta, `veces` veces.
+        Lee el texto y luego `veces` (entero), cada uno en su línea, y llama a la función.
+      en: |
+        Define `repetir(texto, veces)` that shows `texto` on a separate line, `veces` times.
+        Read the text and then `veces` (whole number), each on its own line, and call the function.
+    starter: |
+      # Escribe tu código aquí / Write your code here
+    reference_solution: |
+      def repetir(texto, veces):
+          for i in range(veces):
+              print(texto)
+
+      t = input()
+      v = int(input())
+      repetir(t, v)
+    tests:
+      - {stdin: "hola\n2\n", expected_stdout: "hola\nhola\n", visible: true}
+      - {stdin: "x\n3\n", expected_stdout: "x\nx\nx\n", visible: false}
+      - {stdin: "ok\n0\n", expected_stdout: "", visible: false}
+    static_checks:
+      - {kind: requires_function, name: repetir}
+    wrong_examples:
+      - code: |
+          def repetir(texto, veces):
+              print(texto * veces)
+
+          t = input()
+          v = int(input())
+          repetir(t, v)
+        expect_fail_tag: output.mismatch
+      - code: |
+          def repetir(texto, veces):
+              for i in range(veces):
+                  print(texto)
+
+          t = input()
+          v = int(input())
+          repetir(v, t)
+        expect_fail_tag: function.argument_order
+    hints:
+      - {es: 'Un bucle `for` dentro de la función repite el `print`.', en: 'A `for` loop inside the function repeats the `print`.'}
+    explanation:
+      es: 'Pasar los argumentos en otro orden asigna cada valor al parámetro equivocado.'
+      en: 'Passing the arguments in another order assigns each value to the wrong parameter.'
+
+  - id: py.u06.l02.e09
+    type: write_code
+    difficulty: 3
+    skills: [py.params, py.def, py.for, py.input]
+    prompt:
+      es: |
+        Define `mostrar_tabla(n)` que muestre la tabla de multiplicar de `n` del 1 al 5, con el formato
+        `n x i = resultado`. Lee `n` (entero) y llama a la función.
+      en: |
+        Define `mostrar_tabla(n)` that shows the multiplication table of `n` from 1 to 5, in the format
+        `n x i = result`. Read `n` (whole number) and call the function.
+    starter: |
+      # Escribe tu código aquí / Write your code here
+    reference_solution: |
+      def mostrar_tabla(n):
+          for i in range(1, 6):
+              print(n, "x", i, "=", n * i)
+
+      mostrar_tabla(int(input()))
+    tests:
+      - {stdin: "3\n", expected_stdout: "3 x 1 = 3\n3 x 2 = 6\n3 x 3 = 9\n3 x 4 = 12\n3 x 5 = 15\n", visible: true}
+      - {stdin: "7\n", expected_stdout: "7 x 1 = 7\n7 x 2 = 14\n7 x 3 = 21\n7 x 4 = 28\n7 x 5 = 35\n", visible: false}
+    static_checks:
+      - {kind: requires_function, name: mostrar_tabla}
+    wrong_examples:
+      - code: |
+          def mostrar_tabla(n):
+              for i in range(1, 5):
+                  print(n, "x", i, "=", n * i)
+
+          mostrar_tabla(int(input()))
+        expect_fail_tag: logic.off_by_one
+    hints:
+      - {es: 'El final de `range` no se incluye.', en: 'The end of `range` is not included.'}
+    explanation:
+      es: 'Para llegar al 5 el final del `range` debe ser 6.'
+      en: 'To reach 5 the end of the `range` must be 6.'

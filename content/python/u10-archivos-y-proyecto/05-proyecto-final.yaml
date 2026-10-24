@@ -1,0 +1,363 @@
+id: py.u10.l05
+language: python
+unit: py.u10
+position: 5
+skills: [py.project, py.def, py.dict, py.try, py.modules]
+status: draft
+reviewed_by: []
+title:
+  es: 'Proyecto final: tres retos'
+  en: 'Final project: three challenges'
+explanation:
+  es: |
+    Los tres retos usan todo lo aprendido: entrada y salida, funciones, listas, diccionarios, errores y módulos.
+    Cada uno es un programa completo con su propio formato de entrada (siempre `n` en la primera línea).
+
+    Antes de escribir código, anota:
+
+    1. **¿Qué entra y qué sale?**
+    2. **¿Qué estructura de datos uso?**
+    3. **¿Qué casos límite y errores pueden aparecer?**
+
+    Si te atascas, divide el reto en funciones pequeñas y pruébalas por separado.
+  en: |
+    The three challenges use everything you learned: input and output, functions, lists, dictionaries, errors and modules.
+    Each one is a complete program with its own input format (always `n` on the first line).
+
+    Before writing code, note down:
+
+    1. **What goes in and what comes out?**
+    2. **Which data structure do I use?**
+    3. **Which edge cases and errors can appear?**
+
+    If you get stuck, split the challenge into small functions and test them separately.
+exercises:
+  - id: py.u10.l05.e01
+    type: write_code
+    difficulty: 4
+    skills: [py.project, py.strings.methods, py.modules, py.fstring, py.input]
+    prompt:
+      es: |
+        **Reto 1: analizador de texto.** Lee un entero `n` y luego `n` líneas de texto. Considera las palabras en minúsculas
+        (separadas por espacios). Muestra, en este orden y con este formato:
+
+        ```
+        lineas: <n>
+        palabras: <total de palabras>
+        unicas: <palabras distintas>
+        mas_larga: <la palabra más larga; si hay empate, la primera>
+        frecuente: <la palabra más frecuente> <veces>   (empate: la primera que apareció)
+        ```
+
+        Si no hay palabras, muestra `-` como valor de `mas_larga` y `-` en `frecuente`.
+      en: |
+        **Challenge 1: text analyzer.** Read a whole number `n` and then `n` lines of text. Consider the words in lowercase
+        (separated by spaces). Show, in this order and with this format:
+
+        ```
+        lineas: <n>
+        palabras: <total words>
+        unicas: <distinct words>
+        mas_larga: <the longest word; if tied, the first one>
+        frecuente: <the most frequent word> <times>   (tie: the first one that appeared)
+        ```
+
+        If there are no words, show `-` as the value of `mas_larga` and `-` in `frecuente`.
+    starter: |
+      from collections import Counter
+
+      # Escribe tu código aquí / Write your code here
+    reference_solution: |
+      from collections import Counter
+
+      n = int(input())
+      palabras = []
+      for i in range(n):
+          for p in input().lower().split():
+              palabras.append(p)
+
+      print(f"lineas: {n}")
+      print(f"palabras: {len(palabras)}")
+      print(f"unicas: {len(set(palabras))}")
+      if len(palabras) == 0:
+          print("mas_larga: -")
+          print("frecuente: -")
+      else:
+          mas_larga = ""
+          for p in palabras:
+              if len(p) > len(mas_larga):
+                  mas_larga = p
+          print(f"mas_larga: {mas_larga}")
+          palabra, veces = Counter(palabras).most_common(1)[0]
+          print(f"frecuente: {palabra} {veces}")
+    tests:
+      - {stdin: "2\nhola mundo hola\nel sol brilla\n", expected_stdout: "lineas: 2\npalabras: 6\nunicas: 5\nmas_larga: brilla\nfrecuente: hola 2\n", visible: true}
+      - {stdin: "1\nHola hola HOLA\n", expected_stdout: "lineas: 1\npalabras: 3\nunicas: 1\nmas_larga: hola\nfrecuente: hola 3\n", visible: false}
+      - {stdin: "0\n", expected_stdout: "lineas: 0\npalabras: 0\nunicas: 0\nmas_larga: -\nfrecuente: -\n", visible: false}
+    wrong_examples:
+      - code: |
+          from collections import Counter
+
+          n = int(input())
+          palabras = []
+          for i in range(n):
+              for p in input().split():
+                  palabras.append(p)
+
+          print(f"lineas: {n}")
+          print(f"palabras: {len(palabras)}")
+          print(f"unicas: {len(set(palabras))}")
+          if len(palabras) == 0:
+              print("mas_larga: -")
+              print("frecuente: -")
+          else:
+              mas_larga = ""
+              for p in palabras:
+                  if len(p) > len(mas_larga):
+                      mas_larga = p
+              print(f"mas_larga: {mas_larga}")
+              palabra, veces = Counter(palabras).most_common(1)[0]
+              print(f"frecuente: {palabra} {veces}")
+        expect_fail_tag: logic.case_sensitive
+    hints:
+      - {es: 'Pasa cada línea a minúsculas antes de separar en palabras.', en: 'Turn each line to lowercase before splitting into words.'}
+      - {es: 'Usa `>` (estricto) al buscar la más larga para quedarte con la primera en un empate.', en: 'Use `>` (strict) when looking for the longest to keep the first one in a tie.'}
+    explanation:
+      es: 'El caso sin palabras es un caso límite que hay que manejar aparte.'
+      en: 'The case with no words is an edge case that must be handled separately.'
+
+  - id: py.u10.l05.e02
+    type: write_code
+    difficulty: 5
+    skills: [py.project, py.def, py.dict, py.try, py.input]
+    prompt:
+      es: |
+        **Reto 2: banco.** Lee un entero `n` y luego `n` comandos. Los saldos son enteros positivos.
+        - `crear <nombre> <saldo>`: crea una cuenta con ese saldo inicial (mayor que 0).
+        - `depositar <nombre> <monto>`: suma el monto (mayor que 0).
+        - `retirar <nombre> <monto>`: resta el monto (mayor que 0 y no mayor que el saldo).
+        - `transferir <origen> <destino> <monto>`: mueve el monto entre dos cuentas existentes (mayor que 0 y no mayor que el saldo de origen).
+        - `saldo <nombre>`: muestra el saldo.
+
+        Los comandos correctos no muestran nada (salvo `saldo`). Si falla, muestra un solo mensaje y **no cambies ninguna cuenta**:
+        `error: monto invalido`, `error: cuenta no existe`, `error: cuenta existe`, `error: fondos insuficientes` o
+        `error: comando invalido` (comando desconocido o con número de partes incorrecto).
+        Comprueba en este orden: formato del comando, cuentas, monto, fondos.
+      en: |
+        **Challenge 2: bank.** Read a whole number `n` and then `n` commands. Balances are positive whole numbers.
+        - `crear <nombre> <saldo>`: creates an account with that initial balance (greater than 0).
+        - `depositar <nombre> <monto>`: adds the amount (greater than 0).
+        - `retirar <nombre> <monto>`: subtracts the amount (greater than 0 and not greater than the balance).
+        - `transferir <origen> <destino> <monto>`: moves the amount between two existing accounts (greater than 0 and not greater than the source balance).
+        - `saldo <nombre>`: shows the balance.
+
+        Correct commands show nothing (except `saldo`). If it fails, show a single message and **change no account**:
+        `error: monto invalido`, `error: cuenta no existe`, `error: cuenta existe`, `error: fondos insuficientes` or
+        `error: comando invalido` (unknown command or wrong number of parts).
+        Check in this order: command format, accounts, amount, funds.
+    starter: |
+      # Escribe tu código aquí / Write your code here
+    reference_solution: |
+      def validar_monto(texto):
+          try:
+              monto = int(texto)
+          except ValueError:
+              raise ValueError("error: monto invalido")
+          if monto <= 0:
+              raise ValueError("error: monto invalido")
+          return monto
+
+      def exigir(cuentas, nombre):
+          if nombre not in cuentas:
+              raise ValueError("error: cuenta no existe")
+
+      def ejecutar(linea, cuentas):
+          partes = linea.split()
+          if len(partes) == 0:
+              raise ValueError("error: comando invalido")
+          cmd = partes[0]
+          if cmd == "crear" and len(partes) == 3:
+              if partes[1] in cuentas:
+                  raise ValueError("error: cuenta existe")
+              cuentas[partes[1]] = validar_monto(partes[2])
+          elif cmd == "depositar" and len(partes) == 3:
+              exigir(cuentas, partes[1])
+              cuentas[partes[1]] = cuentas[partes[1]] + validar_monto(partes[2])
+          elif cmd == "retirar" and len(partes) == 3:
+              exigir(cuentas, partes[1])
+              monto = validar_monto(partes[2])
+              if monto > cuentas[partes[1]]:
+                  raise ValueError("error: fondos insuficientes")
+              cuentas[partes[1]] = cuentas[partes[1]] - monto
+          elif cmd == "transferir" and len(partes) == 4:
+              exigir(cuentas, partes[1])
+              exigir(cuentas, partes[2])
+              monto = validar_monto(partes[3])
+              if monto > cuentas[partes[1]]:
+                  raise ValueError("error: fondos insuficientes")
+              cuentas[partes[1]] = cuentas[partes[1]] - monto
+              cuentas[partes[2]] = cuentas[partes[2]] + monto
+          elif cmd == "saldo" and len(partes) == 2:
+              exigir(cuentas, partes[1])
+              print(cuentas[partes[1]])
+          else:
+              raise ValueError("error: comando invalido")
+
+      n = int(input())
+      cuentas = {}
+      for i in range(n):
+          try:
+              ejecutar(input(), cuentas)
+          except ValueError as e:
+              print(e)
+    tests:
+      - {stdin: "10\ncrear ana 100\ncrear luis 50\ntransferir ana luis 30\nsaldo ana\nsaldo luis\nretirar ana 100\nretirar ana 70\nsaldo ana\ndepositar bea 5\nbaile\n", expected_stdout: "70\n80\nerror: fondos insuficientes\n0\nerror: cuenta no existe\nerror: comando invalido\n", visible: true}
+      - {stdin: "5\ncrear ana x\ncrear ana 10\ncrear ana 5\ndepositar ana -3\nsaldo ana\n", expected_stdout: "error: monto invalido\nerror: cuenta existe\nerror: monto invalido\n10\n", visible: false}
+      - {stdin: "5\ncrear a 10\ntransferir a b 5\ncrear b 1\ntransferir a b 20\nsaldo b\n", expected_stdout: "error: cuenta no existe\nerror: fondos insuficientes\n1\n", visible: false}
+    wrong_examples:
+      - code: |
+          def validar_monto(texto):
+              try:
+                  monto = int(texto)
+              except ValueError:
+                  raise ValueError("error: monto invalido")
+              if monto <= 0:
+                  raise ValueError("error: monto invalido")
+              return monto
+
+          def exigir(cuentas, nombre):
+              if nombre not in cuentas:
+                  raise ValueError("error: cuenta no existe")
+
+          def ejecutar(linea, cuentas):
+              partes = linea.split()
+              if len(partes) == 0:
+                  raise ValueError("error: comando invalido")
+              cmd = partes[0]
+              if cmd == "crear" and len(partes) == 3:
+                  if partes[1] in cuentas:
+                      raise ValueError("error: cuenta existe")
+                  cuentas[partes[1]] = validar_monto(partes[2])
+              elif cmd == "depositar" and len(partes) == 3:
+                  exigir(cuentas, partes[1])
+                  cuentas[partes[1]] = cuentas[partes[1]] + validar_monto(partes[2])
+              elif cmd == "retirar" and len(partes) == 3:
+                  exigir(cuentas, partes[1])
+                  monto = validar_monto(partes[2])
+                  cuentas[partes[1]] = cuentas[partes[1]] - monto
+              elif cmd == "transferir" and len(partes) == 4:
+                  exigir(cuentas, partes[1])
+                  exigir(cuentas, partes[2])
+                  monto = validar_monto(partes[3])
+                  cuentas[partes[1]] = cuentas[partes[1]] - monto
+                  cuentas[partes[2]] = cuentas[partes[2]] + monto
+              elif cmd == "saldo" and len(partes) == 2:
+                  exigir(cuentas, partes[1])
+                  print(cuentas[partes[1]])
+              else:
+                  raise ValueError("error: comando invalido")
+
+          n = int(input())
+          cuentas = {}
+          for i in range(n):
+              try:
+                  ejecutar(input(), cuentas)
+              except ValueError as e:
+                  print(e)
+        expect_fail_tag: validation.missing_check
+    hints:
+      - {es: 'Una función por tarea (validar monto, exigir cuenta, ejecutar) hace el código mucho más fácil de seguir.', en: 'One function per task (validate amount, require account, execute) makes the code much easier to follow.'}
+      - {es: 'Lanza los errores con `raise ValueError("mensaje")` y captúralos en un solo `try` en el bucle principal.', en: 'Raise the errors with `raise ValueError("message")` and catch them in a single `try` in the main loop.'}
+    explanation:
+      es: 'Como los errores se lanzan antes de modificar ninguna cuenta, una operación fallida nunca deja los datos a medias.'
+      en: 'Since errors are raised before any account is modified, a failed operation never leaves the data half-done.'
+
+  - id: py.u10.l05.e03
+    type: write_code
+    difficulty: 5
+    skills: [py.project, py.list, py.tuple, py.fstring, py.input]
+    prompt:
+      es: |
+        **Reto 3: libro de notas.** Lee un entero `n` y luego `n` líneas con el formato `nombre nota1 nota2 ...` (al menos una nota
+        entera por estudiante). Calcula el promedio de cada uno. Muestra una línea `nombre: promedio` (un decimal) por estudiante,
+        ordenados por promedio de mayor a menor y, si hay empate, por nombre alfabético. Termina con `aprobados: k`, donde `k` es
+        cuántos tienen promedio de 60 o más.
+      en: |
+        **Challenge 3: grade book.** Read a whole number `n` and then `n` lines in the format `name grade1 grade2 ...` (at least one
+        whole-number grade per student). Compute each student's average. Show one line `name: average` (one decimal) per student,
+        sorted by average from highest to lowest and, if tied, by alphabetical name. End with `aprobados: k`, where `k` is
+        how many have an average of 60 or more.
+    starter: |
+      # Escribe tu código aquí / Write your code here
+    reference_solution: |
+      n = int(input())
+      resultados = []
+      aprobados = 0
+      for i in range(n):
+          partes = input().split()
+          nombre = partes[0]
+          notas = partes[1:]
+          total = 0
+          for nota in notas:
+              total = total + int(nota)
+          prom = total / len(notas)
+          resultados.append((-prom, nombre))
+          if prom >= 60:
+              aprobados = aprobados + 1
+
+      resultados.sort()
+      for neg, nombre in resultados:
+          print(f"{nombre}: {-neg:.1f}")
+      print(f"aprobados: {aprobados}")
+    tests:
+      - {stdin: "3\nana 80 90\nluis 50 60 70\nbea 90 80\n", expected_stdout: "ana: 85.0\nbea: 85.0\nluis: 60.0\naprobados: 3\n", visible: true}
+      - {stdin: "2\nzoe 59\nabe 61 60\n", expected_stdout: "abe: 60.5\nzoe: 59.0\naprobados: 1\n", visible: false}
+      - {stdin: "0\n", expected_stdout: "aprobados: 0\n", visible: false}
+    wrong_examples:
+      - code: |
+          n = int(input())
+          resultados = []
+          aprobados = 0
+          for i in range(n):
+              partes = input().split()
+              nombre = partes[0]
+              notas = partes[1:]
+              total = 0
+              for nota in notas:
+                  total = total + int(nota)
+              prom = total / len(notas)
+              resultados.append((prom, nombre))
+              if prom >= 60:
+                  aprobados = aprobados + 1
+
+          resultados.sort()
+          for prom, nombre in resultados:
+              print(f"{nombre}: {prom:.1f}")
+          print(f"aprobados: {aprobados}")
+        expect_fail_tag: logic.sort_direction
+    hints:
+      - {es: 'Una lista de tuplas se ordena comparando elemento a elemento: guarda `(-promedio, nombre)` y `sort()` hará el resto.', en: 'A list of tuples is sorted by comparing element by element: store `(-average, name)` and `sort()` does the rest.'}
+      - {es: '`partes[1:]` es la lista de notas (como textos).', en: '`partes[1:]` is the list of grades (as texts).'}
+    explanation:
+      es: 'Guardar el promedio con signo negativo consigue el orden descendente y, a la vez, el desempate alfabético.'
+      en: 'Storing the average with a negative sign gives descending order and, at the same time, the alphabetical tie-break.'
+
+  - id: py.u10.l05.e04
+    type: multiple_choice
+    difficulty: 2
+    skills: [py.project]
+    prompt:
+      es: 'Terminaste la ruta de Python. ¿Cuál de estos es un siguiente paso natural para seguir creciendo?'
+      en: 'You have finished the Python path. Which of these is a natural next step to keep growing?'
+    options:
+      - {es: 'Construir proyectos propios, aprender clases y objetos, y practicar con bibliotecas externas.', en: 'Build your own projects, learn classes and objects, and practice with external libraries.'}
+      - {es: 'Dejar de practicar: ya no queda nada por aprender.', en: 'Stop practicing: there is nothing left to learn.'}
+      - {es: 'Memorizar todos los métodos de la biblioteca estándar.', en: 'Memorize every method of the standard library.'}
+      - {es: 'Volver a empezar sin escribir código.', en: 'Start over without writing code.'}
+    answer: 0
+    distractor_tags: {1: growth.misconception, 2: growth.memorization}
+    hints:
+      - {es: 'Se aprende programando, sobre todo con proyectos que te interesen.', en: 'You learn by programming, above all with projects that interest you.'}
+    explanation:
+      es: 'Un buen siguiente paso es un proyecto propio: algo que te importe y que te obligue a investigar y a depurar.'
+      en: 'A good next step is a project of your own: something you care about that forces you to research and debug.'

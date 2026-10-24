@@ -1,0 +1,8 @@
+id: py.u01
+position: 1
+title:
+  es: 'Primeros pasos'
+  en: 'First steps'
+summary:
+  es: 'Mostrar texto, guardar datos en variables y conocer los tipos básicos.'
+  en: 'Showing text, storing data in variables and meeting the basic types.'

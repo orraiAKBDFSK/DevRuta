@@ -1,0 +1,261 @@
+id: py.u08.l01
+language: python
+unit: py.u08
+position: 1
+skills: [py.slicing, py.strings.basic]
+status: draft
+reviewed_by: []
+title:
+  es: 'Índices en el texto'
+  en: 'Indexes in text'
+explanation:
+  es: |
+    Un texto es una **secuencia de caracteres**, y se indexa igual que una lista:
+
+    ```python
+    s = "Python"
+    print(s[0])        # P   (primer carácter)
+    print(s[-1])       # n   (último)
+    print(len(s))      # 6
+    print("th" in s)   # True  (¿contiene este fragmento?)
+    ```
+
+    - El índice empieza en 0 y también hay índices negativos.
+    - Los espacios y signos **también cuentan** como caracteres: `len("a b")` es 3.
+    - A diferencia de las listas, un texto **no se puede modificar**: `s[0] = "J"` da un `TypeError`.
+      Para "cambiar" un texto se crea uno nuevo.
+    - Si el texto lleva comillas dentro, mezcla los tipos: `'Dijo "hola"'`.
+  en: |
+    Text is a **sequence of characters**, and it is indexed just like a list:
+
+    ```python
+    s = "Python"
+    print(s[0])        # P   (first character)
+    print(s[-1])       # n   (last)
+    print(len(s))      # 6
+    print("th" in s)   # True  (does it contain this fragment?)
+    ```
+
+    - The index starts at 0 and negative indexes also exist.
+    - Spaces and symbols **also count** as characters: `len("a b")` is 3.
+    - Unlike lists, text **cannot be modified**: `s[0] = "J"` raises a `TypeError`.
+      To "change" a text you create a new one.
+    - If the text contains quotes, mix the types: `'Dijo "hola"'`.
+exercises:
+  - id: py.u08.l01.e01
+    type: predict_output
+    difficulty: 1
+    skills: [py.slicing]
+    prompt:
+      es: '¿Qué muestra este programa?'
+      en: 'What does this program show?'
+    code: |
+      print("Python"[0])
+    answer: "P"
+    hints:
+      - {es: 'El primer índice es 0.', en: 'The first index is 0.'}
+    explanation:
+      es: 'Se puede indexar directamente un texto literal.'
+      en: 'You can index a literal text directly.'
+
+  - id: py.u08.l01.e02
+    type: predict_output
+    difficulty: 1
+    skills: [py.slicing]
+    prompt:
+      es: '¿Qué muestra este programa?'
+      en: 'What does this program show?'
+    code: |
+      s = "Python"
+      print(s[-1])
+    answer: "n"
+    hints:
+      - {es: '`-1` es el último carácter.', en: '`-1` is the last character.'}
+    explanation:
+      es: 'Los índices negativos cuentan desde el final.'
+      en: 'Negative indexes count from the end.'
+
+  - id: py.u08.l01.e03
+    type: predict_output
+    difficulty: 2
+    skills: [py.strings.basic]
+    prompt:
+      es: '¿Qué muestra este programa?'
+      en: 'What does this program show?'
+    code: |
+      print(len("Hola mundo"))
+    answer: "10"
+    hints:
+      - {es: 'El espacio también es un carácter.', en: 'The space is also a character.'}
+    explanation:
+      es: '4 letras + 1 espacio + 5 letras = 10.'
+      en: '4 letters + 1 space + 5 letters = 10.'
+
+  - id: py.u08.l01.e04
+    type: multiple_choice
+    difficulty: 2
+    skills: [py.strings.basic]
+    prompt:
+      es: |
+        ¿Qué ocurre al ejecutar este programa?
+
+        ```python
+        s = "hola"
+        s[0] = "H"
+        ```
+      en: |
+        What happens when running this program?
+
+        ```python
+        s = "hola"
+        s[0] = "H"
+        ```
+    options:
+      - {es: 'Da un `TypeError`: los textos no se pueden modificar.', en: 'It raises a `TypeError`: text cannot be modified.'}
+      - {es: '`s` pasa a valer `"Hola"`.', en: '`s` becomes `"Hola"`.'}
+      - {es: 'Se agrega una `H` al final.', en: 'An `H` is added at the end.'}
+      - {es: 'No ocurre nada.', en: 'Nothing happens.'}
+    answer: 0
+    distractor_tags: {1: string.mutability_misconception}
+    hints:
+      - {es: 'Piensa en lo que pasaba con las tuplas.', en: 'Think about what happened with tuples.'}
+    explanation:
+      es: 'Para obtener `"Hola"` hay que crear un texto nuevo, por ejemplo `"H" + s[1:]`, que verás en la siguiente lección.'
+      en: 'To get `"Hola"` you must create a new text, for example `"H" + s[1:]`, which you will see in the next lesson.'
+
+  - id: py.u08.l01.e05
+    type: predict_output
+    difficulty: 2
+    skills: [py.strings.basic]
+    prompt:
+      es: '¿Qué muestra este programa? Escribe las dos líneas.'
+      en: 'What does this program show? Write both lines.'
+    code: |
+      print("th" in "Python")
+      print("ph" in "Python")
+    answer: "True\nFalse"
+    hints:
+      - {es: 'Los caracteres deben aparecer seguidos y en ese orden.', en: 'The characters must appear together and in that order.'}
+    explanation:
+      es: '`in` busca el fragmento completo dentro del texto.'
+      en: '`in` looks for the whole fragment inside the text.'
+
+  - id: py.u08.l01.e06
+    type: fill_code
+    difficulty: 2
+    skills: [py.slicing]
+    prompt:
+      es: 'Completa el índice para que el programa muestre `n`.'
+      en: 'Fill in the index so the program shows `n`.'
+    code: |
+      palabra = "python"
+      print(palabra[___])
+    blanks:
+      - ["-1", "5"]
+    hints:
+      - {es: 'Es la última letra.', en: 'It is the last letter.'}
+    explanation:
+      es: 'Sirven `5` (índice positivo) y `-1` (desde el final).'
+      en: 'Both `5` (positive index) and `-1` (from the end) work.'
+
+  - id: py.u08.l01.e07
+    type: predict_output
+    difficulty: 2
+    skills: [py.strings.basic]
+    prompt:
+      es: '¿Qué muestra este programa? Fíjate en cómo se combinan las comillas.'
+      en: 'What does this program show? Mind how the quotes are combined.'
+    code: |
+      print('Dijo "hola"')
+    answer: "Dijo \"hola\""
+    hints:
+      - {es: 'Las comillas externas no se muestran.', en: 'The outer quotes are not shown.'}
+    explanation:
+      es: 'Las comillas simples exteriores permiten escribir comillas dobles dentro del texto.'
+      en: 'The outer single quotes let you write double quotes inside the text.'
+
+  - id: py.u08.l01.e08
+    type: write_code
+    difficulty: 2
+    skills: [py.slicing, py.input]
+    prompt:
+      es: 'Lee una palabra y muestra su primera y su última letra, separadas por un espacio.'
+      en: 'Read a word and show its first and its last letter, separated by a space.'
+    starter: |
+      # Escribe tu código aquí / Write your code here
+    reference_solution: |
+      palabra = input()
+      print(palabra[0], palabra[-1])
+    tests:
+      - {stdin: "hola\n", expected_stdout: "h a\n", visible: true}
+      - {stdin: "x\n", expected_stdout: "x x\n", visible: false}
+      - {stdin: "python\n", expected_stdout: "p n\n", visible: false}
+    wrong_examples:
+      - code: |
+          palabra = input()
+          print(palabra[0], palabra[len(palabra)])
+        expect_fail_tag: index.out_of_range
+      - code: |
+          palabra = input()
+          print(palabra[-1], palabra[0])
+        expect_fail_tag: logic.swapped_order
+    hints:
+      - {es: 'Para la última letra no necesitas calcular la longitud.', en: 'For the last letter you do not need to calculate the length.'}
+    explanation:
+      es: '`palabra[len(palabra)]` se pasa del último índice, que es `len(palabra) - 1`.'
+      en: '`palabra[len(palabra)]` goes past the last index, which is `len(palabra) - 1`.'
+
+  - id: py.u08.l01.e09
+    type: write_code
+    difficulty: 3
+    skills: [py.slicing, py.for, py.input]
+    prompt:
+      es: 'Lee una palabra y muestra cada letra con su índice, una por línea, en el formato `0 a`.'
+      en: 'Read a word and show each letter with its index, one per line, in the format `0 a`.'
+    starter: |
+      # Escribe tu código aquí / Write your code here
+    reference_solution: |
+      palabra = input()
+      for i in range(len(palabra)):
+          print(i, palabra[i])
+    tests:
+      - {stdin: "abc\n", expected_stdout: "0 a\n1 b\n2 c\n", visible: true}
+      - {stdin: "z\n", expected_stdout: "0 z\n", visible: false}
+    wrong_examples:
+      - code: |
+          palabra = input()
+          for i in range(1, len(palabra) + 1):
+              print(i, palabra[i - 1])
+        expect_fail_tag: logic.off_by_one
+    hints:
+      - {es: 'Recorre los índices con `range(len(palabra))`.', en: 'Walk through the indexes with `range(len(palabra))`.'}
+    explanation:
+      es: 'Los índices empiezan en 0, no en 1.'
+      en: 'Indexes start at 0, not 1.'
+
+  - id: py.u08.l01.e10
+    type: write_code
+    difficulty: 3
+    skills: [py.slicing, py.compare, py.input]
+    prompt:
+      es: 'Lee una palabra y muestra `True` si empieza y termina con la misma letra, o `False` si no.'
+      en: 'Read a word and show `True` if it starts and ends with the same letter, or `False` otherwise.'
+    starter: |
+      # Escribe tu código aquí / Write your code here
+    reference_solution: |
+      palabra = input()
+      print(palabra[0] == palabra[-1])
+    tests:
+      - {stdin: "oso\n", expected_stdout: "True\n", visible: true}
+      - {stdin: "casa\n", expected_stdout: "False\n", visible: false}
+      - {stdin: "a\n", expected_stdout: "True\n", visible: false}
+    wrong_examples:
+      - code: |
+          palabra = input()
+          print(palabra[0] != palabra[-1])
+        expect_fail_tag: logic.inverted_condition
+    hints:
+      - {es: 'Compara el primer y el último carácter con `==`.', en: 'Compare the first and the last character with `==`.'}
+    explanation:
+      es: 'Con una sola letra, la primera y la última son la misma.'
+      en: 'With a single letter, the first and the last are the same.'

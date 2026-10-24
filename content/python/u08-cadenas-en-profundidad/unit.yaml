@@ -1,0 +1,8 @@
+id: py.u08
+position: 8
+title:
+  es: 'Cadenas en profundidad'
+  en: 'Strings in depth'
+summary:
+  es: 'Rebanadas, métodos de texto y formato con f-strings.'
+  en: 'Slices, string methods and formatting with f-strings.'

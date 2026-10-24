@@ -1,0 +1,260 @@
+id: py.u06.l01
+language: python
+unit: py.u06
+position: 1
+skills: [py.def]
+status: draft
+reviewed_by: []
+title:
+  es: 'Definir y llamar funciones'
+  en: 'Defining and calling functions'
+explanation:
+  es: |
+    Una **función** es un bloque de código con nombre que puedes reutilizar. Se crea con `def`:
+
+    ```python
+    def saludar():
+        print("Hola")
+
+    saludar()
+    saludar()
+    ```
+
+    Muestra `Hola` dos veces.
+
+    - `def nombre():` **define** la función, pero no la ejecuta.
+    - Escribir `nombre()` (con paréntesis) la **llama**, y solo entonces se ejecuta.
+    - El cuerpo va indentado, igual que en un `if` o un bucle.
+    - La función debe estar definida **antes** de llamarla.
+    - Sirven para no repetir código y para darle un nombre a cada tarea.
+  en: |
+    A **function** is a named block of code you can reuse. It is created with `def`:
+
+    ```python
+    def saludar():
+        print("Hola")
+
+    saludar()
+    saludar()
+    ```
+
+    It shows `Hola` twice.
+
+    - `def nombre():` **defines** the function but does not run it.
+    - Writing `nombre()` (with parentheses) **calls** it, and only then does it run.
+    - The body is indented, just like in an `if` or a loop.
+    - The function must be defined **before** you call it.
+    - They help you avoid repeating code and give a name to each task.
+exercises:
+  - id: py.u06.l01.e01
+    type: predict_output
+    difficulty: 1
+    skills: [py.def]
+    prompt:
+      es: '¿Qué muestra este programa?'
+      en: 'What does this program show?'
+    code: |
+      def saludar():
+          print("Hola")
+
+      saludar()
+      saludar()
+    answer: "Hola\nHola"
+    hints:
+      - {es: 'Cada llamada ejecuta el cuerpo de la función.', en: 'Each call runs the body of the function.'}
+    explanation:
+      es: 'La función se define una vez y se llama dos veces.'
+      en: 'The function is defined once and called twice.'
+
+  - id: py.u06.l01.e02
+    type: predict_output
+    difficulty: 2
+    skills: [py.def]
+    prompt:
+      es: '¿Qué muestra este programa? Escribe las líneas en orden.'
+      en: 'What does this program show? Write the lines in order.'
+    code: |
+      def f():
+          print("A")
+
+      print("B")
+      f()
+    answer: "B\nA"
+    hints:
+      - {es: 'Definir una función no la ejecuta.', en: 'Defining a function does not run it.'}
+    explanation:
+      es: 'Primero se ejecuta `print("B")`; la función solo corre cuando se llama.'
+      en: '`print("B")` runs first; the function only runs when it is called.'
+
+  - id: py.u06.l01.e03
+    type: multiple_choice
+    difficulty: 2
+    skills: [py.def]
+    prompt:
+      es: |
+        ¿Qué muestra este programa?
+
+        ```python
+        def saludar():
+            print("Hola")
+        ```
+      en: |
+        What does this program show?
+
+        ```python
+        def saludar():
+            print("Hola")
+        ```
+    options:
+      - {es: 'Nada, porque la función se define pero nunca se llama.', en: 'Nothing, because the function is defined but never called.'}
+      - {es: '`Hola`', en: '`Hola`'}
+      - {es: 'Un error.', en: 'An error.'}
+      - {es: '`saludar`', en: '`saludar`'}
+    answer: 0
+    distractor_tags: {1: function.def_vs_call}
+    hints:
+      - {es: 'Busca una línea con `saludar()` fuera de la definición.', en: 'Look for a line with `saludar()` outside the definition.'}
+    explanation:
+      es: 'Falta la llamada `saludar()`.'
+      en: 'The call `saludar()` is missing.'
+
+  - id: py.u06.l01.e04
+    type: order_lines
+    difficulty: 2
+    skills: [py.def]
+    prompt:
+      es: 'Ordena las líneas para definir la función `saludar` y llamarla una vez.'
+      en: 'Order the lines to define the function `saludar` and call it once.'
+    lines:
+      - 'def saludar():'
+      - '    print("Hola")'
+      - 'saludar()'
+    hints:
+      - {es: 'Una función se define antes de llamarla.', en: 'A function is defined before being called.'}
+    explanation:
+      es: 'El cuerpo va indentado y la llamada, sin indentar.'
+      en: 'The body is indented and the call is not.'
+
+  - id: py.u06.l01.e05
+    type: fill_code
+    difficulty: 2
+    skills: [py.def]
+    prompt:
+      es: 'Completa la cabecera de la función; falta el signo que cierra toda línea que abre un bloque.'
+      en: 'Fill in the function header; the sign that ends every line that opens a block is missing.'
+    code: |
+      def saludar()___
+          print("Hola")
+
+      saludar()
+    blanks:
+      - [":"]
+    hints:
+      - {es: 'Igual que en `if` y `while`.', en: 'Just like in `if` and `while`.'}
+    explanation:
+      es: 'Sin los dos puntos hay un `SyntaxError`.'
+      en: 'Without the colon there is a `SyntaxError`.'
+
+  - id: py.u06.l01.e06
+    type: predict_output
+    difficulty: 3
+    skills: [py.def, py.for]
+    prompt:
+      es: '¿Qué muestra este programa? Escribe las cuatro líneas.'
+      en: 'What does this program show? Write the four lines.'
+    code: |
+      def dos_lineas():
+          print("x")
+          print("y")
+
+      for i in range(2):
+          dos_lineas()
+    answer: "x\ny\nx\ny"
+    hints:
+      - {es: 'La función se llama una vez por cada vuelta del bucle.', en: 'The function is called once on each turn of the loop.'}
+    explanation:
+      es: 'Dos vueltas, y cada llamada muestra dos líneas.'
+      en: 'Two turns, and each call shows two lines.'
+
+  - id: py.u06.l01.e07
+    type: write_code
+    difficulty: 2
+    skills: [py.def, py.output]
+    prompt:
+      es: |
+        Define una función `separador()` que muestre `=====`. Luego el programa debe mostrar
+        `A`, llamar a `separador()`, mostrar `B` y volver a llamar a `separador()`.
+      en: |
+        Define a function `separador()` that shows `=====`. Then the program must show
+        `A`, call `separador()`, show `B` and call `separador()` again.
+    starter: |
+      # Escribe tu código aquí / Write your code here
+    reference_solution: |
+      def separador():
+          print("=====")
+
+      print("A")
+      separador()
+      print("B")
+      separador()
+    tests:
+      - {stdin: "", expected_stdout: "A\n=====\nB\n=====\n", visible: true}
+    static_checks:
+      - {kind: requires_function, name: separador}
+    wrong_examples:
+      - code: |
+          print("A")
+          print("=====")
+          print("B")
+          print("=====")
+        expect_fail_tag: static.no_function
+      - code: |
+          def separador():
+              print("=====")
+
+          print("A")
+          separador
+          print("B")
+          separador
+        expect_fail_tag: function.missing_parentheses
+    hints:
+      - {es: 'Para llamar a la función hay que escribir los paréntesis.', en: 'To call the function you must write the parentheses.'}
+    explanation:
+      es: '`separador` sin paréntesis solo nombra la función; no la ejecuta.'
+      en: '`separador` without parentheses only names the function; it does not run it.'
+
+  - id: py.u06.l01.e08
+    type: multiple_choice
+    difficulty: 2
+    skills: [py.def]
+    prompt:
+      es: |
+        ¿Qué ocurre con este programa?
+
+        ```python
+        saludar()
+
+        def saludar():
+            print("Hola")
+        ```
+      en: |
+        What happens with this program?
+
+        ```python
+        saludar()
+
+        def saludar():
+            print("Hola")
+        ```
+    options:
+      - {es: 'Da un `NameError`: la función se llama antes de definirse.', en: 'It raises a `NameError`: the function is called before being defined.'}
+      - {es: 'Muestra `Hola`.', en: 'It shows `Hola`.'}
+      - {es: 'No muestra nada.', en: 'It shows nothing.'}
+      - {es: 'Da un `SyntaxError`.', en: 'It raises a `SyntaxError`.'}
+    answer: 0
+    distractor_tags: {1: function.order_misconception}
+    hints:
+      - {es: 'Python lee el programa de arriba abajo.', en: 'Python reads the program from top to bottom.'}
+    explanation:
+      es: 'Cuando se llega a la primera línea, `saludar` todavía no existe.'
+      en: 'When the first line is reached, `saludar` does not exist yet.'

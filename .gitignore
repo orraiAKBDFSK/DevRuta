@@ -1,0 +1,27 @@
+# Dependencias y compilados
+node_modules/
+dist/
+.angular/
+target/
+*.class
+*.log
+
+# Entornos virtuales y cachés de Python
+.venv/
+venv/
+__pycache__/
+
+# Secretos y configuración local: nunca se suben
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Editores y sistema operativo
+.idea/
+*.iml
+.vscode/*
+!.vscode/extensions.json
+.DS_Store
+Thumbs.db

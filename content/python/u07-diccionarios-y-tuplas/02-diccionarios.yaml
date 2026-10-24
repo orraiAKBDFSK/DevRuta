@@ -1,0 +1,308 @@
+id: py.u07.l02
+language: python
+unit: py.u07
+position: 2
+skills: [py.dict]
+status: draft
+reviewed_by: []
+title:
+  es: 'Diccionarios'
+  en: 'Dictionaries'
+explanation:
+  es: |
+    Un **diccionario** guarda pares **clave: valor**. En vez de buscar por posición, buscas por clave:
+
+    ```python
+    edades = {"Ana": 20, "Luis": 25}
+    print(edades["Ana"])        # 20
+    edades["Eva"] = 30          # agrega un par nuevo
+    edades["Ana"] = 21          # cambia un valor existente
+    del edades["Luis"]          # borra un par
+    print(edades)               # {'Ana': 21, 'Eva': 30}
+    ```
+
+    - Las claves son **únicas** y suelen ser texto o números.
+    - `clave in diccionario` pregunta si la **clave** existe (no el valor).
+    - Pedir una clave que no existe con `[]` da un `KeyError`. Con `.get(clave, valor_por_defecto)` no falla.
+    - `len(diccionario)` cuenta los pares.
+  en: |
+    A **dictionary** stores **key: value** pairs. Instead of looking up by position, you look up by key:
+
+    ```python
+    edades = {"Ana": 20, "Luis": 25}
+    print(edades["Ana"])        # 20
+    edades["Eva"] = 30          # adds a new pair
+    edades["Ana"] = 21          # changes an existing value
+    del edades["Luis"]          # deletes a pair
+    print(edades)               # {'Ana': 21, 'Eva': 30}
+    ```
+
+    - Keys are **unique** and are usually text or numbers.
+    - `key in dictionary` asks whether the **key** exists (not the value).
+    - Asking for a key that does not exist with `[]` raises a `KeyError`. With `.get(key, default_value)` it does not fail.
+    - `len(dictionary)` counts the pairs.
+exercises:
+  - id: py.u07.l02.e01
+    type: predict_output
+    difficulty: 1
+    skills: [py.dict]
+    prompt:
+      es: '¿Qué muestra este programa?'
+      en: 'What does this program show?'
+    code: |
+      d = {"a": 1, "b": 2}
+      print(d["b"])
+    answer: "2"
+    hints:
+      - {es: 'Se busca por clave, no por posición.', en: 'You look up by key, not by position.'}
+    explanation:
+      es: 'La clave `"b"` tiene el valor 2.'
+      en: 'The key `"b"` has the value 2.'
+
+  - id: py.u07.l02.e02
+    type: predict_output
+    difficulty: 2
+    skills: [py.dict]
+    prompt:
+      es: '¿Qué muestra este programa? Escribe el diccionario tal como lo muestra Python.'
+      en: 'What does this program show? Write the dictionary the way Python shows it.'
+    code: |
+      d = {"a": 1}
+      d["b"] = 2
+      print(d)
+    answer: "{'a': 1, 'b': 2}"
+    hints:
+      - {es: 'Asignar a una clave nueva agrega un par.', en: 'Assigning to a new key adds a pair.'}
+    explanation:
+      es: 'Python muestra los textos con comillas simples.'
+      en: 'Python shows text with single quotes.'
+
+  - id: py.u07.l02.e03
+    type: predict_output
+    difficulty: 2
+    skills: [py.dict]
+    prompt:
+      es: '¿Qué muestra este programa?'
+      en: 'What does this program show?'
+    code: |
+      d = {"a": 1}
+      d["a"] = 5
+      print(d)
+    answer: "{'a': 5}"
+    hints:
+      - {es: 'Las claves son únicas.', en: 'Keys are unique.'}
+    explanation:
+      es: 'Asignar a una clave existente reemplaza su valor.'
+      en: 'Assigning to an existing key replaces its value.'
+
+  - id: py.u07.l02.e04
+    type: predict_output
+    difficulty: 2
+    skills: [py.dict]
+    prompt:
+      es: '¿Qué muestra este programa? Escribe las dos líneas.'
+      en: 'What does this program show? Write both lines.'
+    code: |
+      d = {"x": 1, "y": 2}
+      print("x" in d)
+      print(1 in d)
+    answer: "True\nFalse"
+    hints:
+      - {es: '`in` revisa las claves.', en: '`in` checks the keys.'}
+    explanation:
+      es: '`"x"` es una clave; `1` es un valor, no una clave.'
+      en: '`"x"` is a key; `1` is a value, not a key.'
+
+  - id: py.u07.l02.e05
+    type: multiple_choice
+    difficulty: 2
+    skills: [py.dict]
+    prompt:
+      es: |
+        ¿Qué ocurre al ejecutar este programa?
+
+        ```python
+        d = {"a": 1}
+        print(d["z"])
+        ```
+      en: |
+        What happens when running this program?
+
+        ```python
+        d = {"a": 1}
+        print(d["z"])
+        ```
+    options:
+      - {es: 'Da un `KeyError`: la clave `"z"` no existe.', en: 'It raises a `KeyError`: the key `"z"` does not exist.'}
+      - {es: 'Muestra `None`.', en: 'It shows `None`.'}
+      - {es: 'Muestra 0.', en: 'It shows 0.'}
+      - {es: 'Agrega la clave `"z"`.', en: 'It adds the key `"z"`.'}
+    answer: 0
+    distractor_tags: {1: dict.get_vs_index}
+    hints:
+      - {es: 'Hay otra forma de pedir un valor que no falla si la clave no existe.', en: 'There is another way to ask for a value that does not fail if the key does not exist.'}
+    explanation:
+      es: 'Usa `d.get("z")` o comprueba antes con `in`.'
+      en: 'Use `d.get("z")` or check first with `in`.'
+
+  - id: py.u07.l02.e06
+    type: predict_output
+    difficulty: 2
+    skills: [py.dict]
+    prompt:
+      es: '¿Qué muestra este programa?'
+      en: 'What does this program show?'
+    code: |
+      d = {"a": 1}
+      print(d.get("z", 0))
+    answer: "0"
+    hints:
+      - {es: 'El segundo argumento de `get` es el valor por defecto.', en: 'The second argument of `get` is the default value.'}
+    explanation:
+      es: 'La clave no existe, así que se devuelve el valor por defecto.'
+      en: 'The key does not exist, so the default value is returned.'
+
+  - id: py.u07.l02.e07
+    type: fill_code
+    difficulty: 2
+    skills: [py.dict]
+    prompt:
+      es: 'Completa la clave para que el programa agregue la leche y muestre `{''pan'': 3, ''leche'': 5}`.'
+      en: 'Fill in the key so the program adds the milk and shows `{''pan'': 3, ''leche'': 5}`.'
+    code: |
+      precios = {"pan": 3}
+      precios[___] = 5
+      print(precios)
+    blanks:
+      - ['"leche"', "'leche'"]
+    hints:
+      - {es: 'La clave es un texto, así que lleva comillas.', en: 'The key is text, so it needs quotes.'}
+    explanation:
+      es: 'Sin comillas, Python buscaría una variable llamada `leche`.'
+      en: 'Without quotes, Python would look for a variable called `leche`.'
+
+  - id: py.u07.l02.e08
+    type: write_code
+    difficulty: 3
+    skills: [py.dict, py.input, py.for]
+    prompt:
+      es: |
+        Lee un entero `n` y luego `n` pares de líneas: un nombre y su edad (entero). Después lee un nombre a buscar.
+        Muestra su edad, o `no existe` si el nombre no está.
+      en: |
+        Read a whole number `n` and then `n` pairs of lines: a name and its age (whole number). Then read a name to look up.
+        Show its age, or `no existe` if the name is not there.
+    starter: |
+      # Escribe tu código aquí / Write your code here
+    reference_solution: |
+      n = int(input())
+      edades = {}
+      for i in range(n):
+          nombre = input()
+          edad = int(input())
+          edades[nombre] = edad
+      buscado = input()
+      if buscado in edades:
+          print(edades[buscado])
+      else:
+          print("no existe")
+    tests:
+      - {stdin: "2\nAna\n20\nLuis\n25\nLuis\n", expected_stdout: "25\n", visible: true}
+      - {stdin: "1\nAna\n20\nEva\n", expected_stdout: "no existe\n", visible: false}
+      - {stdin: "3\na\n1\nb\n2\nc\n3\nb\n", expected_stdout: "2\n", visible: false}
+    wrong_examples:
+      - code: |
+          n = int(input())
+          edades = {}
+          for i in range(n):
+              nombre = input()
+              edad = int(input())
+              edades[nombre] = edad
+          buscado = input()
+          print(edades[buscado])
+        expect_fail_tag: dict.keyerror_unhandled
+    hints:
+      - {es: 'Comprueba con `in` antes de acceder a la clave.', en: 'Check with `in` before accessing the key.'}
+    explanation:
+      es: 'Acceder con `[]` a una clave inexistente interrumpe el programa con un `KeyError`.'
+      en: 'Accessing a missing key with `[]` interrupts the program with a `KeyError`.'
+
+  - id: py.u07.l02.e09
+    type: write_code
+    difficulty: 2
+    skills: [py.dict, py.input]
+    prompt:
+      es: |
+        Parte del diccionario `{"a": 1, "b": 2}`. Lee una clave (texto) y un valor (entero), uno por línea.
+        Asigna ese valor a esa clave (cambiándolo o agregándolo) y muestra el diccionario.
+      en: |
+        Start with the dictionary `{"a": 1, "b": 2}`. Read a key (text) and a value (whole number), one per line.
+        Assign that value to that key (changing or adding it) and show the dictionary.
+    starter: |
+      d = {"a": 1, "b": 2}
+      # Escribe tu código aquí / Write your code here
+    reference_solution: |
+      d = {"a": 1, "b": 2}
+      clave = input()
+      valor = int(input())
+      d[clave] = valor
+      print(d)
+    tests:
+      - {stdin: "b\n9\n", expected_stdout: "{'a': 1, 'b': 9}\n", visible: true}
+      - {stdin: "c\n3\n", expected_stdout: "{'a': 1, 'b': 2, 'c': 3}\n", visible: false}
+    wrong_examples:
+      - code: |
+          d = {"a": 1, "b": 2}
+          clave = input()
+          valor = int(input())
+          print(d)
+        expect_fail_tag: logic.missing_branch
+      - code: |
+          d = {"a": 1, "b": 2}
+          clave = input()
+          valor = input()
+          d[clave] = valor
+          print(d)
+        expect_fail_tag: io.input_not_cast
+    hints:
+      - {es: 'La misma asignación sirve para agregar y para cambiar.', en: 'The same assignment works for adding and for changing.'}
+    explanation:
+      es: 'Sin `int()`, el valor se guardaría como texto y se mostraría con comillas.'
+      en: 'Without `int()`, the value would be stored as text and shown with quotes.'
+
+  - id: py.u07.l02.e10
+    type: write_code
+    difficulty: 3
+    skills: [py.dict, py.if, py.input]
+    prompt:
+      es: |
+        Parte del diccionario `{"a": 1, "b": 2, "c": 3}`. Lee una clave. Si existe, bórrala; si no, no hagas nada.
+        Muestra el diccionario resultante.
+      en: |
+        Start with the dictionary `{"a": 1, "b": 2, "c": 3}`. Read a key. If it exists, delete it; if not, do nothing.
+        Show the resulting dictionary.
+    starter: |
+      d = {"a": 1, "b": 2, "c": 3}
+      # Escribe tu código aquí / Write your code here
+    reference_solution: |
+      d = {"a": 1, "b": 2, "c": 3}
+      clave = input()
+      if clave in d:
+          del d[clave]
+      print(d)
+    tests:
+      - {stdin: "b\n", expected_stdout: "{'a': 1, 'c': 3}\n", visible: true}
+      - {stdin: "z\n", expected_stdout: "{'a': 1, 'b': 2, 'c': 3}\n", visible: false}
+      - {stdin: "a\n", expected_stdout: "{'b': 2, 'c': 3}\n", visible: false}
+    wrong_examples:
+      - code: |
+          d = {"a": 1, "b": 2, "c": 3}
+          clave = input()
+          del d[clave]
+          print(d)
+        expect_fail_tag: dict.keyerror_unhandled
+    hints:
+      - {es: '`del d[clave]` borra el par.', en: '`del d[clave]` deletes the pair.'}
+    explanation:
+      es: 'Borrar una clave inexistente da `KeyError`, por eso se comprueba antes con `in`.'
+      en: 'Deleting a missing key raises `KeyError`, which is why it is checked first with `in`.'

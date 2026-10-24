@@ -1,0 +1,10 @@
+id: py.course
+language: python
+language_name: Python
+position: 1
+title:
+  es: 'Python desde cero'
+  en: 'Python from scratch'
+description:
+  es: 'Aprende a programar desde cero con Python: variables, decisiones, bucles, funciones, estructuras de datos y un proyecto final.'
+  en: 'Learn to program from scratch with Python: variables, decisions, loops, functions, data structures and a final project.'
