@@ -1,4 +1,4 @@
-FROM python:3.13-slim
+FROM python:3.15-slim
 
 # Solo la CLI de Docker (binario estático); el servicio no necesita nada más.
 COPY --from=docker:29-cli /usr/local/bin/docker /usr/local/bin/docker
