@@ -51,4 +51,4 @@ justa, sin patrones que presionen (sin vidas ni castigos por fallar).
 
 Corregido durante la verificación: «1 días seguidos» (ahora usa el singular).
 
-No verificado: el CI de GitHub (nunca ejecutado) ni lectores de pantalla reales.
+El CI de GitHub se ejecutó después (2026-10-24) y pasó. No verificado: lectores de pantalla reales.

@@ -40,4 +40,4 @@ Las lecciones ya se importan al catálogo (ADR 0005). Faltaba que el estudiante 
 | Compose completo | levanta; la respuesta de `GET /v1/lessons/{id}/exercises` no contiene `solution`; acierto, error (400), pista y `WRITE_CODE` (422) se comportan como se espera |
 | Navegador | la lección `py.u01.l01` muestra los 6 ejercicios; resolver uno muestra «¡Correcto!», la explicación y el contador pasa a 1 de 5 |
 
-No verificado: el CI de GitHub (nunca ejecutado), lectores de pantalla reales, y el resto de tipos de ejercicio probados a mano en el navegador (cubiertos solo por pruebas automáticas).
+El CI de GitHub se ejecutó después (2026-10-24) y pasó. No verificado: lectores de pantalla reales, y el resto de tipos de ejercicio probados a mano en el navegador (cubiertos solo por pruebas automáticas).

@@ -72,5 +72,5 @@ de datos y los secretos: ese código no puede ejecutarse nunca en su proceso.
 | Navegador (Compose completo) | en `py.u01.l01.e05`: respuesta errónea → «no superada» con salida esperada y obtenida; bucle infinito → «tu programa tardó demasiado»; `print(x)` → traceback propio; solución correcta → «¡Correcto!»; contador 1 de 6 |
 | Runner parado | la API responde `503 RUNNER_UNAVAILABLE` y no registra el intento |
 
-No verificado: gVisor, carga concurrente real, el CI de GitHub (nunca ejecutado), lectores de pantalla, ni cómo se
+El CI de GitHub se ejecutó después (2026-10-24) y pasó. No verificado: gVisor, carga concurrente real, lectores de pantalla, ni cómo se
 comporta en Linux nativo con cgroups v1 (solo he probado Docker Desktop).
