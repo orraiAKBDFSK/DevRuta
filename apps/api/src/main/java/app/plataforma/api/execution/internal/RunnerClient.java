@@ -78,7 +78,8 @@ final class RunnerClient implements CodeExecutor {
 				Map<String, Object> c = (Map<String, Object>) raw;
 				cases.add(new CaseResult(string(c.get("stdout")), string(c.get("stderr")),
 						c.get("exit_code") instanceof Number n ? n.intValue() : null,
-						Boolean.TRUE.equals(c.get("timed_out")), Boolean.TRUE.equals(c.get("truncated"))));
+						Boolean.TRUE.equals(c.get("timed_out")), Boolean.TRUE.equals(c.get("truncated")),
+						Boolean.TRUE.equals(c.get("compile_error"))));
 			}
 			List<Boolean> checks = new ArrayList<>();
 			for (Object raw : (List<Object>) tree.get("checks")) {

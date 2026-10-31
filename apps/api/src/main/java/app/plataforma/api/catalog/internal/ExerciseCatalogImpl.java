@@ -19,7 +19,7 @@ import app.plataforma.api.catalog.ExerciseType;
 class ExerciseCatalogImpl implements ExerciseCatalog {
 
 	private static final String SELECT = """
-			select e.content_id, l.content_id as lesson_cid, e.position, e.type, e.difficulty,
+			select e.content_id, l.content_id as lesson_cid, pl.code as language, e.position, e.type, e.difficulty,
 			       e.config::text as config, e.solution::text as solution,
 			       coalesce(t.prompt, f.prompt) as prompt, coalesce(t.explanation, f.explanation) as explanation,
 			       coalesce(t.options, f.options)::text as options, coalesce(t.hints, f.hints)::text as hints
@@ -27,6 +27,7 @@ class ExerciseCatalogImpl implements ExerciseCatalog {
 			join lesson l on l.id = e.lesson_id
 			join unit u on u.id = l.unit_id
 			join course c on c.id = u.course_id
+			join programming_language pl on pl.id = c.language_id
 			left join exercise_translation t on t.exercise_id = e.id and t.locale = :locale
 			left join exercise_translation f on f.exercise_id = e.id and f.locale = 'es'
 			where not e.archived and l.status <> 'ARCHIVED' and not u.archived and not c.archived
@@ -69,7 +70,7 @@ class ExerciseCatalogImpl implements ExerciseCatalog {
 				ExerciseType.valueOf(rs.getString("type")), rs.getInt("difficulty"), rs.getString("prompt"),
 				rs.getString("explanation"), strings(rs.getString("options")), strings(rs.getString("hints")),
 				object(rs.getString("config")), object(rs.getString("solution")),
-				skills.getOrDefault(id, List.of()));
+				skills.getOrDefault(id, List.of()), rs.getString("language"));
 	}
 
 	private Map<String, List<String>> skills(String condition, String id) {

@@ -56,12 +56,14 @@ jobs:
           cache-dependency-path: scripts/requirements.txt
       - run: pip install -r scripts/requirements.txt
       # Las pruebas de aislamiento ejecutan código hostil de verdad: necesitan la imagen del sandbox.
-      - name: Construir la imagen del sandbox
-        run: docker build -t plataforma-sandbox-python:local -f apps/runner/sandbox/Dockerfile.python apps/runner/sandbox
+      - name: Construir las imágenes del sandbox (Python y C++)
+        run: |
+          docker build -t plataforma-sandbox-python:local -f apps/runner/sandbox/Dockerfile.python apps/runner/sandbox
+          docker build -t plataforma-sandbox-cpp:local -f apps/runner/sandbox/Dockerfile.cpp apps/runner/sandbox
       - name: Pruebas del runner (protocolo, servidor y aislamiento)
         working-directory: apps/runner
         run: python -m unittest discover -s tests -t . -v
-      - name: Todos los ejercicios de escribir código, por el runner real
+      - name: Todos los ejercicios de código (Python y C++), por el runner real
         run: |
           RUNNER_TOKEN=ci-token-ci-token-0123456789 docker compose -f infra/compose/docker-compose.yml -f infra/compose/ci-runner-port.yml --profile full up -d --build runner
           for i in $(seq 1 30); do curl -sf http://127.0.0.1:8090/healthz && break; sleep 2; done

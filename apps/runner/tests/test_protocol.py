@@ -17,7 +17,7 @@ class ProtocolTests(unittest.TestCase):
 
     def test_rejects_what_does_not_fit(self):
         bad = [
-            None, [], valid(language="cpp"), valid(code=""), valid(code="  "), valid(code=5),
+            None, [], valid(language="rust"), valid(code=""), valid(code="  "), valid(code=5),
             valid(code="x" * 20_001), valid(cases=[]), valid(cases=[{"stdin": ""}] * 11), valid(cases=["x"]),
             valid(cases=[{"stdin": "x" * 10_001}]), valid(case_timeout_ms=99_999), valid(case_timeout_ms=True),
             valid(total_timeout_ms=0), valid(checks="x"), valid(checks=[{"kind": "rm -rf"}]),

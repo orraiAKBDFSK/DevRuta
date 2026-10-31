@@ -22,4 +22,10 @@ class ProfileDirectoryImpl implements ProfileDirectory {
 		return profiles.findById(userId).map(UserProfile::getLocale).orElse("es");
 	}
 
+	@Override
+	@Transactional(readOnly = true)
+	public String timeZoneOf(UUID userId) {
+		return profiles.findById(userId).map(UserProfile::getTimezone).orElse("UTC");
+	}
+
 }

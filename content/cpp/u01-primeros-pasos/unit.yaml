@@ -1,0 +1,8 @@
+id: cpp.u01
+position: 1
+title:
+  es: 'Primeros pasos'
+  en: 'First steps'
+summary:
+  es: 'Tu primer programa en C++: mostrar texto, usar variables con tipo y leer datos.'
+  en: 'Your first C++ program: showing text, typed variables and reading input.'

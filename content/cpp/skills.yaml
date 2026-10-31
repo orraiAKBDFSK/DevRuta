@@ -1,0 +1,17 @@
+# Habilidades de la ruta de C++ y sus prerrequisitos (grafo acíclico).
+skills:
+  - id: cpp.output
+    name:
+      es: 'Mostrar resultados'
+      en: 'Showing output'
+    requires: []
+  - id: cpp.variables
+    name:
+      es: 'Variables y tipos'
+      en: 'Variables and types'
+    requires: [cpp.output]
+  - id: cpp.input
+    name:
+      es: 'Leer datos de la entrada'
+      en: 'Reading input'
+    requires: [cpp.variables]

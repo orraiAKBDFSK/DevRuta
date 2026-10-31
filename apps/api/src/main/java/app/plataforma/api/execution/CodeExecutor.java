@@ -27,7 +27,13 @@ public interface CodeExecutor {
 	}
 
 	/** {@code exitCode} es {@code null} si el caso no llegó a ejecutarse (se acabó el tiempo total). */
-	record CaseResult(String stdout, String stderr, Integer exitCode, boolean timedOut, boolean truncated) {
+	record CaseResult(String stdout, String stderr, Integer exitCode, boolean timedOut, boolean truncated,
+			boolean compileError) {
+
+		public CaseResult(String stdout, String stderr, Integer exitCode, boolean timedOut, boolean truncated) {
+			this(stdout, stderr, exitCode, timedOut, truncated, false);
+		}
+
 	}
 
 	class Unavailable extends RuntimeException {

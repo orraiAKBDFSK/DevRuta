@@ -73,6 +73,7 @@ def main() -> None:
         sys.exit("RUNNER_TOKEN es obligatorio y debe tener al menos 16 caracteres")
     settings = Settings(
         image=os.environ.get("SANDBOX_IMAGE_PYTHON", "plataforma-sandbox-python:local"),
+        cpp_image=os.environ.get("SANDBOX_IMAGE_CPP", "plataforma-sandbox-cpp:local"),
         runtime=os.environ.get("SANDBOX_RUNTIME") or None,
         max_concurrent=int(os.environ.get("RUNNER_MAX_CONCURRENT", "4")),
     )

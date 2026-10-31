@@ -15,7 +15,8 @@ LABEL = "plataforma.sandbox=1"
 
 @dataclass(frozen=True)
 class Settings:
-    image: str
+    image: str  # imagen de Python (la de siempre)
+    cpp_image: str = "plataforma-sandbox-cpp:local"
     docker_bin: str = "docker"
     runtime: str | None = None  # p. ej. "runsc" (gVisor) en producción
     memory: str = "256m"
@@ -32,21 +33,25 @@ class SandboxFailure(Exception):
     pass
 
 
-def docker_args(settings: Settings, name: str) -> list[str]:
+def docker_args(settings: Settings, name: str, language: str = "python") -> list[str]:
+    cpp = language == "cpp"
+    # El compilador necesita más memoria y poder ejecutar el binario que genera, así que /tmp admite ejecución.
+    memory = "768m" if cpp else settings.memory
+    tmpfs = "/tmp:rw,exec,nosuid,nodev,size=64m" if cpp else "/tmp:rw,noexec,nosuid,nodev,size=32m"
     args = [
         settings.docker_bin, "run", "--rm", "-i", "--name", name, "--label", LABEL,
         "--network", "none",
-        "--memory", settings.memory, "--memory-swap", settings.memory,
+        "--memory", memory, "--memory-swap", memory,
         "--cpus", settings.cpus, "--pids-limit", str(settings.pids),
         "--cap-drop", "ALL", "--security-opt", "no-new-privileges",
-        "--read-only", "--tmpfs", "/tmp:rw,noexec,nosuid,nodev,size=32m",
+        "--read-only", "--tmpfs", tmpfs,
         "--user", "65534:65534",
         "--ulimit", "nofile=256:256", "--ulimit", "core=0",
         "--hostname", "sandbox",
     ]
     if settings.runtime:
         args += ["--runtime", settings.runtime]
-    return args + [settings.image]
+    return args + [settings.cpp_image if cpp else settings.image]
 
 
 class Executor:
@@ -80,9 +85,9 @@ class Executor:
 
     def _run(self, request: dict) -> dict:
         name = f"plat-sbx-{uuid.uuid4().hex[:16]}"
-        payload = {k: request[k] for k in ("code", "cases", "checks", "case_timeout_ms", "total_timeout_ms")}
-        wall = request["total_timeout_ms"] / 1000 + 8  # margen para arrancar el contenedor
-        proc = subprocess.Popen(docker_args(self.settings, name), stdin=subprocess.PIPE, stdout=subprocess.PIPE,
+        payload = {k: request[k] for k in ("language", "code", "cases", "checks", "case_timeout_ms", "total_timeout_ms")}
+        wall = request["total_timeout_ms"] / 1000 + (30 if request["language"] == "cpp" else 8)  # arranque y compilación
+        proc = subprocess.Popen(docker_args(self.settings, name, request["language"]), stdin=subprocess.PIPE, stdout=subprocess.PIPE,
                                 stderr=subprocess.PIPE, text=True, encoding="utf-8")
         try:
             out, _ = proc.communicate(json.dumps(payload), timeout=wall)

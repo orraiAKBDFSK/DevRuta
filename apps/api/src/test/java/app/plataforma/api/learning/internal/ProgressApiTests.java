@@ -264,6 +264,20 @@ class ProgressApiTests extends IntegrationTest {
 	}
 
 	@Test
+	void theTimeZoneSavedInTheProfileWinsOverTheHeader() {
+		TestClient client = newUser();
+		assertThat(client.patch("/v1/me/profile", "{\"timezone\":\"America/Los_Angeles\"}").status()).isEqualTo(200);
+		clock.setNow(java.time.Instant.parse("2026-10-23T23:30:00Z"));
+		client.post(attempt(MC), RIGHT_MC);
+
+		// El navegador dice UTC, pero el perfil dice Los Ángeles: dos horas después sigue siendo el mismo día allí.
+		clock.advance(Duration.ofHours(2));
+		client.postWithHeader(attempt(PREDICT), predict(), "X-Time-Zone", "UTC");
+
+		assertThat(client.getWithHeader("/v1/progress", "X-Time-Zone", "UTC").raw("streak")).isEqualTo("1");
+	}
+
+	@Test
 	void anInvalidTimeZoneFallsBackToUtcInsteadOfFailing() {
 		TestClient client = newUser();
 

@@ -16,6 +16,7 @@ pistas y progreso visible. Empieza con **Python** y se amplía a C++ después.
 | Catálogo de rutas, unidades y lecciones + importador de contenido | Fase 5: hecha y verificada en local (ver `docs/adr/0005-catalogo-e-importador-de-contenido.md`). Los ejercicios llegan en la fase 6 |
 | Ejercicios básicos y evaluación automática | Fase 6: hecha y verificada en local (ver `docs/adr/0006-ejercicios-y-evaluacion.md`). Se evalúan 270 de 412 ejercicios; los 142 de «escribir código» esperan a la fase 7 |
 | Verificación de correo y recuperación de contraseña | Hecha y verificada en local con Mailpit (ver `docs/adr/0004-correo-verificacion-y-recuperacion.md`). **Falta un proveedor real con dominio propio y los textos legales antes de abrir el registro al público** |
+| C++ como segundo lenguaje | Unidad de muestra en borrador (2 lecciones) y runner con compilador, verificados en local (ver `docs/adr/0009-cpp-segundo-lenguaje.md`). **Falta escribir el resto del curso** |
 | Progreso, XP, rachas y logros | Fase 8: hecha y verificada en local (ver `docs/adr/0008-progreso-xp-rachas-logros.md`). Las rachas usan la zona horaria del navegador |
 | Ejecución aislada de código (`apps/runner`) | Fase 7: hecha y verificada en local con los 142 ejercicios de escribir código (ver `docs/adr/0007-ejecucion-aislada.md`). **No apta para producción**: falta máquina dedicada, gVisor/Docker sin root y revisión de seguridad |
 

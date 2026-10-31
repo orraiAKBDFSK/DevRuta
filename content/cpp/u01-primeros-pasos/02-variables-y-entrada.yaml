@@ -1,0 +1,216 @@
+id: cpp.u01.l02
+language: cpp
+unit: cpp.u01
+position: 2
+skills: [cpp.variables, cpp.input]
+status: draft
+reviewed_by: []
+title:
+  es: 'Variables, tipos y entrada'
+  en: 'Variables, types and input'
+explanation:
+  es: |
+    En C++ toda variable tiene un **tipo** que se declara al crearla y no cambia:
+
+    ```cpp
+    int edad = 20;          // número entero
+    double altura = 1.75;   // número con decimales
+    std::string nombre = "Ana";  // texto (necesita #include <string>)
+    ```
+
+    - Dividir dos `int` da un `int`: `7 / 2` es `3`. El resto se obtiene con `%`: `7 % 2` es `1`.
+    - Para leer datos se usa `std::cin >> variable;`.
+
+    ```cpp
+    int n;
+    std::cin >> n;
+    std::cout << n * 2 << "\n";
+    ```
+  en: |
+    In C++ every variable has a **type** that is declared when it is created and never changes:
+
+    ```cpp
+    int age = 20;          // whole number
+    double height = 1.75;  // number with decimals
+    std::string name = "Ana";  // text (needs #include <string>)
+    ```
+
+    - Dividing two `int` values gives an `int`: `7 / 2` is `3`. The remainder is `%`: `7 % 2` is `1`.
+    - To read data use `std::cin >> variable;`.
+
+    ```cpp
+    int n;
+    std::cin >> n;
+    std::cout << n * 2 << "\n";
+    ```
+exercises:
+  - id: cpp.u01.l02.e01
+    type: multiple_choice
+    difficulty: 1
+    skills: [cpp.variables]
+    prompt:
+      es: '¿Qué tipo es el más adecuado para guardar la cantidad de alumnos de una clase?'
+      en: 'Which type is the best to store the number of students in a class?'
+    options:
+      - {es: '`int`', en: '`int`'}
+      - {es: '`double`', en: '`double`'}
+      - {es: '`std::string`', en: '`std::string`'}
+      - {es: '`bool`', en: '`bool`'}
+    answer: 0
+    hints:
+      - {es: 'Es un número sin decimales.', en: 'It is a number without decimals.'}
+    explanation:
+      es: 'Una cantidad de personas es un número entero: `int`.'
+      en: 'A number of people is a whole number: `int`.'
+  - id: cpp.u01.l02.e02
+    type: predict_output
+    difficulty: 2
+    skills: [cpp.variables]
+    prompt:
+      es: '¿Qué muestra este programa?'
+      en: 'What does this program show?'
+    code: |
+      #include <iostream>
+
+      int main() {
+          int a = 7;
+          int b = 2;
+          std::cout << a / b << " " << a % b;
+      }
+    answer: "3 1"
+    hints:
+      - {es: 'Con enteros la división descarta los decimales.', en: 'With integers the division drops the decimals.'}
+      - {es: '`%` da el resto de la división.', en: '`%` gives the remainder of the division.'}
+    explanation:
+      es: '`7 / 2` es `3` (división entera) y `7 % 2` es `1` (el resto).'
+      en: '`7 / 2` is `3` (integer division) and `7 % 2` is `1` (the remainder).'
+  - id: cpp.u01.l02.e03
+    type: predict_output
+    difficulty: 2
+    skills: [cpp.variables]
+    prompt:
+      es: '¿Qué muestra este programa?'
+      en: 'What does this program show?'
+    code: |
+      #include <iostream>
+
+      int main() {
+          double x = 7;
+          double y = 2;
+          std::cout << x / y;
+      }
+    answer: "3.5"
+    hints:
+      - {es: 'Ahora los dos valores son `double`.', en: 'Now both values are `double`.'}
+    explanation:
+      es: 'Con `double` la división conserva los decimales: `3.5`.'
+      en: 'With `double` the division keeps the decimals: `3.5`.'
+  - id: cpp.u01.l02.e04
+    type: fill_code
+    difficulty: 2
+    skills: [cpp.input]
+    prompt:
+      es: 'Completa el programa: debe leer un número y mostrar su doble.'
+      en: 'Complete the program: it must read a number and show its double.'
+    code: |
+      #include <iostream>
+
+      int main() {
+          int n;
+          std::cin ___ n;
+          std::cout << n ___ 2 << "\n";
+      }
+    blanks:
+      - ['>>']
+      - ['*']
+    hints:
+      - {es: 'Para leer se usa el operador contrario al de mostrar.', en: 'To read you use the opposite operator to the one used to show.'}
+    explanation:
+      es: '`std::cin >> n` lee el valor y `n * 2` lo duplica.'
+      en: '`std::cin >> n` reads the value and `n * 2` doubles it.'
+  - id: cpp.u01.l02.e05
+    type: write_code
+    difficulty: 2
+    skills: [cpp.input]
+    prompt:
+      es: 'Lee dos números enteros separados por un espacio y muestra su suma.'
+      en: 'Read two whole numbers separated by a space and show their sum.'
+    starter: |
+      #include <iostream>
+
+      int main() {
+          // Lee dos enteros y muestra su suma / Read two integers and show their sum
+      }
+    reference_solution: |
+      #include <iostream>
+
+      int main() {
+          int a, b;
+          std::cin >> a >> b;
+          std::cout << a + b << "\n";
+      }
+    tests:
+      - {stdin: "2 3\n", expected_stdout: "5\n", visible: true}
+      - {stdin: "10 -4\n", expected_stdout: "6\n", visible: true}
+      - {stdin: "100 200\n", expected_stdout: "300\n", visible: false}
+    wrong_examples:
+      - code: |
+          #include <iostream>
+
+          int main() {
+              int a, b;
+              std::cin >> a >> b;
+              std::cout << a - b << "\n";
+          }
+        expect_fail_tag: code.wrong_output
+      - code: |
+          #include <iostream>
+
+          int main() {
+              std::cout << 5 << "\n";
+          }
+        expect_fail_tag: code.wrong_output
+    hints:
+      - {es: 'Se pueden leer dos valores seguidos: `std::cin >> a >> b;`.', en: 'You can read two values in a row: `std::cin >> a >> b;`.'}
+    explanation:
+      es: 'Declara dos `int`, léelos con `std::cin` y muestra `a + b`.'
+      en: 'Declare two `int` values, read them with `std::cin` and show `a + b`.'
+  - id: cpp.u01.l02.e06
+    type: write_code
+    difficulty: 2
+    skills: [cpp.input]
+    prompt:
+      es: 'Lee un nombre (una sola palabra) y muestra `Hola, ` seguido del nombre y un signo de exclamación.'
+      en: 'Read a name (a single word) and show `Hola, ` followed by the name and an exclamation mark.'
+    starter: |
+      #include <iostream>
+      #include <string>
+
+      int main() {
+          // Lee el nombre y salúdalo / Read the name and greet it
+      }
+    reference_solution: |
+      #include <iostream>
+      #include <string>
+
+      int main() {
+          std::string nombre;
+          std::cin >> nombre;
+          std::cout << "Hola, " << nombre << "!\n";
+      }
+    tests:
+      - {stdin: "Ana\n", expected_stdout: "Hola, Ana!\n", visible: true}
+      - {stdin: "Luis\n", expected_stdout: "Hola, Luis!\n", visible: true}
+    wrong_examples:
+      - code: |
+          #include <iostream>
+
+          int main() {
+              std::cout << "Hola, Ana!\n";
+          }
+        expect_fail_tag: code.wrong_output
+    hints:
+      - {es: 'Un texto se guarda en un `std::string` y se lee con `std::cin >>`.', en: 'A text is stored in a `std::string` and read with `std::cin >>`.'}
+    explanation:
+      es: 'Lee con `std::cin >> nombre` y encadena los textos con `<<`.'
+      en: 'Read with `std::cin >> nombre` and chain the texts with `<<`.'

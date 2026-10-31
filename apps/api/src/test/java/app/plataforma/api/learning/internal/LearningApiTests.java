@@ -247,7 +247,8 @@ class LearningApiTests extends IntegrationTest {
 		assertThat(response.body()).contains("\"correct\":true").contains("\"solved\":true")
 				.contains("Basta un print.").contains("\"passed\":true");
 		assertThat(runner.lastRequest.code()).isEqualTo("print(3)");
-		assertThat(runner.lastRequest.language()).isEqualTo("python");
+		// El código de lenguaje del curso es el que se envía al runner (el fixture usa "fx").
+		assertThat(runner.lastRequest.language()).isEqualTo("fx");
 		assertThat(runner.lastRequest.stdins()).containsExactly("");
 	}
 

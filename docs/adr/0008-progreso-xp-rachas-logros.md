@@ -29,9 +29,9 @@ justa, sin patrones que presionen (sin vidas ni castigos por fallar).
 
 ## Riesgos y límites conocidos
 
-- **La zona horaria viene del navegador en cada petición, no se guarda en el perfil.** Si alguien practica desde dos zonas
-  distintas (viaje, VPN que cambia la zona del sistema), su día puede contarse distinto y la racha romperse o alargarse.
-  Guardarla en el perfil sería más estable; queda como mejora.
+- **La zona horaria** es la del perfil si el usuario la ha fijado (la web la guarda al registrarse y se edita en Perfil; vale
+  cualquiera distinta de UTC), si no la del navegador (`X-Time-Zone`) y si no UTC. Quien viaja puede fijarla a mano. Un usuario
+  que de verdad esté en UTC y viaje seguirá usando la del navegador.
 - **No hay protección contra «granjas» de XP más allá del límite de peticiones**: el XP depende del contenido, que es finito
   (412 ejercicios), así que el máximo total es fijo.
 - Cambiar las fórmulas no recalcula el XP ya concedido (queda guardado en `xp_event`).

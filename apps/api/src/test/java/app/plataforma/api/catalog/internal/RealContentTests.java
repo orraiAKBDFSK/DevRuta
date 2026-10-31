@@ -38,9 +38,9 @@ class RealContentTests extends IntegrationTest {
 	void theRepositoryContentImportsCleanlyAndCompletely() {
 		ImportReport report = importer.importFrom(REPOSITORY_CONTENT, ContentStatus.DRAFT);
 
-		assertThat(report.courses()).isEqualTo(1);
+		assertThat(report.courses()).isEqualTo(2);
 		assertThat(report.units()).isGreaterThanOrEqualTo(10);
-		assertThat(report.lessonsCreated()).isGreaterThanOrEqualTo(48);
+		assertThat(report.lessonsCreated()).isGreaterThanOrEqualTo(50);
 		assertThat(report.lessonsSkippedByStatus()).isZero();
 		int lessons = count(jdbc, "select count(*) from lesson");
 		assertThat(count(jdbc, "select count(*) from lesson_translation")).isEqualTo(lessons * 2);
@@ -57,7 +57,7 @@ class RealContentTests extends IntegrationTest {
 		ImportReport report = importer.importFrom(REPOSITORY_CONTENT, ContentStatus.PUBLISHED);
 
 		assertThat(count(jdbc, "select count(*) from lesson where status <> 'PUBLISHED'")).isZero();
-		assertThat(report.lessonsCreated() + report.lessonsSkippedByStatus()).isGreaterThanOrEqualTo(48);
+		assertThat(report.lessonsCreated() + report.lessonsSkippedByStatus()).isGreaterThanOrEqualTo(50);
 	}
 
 }

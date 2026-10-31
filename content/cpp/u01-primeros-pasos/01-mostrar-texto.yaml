@@ -1,0 +1,165 @@
+id: cpp.u01.l01
+language: cpp
+unit: cpp.u01
+position: 1
+skills: [cpp.output]
+status: draft
+reviewed_by: []
+title:
+  es: 'Mostrar texto en pantalla'
+  en: 'Showing text on screen'
+explanation:
+  es: |
+    C++ es un lenguaje **compilado**: primero un programa llamado compilador traduce tu código a un ejecutable y después se ejecuta.
+    El programa más pequeño que muestra algo es este:
+
+    ```cpp
+    #include <iostream>
+
+    int main() {
+        std::cout << "Hola, mundo\n";
+    }
+    ```
+
+    - `#include <iostream>` trae las herramientas de entrada y salida.
+    - `int main()` es la función donde empieza el programa.
+    - `std::cout << ...` envía texto a la pantalla. Varios `<<` se encadenan.
+    - `\n` es un salto de línea; `std::endl` también lo hace.
+    - Cada instrucción termina en `;`.
+  en: |
+    C++ is a **compiled** language: first a program called the compiler translates your code into an executable, then it runs.
+    The smallest program that shows something is this:
+
+    ```cpp
+    #include <iostream>
+
+    int main() {
+        std::cout << "Hola, mundo\n";
+    }
+    ```
+
+    - `#include <iostream>` brings in the input and output tools.
+    - `int main()` is the function where the program starts.
+    - `std::cout << ...` sends text to the screen. Several `<<` can be chained.
+    - `\n` is a line break; `std::endl` does the same.
+    - Every statement ends with `;`.
+exercises:
+  - id: cpp.u01.l01.e01
+    type: multiple_choice
+    difficulty: 1
+    skills: [cpp.output]
+    prompt:
+      es: '¿Qué línea de C++ muestra el texto Hola en pantalla?'
+      en: 'Which C++ line shows the text Hola on screen?'
+    options:
+      - {es: '`std::cout << "Hola";`', en: '`std::cout << "Hola";`'}
+      - {es: '`print("Hola");`', en: '`print("Hola");`'}
+      - {es: '`echo "Hola";`', en: '`echo "Hola";`'}
+      - {es: '`Console.WriteLine("Hola");`', en: '`Console.WriteLine("Hola");`'}
+    answer: 0
+    hints:
+      - {es: 'En C++ se usa un objeto llamado cout con el operador <<.', en: 'C++ uses an object called cout with the << operator.'}
+    explanation:
+      es: 'Las otras opciones son de Python, de la terminal y de C#.'
+      en: 'The other options are from Python, the shell and C#.'
+  - id: cpp.u01.l01.e02
+    type: multiple_choice
+    difficulty: 1
+    skills: [cpp.output]
+    prompt:
+      es: '¿Para qué sirve `#include <iostream>`?'
+      en: 'What is `#include <iostream>` for?'
+    options:
+      - {es: 'Para poder usar la entrada y la salida (`cin` y `cout`)', en: 'To be able to use input and output (`cin` and `cout`)'}
+      - {es: 'Para mostrar un texto en pantalla', en: 'To show a text on screen'}
+      - {es: 'Para crear la función `main`', en: 'To create the `main` function'}
+      - {es: 'Para guardar el programa en un archivo', en: 'To save the program in a file'}
+    answer: 0
+    hints:
+      - {es: 'Piensa en el nombre: input-output stream.', en: 'Think about the name: input-output stream.'}
+    explanation:
+      es: 'Sin esa línea el compilador no conoce `std::cout`.'
+      en: 'Without that line the compiler does not know `std::cout`.'
+  - id: cpp.u01.l01.e03
+    type: predict_output
+    difficulty: 1
+    skills: [cpp.output]
+    prompt:
+      es: '¿Qué muestra este programa? Escribe la salida exacta.'
+      en: 'What does this program show? Type the exact output.'
+    code: |
+      #include <iostream>
+
+      int main() {
+          std::cout << "A";
+          std::cout << "B" << std::endl;
+          std::cout << "C";
+      }
+    answer: "AB\nC"
+    hints:
+      - {es: 'Solo `std::endl` cambia de línea.', en: 'Only `std::endl` moves to a new line.'}
+    explanation:
+      es: 'Muestra `AB`, salta de línea y después muestra `C`.'
+      en: 'It shows `AB`, moves to a new line and then shows `C`.'
+  - id: cpp.u01.l01.e04
+    type: fill_code
+    difficulty: 1
+    skills: [cpp.output]
+    prompt:
+      es: 'Completa el programa para que muestre Hola.'
+      en: 'Complete the program so it shows Hola.'
+    code: |
+      #include <___>
+
+      int main() {
+          std::cout ___ "Hola\n";
+      }
+    blanks:
+      - ['iostream']
+      - ['<<']
+    hints:
+      - {es: 'El primer hueco es el nombre de la biblioteca de entrada y salida.', en: 'The first blank is the name of the input and output library.'}
+    explanation:
+      es: '`iostream` da acceso a `std::cout`, y `<<` envía el texto a la pantalla.'
+      en: '`iostream` gives access to `std::cout`, and `<<` sends the text to the screen.'
+  - id: cpp.u01.l01.e05
+    type: write_code
+    difficulty: 1
+    skills: [cpp.output]
+    prompt:
+      es: 'Escribe un programa que muestre exactamente: `Hola, mundo`'
+      en: 'Write a program that shows exactly this text (in Spanish): `Hola, mundo`'
+    starter: |
+      #include <iostream>
+
+      int main() {
+          // Escribe tu código aquí / Write your code here
+      }
+    reference_solution: |
+      #include <iostream>
+
+      int main() {
+          std::cout << "Hola, mundo\n";
+      }
+    tests:
+      - {stdin: "", expected_stdout: "Hola, mundo\n", visible: true}
+    wrong_examples:
+      - code: |
+          #include <iostream>
+
+          int main() {
+              std::cout << "Hola mundo\n";
+          }
+        expect_fail_tag: code.wrong_output
+      - code: |
+          #include <iostream>
+
+          int main() {
+              std::cout << "Hola, mundo\n"
+          }
+        expect_fail_tag: code.compile_error
+    hints:
+      - {es: 'Usa `std::cout << "..."` y no olvides el `;` al final.', en: 'Use `std::cout << "..."` and do not forget the `;` at the end.'}
+    explanation:
+      es: 'La salida debe coincidir carácter por carácter, y el programa debe compilar.'
+      en: 'The output must match character by character, and the program must compile.'

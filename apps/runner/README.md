@@ -34,7 +34,8 @@ Límites: código 20 000 caracteres, 10 casos, 10 000 caracteres de stdin por ca
 | Variable | Por defecto | Para qué |
 |---|---|---|
 | `RUNNER_TOKEN` | — (obligatoria, ≥ 16 caracteres) | secreto compartido con la API |
-| `SANDBOX_IMAGE_PYTHON` | `plataforma-sandbox-python:local` | imagen del sandbox |
+| `SANDBOX_IMAGE_PYTHON` | `plataforma-sandbox-python:local` | imagen del sandbox de Python |
+| `SANDBOX_IMAGE_CPP` | `plataforma-sandbox-cpp:local` | imagen del sandbox de C++ |
 | `SANDBOX_RUNTIME` | (el de Docker) | p. ej. `runsc` para gVisor en producción |
 | `RUNNER_MAX_CONCURRENT` | `4` | contenedores a la vez; el resto recibe `503` |
 | `RUNNER_BIND` / `RUNNER_PORT` | `0.0.0.0` / `8090` | dónde escucha |
@@ -43,6 +44,7 @@ Límites: código 20 000 caracteres, 10 casos, 10 000 caracteres de stdin por ca
 
 ```bash
 docker build -t plataforma-sandbox-python:local -f sandbox/Dockerfile.python sandbox
+docker build -t plataforma-sandbox-cpp:local -f sandbox/Dockerfile.cpp sandbox
 python -m unittest discover -s tests -t . -v
 ```
 
@@ -52,6 +54,6 @@ Para pasar **todo el contenido** por el runner real: `scripts/verify_runner_cont
 
 ## Límites conocidos
 
-- Solo Python. C++ será otra imagen y otro valor de `language` con el mismo contrato.
+- Python y C++ (`language: "cpp"`, imagen `plataforma-sandbox-cpp`, sin comprobaciones estáticas). Ver `docs/adr/0009-cpp-segundo-lenguaje.md`.
 - Sin gVisor en Docker Desktop: el aislamiento local es el de contenedores normales (runc). Ver el ADR.
 - Mientras corre, el código del estudiante ve las entradas (no las salidas esperadas) de los otros tests del mismo envío.

@@ -1,0 +1,10 @@
+id: cpp.course
+language: cpp
+language_name: 'C++'
+position: 2
+title:
+  es: 'C++ desde cero'
+  en: 'C++ from scratch'
+description:
+  es: 'Aprende C++ desde cero: un lenguaje compilado y de tipado fuerte. Esta ruta está en construcción; por ahora tiene la primera unidad.'
+  en: 'Learn C++ from scratch: a compiled, strongly typed language. This path is under construction; for now it has the first unit.'

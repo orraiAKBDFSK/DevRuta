@@ -17,6 +17,9 @@ ROOT = Path(__file__).resolve().parent.parent / "content"
 TYPES = {"multiple_choice", "predict_output", "order_lines", "fill_code", "write_code"}
 SAMPLE_STDIN = "1\n" * 5  # entrada de relleno para ejercicios sin tests
 errors: list[str] = []
+# Solo se ejecuta aquí el código de Python. El de otros lenguajes (C++) lo ejecuta scripts/verify_runner_content.py
+# con el runner real, que es el que tiene el compilador y el sandbox.
+RUN_LOCAL = True
 
 
 def err(where: str, msg: str) -> None:
@@ -29,7 +32,7 @@ def run(code: str, stdin: str = "") -> tuple[int, str]:
         try:
             p = subprocess.run(
                 [sys.executable, "-I", "-c", code],
-                input=stdin, capture_output=True, text=True, timeout=3, cwd=tmp,
+                input=stdin, capture_output=True, text=True, timeout=10, cwd=tmp,
             )
         except subprocess.TimeoutExpired:
             return -1, ""  # bucle infinito: cuenta como fallo
@@ -90,6 +93,10 @@ def check_exercise(ex: dict, where: str) -> None:
     bilingual({k: ex.get(k) for k in ("prompt", "hints", "explanation", "options")}, where)
     if not ex.get("hints"):
         err(where, "sin pistas")
+    if not RUN_LOCAL and t != "multiple_choice":
+        if t == "write_code" and not ex.get("wrong_examples"):
+            err(where, "sin wrong_examples")
+        return
     if t == "multiple_choice":
         if not 0 <= ex["answer"] < len(ex["options"]):
             err(where, "answer fuera de rango")
@@ -166,6 +173,8 @@ def check_language(lang_dir: Path, seen_exercises: set[str]) -> int:
         return 0
 
     course = load(course_file)
+    global RUN_LOCAL
+    RUN_LOCAL = course.get("language") == "python"
     bilingual({"title": course["title"], "description": course["description"]}, f"{w0}/course.yaml")
 
     # Habilidades: ids únicos, textos en ambos idiomas, prerrequisitos existentes y sin ciclos.

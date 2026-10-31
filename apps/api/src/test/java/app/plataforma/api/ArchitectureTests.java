@@ -51,7 +51,7 @@ class ArchitectureTests {
 	@ArchTest
 	static final ArchRule learningUsesOtherModulesOnlyThroughTheirPublicApi = noClasses().that()
 			.resideInAPackage("..learning..").should().dependOnClassesThat()
-			.resideInAnyPackage("..catalog.internal..", "..identity.internal..", "..profile..", "..notifications..",
+			.resideInAnyPackage("..catalog.internal..", "..identity.internal..", "..profile.internal..", "..notifications..",
 					"..execution.internal..");
 
 	@ArchTest

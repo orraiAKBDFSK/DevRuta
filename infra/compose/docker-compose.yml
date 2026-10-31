@@ -79,6 +79,15 @@ services:
     entrypoint: ["true"]
     restart: "no"
 
+  sandbox-cpp:
+    profiles: ["full"]
+    image: plataforma-sandbox-cpp:local
+    build:
+      context: ../../apps/runner/sandbox
+      dockerfile: Dockerfile.cpp
+    entrypoint: ["true"]
+    restart: "no"
+
   # Ejecuta el código de los estudiantes. SOLO DESARROLLO: monta el socket de Docker, que equivale a ser root en la
   # máquina. No publica ningún puerto: solo la API lo alcanza, con un token. En producción debe ir en una máquina
   # aparte, con Docker sin root y gVisor (ver docs/adr/0007).
@@ -89,10 +98,13 @@ services:
     environment:
       RUNNER_TOKEN: ${RUNNER_TOKEN:-dev-only-runner-token-change-me}
       SANDBOX_IMAGE_PYTHON: plataforma-sandbox-python:local
+      SANDBOX_IMAGE_CPP: plataforma-sandbox-cpp:local
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     depends_on:
       sandbox-python:
+        condition: service_completed_successfully
+      sandbox-cpp:
         condition: service_completed_successfully
     healthcheck:
       test: ["CMD", "python", "-c", "import urllib.request,sys; sys.exit(0 if urllib.request.urlopen('http://127.0.0.1:8090/healthz', timeout=4).status == 200 else 1)"]

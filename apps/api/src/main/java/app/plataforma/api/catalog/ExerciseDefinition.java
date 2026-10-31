@@ -13,8 +13,18 @@ import java.util.Map;
  * @param lessonId identificador de la lección a la que pertenece
  * @param options opciones de un ejercicio de selección múltiple (vacío en los demás tipos)
  * @param hints pistas de menos a más reveladora
+ * @param language código del lenguaje del curso (por ejemplo {@code python} o {@code cpp})
  */
 public record ExerciseDefinition(String id, String lessonId, int position, ExerciseType type, int difficulty,
 		String prompt, String explanation, List<String> options, List<String> hints, Map<String, Object> config,
-		Map<String, Object> solution, List<String> skillIds) {
+		Map<String, Object> solution, List<String> skillIds, String language) {
+
+	/** Ejercicio de Python (el lenguaje por defecto). */
+	public ExerciseDefinition(String id, String lessonId, int position, ExerciseType type, int difficulty, String prompt,
+			String explanation, List<String> options, List<String> hints, Map<String, Object> config,
+			Map<String, Object> solution, List<String> skillIds) {
+		this(id, lessonId, position, type, difficulty, prompt, explanation, options, hints, config, solution, skillIds,
+				"python");
+	}
+
 }

@@ -117,6 +117,35 @@ class CodeEvaluationTests {
 	}
 
 	@Test
+	void sendsTheLanguageOfTheExerciseToTheRunner() {
+		ExerciseDefinition cpp = new ExerciseDefinition("e1", "l1", 1, ExerciseType.WRITE_CODE, 1, "p", "explicación",
+				List.of(), List.of("pista"), Map.of("starter", "#"),
+				Map.of("referenceSolution", "x", "tests", List.of(test("", "1\n", true)), "staticChecks", List.of()),
+				List.of(), "cpp");
+		Stub runner = new Stub(List.of(ran("1\n")));
+
+		CodeEvaluation.evaluate(cpp, answer("int main() {}"), runner);
+		assertThat(runner.seen.language()).isEqualTo("cpp");
+
+		CodeEvaluation.evaluate(exercise(List.of(test("", "1\n", true)), List.of()), answer("x"), runner);
+		assertThat(runner.seen.language()).isEqualTo("python");
+	}
+
+	@Test
+	void aCompileErrorIsTaggedAndShownEvenWhenTheFailingTestIsHidden() {
+		ExerciseDefinition e = exercise(List.of(test("", "1\n", false)), List.of());
+		CodeExecutor.CaseResult broken = new CodeExecutor.CaseResult("", "main.cpp:3:5: error: expected ';'", 1, false,
+				false, true);
+
+		CodeEvaluation.Verdict verdict = CodeEvaluation.evaluate(e, answer("x"), new Stub(List.of(broken)));
+
+		assertThat(verdict.correct()).isFalse();
+		assertThat(verdict.errorTag()).isEqualTo("code.compile_error");
+		assertThat(verdict.error()).contains("expected ';'");
+		assertThat(verdict.tests().get(0).expected()).isNull();
+	}
+
+	@Test
 	void aProgramThatPrintsTheRightThingButExitsWithAnErrorFails() {
 		ExerciseDefinition e = exercise(List.of(test("", "1\n", true)), List.of());
 

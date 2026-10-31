@@ -17,9 +17,6 @@ import app.plataforma.api.platform.ApiException;
  */
 final class CodeEvaluation {
 
-	/** Solo Python por ahora; C++ llegará como otro valor de {@code language} en el mismo contrato. */
-	private static final String LANGUAGE = "python";
-
 	static final int MAX_CODE = 10_000;
 
 	private static final int MAX_SHOWN = 2_000;
@@ -39,7 +36,7 @@ final class CodeEvaluation {
 		}
 		List<Map<String, Object>> tests = (List<Map<String, Object>>) exercise.solution().get("tests");
 		List<Map<String, Object>> checks = (List<Map<String, Object>>) exercise.solution().get("staticChecks");
-		CodeExecutor.Result result = executor.run(new CodeExecutor.Request(LANGUAGE, code,
+		CodeExecutor.Result result = executor.run(new CodeExecutor.Request(exercise.language(), code,
 				tests.stream().map(t -> (String) t.get("stdin")).toList(), checks));
 		if (result.cases().size() != tests.size() || result.checks().size() != checks.size()) {
 			throw new CodeExecutor.Unavailable("El runner devolvió un número de resultados inesperado", false);
@@ -59,7 +56,7 @@ final class CodeEvaluation {
 					visible ? shown(expected) : null, visible ? shown(run.stdout()) : null));
 			if (!passed && tag == null) {
 				tag = failureTag(run);
-				if (visible && !run.timedOut() && !Integer.valueOf(0).equals(run.exitCode())) {
+				if ((visible || run.compileError()) && !run.timedOut() && !Integer.valueOf(0).equals(run.exitCode())) {
 					error = tail(run.stderr());
 				}
 			}
@@ -78,6 +75,9 @@ final class CodeEvaluation {
 	}
 
 	private static String failureTag(CodeExecutor.CaseResult run) {
+		if (run.compileError()) {
+			return "code.compile_error";
+		}
 		if (run.timedOut()) {
 			return "code.timeout";
 		}

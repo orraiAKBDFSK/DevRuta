@@ -2,7 +2,7 @@
 
 import re
 
-LANGUAGES = {"python"}
+LANGUAGES = {"python", "cpp"}
 MAX_CODE = 20_000
 MAX_STDIN = 10_000
 MAX_CASES = 10
@@ -65,7 +65,7 @@ def parse(body):
         "language": language,
         "code": code,
         "cases": cases,
-        "checks": [_check(c) for c in raw_checks],
+        "checks": [_check(c) for c in raw_checks] if language == "python" else [],
         "case_timeout_ms": _int(body.get("case_timeout_ms"), "case_timeout_ms", 100, MAX_CASE_MS, DEFAULT_CASE_MS),
         "total_timeout_ms": _int(body.get("total_timeout_ms"), "total_timeout_ms", 100, MAX_TOTAL_MS, 10_000),
     }
