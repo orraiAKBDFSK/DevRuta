@@ -1,27 +1,50 @@
+/* Sistema de diseño: tokens + base. Colores comprobados para contraste AA (texto normal ≥ 4,5:1) en claro y oscuro. */
 :root {
-  --bg: #ffffff;
-  --surface: #f6f7f9;
-  --text: #1b1f24;
-  --muted: #5a6572;
-  --border: #d0d7de;
-  --accent: #1a56db;
+  --bg: #f6f7fb;
+  --bg-glow-1: rgba(99, 102, 241, 0.12);
+  --bg-glow-2: rgba(168, 85, 247, 0.1);
+  --surface: #ffffff;
+  --surface-2: #eef0f8;
+  --text: #0f172a;
+  --muted: #475569;
+  --border: #dde1ee;
+  --accent: #4f46e5;
+  --accent-2: #7c3aed;
+  --accent-soft: #e9e8ff;
   --accent-text: #ffffff;
+  --gradient: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
   --danger: #b42318;
   --ok: #067647;
+  --warn: #92400e;
+  --radius: 0.875rem;
+  --radius-sm: 0.5rem;
+  --shadow: 0 1px 2px rgba(15, 23, 42, 0.06), 0 8px 24px -12px rgba(15, 23, 42, 0.18);
+  --shadow-lg: 0 2px 4px rgba(15, 23, 42, 0.06), 0 18px 40px -16px rgba(79, 70, 229, 0.35);
+  --font: 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+  --mono: ui-monospace, 'JetBrains Mono', 'Cascadia Code', SFMono-Regular, Menlo, Consolas, monospace;
   color-scheme: light dark;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg: #12161b;
-    --surface: #1b2128;
-    --text: #e8edf2;
-    --muted: #9aa7b4;
-    --border: #36404b;
-    --accent: #6ea0ff;
-    --accent-text: #0b1220;
-    --danger: #ff8a80;
+    --bg: #0b1020;
+    --bg-glow-1: rgba(99, 102, 241, 0.2);
+    --bg-glow-2: rgba(168, 85, 247, 0.14);
+    --surface: #131a2e;
+    --surface-2: #1b2440;
+    --text: #e8ecf8;
+    --muted: #a3aed0;
+    --border: #2a3558;
+    --accent: #9aa6ff;
+    --accent-2: #b794f6;
+    --accent-soft: #232c52;
+    --accent-text: #0b1020;
+    --gradient: linear-gradient(135deg, #8b9bff 0%, #b794f6 100%);
+    --danger: #ff9a8f;
     --ok: #5dd39e;
+    --warn: #fbbf77;
+    --shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 10px 28px -14px rgba(0, 0, 0, 0.7);
+    --shadow-lg: 0 2px 4px rgba(0, 0, 0, 0.4), 0 20px 44px -18px rgba(139, 155, 255, 0.35);
   }
 }
 
@@ -31,32 +54,73 @@
   box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   margin: 0;
-  background: var(--bg);
+  min-height: 100vh;
+  background:
+    radial-gradient(60rem 28rem at 12% -8%, var(--bg-glow-1), transparent 60%),
+    radial-gradient(48rem 24rem at 100% 0%, var(--bg-glow-2), transparent 55%),
+    var(--bg);
+  background-attachment: fixed;
   color: var(--text);
-  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
-  line-height: 1.5;
+  font-family: var(--font);
+  font-size: 1rem;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  line-height: 1.2;
+  letter-spacing: -0.02em;
 }
 
 a {
   color: var(--accent);
+  text-underline-offset: 0.2em;
 }
 
 h2 {
   margin-top: 0;
+  font-size: clamp(1.6rem, 1.2rem + 1.6vw, 2.25rem);
+}
+
+h3 {
+  font-size: 1.2rem;
 }
 
 .card {
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: 0.5rem;
-  padding: 1rem;
-  margin-bottom: 1rem;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 1.25rem 1.4rem;
+  margin-bottom: 1.1rem;
 }
 
 .card.danger {
   border-color: var(--danger);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .card.hoverable {
+    transition:
+      transform 0.18s ease,
+      box-shadow 0.18s ease,
+      border-color 0.18s ease;
+  }
+
+  .card.hoverable:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--accent);
+  }
 }
 
 .field {
@@ -492,4 +556,278 @@ progress {
 
 .form-ok.xp {
   font-weight: 600;
+}
+
+/* ---------- Componentes refinados (sobrescriben lo anterior) ---------- */
+button {
+  font-weight: 600;
+  border-radius: var(--radius-sm);
+  background: var(--gradient);
+  box-shadow: 0 6px 16px -8px var(--accent);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  button,
+  a.button {
+    transition:
+      transform 0.15s ease,
+      box-shadow 0.15s ease,
+      filter 0.15s ease;
+  }
+
+  button:not(:disabled):hover,
+  a.button:hover {
+    transform: translateY(-1px);
+    filter: brightness(1.06);
+  }
+}
+
+button:disabled {
+  box-shadow: none;
+  filter: grayscale(0.4);
+}
+
+button.secondary {
+  background: transparent;
+  box-shadow: none;
+  color: var(--accent);
+  border: 1.5px solid var(--accent);
+}
+
+button.link-button,
+.link-button {
+  background: none;
+  box-shadow: none;
+  color: var(--accent);
+  font-weight: 500;
+}
+
+.danger-button {
+  background: var(--danger);
+  color: var(--bg);
+  box-shadow: none;
+}
+
+a.button {
+  font-weight: 600;
+  border-radius: var(--radius-sm);
+  background: var(--gradient);
+  box-shadow: 0 6px 16px -8px var(--accent);
+}
+
+input[type='text'],
+input[type='email'],
+input[type='password'],
+input[type='number'],
+select,
+textarea {
+  background: var(--surface);
+  border-radius: var(--radius-sm);
+}
+
+.badge {
+  background: var(--accent-soft);
+  border-color: transparent;
+  color: var(--accent);
+}
+
+.badge.ok {
+  background: transparent;
+  border-color: var(--ok);
+  color: var(--ok);
+}
+
+.chip {
+  background: var(--surface-2);
+  border-color: transparent;
+  color: var(--muted);
+}
+
+.lang-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.15rem 0.7rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: var(--accent-text);
+  background: var(--gradient);
+  border-radius: 999px;
+}
+
+/* Lecciones como un camino numerado */
+.lesson-list {
+  counter-reset: lesson;
+  display: grid;
+  gap: 0.6rem;
+  padding: 0;
+  list-style: none;
+}
+
+.lesson-list li {
+  counter-increment: lesson;
+  display: grid;
+  grid-template-columns: 2.25rem 1fr;
+  column-gap: 0.85rem;
+  align-items: center;
+  margin: 0;
+  padding: 0.65rem 0.8rem;
+  background: var(--surface-2);
+  border-radius: var(--radius-sm);
+}
+
+.lesson-list li::before {
+  content: counter(lesson);
+  grid-row: 1 / span 2;
+  display: grid;
+  place-items: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  font-weight: 700;
+  color: var(--accent-text);
+  background: var(--gradient);
+  border-radius: 50%;
+}
+
+.lesson-list li a {
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.lesson-list li a:hover {
+  text-decoration: underline;
+}
+
+.lesson-list .skills {
+  grid-column: 2;
+}
+
+/* Tira de estadísticas de la portada */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr));
+  gap: 0.75rem;
+  margin: 1rem 0 1.5rem;
+  padding: 0;
+  list-style: none;
+}
+
+.stats li {
+  display: grid;
+  gap: 0.1rem;
+  padding: 0.9rem 1rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.stats .value {
+  font-size: 1.6rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  background: var(--gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.stats .label {
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.hero {
+  margin: 0.5rem 0 0.25rem;
+}
+
+.hero p {
+  margin: 0.25rem 0 0;
+  color: var(--muted);
+  font-size: 1.05rem;
+}
+
+.course-card h3 {
+  margin: 0.4rem 0;
+  font-size: 1.35rem;
+}
+
+.course-card p {
+  margin: 0.35rem 0;
+}
+
+.course-card .actions {
+  margin-top: 1rem;
+}
+
+/* Progreso */
+progress {
+  appearance: none;
+  border: 0;
+  border-radius: 999px;
+  overflow: hidden;
+  background: var(--surface-2);
+}
+
+progress::-webkit-progress-bar {
+  background: var(--surface-2);
+}
+
+progress::-webkit-progress-value {
+  background: var(--gradient);
+  border-radius: 999px;
+}
+
+progress::-moz-progress-bar {
+  background: var(--accent);
+  border-radius: 999px;
+}
+
+.achievements li.unlocked {
+  box-shadow: var(--shadow);
+}
+
+/* Ejercicios */
+.option {
+  border-radius: var(--radius-sm);
+}
+
+.option:has(input:checked) {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+
+pre.code,
+.markdown pre {
+  background: var(--surface-2);
+  border-color: transparent;
+  font-family: var(--mono);
+}
+
+.markdown code,
+pre.code code,
+.code-line,
+textarea {
+  font-family: var(--mono);
+}
+
+.markdown :not(pre) > code {
+  background: var(--surface-2);
+}
+
+.hint-text {
+  border-left-color: var(--accent-2);
+  background: var(--surface-2);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+}
+
+.explanation {
+  background: var(--surface-2);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+}
+
+.tests li {
+  background: var(--surface-2);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
 }

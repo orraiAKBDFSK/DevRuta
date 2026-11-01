@@ -11,6 +11,11 @@ export const EN: Record<string, string> = {
 
   'common.loading': 'Loading…',
   'home.title': 'Hello, {name}',
+  'home.subtitle': 'Pick a path and keep learning at your own pace.',
+  'home.stats': 'Your progress',
+  'home.level': 'Level',
+  'home.streak': 'Streak (days)',
+  'home.solved': 'Exercises solved',
   'home.noCourses': 'There are no courses available yet.',
   'course.counts': '{units} units · {lessons} lessons',
   'course.open': 'View learning path',

@@ -3,6 +3,8 @@ import { RouterLink } from '@angular/router';
 import { CatalogService } from '../../core/catalog/catalog.service';
 import { CourseSummary } from '../../core/catalog/models';
 import { I18nService } from '../../core/i18n/i18n.service';
+import { ProgressSummary } from '../../core/learning/models';
+import { ProgressService } from '../../core/learning/progress.service';
 import { ProfileService } from '../../core/profile/profile.service';
 
 type State = 'loading' | 'ready' | 'error';
@@ -12,7 +14,31 @@ type State = 'loading' | 'ready' | 'error';
   imports: [RouterLink],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <h2>{{ i18n.t('home.title', { name: profiles.profile()?.displayName ?? '' }) }}</h2>
+    <header class="hero">
+      <h2>{{ i18n.t('home.title', { name: profiles.profile()?.displayName ?? '' }) }}</h2>
+      <p>{{ i18n.t('home.subtitle') }}</p>
+    </header>
+
+    @if (progress(); as p) {
+      <ul class="stats" [attr.aria-label]="i18n.t('home.stats')">
+        <li>
+          <span class="value">{{ p.level }}</span>
+          <span class="label">{{ i18n.t('home.level') }}</span>
+        </li>
+        <li>
+          <span class="value">{{ p.xp }}</span>
+          <span class="label">XP</span>
+        </li>
+        <li>
+          <span class="value">{{ p.streak }}</span>
+          <span class="label">{{ i18n.t('home.streak') }}</span>
+        </li>
+        <li>
+          <span class="value">{{ p.solvedExercises }}</span>
+          <span class="label">{{ i18n.t('home.solved') }}</span>
+        </li>
+      </ul>
+    }
 
     @switch (state()) {
       @case ('loading') {
@@ -26,13 +52,16 @@ type State = 'loading' | 'ready' | 'error';
           <p>{{ i18n.t('home.noCourses') }}</p>
         }
         @for (course of courses(); track course.id) {
-          <section class="card" [attr.aria-labelledby]="'course-' + course.id">
+          <section class="card hoverable course-card" [attr.aria-labelledby]="'course-' + course.id">
+            <span class="lang-badge">{{ course.languageName }}</span>
             <h3 [id]="'course-' + course.id">{{ course.title }}</h3>
             <p>{{ course.description }}</p>
             <p class="hint">
               {{ i18n.t('course.counts', { units: '' + course.unitCount, lessons: '' + course.lessonCount }) }}
             </p>
-            <a class="button" [routerLink]="['/ruta', course.id]">{{ i18n.t('course.open') }}</a>
+            <div class="actions">
+              <a class="button" [routerLink]="['/ruta', course.id]">{{ i18n.t('course.open') }}</a>
+            </div>
           </section>
         }
       }
@@ -43,11 +72,18 @@ export class HomePage {
   protected readonly i18n = inject(I18nService);
   protected readonly profiles = inject(ProfileService);
   private readonly catalog = inject(CatalogService);
+  private readonly progressService = inject(ProgressService);
 
   protected readonly state = signal<State>('loading');
   protected readonly courses = signal<CourseSummary[]>([]);
+  /** Resumen de progreso; si no se puede cargar, la portada se muestra sin él. */
+  protected readonly progress = signal<ProgressSummary | null>(null);
 
   constructor() {
+    this.progressService.summary().then(
+      (summary) => this.progress.set(summary),
+      () => this.progress.set(null),
+    );
     // Vuelve a pedir los cursos cuando cambia el idioma de la interfaz.
     effect(() => {
       this.i18n.locale();
