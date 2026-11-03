@@ -1,6 +1,6 @@
 # Imagen del sandbox de C++: compilador + el mismo arnés que Python (que compila una vez y ejecuta cada test).
 # Se lanza con red desactivada y sin privilegios, igual que la de Python (ver executor.py).
-FROM python:3.13-slim
+FROM python:3.15-slim
 
 RUN apt-get update \
     && apt-get install -y --no-install-recommends g++ \
