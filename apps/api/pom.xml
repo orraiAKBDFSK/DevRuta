@@ -28,7 +28,7 @@
 	</scm>
 	<properties>
 		<java.version>25</java.version>
-		<bouncycastle.version>1.86</bouncycastle.version>
+		<bouncycastle.version>1.87</bouncycastle.version>
 		<archunit.version>1.5.1</archunit.version>
 	</properties>
 	<dependencies>
